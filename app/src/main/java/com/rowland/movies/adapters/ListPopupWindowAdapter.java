@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.rowland.movies.R;
-import com.rowland.objects.ListPopupMenu;
+import com.rowland.movies.objects.ListPopupMenu;
 
 import java.util.ArrayList;
 

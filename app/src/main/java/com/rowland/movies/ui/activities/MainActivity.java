@@ -7,8 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.rowland.movies.R;
-import com.rowland.ui.fragments.DetailsFragment;
-import com.rowland.ui.fragments.MainFragment;
+import com.rowland.movies.ui.fragments.DetailsFragment;
+import com.rowland.movies.ui.fragments.MainFragment;
 
 
 public class MainActivity extends AppCompatActivity {

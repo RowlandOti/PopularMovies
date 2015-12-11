@@ -1,6 +1,6 @@
 package com.rowland.movies.rest.data;
 
-import com.rowland.rest.pojos.Reviews;
+import com.rowland.movies.rest.pojos.Reviews;
 
 import java.util.List;
 

@@ -1,9 +1,9 @@
 package com.rowland.movies.rest.services;
 
-import com.rowland.rest.data.MoviesData;
-import com.rowland.rest.data.ReviewsData;
-import com.rowland.rest.data.TrailersData;
-import com.rowland.rest.pojos.Movies;
+import com.rowland.movies.rest.data.MoviesData;
+import com.rowland.movies.rest.data.ReviewsData;
+import com.rowland.movies.rest.data.TrailersData;
+import com.rowland.movies.rest.pojos.Movies;
 
 import retrofit.Call;
 import retrofit.http.GET;

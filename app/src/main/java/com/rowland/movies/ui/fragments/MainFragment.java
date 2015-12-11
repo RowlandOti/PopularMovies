@@ -13,11 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
-import com.rowland.adapters.ListPopupWindowAdapter;
-import com.rowland.adapters.SmartNestedViewPagerAdapter;
+import com.rowland.movies.adapters.ListPopupWindowAdapter;
+import com.rowland.movies.adapters.SmartNestedViewPagerAdapter;
 import com.rowland.movies.R;
-import com.rowland.objects.ListPopupMenu;
-import com.rowland.utilities.Utilities;
+import com.rowland.movies.objects.ListPopupMenu;
+import com.rowland.movies.utilities.Utilities;
 
 import java.util.ArrayList;
 

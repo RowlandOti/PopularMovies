@@ -4,10 +4,10 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
-import com.rowland.ui.fragments.MainFragment;
-import com.rowland.ui.fragments.subfragment.FavouriteFragment;
-import com.rowland.ui.fragments.subfragment.HighestRatedFragment;
-import com.rowland.ui.fragments.subfragment.PopularFragment;
+import com.rowland.movies.ui.fragments.MainFragment;
+import com.rowland.movies.ui.fragments.subfragment.FavouriteFragment;
+import com.rowland.movies.ui.fragments.subfragment.HighestRatedFragment;
+import com.rowland.movies.ui.fragments.subfragment.PopularFragment;
 
 
 /**
