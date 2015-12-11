@@ -17,14 +17,18 @@
 
 package com.rowland.movies.rest.services;
 
+import com.rowland.movies.ApplicationController;
+
+import retrofit.Retrofit;
+
 /**
  * Created by Oti Rowland on 12/11/2015.
  */
-public class MoviesAPISingleton extends ARetrofitAPI{
+public class MoviesAPI extends ARetrofitAPI{
 
     /**
      * I should only ever call retrofit.create() once and re-use the
-     * same instance of MoviesAPIService every time you need to interaction with it.
+     * same instance of IMoviesAPIService every time you need to interaction with it.
      *
      * I used the regular singleton pattern in order to ensure that there only is ever a single
      * instance of this class that I use everywhere. A dependency injection framework would
@@ -32,17 +36,19 @@ public class MoviesAPISingleton extends ARetrofitAPI{
      * I am not already utilizing it.
      */
 
-    // Declare MoviesAPIService singleton instance
-    private static MoviesAPIService imDbEndPointsApiInstance;
+    // Declare IMoviesAPIService singleton instance
+    private static IMoviesAPIService imoviesApiInstance;
 
-    private MoviesAPISingleton()
+    private MoviesAPI()
     {
+        Retrofit retrofit = ApplicationController.getRetrofit();
+        service = restAdapter.create(UserService.class);
         // Initialise the singleton instance
-        imDbEndPointsApiInstance = retrofit.create(MoviesAPIService.class);
+        imoviesApiInstance = retrofit.create(IMoviesAPIService.class);
     }
     // Return the singleton instance
-    public static MoviesAPIService getInstance()
+    public static IMoviesAPIService getInstance()
     {
-        return imDbEndPointsApiInstance;
+        return imoviesApiInstance;
     }
 }

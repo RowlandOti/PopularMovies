@@ -29,7 +29,7 @@ import retrofit.http.Query;
 /**
  * Created by Oti Rowland  on 12/11/2015.
  */
-public interface MoviesAPIService {
+public interface IMoviesAPIService {
 
     /**
      * With Retrofit 2, endpoints are defined inside of an interface using special retrofit annotations
