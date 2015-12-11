@@ -1,0 +1,63 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion Integer.parseInt(project.ANDROID_BUILD_TARGET_SDK_VERSION)
+    buildToolsVersion project.ANDROID_BUILD_TOOLS_VERSION
+
+    defaultConfig {
+        applicationId project.APPLICATION_ID
+        versionName project.VERSION_NAME
+        versionCode Integer.parseInt(project.VERSION_CODE)
+        minSdkVersion Integer.parseInt(project.ANDROID_BUILD_MIN_SDK_VERSION)
+        targetSdkVersion Integer.parseInt(project.ANDROID_BUILD_TARGET_SDK_VERSION)
+    }
+    signingConfigs {
+        release {
+            keyAlias 'popularmovies.app'
+            keyPassword 'i82april'
+            storeFile file('H:/StudioProjects/AndroidDeveloperNanodegree/MoviesOriginal/.signing/popularmovies.keystore')
+            storePassword 'i82april'
+        }
+    }
+    productFlavors {
+        //Paid Version
+        pro {
+            applicationId = "com.rowland.movies.pro"
+            versionName "1.0-pro"
+            //Accessed in java code as BuildConfig.IS_PRO_VERSION
+            buildConfigField "boolean", "IS_PRO_VERSION", "true"
+            buildConfigField 'String', 'THE_MOVIE_MDB_API_KEY', '"85e9d533d94c2f21c87296165b3e7d5c"'
+            productFlavors.pro.signingConfig signingConfigs.release
+        }
+        //Free Version
+        free {
+            applicationId = "com.rowland.movies.free"
+            versionName "1.0-free"
+            //Accessed in java code as BuildConfig.IS_PRO_VERSION
+            buildConfigField "boolean", "IS_PRO_VERSION", "false"
+            buildConfigField 'String', 'THE_MOVIE_MDB_API_KEY', '"85e9d533d94c2f21c87296165b3e7d5c"'
+            productFlavors.free.signingConfig signingConfigs.release
+        }
+    }
+    buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+        }
+        release {
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    // Local binary dependency
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    // Module dependency
+    compile project(':libraries:design')
+    // Remote binary dependency - Android
+    compile 'com.android.support:appcompat-v7:23.0.1'
+    compile 'com.android.support:design:23.0.1'
+    // Remote binary dependency - Third Party
+    compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
+    compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
+}
