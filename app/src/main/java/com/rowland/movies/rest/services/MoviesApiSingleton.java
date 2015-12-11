@@ -17,17 +17,14 @@
 
 package com.rowland.movies.rest.services;
 
-import retrofit.GsonConverterFactory;
-import retrofit.Retrofit;
-
 /**
  * Created by Oti Rowland on 12/11/2015.
  */
-public class MoviesApiSingleton extends RetrofitApi{
+public class MoviesAPISingleton extends ARetrofitAPI{
 
     /**
      * I should only ever call retrofit.create() once and re-use the
-     * same instance of MoviesApiService every time you need to interaction with it.
+     * same instance of MoviesAPIService every time you need to interaction with it.
      *
      * I used the regular singleton pattern in order to ensure that there only is ever a single
      * instance of this class that I use everywhere. A dependency injection framework would
@@ -35,16 +32,16 @@ public class MoviesApiSingleton extends RetrofitApi{
      * I am not already utilizing it.
      */
 
-    // Declare MoviesApiService singleton instance
-    private static MoviesApiService imDbEndPointsApiInstance;
+    // Declare MoviesAPIService singleton instance
+    private static MoviesAPIService imDbEndPointsApiInstance;
 
-    private MoviesApiSingleton()
+    private MoviesAPISingleton()
     {
         // Initialise the singleton instance
-        imDbEndPointsApiInstance = retrofit.create(MoviesApiService.class);
+        imDbEndPointsApiInstance = retrofit.create(MoviesAPIService.class);
     }
     // Return the singleton instance
-    public static MoviesApiService getInstance()
+    public static MoviesAPIService getInstance()
     {
         return imDbEndPointsApiInstance;
     }
