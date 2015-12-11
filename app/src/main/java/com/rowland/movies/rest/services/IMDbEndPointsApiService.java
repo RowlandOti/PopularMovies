@@ -36,15 +36,20 @@ public interface IMDbEndPointsApiService {
      * to encode details about the parameters and request method.
      **/
 
-    // Will load our movies
-    @GET("/3/discover/movie")
+    // Define all our endpoints
+    static final String MOVIES_ENDPOINT = "/3/discover/movie";
+    static final String MOVIES_VIDEOS_ENDPOINT = "/3/movie/{id}/videos";
+    static final String MOVIES_TRAILERS_ENDPOINT = "/3/movie/{id}/reviews";
+
+    // Load our movies
+    @GET(MOVIES_ENDPOINT)
     Call<MoviesData> loadMoviesData(@Query("apiKey") String apiKey, @Query("sortBy") String sortBy);
 
-    // Will load the movie's trailer videos
-    @GET("/3/movie/{id}/videos")
+    // Load the movie's trailer videos
+    @GET(MOVIES_VIDEOS_ENDPOINT)
     Call<TrailersData> loadTrailersData(@Query("apiKey") String apiKey, @Query("sortBy") String sortBy);
 
-    // Will load the movie's trailers
-    @GET("/3/movie/{id}/reviews")
+    // Load the movie's trailers
+    @GET(MOVIES_TRAILERS_ENDPOINT)
     Call<ReviewsData> loadReviewsData(@Query("apiKey") String apiKey, @Query("sortBy") String sortBy);
 }
