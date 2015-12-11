@@ -14,15 +14,22 @@ import retrofit.http.Query;
  */
 public interface IMDbEndPointsApi {
 
+    /**
+     * With Retrofit 2, endpoints are defined inside of an interface using special retrofit annotations
+     * to encode details about the parameters and request method.
+     *
+     * Created by Rowland  on 12/11/2015.
+     * */
+
     // Will load our movies
     @GET("/3/discover/movie")
-    Call<Movies> loadMovies(@Query("apiKey") String apiKey, @Query("sortBy") String sortBy);
+    Call<Movies> loadMoviesData(@Query("apiKey") String apiKey, @Query("sortBy") String sortBy);
 
     // Will load the movie's trailer videos
     @GET("/3/movie/{id}/videos")
-    Call<TrailersData> loadMovieTrailers(@Query("apiKey") String apiKey, @Query("sortBy") String sortBy);
+    Call<TrailersData> loadTrailersData(@Query("apiKey") String apiKey, @Query("sortBy") String sortBy);
 
     // Will load the movie's trailers
     @GET("/3/movie/{id}/reviews")
-    Call<ReviewsData> loadMovieReviews(@Query("apiKey") String apiKey, @Query("sortBy") String sortBy);
+    Call<ReviewsData> loadReviewsData(@Query("apiKey") String apiKey, @Query("sortBy") String sortBy);
 }
