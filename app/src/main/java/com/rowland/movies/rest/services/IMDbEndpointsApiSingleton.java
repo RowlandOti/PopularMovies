@@ -27,20 +27,33 @@ import retrofit.Retrofit;
  */
 public class IMDbEndpointsApiSingleton {
 
-    public static final String API_MOVIE_URL = "http://api.themoviedb.org";
-    // The singleton instance returned
-    private static IMDbEndPointsApi imDbEndPointsApiInstance;
+    /**
+     * I should only ever call retrofit.create() once and re-use the
+     * same instance of IMDbEndPointsApi every time you need to interaction with it.
+     *
+     * I used the regular singleton pattern in order to ensure that there only is ever a single
+     * instance of this class that I use everywhere. A dependency injection framework would
+     * also be something that I could used to manage these instances but would be a bit overkill since
+     * I am not already utilizing it.
+     */
 
-    public static IMDbEndPointsApi getInstance()
-    {
-        return imDbEndPointsApiInstance;
-    }
+    // To send out network requests to an API, we need to use the Retrofit builder class and specify
+    // the base URL for the service.
+    public static final String API_MOVIE_URL = "http://api.themoviedb.org";
+    // Declare singleton instance
+    private static IMDbEndPointsApi imDbEndPointsApiInstance;
 
     private IMDbEndpointsApiSingleton()
     {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(API_MOVIE_URL).addConverterFactory(GsonConverterFactory.create())
                 .build();
+        // Initialise the singleton instance
         imDbEndPointsApiInstance = retrofit.create(IMDbEndPointsApi.class);
+    }
+    // Return the singleton instance
+    public static IMDbEndPointsApi getInstance()
+    {
+        return imDbEndPointsApiInstance;
     }
 }

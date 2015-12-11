@@ -34,8 +34,6 @@ public interface IMDbEndPointsApi {
     /**
      * With Retrofit 2, endpoints are defined inside of an interface using special retrofit annotations
      * to encode details about the parameters and request method.
-     *
-     * Created by Rowland  on 12/11/2015.
      **/
 
     // Will load our movies
