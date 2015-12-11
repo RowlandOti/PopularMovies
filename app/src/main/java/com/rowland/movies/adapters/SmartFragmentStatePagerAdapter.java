@@ -1,4 +1,4 @@
-package com.rowland.adapters;
+package com.rowland.movies.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

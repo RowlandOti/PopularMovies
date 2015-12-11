@@ -1,4 +1,4 @@
-package com.rowland.utilities;
+package com.rowland.movies.utilities;
 
 
 import android.content.Context;

@@ -1,4 +1,4 @@
-package com.rowland.objects;
+package com.rowland.movies.objects;
 
 /**
  * Created by Rowland on 7/14/2015.

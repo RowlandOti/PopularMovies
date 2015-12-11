@@ -1,4 +1,4 @@
-package com.rowland.ui.activities;
+package com.rowland.movies.ui.activities;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.rowland.movies.R;
 import com.rowland.ui.fragments.DetailsFragment;
 import com.rowland.ui.fragments.MainFragment;
 

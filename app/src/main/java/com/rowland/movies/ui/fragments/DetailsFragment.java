@@ -1,4 +1,4 @@
-package com.rowland.ui.fragments;
+package com.rowland.movies.ui.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
