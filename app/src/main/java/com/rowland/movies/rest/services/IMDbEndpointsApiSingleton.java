@@ -17,8 +17,6 @@
 
 package com.rowland.movies.rest.services;
 
-import android.content.Context;
-
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 
@@ -29,7 +27,7 @@ public class IMDbEndpointsApiSingleton {
 
     /**
      * I should only ever call retrofit.create() once and re-use the
-     * same instance of IMDbEndPointsApi every time you need to interaction with it.
+     * same instance of IMDbEndPointsApiService every time you need to interaction with it.
      *
      * I used the regular singleton pattern in order to ensure that there only is ever a single
      * instance of this class that I use everywhere. A dependency injection framework would
@@ -41,7 +39,7 @@ public class IMDbEndpointsApiSingleton {
     // the base URL for the service.
     public static final String API_MOVIE_URL = "http://api.themoviedb.org";
     // Declare singleton instance
-    private static IMDbEndPointsApi imDbEndPointsApiInstance;
+    private static IMDbEndPointsApiService imDbEndPointsApiInstance;
 
     private IMDbEndpointsApiSingleton()
     {
@@ -49,10 +47,10 @@ public class IMDbEndpointsApiSingleton {
                 .baseUrl(API_MOVIE_URL).addConverterFactory(GsonConverterFactory.create())
                 .build();
         // Initialise the singleton instance
-        imDbEndPointsApiInstance = retrofit.create(IMDbEndPointsApi.class);
+        imDbEndPointsApiInstance = retrofit.create(IMDbEndPointsApiService.class);
     }
     // Return the singleton instance
-    public static IMDbEndPointsApi getInstance()
+    public static IMDbEndPointsApiService getInstance()
     {
         return imDbEndPointsApiInstance;
     }
