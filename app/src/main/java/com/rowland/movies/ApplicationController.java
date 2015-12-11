@@ -35,17 +35,18 @@ public class ApplicationController extends Application {
         super.onCreate();
         instance = this;
     }
-
-    public static synchronized ApplicationController getInstance() {
+    // Returns the single Application instance
+    public static synchronized ApplicationController getApplicationInstance() {
         return instance;
     }
-
+    // Needed for factory pattern we’ll implement later in our singleton
+    // Returns the single Retrofit instance
     public static Retrofit getRetrofit() {
         //To send out network requests to an API_MOVIE_URL, we need to use the Retrofit builder class
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BuildConfig.API_MOVIE_URL).addConverterFactory(GsonConverterFactory.create())
                 .build();
-        // Wollah! this instance exists through out the appication lifecycle.
+        // Wollah! Retrofit instance is served hot.
         return retrofit;
     }
 }

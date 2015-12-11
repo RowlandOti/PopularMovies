@@ -23,7 +23,7 @@ import retrofit.Retrofit;
 /**
  * Created by Oti Rowland on 12/11/2015.
  */
-public class MoviesApiSingleton {
+public class MoviesApiSingleton extends RetrofitApi{
 
     /**
      * I should only ever call retrofit.create() once and re-use the
@@ -35,18 +35,11 @@ public class MoviesApiSingleton {
      * I am not already utilizing it.
      */
 
-    // To send out network requests to an API, we need to use the Retrofit builder class and specify
-    // the base URL for the service.
-    static final String API_MOVIE_URL = "http://api.themoviedb.org";
     // Declare MoviesApiService singleton instance
     private static MoviesApiService imDbEndPointsApiInstance;
 
     private MoviesApiSingleton()
     {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(API_MOVIE_URL).addConverterFactory(GsonConverterFactory.create())
-                .build();
-
         // Initialise the singleton instance
         imDbEndPointsApiInstance = retrofit.create(MoviesApiService.class);
     }
