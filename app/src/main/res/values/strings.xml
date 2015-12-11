@@ -15,4 +15,10 @@
     <string name="sort_highest_rated">highest_rated.desc</string>
     <string name="sort_favorited">favorites.desc</string>
     <string name="sort_type">sort_type</string>
+
+    <!-- IMDB API related Constants-->
+    <string name="movie_api_url">http://api.themoviedb.org</string>
+    <string name="movie_api_image_url">http://image.tmdb.org/t/p/</string>
+    <string name="movie_api_youtube_image_url">http://img.youtube.com/vi/%s/default.jpg</string>
+    <string name="movie_api_youtube_video_url">http://www.youtube.com/watch?v=</string>
 </resources>
