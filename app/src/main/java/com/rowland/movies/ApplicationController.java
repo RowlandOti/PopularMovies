@@ -27,9 +27,6 @@ import retrofit.Retrofit;
  */
 public class ApplicationController extends Application {
 
-
-    // Specify the base URL for the API to request.
-    static final String API_MOVIE_URL = "http://api.themoviedb.org";
     // Declare ApplicationController singleton instance
     private static ApplicationController instance;
 
@@ -44,9 +41,9 @@ public class ApplicationController extends Application {
     }
 
     public static Retrofit getRetrofit() {
-        //To send out network requests to an API, we need to use the Retrofit builder class
+        //To send out network requests to an API_MOVIE_URL, we need to use the Retrofit builder class
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(API_MOVIE_URL).addConverterFactory(GsonConverterFactory.create())
+                .baseUrl(BuildConfig.API_MOVIE_URL).addConverterFactory(GsonConverterFactory.create())
                 .build();
         // Wollah! this instance exists through out the appication lifecycle.
         return retrofit;
