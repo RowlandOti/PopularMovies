@@ -19,11 +19,18 @@ package com.rowland.movies;
 
 import android.app.Application;
 
+import retrofit.GsonConverterFactory;
+import retrofit.Retrofit;
+
 /**
  * Created by Oti Rowland on 12/12/2015.
  */
-public class ApplicationController extends Application
-{
+public class ApplicationController extends Application {
+
+
+    // Specify the base URL for the API to request.
+    static final String API_MOVIE_URL = "http://api.themoviedb.org";
+    // Declare ApplicationController singleton instance
     private static ApplicationController instance;
 
     @Override
@@ -34,5 +41,14 @@ public class ApplicationController extends Application
 
     public static synchronized ApplicationController getInstance() {
         return instance;
+    }
+
+    public static Retrofit getRetrofit() {
+        //To send out network requests to an API, we need to use the Retrofit builder class
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(API_MOVIE_URL).addConverterFactory(GsonConverterFactory.create())
+                .build();
+        // Wollah! this instance exists through out the appication lifecycle.
+        return retrofit;
     }
 }

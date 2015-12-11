@@ -37,8 +37,8 @@ public class MoviesApiSingleton {
 
     // To send out network requests to an API, we need to use the Retrofit builder class and specify
     // the base URL for the service.
-    public static final String API_MOVIE_URL = "http://api.themoviedb.org";
-    // Declare singleton instance
+    static final String API_MOVIE_URL = "http://api.themoviedb.org";
+    // Declare MoviesApiService singleton instance
     private static MoviesApiService imDbEndPointsApiInstance;
 
     private MoviesApiSingleton()
