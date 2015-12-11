@@ -29,7 +29,7 @@ import retrofit.http.Query;
 /**
  * Created by Rowland  on 12/11/2015.
  */
-public interface IMDbEndPointsApiService {
+public interface MoviesApiService {
 
     /**
      * With Retrofit 2, endpoints are defined inside of an interface using special retrofit annotations

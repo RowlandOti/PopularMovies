@@ -23,11 +23,11 @@ import retrofit.Retrofit;
 /**
  * Created by Oti Rowland on 12/11/2015.
  */
-public class IMDbEndpointsApiSingleton {
+public class MoviesApiSingleton {
 
     /**
      * I should only ever call retrofit.create() once and re-use the
-     * same instance of IMDbEndPointsApiService every time you need to interaction with it.
+     * same instance of MoviesApiService every time you need to interaction with it.
      *
      * I used the regular singleton pattern in order to ensure that there only is ever a single
      * instance of this class that I use everywhere. A dependency injection framework would
@@ -39,18 +39,19 @@ public class IMDbEndpointsApiSingleton {
     // the base URL for the service.
     public static final String API_MOVIE_URL = "http://api.themoviedb.org";
     // Declare singleton instance
-    private static IMDbEndPointsApiService imDbEndPointsApiInstance;
+    private static MoviesApiService imDbEndPointsApiInstance;
 
-    private IMDbEndpointsApiSingleton()
+    private MoviesApiSingleton()
     {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(API_MOVIE_URL).addConverterFactory(GsonConverterFactory.create())
                 .build();
+
         // Initialise the singleton instance
-        imDbEndPointsApiInstance = retrofit.create(IMDbEndPointsApiService.class);
+        imDbEndPointsApiInstance = retrofit.create(MoviesApiService.class);
     }
     // Return the singleton instance
-    public static IMDbEndPointsApiService getInstance()
+    public static MoviesApiService getInstance()
     {
         return imDbEndPointsApiInstance;
     }
