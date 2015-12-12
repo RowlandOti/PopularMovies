@@ -13,32 +13,38 @@ android {
     }
     signingConfigs {
         release {
-            keyAlias 'popularmovies.app'
-            keyPassword 'i82april'
-            storeFile file('H:/StudioProjects/AndroidDeveloperNanodegree/MoviesOriginal/.signing/popularmovies.keystore')
-            storePassword 'i82april'
+            def propFile = file('../signing.properties')
+            if(propFile.exists()) {
+                def props = new Properties()
+                props.load(new FileInputStream(propFile))
+
+                storeFile = file(props['STORE_FILE'])
+                storePassword = props['STORE_PASSWORD']
+                keyAlias = props['KEY_ALIAS']
+                keyPassword = props['KEY_PASSWORD']
+            }
         }
     }
     productFlavors {
         //Paid Version
         pro {
-            applicationId = "com.rowland.movies.pro"
-            versionName "1.0-pro"
+            applicationId = project.APPLICATION_ID + ".pro"
+            versionName project.VERSION_NAME + "-pro"
             //Accessed in java code as BuildConfig.IS_PRO_VERSION
             buildConfigField "boolean", "IS_PRO_VERSION", "true"
             buildConfigField 'String', 'IMDB_API_KEY', '"153677fe3867bbfc1eedc322abc94afc"'
             buildConfigField "String", "API_MOVIE_URL", "http://api.themoviedb.org"
-            productFlavors.pro.signingConfig signingConfigs.release
+            //productFlavors.pro.signingConfig signingConfigs.release
         }
         //Free Version
         free {
-            applicationId = "com.rowland.movies.free"
-            versionName "1.0-free"
+            applicationId = project.APPLICATION_ID + ".free"
+            versionName project.VERSION_NAME + "-free"
             //Accessed in java code as BuildConfig.IS_PRO_VERSION
             buildConfigField "boolean", "IS_PRO_VERSION", "false"
             buildConfigField 'String', 'IMDB_API_KEY', '"153677fe3867bbfc1eedc322abc94afc"'
             buildConfigField "String", "API_MOVIE_URL", "http://api.themoviedb.org"
-            productFlavors.free.signingConfig signingConfigs.release
+            //productFlavors.free.signingConfig signingConfigs.release
         }
     }
     buildTypes {
@@ -47,6 +53,9 @@ android {
         }
         release {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            if(rootProject.file('signing.properties').exists()) {
+                signingConfig signingConfigs.release
+            }
         }
     }
 }
@@ -63,4 +72,5 @@ dependencies {
     compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
     compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
     compile 'com.tonicartos:superslim:0.4.13'
+    compile 'com.uwetrottmann:androidutils:2.0.0'
 }
