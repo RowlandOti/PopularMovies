@@ -20,7 +20,7 @@ package com.rowland.movies;
 import android.app.Application;
 
 import com.rowland.movies.rest.enums.EAPITypes;
-import com.rowland.movies.rest.services.ARetrofitAPI;
+import com.rowland.movies.rest.services.IRetrofitAPI;
 
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
@@ -52,10 +52,10 @@ public class ApplicationController extends Application {
         // Wollah! Retrofit instance is served hot.
         return retrofit;
     }
-    // Factory method will return to us the appropriate ARetrofitAPI Whenever we need to access our api
+    // Factory method will return to us the appropriate IRetrofitAPI Whenever we need to access our api
     // we call ApplicationController.getApiOfType method with appriopriate type and we get class with
     // desired enpoints. Wollah! Awesome encapsualtion.
-    public ARetrofitAPI getApiOfType(EAPITypes type) {
+    public IRetrofitAPI getApiOfType(EAPITypes type) {
 
         return type.getApiType();
     }

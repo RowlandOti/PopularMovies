@@ -24,7 +24,7 @@ import retrofit.Retrofit;
 /**
  * Created by Oti Rowland on 12/11/2015.
  */
-public class MoviesAPI extends ARetrofitAPI{
+public class MoviesAPI implements IRetrofitAPI {
 
     /**
      * I should only ever call retrofit.create() once and re-use the

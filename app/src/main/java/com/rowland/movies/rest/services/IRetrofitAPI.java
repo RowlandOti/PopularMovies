@@ -20,6 +20,6 @@ package com.rowland.movies.rest.services;
 /**
  * Created by Oti Rowland on 12/12/2015.
  */
-public abstract class ARetrofitAPI {
+public interface IRetrofitAPI {
 
 }

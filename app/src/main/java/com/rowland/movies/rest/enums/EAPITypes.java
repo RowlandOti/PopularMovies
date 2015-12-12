@@ -17,7 +17,7 @@
 
 package com.rowland.movies.rest.enums;
 
-import com.rowland.movies.rest.services.ARetrofitAPI;
+import com.rowland.movies.rest.services.IRetrofitAPI;
 import com.rowland.movies.rest.services.MoviesAPI;
 
 /**
@@ -34,13 +34,13 @@ public enum EAPITypes {
 
     MOVIES_API(new MoviesAPI());
 
-    private final ARetrofitAPI instance;
+    private final IRetrofitAPI instance;
 
-    private EAPITypes(ARetrofitAPI instance) {
+    EAPITypes(IRetrofitAPI instance) {
         this.instance = instance;
     }
 
-    public ARetrofitAPI getApiType() {
+    public IRetrofitAPI getApiType() {
         return instance;
     }
 
