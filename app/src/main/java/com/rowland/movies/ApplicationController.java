@@ -30,6 +30,16 @@ import retrofit.Retrofit;
  */
 public class ApplicationController extends Application {
 
+    /**
+     * I should only ever call retrofit.create() once and re-use the
+     * same instance of IMoviesAPIService every time you need to interaction with it.
+     *
+     * I used the regular singleton pattern in order to ensure that there only is ever a single
+     * instance of this class that I use everywhere. A dependency injection framework would
+     * also be something that I could used to manage these instances but would be a bit overkill since
+     * I am not already utilizing it.
+     */
+
     // Declare ApplicationController singleton instance
     private static ApplicationController instance;
 

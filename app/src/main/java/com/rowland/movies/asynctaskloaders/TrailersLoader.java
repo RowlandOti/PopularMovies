@@ -18,22 +18,29 @@
 package com.rowland.movies.asynctaskloaders;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
 import com.rowland.movies.rest.data.MoviesData;
+import com.rowland.movies.rest.data.TrailersData;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.pojos.Movies;
 import com.rowland.movies.rest.services.IRetrofitAPI;
 import com.rowland.movies.rest.services.IMoviesAPIService;
 import com.uwetrottmann.androidutils.GenericSimpleLoader;
 
+import java.io.IOException;
+
 import retrofit.Call;
+import retrofit.Response;
 
 /**
  * Created by Oti Rowland on 12/12/2015.
  */
 public class TrailersLoader extends GenericSimpleLoader<Movies> {
+
+    private static final String LOG_TAG = TrailersLoader.class.getSimpleName();
 
     public TrailersLoader(Context context) {
         super(context);
@@ -41,9 +48,20 @@ public class TrailersLoader extends GenericSimpleLoader<Movies> {
 
     @Override
     public Movies loadInBackground() {
-        Call<MoviesData> createdCall = HttpUtil.getService().getMovieResults(BuildConfig.MOVIE_API_KEY,Constants.SORT_BY_POPULARITY_DESC));
+        // Get the correct RetrofitApi
         IRetrofitAPI moviesAPI = ApplicationController.getApplicationInstance().getApiOfType(EAPITypes.MOVIES_API);
-        IMoviesAPIService movieService = moviesAPI.getMoviesApiServiceInstance();;
+        // Get the MoviesAPIService
+        IMoviesAPIService movieService = moviesAPI.getMoviesApiServiceInstance();
+        // Retriev the trailers data
+        Call<TrailersData> createdCall = movieService.loadTrailersData(BuildConfig.IMDB_API_KEY);
+
+        try {
+            Response<TrailersData> result = createdCall.execute();
+            return result.body().results;
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.e(LOG_TAG, "IOException occurred in loadInBackground()");
+        }
         return null;
     }
 

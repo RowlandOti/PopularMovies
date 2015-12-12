@@ -38,18 +38,18 @@ public interface IMoviesAPIService {
 
     // Define all our endpoints
     static final String MOVIES_ENDPOINT = "/3/discover/movie";
-    static final String MOVIES_VIDEOS_ENDPOINT = "/3/movie/{id}/videos";
-    static final String MOVIES_TRAILERS_ENDPOINT = "/3/movie/{id}/reviews";
+    static final String MOVIES_TRAILERS_ENDPOINT = "/3/movie/{id}/videos";
+    static final String MOVIES_REVIEWS_ENDPOINT = "/3/movie/{id}/reviews";
 
     // Load our movies
     @GET(MOVIES_ENDPOINT)
     Call<MoviesData> loadMoviesData(@Query("apiKey") String apiKey, @Query("sortBy") String sortBy);
 
     // Load the movie's trailer videos
-    @GET(MOVIES_VIDEOS_ENDPOINT)
-    Call<TrailersData> loadTrailersData(@Query("apiKey") String apiKey, @Query("sortBy") String sortBy);
+    @GET(MOVIES_TRAILERS_ENDPOINT)
+    Call<TrailersData> loadTrailersData(@Query("apiKey") String apiKey);
 
     // Load the movie's trailers
-    @GET(MOVIES_TRAILERS_ENDPOINT)
+    @GET(MOVIES_REVIEWS_ENDPOINT)
     Call<ReviewsData> loadReviewsData(@Query("apiKey") String apiKey, @Query("sortBy") String sortBy);
 }

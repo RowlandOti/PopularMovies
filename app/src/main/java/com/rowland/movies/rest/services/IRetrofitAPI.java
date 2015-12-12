@@ -21,5 +21,7 @@ package com.rowland.movies.rest.services;
  * Created by Oti Rowland on 12/12/2015.
  */
 public interface IRetrofitAPI {
+    // Return the singleton instance
+    public IMoviesAPIService getMoviesApiServiceInstance();
 
 }

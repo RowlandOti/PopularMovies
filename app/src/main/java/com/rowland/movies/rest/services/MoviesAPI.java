@@ -36,8 +36,8 @@ public class MoviesAPI implements IRetrofitAPI {
      * I am not already utilizing it.
      */
 
-    // Declare IMoviesAPIService singleton instance
-    private static IMoviesAPIService imoviesApiServiceInstance;
+    // Declare IMoviesAPIService instance
+    private IMoviesAPIService imoviesApiServiceInstance;
 
     public MoviesAPI()
     {
@@ -47,7 +47,7 @@ public class MoviesAPI implements IRetrofitAPI {
         imoviesApiServiceInstance = retrofit.create(IMoviesAPIService.class);
     }
     // Return the singleton instance
-    public static IMoviesAPIService getMoviesApiServiceInstance()
+    public IMoviesAPIService getMoviesApiServiceInstance()
     {
         return imoviesApiServiceInstance;
     }
