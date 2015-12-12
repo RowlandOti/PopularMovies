@@ -26,6 +26,6 @@ import java.util.List;
  */
 public class MoviesData {
 
-    List<Movies> items;
+  public List<Movies> items;
 
 }

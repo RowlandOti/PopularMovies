@@ -26,6 +26,6 @@ import com.rowland.movies.rest.pojos.Trailers;
  */
 public class TrailersData {
 
-    List<Trailers> items;
+  public List<Trailers> items;
 
 }

@@ -27,6 +27,6 @@ import java.util.List;
  */
 public class ReviewsData {
 
-    List<Reviews> items;
+  public List<Reviews> items;
 
 }
