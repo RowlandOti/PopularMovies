@@ -15,7 +15,7 @@
  *
  */
 
-package com.rowland.movies.enums;
+package com.rowland.movies.rest.enums;
 
 import com.rowland.movies.rest.services.ARetrofitAPI;
 import com.rowland.movies.rest.services.MoviesAPI;
@@ -24,7 +24,7 @@ import com.rowland.movies.rest.services.MoviesAPI;
  * Created by Oti Rowland on 12/12/2015.
  */
 
-public enum APITypes {
+public enum EAPITypes {
 
     /**
      * In Retrofit architecture I define static method in ApplicationController class that will
@@ -36,7 +36,7 @@ public enum APITypes {
 
     private final ARetrofitAPI instance;
 
-    private APITypes(ARetrofitAPI instance) {
+    private EAPITypes(ARetrofitAPI instance) {
         this.instance = instance;
     }
 
