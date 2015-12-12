@@ -37,18 +37,18 @@ public class MoviesAPI extends ARetrofitAPI{
      */
 
     // Declare IMoviesAPIService singleton instance
-    private static IMoviesAPIService imoviesApiInstance;
+    private static IMoviesAPIService imoviesApiServiceInstance;
 
-    private MoviesAPI()
+    public MoviesAPI()
     {
+        // Wollah! We have our application-wide Retrofit instance
         Retrofit retrofit = ApplicationController.getRetrofit();
-        service = restAdapter.create(UserService.class);
         // Initialise the singleton instance
-        imoviesApiInstance = retrofit.create(IMoviesAPIService.class);
+        imoviesApiServiceInstance = retrofit.create(IMoviesAPIService.class);
     }
     // Return the singleton instance
-    public static IMoviesAPIService getInstance()
+    public static IMoviesAPIService getMoviesApiServiceInstance()
     {
-        return imoviesApiInstance;
+        return imoviesApiServiceInstance;
     }
 }

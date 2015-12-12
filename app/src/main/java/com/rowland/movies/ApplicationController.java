@@ -19,6 +19,9 @@ package com.rowland.movies;
 
 import android.app.Application;
 
+import com.rowland.movies.rest.services.ARetrofitAPI;
+import com.rowland.movies.rest.services.MoviesAPI;
+
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 
@@ -49,4 +52,5 @@ public class ApplicationController extends Application {
         // Wollah! Retrofit instance is served hot.
         return retrofit;
     }
+
 }
