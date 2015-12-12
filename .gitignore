@@ -1,9 +1,10 @@
 .gradle
 /local.properties
-/.idea
+.idea
 /.idea/workspace.xml
 /.idea/libraries
-/.signing
+.signing
 .DS_Store
+.keystore
 /build
 /captures
