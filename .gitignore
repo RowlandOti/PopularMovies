@@ -3,6 +3,7 @@
 /.idea
 /.idea/workspace.xml
 /.idea/libraries
+/.signing
 .DS_Store
 /build
 /captures

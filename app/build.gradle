@@ -13,7 +13,7 @@ android {
     }
     signingConfigs {
         release {
-            def propFile = file('../signing.properties')
+            def propFile = file('../.signing/signing.properties')
             if(propFile.exists()) {
                 def props = new Properties()
                 props.load(new FileInputStream(propFile))
