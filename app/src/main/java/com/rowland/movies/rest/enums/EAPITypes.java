@@ -34,6 +34,7 @@ public enum EAPITypes {
 
     MOVIES_API(new MoviesAPI());
 
+
     private final IRetrofitAPI instance;
 
     EAPITypes(IRetrofitAPI instance) {

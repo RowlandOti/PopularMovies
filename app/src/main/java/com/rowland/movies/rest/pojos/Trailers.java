@@ -37,10 +37,10 @@ public class Trailers {
     private String type;
     @SerializedName("id")
     @Expose
-    private Object id;
+    private Double id;
     @SerializedName("key")
     @Expose
-    private Object key;
+    private String key;
     @SerializedName("size")
     @Expose
     private Integer size;
@@ -113,7 +113,7 @@ public class Trailers {
      * @param id
      * The id
      */
-    public void setId(Object id) {
+    public void setId(Double id) {
         this.id = id;
     }
 
@@ -122,7 +122,7 @@ public class Trailers {
      * @return
      * The key
      */
-    public Object getKey() {
+    public String getKey() {
         return key;
     }
 
@@ -131,7 +131,7 @@ public class Trailers {
      * @param key
      * The key
      */
-    public void setKey(Object key) {
+    public void setKey(String key) {
         this.key = key;
     }
 

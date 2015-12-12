@@ -51,5 +51,5 @@ public interface IMoviesAPIService {
 
     // Load the movie's trailers
     @GET(MOVIES_REVIEWS_ENDPOINT)
-    Call<ReviewsData> loadReviewsData(@Query("apiKey") String apiKey, @Query("sortBy") String sortBy);
+    Call<ReviewsData> loadReviewsData(@Query("apiKey") String apiKey);
 }

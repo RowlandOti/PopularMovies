@@ -18,18 +18,17 @@
 package com.rowland.movies.asynctaskloaders;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
-import com.rowland.movies.rest.data.MoviesData;
+import com.rowland.movies.rest.data.ReviewsData;
 import com.rowland.movies.rest.data.TrailersData;
 import com.rowland.movies.rest.enums.EAPITypes;
-import com.rowland.movies.rest.pojos.Movies;
+import com.rowland.movies.rest.pojos.Reviews;
 import com.rowland.movies.rest.pojos.Trailers;
-import com.rowland.movies.rest.services.IRetrofitAPI;
 import com.rowland.movies.rest.services.IMoviesAPIService;
+import com.rowland.movies.rest.services.IRetrofitAPI;
 import com.uwetrottmann.androidutils.GenericSimpleLoader;
 
 import java.io.IOException;
@@ -41,25 +40,25 @@ import retrofit.Response;
 /**
  * Created by Oti Rowland on 12/12/2015.
  */
-public class TrailersLoader extends GenericSimpleLoader {
+public class ReviewsLoader extends GenericSimpleLoader {
     // The class Log identifier
-    private static final String LOG_TAG = TrailersLoader.class.getSimpleName();
+    private static final String LOG_TAG = ReviewsLoader.class.getSimpleName();
 
-    public TrailersLoader(Context context) {
+    public ReviewsLoader(Context context) {
         super(context);
     }
 
     @Override
-    public List<Trailers> loadInBackground() {
+    public List<Reviews> loadInBackground() {
         // Get the RetrofitApi with correct Endpoint
         IRetrofitAPI moviesAPI = ApplicationController.getApplicationInstance().getApiOfType(EAPITypes.MOVIES_API);
         // Get the MoviesAPIService
         IMoviesAPIService movieService = moviesAPI.getMoviesApiServiceInstance();
-        // Retrieve the trailers data
-        Call<TrailersData> createdCall = movieService.loadTrailersData(BuildConfig.IMDB_API_KEY);
+        // Retrieve the reviews data
+        Call<ReviewsData> createdCall = movieService.loadReviewsData(BuildConfig.IMDB_API_KEY);
 
         try {
-            Response<TrailersData> result = createdCall.execute();
+            Response<ReviewsData> result = createdCall.execute();
             return result.body().items;
         } catch (IOException e) {
             e.printStackTrace();
@@ -67,22 +66,4 @@ public class TrailersLoader extends GenericSimpleLoader {
         }
         return null;
     }
-    // Extract the individual movie trailers
-    // Handy method, might help in future
-    private Trailers extractTrailer(TrailersData videos) {
-        // If no trailer videos are found return
-        if (videos == null || videos.items == null || videos.items.size() == 0) {
-            return null;
-        }
-
-        // Pop out the lead YouTube trailer
-        for (Trailers video : videos.items) {
-            if ("Trailer".equals(video.getType()) && "YouTube".equals(video.getSite()) && !TextUtils.isEmpty(video.getKey())) {
-                return video;
-            }
-        }
-
-        return null;
-    }
-
 }
