@@ -5,6 +5,6 @@
 /.idea/libraries
 .signing
 .DS_Store
-.keystore
+/.signing/*.keystore
 /build
 /captures
