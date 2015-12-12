@@ -22,11 +22,10 @@ import android.util.Log;
 
 import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
+import com.rowland.movies.asynctaskloaders.enums.ESortOrder;
 import com.rowland.movies.rest.data.MoviesData;
-import com.rowland.movies.rest.data.ReviewsData;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.pojos.Movies;
-import com.rowland.movies.rest.pojos.Reviews;
 import com.rowland.movies.rest.services.IMoviesAPIService;
 import com.rowland.movies.rest.services.IRetrofitAPI;
 import com.uwetrottmann.androidutils.GenericSimpleLoader;
@@ -43,9 +42,12 @@ import retrofit.Response;
 public class MoviesLoader extends GenericSimpleLoader {
     // The class Log identifier
     private static final String LOG_TAG = MoviesLoader.class.getSimpleName();
+    // The sort order type
+    private ESortOrder mSortOrder;
 
-    public MoviesLoader(Context context) {
+    public MoviesLoader(Context context, ESortOrder mSortOrder) {
         super(context);
+        this.mSortOrder = mSortOrder;
     }
 
     @Override
@@ -55,7 +57,7 @@ public class MoviesLoader extends GenericSimpleLoader {
         // Get the MoviesAPIService
         IMoviesAPIService movieService = moviesAPI.getMoviesApiServiceInstance();
         // Retrieve the movies data
-        Call<MoviesData> createdCall = movieService.loadMoviesData(BuildConfig.IMDB_API_KEY, );
+        Call<MoviesData> createdCall = movieService.loadMoviesData(BuildConfig.IMDB_API_KEY, mSortOrder.getSortOrder());
 
         try {
             Response<MoviesData> result = createdCall.execute();

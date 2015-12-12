@@ -23,10 +23,8 @@ import android.util.Log;
 import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
 import com.rowland.movies.rest.data.ReviewsData;
-import com.rowland.movies.rest.data.TrailersData;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.pojos.Reviews;
-import com.rowland.movies.rest.pojos.Trailers;
 import com.rowland.movies.rest.services.IMoviesAPIService;
 import com.rowland.movies.rest.services.IRetrofitAPI;
 import com.uwetrottmann.androidutils.GenericSimpleLoader;
@@ -43,9 +41,12 @@ import retrofit.Response;
 public class ReviewsLoader extends GenericSimpleLoader {
     // The class Log identifier
     private static final String LOG_TAG = ReviewsLoader.class.getSimpleName();
+    // The movie id whose reviews are retrieved
+    private int mTmdbMovieId;
 
-    public ReviewsLoader(Context context) {
+    public ReviewsLoader(Context context, int mTmdbMovieId) {
         super(context);
+        this.mTmdbMovieId = mTmdbMovieId;
     }
 
     @Override
@@ -55,7 +56,7 @@ public class ReviewsLoader extends GenericSimpleLoader {
         // Get the MoviesAPIService
         IMoviesAPIService movieService = moviesAPI.getMoviesApiServiceInstance();
         // Retrieve the reviews data
-        Call<ReviewsData> createdCall = movieService.loadReviewsData(BuildConfig.IMDB_API_KEY);
+        Call<ReviewsData> createdCall = movieService.loadReviewsData(mTmdbMovieId, BuildConfig.IMDB_API_KEY);
 
         try {
             Response<ReviewsData> result = createdCall.execute();

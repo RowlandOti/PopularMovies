@@ -22,4 +22,16 @@ package com.rowland.movies.asynctaskloaders.enums;
  */
 public enum ESortOrder {
 
+    POPULAR_DESCENDING("popularity.desc"), HIGHEST_RATED_DESCENDING("vote_average.desc");
+
+    private String sortOrder;
+
+    private ESortOrder(String s) {
+        sortOrder = s;
+    }
+
+    public String getSortOrder() {
+        return sortOrder;
+    }
+
 }

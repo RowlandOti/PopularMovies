@@ -44,9 +44,12 @@ import retrofit.Response;
 public class TrailersLoader extends GenericSimpleLoader {
     // The class Log identifier
     private static final String LOG_TAG = TrailersLoader.class.getSimpleName();
+    // The movie id whose trailers are retrieved
+    private int mTmdbMovieId;
 
-    public TrailersLoader(Context context) {
+    public TrailersLoader(Context context, int mTmdbMovieId) {
         super(context);
+        this.mTmdbMovieId = mTmdbMovieId;
     }
 
     @Override
@@ -56,7 +59,7 @@ public class TrailersLoader extends GenericSimpleLoader {
         // Get the MoviesAPIService
         IMoviesAPIService movieService = moviesAPI.getMoviesApiServiceInstance();
         // Retrieve the trailers data
-        Call<TrailersData> createdCall = movieService.loadTrailersData(BuildConfig.IMDB_API_KEY);
+        Call<TrailersData> createdCall = movieService.loadTrailersData(mTmdbMovieId, BuildConfig.IMDB_API_KEY);
 
         try {
             Response<TrailersData> result = createdCall.execute();

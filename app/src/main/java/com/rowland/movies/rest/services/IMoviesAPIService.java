@@ -24,6 +24,7 @@ import com.rowland.movies.rest.data.TrailersData;
 
 import retrofit.Call;
 import retrofit.http.GET;
+import retrofit.http.Path;
 import retrofit.http.Query;
 
 /**
@@ -47,9 +48,9 @@ public interface IMoviesAPIService {
 
     // Load the movie's trailer videos
     @GET(MOVIES_TRAILERS_ENDPOINT)
-    Call<TrailersData> loadTrailersData(@Query("apiKey") String apiKey);
+    Call<TrailersData> loadTrailersData(@Path("id") int mTmdbMovieId, @Query("apiKey") String apiKey);
 
     // Load the movie's trailers
     @GET(MOVIES_REVIEWS_ENDPOINT)
-    Call<ReviewsData> loadReviewsData(@Query("apiKey") String apiKey);
+    Call<ReviewsData> loadReviewsData(@Path("id") int mTmdbMovieId, @Query("apiKey") String apiKey);
 }

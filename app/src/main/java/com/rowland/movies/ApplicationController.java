@@ -19,8 +19,11 @@ package com.rowland.movies;
 
 import android.app.Application;
 
+import com.facebook.stetho.Stetho;
+import com.facebook.stetho.okhttp.StethoInterceptor;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.services.IRetrofitAPI;
+import com.squareup.okhttp.OkHttpClient;
 
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
@@ -45,8 +48,19 @@ public class ApplicationController extends Application {
 
     @Override
     public void onCreate() {
+        /**
+         *  Retrofit and OkHttp can be hard to troubleshoot when trying to step through the various layers of
+         *  abstraction in the libraries. Facebook's Stetho project enables you to use Chrome to inspect all network traffic.
+         *  Visit chrome://inspect on your Chrome desktop and your emulator/device should appear.
+         *  Click on Inspect to launch a new window. Click on the Network tab. Now you can start watching network traffic
+         *  between your emulator or device in real-time!
+         */
         super.onCreate();
         instance = this;
+
+        Stetho.initializeWithDefaults(this);
+        OkHttpClient client = new OkHttpClient();
+        client.networkInterceptors().add(new StethoInterceptor());
     }
     // Returns the single Application instance
     public static synchronized ApplicationController getApplicationInstance() {
