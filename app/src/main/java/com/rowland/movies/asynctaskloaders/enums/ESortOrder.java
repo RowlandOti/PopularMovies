@@ -21,7 +21,7 @@ package com.rowland.movies.asynctaskloaders.enums;
  * Created by Oti Rowland on 12/12/2015.
  */
 public enum ESortOrder {
-
+    // The sort order for retrieving the movies
     POPULAR_DESCENDING("popularity.desc"), HIGHEST_RATED_DESCENDING("vote_average.desc");
 
     private String sortOrder;
@@ -29,7 +29,7 @@ public enum ESortOrder {
     private ESortOrder(String s) {
         sortOrder = s;
     }
-
+    // Get the correspinding sort order
     public String getSortOrder() {
         return sortOrder;
     }
