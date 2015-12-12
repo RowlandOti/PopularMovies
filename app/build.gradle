@@ -33,7 +33,6 @@ android {
             //Accessed in java code as BuildConfig.IS_PRO_VERSION
             buildConfigField "boolean", "IS_PRO_VERSION", "true"
             buildConfigField 'String', 'IMDB_API_KEY', '"153677fe3867bbfc1eedc322abc94afc"'
-            buildConfigField "String", "API_MOVIE_URL", "http://api.themoviedb.org"
             //productFlavors.pro.signingConfig signingConfigs.release
         }
         //Free Version
@@ -43,7 +42,6 @@ android {
             //Accessed in java code as BuildConfig.IS_PRO_VERSION
             buildConfigField "boolean", "IS_PRO_VERSION", "false"
             buildConfigField 'String', 'IMDB_API_KEY', '"153677fe3867bbfc1eedc322abc94afc"'
-            buildConfigField "String", "API_MOVIE_URL", "http://api.themoviedb.org"
             //productFlavors.free.signingConfig signingConfigs.release
         }
     }

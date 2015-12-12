@@ -21,6 +21,7 @@ import android.app.Application;
 
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp.StethoInterceptor;
+import com.rowland.movies.enums.EBaseURlTypes;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.services.IRetrofitAPI;
 import com.squareup.okhttp.OkHttpClient;
@@ -71,7 +72,7 @@ public class ApplicationController extends Application {
     public static Retrofit getRetrofit() {
         //To send out network requests to an API_MOVIE_URL, we need to use the Retrofit builder class
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BuildConfig.API_MOVIE_URL).addConverterFactory(GsonConverterFactory.create())
+                .baseUrl(EBaseURlTypes.MOVIE_API_BASE_URL.getUrl()).addConverterFactory(GsonConverterFactory.create())
                 .build();
         // Wollah! Retrofit instance is served hot.
         return retrofit;
