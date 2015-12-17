@@ -22,23 +22,51 @@ package com.rowland.movies.rest.pojos;
  * Created by Rowland on 12/11/2015.
  */
 
+import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Reviews {
+public class Reviews extends Model {
 
+    // Gson annotations
     @SerializedName("author")
     @Expose
+    //ActiveAndroid Annotations
+    @Column(name = "author")
     private String author;
+
+    // Gson annotations
     @SerializedName("content")
     @Expose
+    //ActiveAndroid Annotations
+    @Column(name = "content")
     private String content;
+
+    // Gson annotations
     @SerializedName("url")
     @Expose
+    //ActiveAndroid Annotations
+    @Column(name = "url")
     private String url;
-    @SerializedName("id")
+
+    // Gson annotations
+    @SerializedName("id_")
     @Expose
-    private String id;
+    //ActiveAndroid Annotations
+    @Column(name = "id_")
+    private String id_;
+
+    // A movie has many trailers so lets associate each movie to a trailer in a many-to-one relation
+    @Column(name = "movie", onDelete = Column.ForeignKeyAction.CASCADE)
+    public Movies movie;
+
+
+    public Reviews()
+    {
+        // You have to call super in each constructor to create the table.
+        super();
+    }
 
     /**
      *
@@ -99,17 +127,17 @@ public class Reviews {
      * @return
      * The id
      */
-    public String getId() {
-        return id;
+    public String getId_() {
+        return id_;
     }
 
     /**
      *
-     * @param id
+     * @param id_
      * The id
      */
-    public void setId(String id) {
-        this.id = id;
+    public void setId(String id_) {
+        this.id_ = id_;
     }
 
 }

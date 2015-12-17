@@ -22,44 +22,96 @@ package com.rowland.movies.rest.pojos;
  * Created by Rowland on 12/11/2015.
  */
 
+import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+@Table(name = "Movies")
+public class Movies extends Model {
 
-public class Movies {
+    public Movies()
+    {
+        // You have to call super in each constructor to create the table.
+        super();
+    }
 
+    // Gson annotations
     @SerializedName("poster_path")
     @Expose
+    //ActiveAndroid Annotations
+    @Column(name = "poster_path")
     private String posterPath;
+
+    // Gson annotations
     @SerializedName("overview")
     @Expose
+    //ActiveAndroid Annotations
+    @Column(name = "overview")
     private String overview;
+
+    // Gson annotations
     @SerializedName("original_title")
     @Expose
+    //ActiveAndroid Annotations
+    @Column(name = "originalTitle")
     private String originalTitle;
+
+    // Gson annotations
     @SerializedName("original_language")
     @Expose
+    //ActiveAndroid Annotations
+    @Column(name = "originalLanguage")
     private String originalLanguage;
+
+    // Gson annotations
     @SerializedName("title")
     @Expose
+    //ActiveAndroid Annotations
+    @Column(name = "title")
     private String title;
+
+    // Gson annotations
     @SerializedName("backdrop_path")
     @Expose
+    //ActiveAndroid Annotations
+    @Column(name = "backdropPath")
     private String backdropPath;
+
+    // Gson annotations
     @SerializedName("vote_count")
     @Expose
+    //ActiveAndroid Annotations
+    @Column(name = "voteCount")
     private Integer voteCount;
-    @SerializedName("id")
+
+    // Gson annotations
+    @SerializedName("id_")
     @Expose
-    private Integer id;
+    //ActiveAndroid Annotations
+    @Column(name = "id_")
+    private Integer id_;
+
+    // Gson annotations
     @SerializedName("popularity")
     @Expose
+    //ActiveAndroid Annotations
+    @Column(name = "popularity")
     private Object popularity;
+
+    // Gson annotations
     @SerializedName("vote_average")
     @Expose
-    private Object voteAverage;
+    //ActiveAndroid Annotations
+    @Column(name = "voteAverage")
+    private Double voteAverage;
+
+    // Gson annotations
     @SerializedName("adult")
     @Expose
+    //ActiveAndroid Annotations
+    @Column(name = "adult")
     private Boolean adult;
 
     /**
@@ -193,17 +245,17 @@ public class Movies {
      * @return
      * The id
      */
-    public Integer getId() {
-        return id;
+    public Integer getId_() {
+        return id_;
     }
 
     /**
      *
-     * @param id
+     * @param id_
      * The id
      */
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer id_) {
+        this.id_ = id_;
     }
 
     /**
@@ -229,7 +281,7 @@ public class Movies {
      * @return
      * The voteAverage
      */
-    public Object getVoteAverage() {
+    public Double getVoteAverage() {
         return voteAverage;
     }
 
@@ -238,7 +290,7 @@ public class Movies {
      * @param voteAverage
      * The vote_average
      */
-    public void setVoteAverage(Object voteAverage) {
+    public void setVoteAverage(Double voteAverage) {
         this.voteAverage = voteAverage;
     }
 

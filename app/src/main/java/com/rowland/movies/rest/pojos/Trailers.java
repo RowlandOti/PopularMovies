@@ -22,28 +22,63 @@ package com.rowland.movies.rest.pojos;
  * Created by Rowland on 12/11/2015.
  */
 
+import com.activeandroid.annotation.Column;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Trailers {
+
+    public Trailers()
+    {
+        // You have to call super in each constructor to create the table.
+        super();
+    }
+
+    // Gson annotations
     @SerializedName("name")
     @Expose
+    // ActiveAndroid Annotations
+    @Column(name = "name")
     private String name;
+
+    // Gson annotations
     @SerializedName("site")
     @Expose
+    //ActiveAndroid Annotations
+    @Column(name = "site")
     private String site;
+
+    // Gson annotations
     @SerializedName("type")
     @Expose
+    //ActiveAndroid Annotations
+    @Column(name = "type")
     private String type;
-    @SerializedName("id")
+
+    // Gson annotations
+    @SerializedName("id_")
     @Expose
-    private Double id;
+    //ActiveAndroid Annotations
+    @Column(name = "id_")
+    private Double id_;
+
+    // Gson annotations
     @SerializedName("key")
     @Expose
+    //ActiveAndroid Annotations
+    @Column(name = "key")
     private String key;
+
+    // Gson annotations
     @SerializedName("size")
     @Expose
+    //ActiveAndroid Annotations
+    @Column(name = "size")
     private Integer size;
+
+    // A movie has many trailers so lets associate each movie to a trailer in a many-to-one relation
+    @Column(name = "movie", onDelete = Column.ForeignKeyAction.CASCADE)
+    public Movies movie;
 
     /**
      *
@@ -102,10 +137,10 @@ public class Trailers {
     /**
      *
      * @return
-     * The id
+     * The id_
      */
-    public Object getId() {
-        return id;
+    public Double getId_() {
+        return id_;
     }
 
     /**
@@ -114,7 +149,7 @@ public class Trailers {
      * The id
      */
     public void setId(Double id) {
-        this.id = id;
+        this.id_ = id_;
     }
 
     /**
