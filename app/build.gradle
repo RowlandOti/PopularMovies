@@ -59,18 +59,24 @@ android {
 }
 
 dependencies {
-    // Local binary dependency
+    // LOCAL BINARY DEPENDENCY
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    // Module dependency
+    // MODULE DEPENDENCY
     compile project(':libraries:design')
-    // Remote binary dependency - Android
+    // REMOTE BINARY DEPENDENCY - Android
     compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'com.android.support:design:23.0.1'
-    // Remote binary dependency - Third Party
+    // REMOTE BINARY DEPENDENCY - Third Party
+    // Use - Rest API support
     compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
     compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
     compile 'com.tonicartos:superslim:0.4.13'
+    // Use - General Utilities support
     compile 'com.uwetrottmann:androidutils:2.0.0'
+    // Use - Data flow analytics support
     compile 'com.facebook.stetho:stetho:1.2.0'
     compile 'com.facebook.stetho:stetho-okhttp:1.2.0'
+    // Use - Database support
+    compile 'de.greenrobot:greendao:2.1.0'
+    compile 'de.greenrobot:greendao-generator:2.1.0'
 }
