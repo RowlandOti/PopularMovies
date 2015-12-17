@@ -17,8 +17,7 @@
 
 package com.rowland.movies;
 
-import android.app.Application;
-
+import com.activeandroid.app.Application;
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp.StethoInterceptor;
 import com.rowland.movies.enums.EBaseURlTypes;
