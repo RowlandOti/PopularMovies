@@ -28,6 +28,8 @@ import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 @Table(name = "Movies")
 public class Movies extends Model {
 
@@ -113,6 +115,10 @@ public class Movies extends Model {
     //ActiveAndroid Annotations
     @Column(name = "adult")
     private Boolean adult;
+
+    // Movies owns these items
+    public List<Reviews> movieReviews;
+    public List<Trailers> movieTrailers;
 
     /**
      *
