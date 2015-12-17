@@ -33,7 +33,9 @@ import java.io.IOException;
 import java.util.List;
 
 import retrofit.Call;
+import retrofit.Callback;
 import retrofit.Response;
+import retrofit.Retrofit;
 
 /**
  * Created by Oti Rowland on 12/12/2015.
@@ -57,6 +59,23 @@ public class ReviewsLoader extends GenericSimpleLoader {
         IMoviesAPIService movieService = moviesAPI.getMoviesApiServiceInstance();
         // Retrieve the reviews data
         Call<ReviewsData> createdCall = movieService.loadReviewsData(mTmdbMovieId, BuildConfig.IMDB_API_KEY);
+        // Asynchronously access
+        createdCall.enqueue(new Callback<List<Reviews>>() {
+            @Override
+            public void onResponse(Response<List<Reviews>> response, Retrofit retrofit) {
+                if (response.isSuccess()) {
+                    // tasks available
+                } else {
+                    // error response, no access to resource?
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                // something went completely south (like no internet connection)
+                Log.d("Error", t.getMessage());
+            }
+        };
 
         try {
             Response<ReviewsData> result = createdCall.execute();

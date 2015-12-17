@@ -120,6 +120,17 @@ public class Movies extends Model {
     public List<Reviews> movieReviews;
     public List<Trailers> movieTrailers;
 
+    // Retrieve all the movie owned trailers
+    public List<Trailers> getMovieTrailers()
+    {
+        return getMany(Trailers.class, "Trailers");
+    }
+    // Retrieve all the movie owned reviews
+    public List<Reviews> getMovieReviews()
+    {
+        return getMany(Reviews.class, "Reviews");
+    }
+
     /**
      *
      * @return

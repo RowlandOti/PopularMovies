@@ -22,17 +22,12 @@ package com.rowland.movies.rest.pojos;
  * Created by Rowland on 12/11/2015.
  */
 
+import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Trailers {
-
-    public Trailers()
-    {
-        // You have to call super in each constructor to create the table.
-        super();
-    }
+public class Trailers extends Model {
 
     // Gson annotations
     @SerializedName("name")
@@ -79,6 +74,12 @@ public class Trailers {
     // A movie has many trailers so lets associate each movie to a trailer in a many-to-one relation
     @Column(name = "movie", onDelete = Column.ForeignKeyAction.CASCADE)
     public Movies movie;
+
+    public Trailers()
+    {
+        // You have to call super in each constructor to create the table.
+        super();
+    }
 
     /**
      *
