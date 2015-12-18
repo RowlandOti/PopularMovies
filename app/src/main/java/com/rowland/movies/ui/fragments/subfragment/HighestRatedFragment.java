@@ -18,12 +18,8 @@
 package com.rowland.movies.ui.fragments.subfragment;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,9 +29,9 @@ import com.rowland.movies.asynctaskloaders.MoviesLoader;
 import com.rowland.movies.asynctaskloaders.enums.ESortOrder;
 import com.rowland.movies.rest.pojos.Movies;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
 
 
@@ -76,6 +72,13 @@ public class HighestRatedFragment extends ABaseFragment implements LoaderManager
     }
 
     @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mMovieLists = new ArrayList<>();
+        getLoaderManager().initLoader(0, null, this);
+    }
+
+    @Override
     public Loader<List<Movies>> onCreateLoader(int id, Bundle args) {
         return new MoviesLoader(getActivity(), ESortOrder.HIGHEST_RATED_DESCENDING);
     }
@@ -83,12 +86,15 @@ public class HighestRatedFragment extends ABaseFragment implements LoaderManager
     @Override
     public void onLoadFinished(Loader<List<Movies>> loader, List<Movies> data) {
 
+        mSwRefreshLayout.setRefreshing(false);
+        mMovieLists = (ArrayList<Movies>) data;
+
     }
 
     @Override
     public void onLoaderReset(Loader<List<Movies>> loader) {
 
-        swRefreshLayout.setRefreshing(false);
+        mSwRefreshLayout.setRefreshing(false);
     }
     // When RefreshLayout is triggered reload the loader
     @Override

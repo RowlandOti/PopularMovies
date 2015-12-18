@@ -40,17 +40,17 @@ public class ABaseFragment extends Fragment implements SwipeRefreshLayout.OnRefr
     // Logging tracker for this class
     private final String LOG_TAG = ABaseFragment.class.getSimpleName();
     // AN arrayList of the movies
-    private ArrayList<Movies> mMovieLists;
+    protected ArrayList<Movies> mMovieLists;
     // The grid adapter
-    private GridAdapter mMovieAdapter;
+    protected GridAdapter mMovieAdapter;
 
     // ButterKnife injected Views
     @Bind(R.id.sw_refresh_layout)
-    SwipeRefreshLayout swRefreshLayout;
+    SwipeRefreshLayout mSwRefreshLayout;
     @Bind(R.id.grid_recycle_view)
     RecyclerView mGridRecycleView;
 
-    public static ABaseFragment newInstance(ABaseFragment fragment, Bundle args) {
+    protected static ABaseFragment newInstance(ABaseFragment fragment, Bundle args) {
 
         // Create the new fragment instance
         ABaseFragment  fragmentInstance = fragment;
@@ -67,8 +67,8 @@ public class ABaseFragment extends Fragment implements SwipeRefreshLayout.OnRefr
     {
         super.onViewCreated(view, savedInstanceState);
 
-        swRefreshLayout.setColorSchemeResources(R.color.apptheme_accent_teal);
-        swRefreshLayout.setProgressViewOffset(true, 100, 400);
+        mSwRefreshLayout.setColorSchemeResources(R.color.apptheme_accent_teal);
+        mSwRefreshLayout.setProgressViewOffset(true, 100, 400);
 
         final GridLayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
 
@@ -78,7 +78,7 @@ public class ABaseFragment extends Fragment implements SwipeRefreshLayout.OnRefr
         mMovieAdapter = new GridAdapter(mMovieLists);
 
         mGridRecycleView.setAdapter(mMovieAdapter);
-        swRefreshLayout.setOnRefreshListener(this);
+        mSwRefreshLayout.setOnRefreshListener(this);
     }
 
     @Override
