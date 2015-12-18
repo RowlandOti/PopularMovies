@@ -41,7 +41,7 @@ public abstract class RestCallBack<ReviewsData> implements Callback<ReviewsData>
         if (response.isSuccess() && response.errorBody() == null) {
             // tasks available
             response.body();
-            List<Reviews> items = response.body().items;
+            //List<Reviews> items = response.body().items;
         } else {
 
             try {

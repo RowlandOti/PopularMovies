@@ -2,130 +2,137 @@
 <items version="2" >
 
     <item
-        jar="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\22.1.1\jars\classes.jar"
+        jar="C:\Users\Rowland\.gradle\caches\modules-2\files-2.1\com.facebook.stetho\stetho\1.2.0\1d6cdb8ce8185b8b23213fad48a83987fb6d2d67\stetho-1.2.0.jar"
         jumboMode="false"
-        revision="23.0.1"
-        sha1="e0b0c35d02308b270015a74cada4887e2e49b889">
-        <dex dex="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\pre-dexed\pro\release\classes-d1a160689ebd7a67a0fda6bb20557878c4ddd0a7.jar" />
-    </item>
-    <item
-        jar="C:\Users\Rowland\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp\okhttp\2.5.0\4de2b4ed3445c37ec1720a7d214712e845a24636\okhttp-2.5.0.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="4de2b4ed3445c37ec1720a7d214712e845a24636">
-        <dex dex="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\pre-dexed\pro\release\okhttp-2.5.0-0779a75f14b93ead5ab65a46428c3e115f3a975f.jar" />
-    </item>
-    <item
-        jar="C:\Users\Rowland\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit\retrofit\2.0.0-beta2\880d9e0997b2d1bfc98e0d121ced33ee5d04aac4\retrofit-2.0.0-beta2.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="880d9e0997b2d1bfc98e0d121ced33ee5d04aac4">
-        <dex dex="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\pre-dexed\pro\release\retrofit-2.0.0-beta2-bbf393b51444dab788f258204f1e4804b0578ce8.jar" />
-    </item>
-    <item
-        jar="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\libs\internal_impl-23.0.1.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
-        <dex dex="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\pre-dexed\pro\release\internal_impl-23.0.1-398207b8f0ca103cd814e77c7369510206a9882b.jar" />
-    </item>
-    <item
-        jar="C:\Users\Rowland\.gradle\caches\modules-2\files-2.1\com.google.code.findbugs\jsr305\2.0.1\516c03b21d50a644d538de0f0369c620989cd8f0\jsr305-2.0.1.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="516c03b21d50a644d538de0f0369c620989cd8f0">
-        <dex dex="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\pre-dexed\pro\release\jsr305-2.0.1-64a227b23252a5d79d07b1dc421bec9478c1a5a9.jar" />
+        revision="23.0.2"
+        sha1="1d6cdb8ce8185b8b23213fad48a83987fb6d2d67">
+        <dex dex="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\pre-dexed\pro\release\stetho-1.2.0_9800a6a5a37c397606ec6f55a6e6253701f362e6.jar" />
     </item>
     <item
         jar="C:\Users\Rowland\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit\converter-gson\2.0.0-beta2\392c3d09e0f5e7087544093cc0cb23bb9c7af5fa\converter-gson-2.0.0-beta2.jar"
         jumboMode="false"
-        revision="23.0.1"
+        revision="23.0.2"
         sha1="392c3d09e0f5e7087544093cc0cb23bb9c7af5fa">
-        <dex dex="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\pre-dexed\pro\release\converter-gson-2.0.0-beta2-17e0d336d00597f0bdb16592e5040a769d4b1cd5.jar" />
+        <dex dex="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\pre-dexed\pro\release\converter-gson-2.0.0-beta2_17e0d336d00597f0bdb16592e5040a769d4b1cd5.jar" />
     </item>
     <item
-        jar="C:\Users\Rowland\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.6.0\98476622f10715998eacf9240d6b479f12c66143\okio-1.6.0.jar"
+        jar="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\22.1.1\jars\classes.jar"
         jumboMode="false"
-        revision="23.0.1"
-        sha1="98476622f10715998eacf9240d6b479f12c66143">
-        <dex dex="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\pre-dexed\pro\release\okio-1.6.0-ab557abf44cb2a19f5962395cc532885c2a19486.jar" />
-    </item>
-    <item
-        jar="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\exploded-aar\com.android.support\design\23.0.1\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="e5c61a3169221a89654ffcaaed47bba51cf071ad">
-        <dex dex="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\pre-dexed\pro\release\classes-a298b686fcbcb2c7c8582053d8f248272e903e2b.jar" />
-    </item>
-    <item
-        jar="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\exploded-aar\com.uwetrottmann\androidutils\2.0.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="27ad2b00618a153b9fa62ede953fc6e022072775">
-        <dex dex="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\pre-dexed\pro\release\classes-2b58140f6ef68b6f2e64ffc95cdf77f970661814.jar" />
+        revision="23.0.2"
+        sha1="e0b0c35d02308b270015a74cada4887e2e49b889">
+        <dex dex="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\pre-dexed\pro\release\com.android.support-recyclerview-v7-22.1.1_d1a160689ebd7a67a0fda6bb20557878c4ddd0a7.jar" />
     </item>
     <item
         jar="H:\CreativeSoftware\Sdk\Droid\extras\android\m2repository\com\android\support\support-annotations\23.0.1\support-annotations-23.0.1.jar"
         jumboMode="false"
-        revision="23.0.1"
+        revision="23.0.2"
         sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
-        <dex dex="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\pre-dexed\pro\release\support-annotations-23.0.1-f0d23f49e55f07300a562186178b2e87ca5c1528.jar" />
+        <dex dex="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\pre-dexed\pro\release\support-annotations-23.0.1_f0d23f49e55f07300a562186178b2e87ca5c1528.jar" />
     </item>
     <item
-        jar="C:\Users\Rowland\.gradle\caches\modules-2\files-2.1\com.facebook.stetho\stetho\1.2.0\1d6cdb8ce8185b8b23213fad48a83987fb6d2d67\stetho-1.2.0.jar"
+        jar="C:\Users\Rowland\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit\retrofit\2.0.0-beta2\880d9e0997b2d1bfc98e0d121ced33ee5d04aac4\retrofit-2.0.0-beta2.jar"
         jumboMode="false"
-        revision="23.0.1"
-        sha1="1d6cdb8ce8185b8b23213fad48a83987fb6d2d67">
-        <dex dex="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\pre-dexed\pro\release\stetho-1.2.0-9800a6a5a37c397606ec6f55a6e6253701f362e6.jar" />
-    </item>
-    <item
-        jar="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\exploded-aar\MoviesOriginal.libraries\design\unspecified\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="718dcbd837cc7d086c1e342d6f94acf7c6647d12">
-        <dex dex="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\pre-dexed\pro\release\classes-c02013be4677ff1276ddce7c1154e1bb3b6b0570.jar" />
+        revision="23.0.2"
+        sha1="880d9e0997b2d1bfc98e0d121ced33ee5d04aac4">
+        <dex dex="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\pre-dexed\pro\release\retrofit-2.0.0-beta2_bbf393b51444dab788f258204f1e4804b0578ce8.jar" />
     </item>
     <item
         jar="C:\Users\Rowland\.gradle\caches\modules-2\files-2.1\com.facebook.stetho\stetho-okhttp\1.2.0\6c5c9380e245c4ff5be2b2a49dcbb0200c39798e\stetho-okhttp-1.2.0.jar"
         jumboMode="false"
-        revision="23.0.1"
+        revision="23.0.2"
         sha1="6c5c9380e245c4ff5be2b2a49dcbb0200c39798e">
-        <dex dex="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\pre-dexed\pro\release\stetho-okhttp-1.2.0-43114244a9251ff9e69b0b10a85286ba6f695a99.jar" />
+        <dex dex="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\pre-dexed\pro\release\stetho-okhttp-1.2.0_43114244a9251ff9e69b0b10a85286ba6f695a99.jar" />
     </item>
     <item
-        jar="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\exploded-aar\com.tonicartos\superslim\0.4.13\jars\classes.jar"
+        jar="C:\Users\Rowland\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp\okhttp\2.5.0\4de2b4ed3445c37ec1720a7d214712e845a24636\okhttp-2.5.0.jar"
         jumboMode="false"
-        revision="23.0.1"
-        sha1="8adfd82229a5f0a129469305587557199017219e">
-        <dex dex="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\pre-dexed\pro\release\classes-e10de61898f4697a8f6f19a524345c29f4b40590.jar" />
-    </item>
-    <item
-        jar="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
-        <dex dex="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\pre-dexed\pro\release\classes-636fe731cf467cf42041ae30ae9db1f2e920906b.jar" />
+        revision="23.0.2"
+        sha1="4de2b4ed3445c37ec1720a7d214712e845a24636">
+        <dex dex="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\pre-dexed\pro\release\okhttp-2.5.0_0779a75f14b93ead5ab65a46428c3e115f3a975f.jar" />
     </item>
     <item
         jar="C:\Users\Rowland\.gradle\caches\modules-2\files-2.1\commons-cli\commons-cli\1.2\2bf96b7aa8b611c177d329452af1dc933e14501c\commons-cli-1.2.jar"
         jumboMode="false"
-        revision="23.0.1"
+        revision="23.0.2"
         sha1="2bf96b7aa8b611c177d329452af1dc933e14501c">
-        <dex dex="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\pre-dexed\pro\release\commons-cli-1.2-52378486910693f7a2e41971920678eefd958b63.jar" />
+        <dex dex="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\pre-dexed\pro\release\commons-cli-1.2_52378486910693f7a2e41971920678eefd958b63.jar" />
     </item>
     <item
-        jar="C:\Users\Rowland\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.3.1\ecb6e1f8e4b0e84c4b886c2f14a1500caf309757\gson-2.3.1.jar"
+        jar="C:\Users\Rowland\.gradle\caches\modules-2\files-2.1\com.google.code.findbugs\jsr305\2.0.1\516c03b21d50a644d538de0f0369c620989cd8f0\jsr305-2.0.1.jar"
         jumboMode="false"
-        revision="23.0.1"
-        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
-        <dex dex="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\pre-dexed\pro\release\gson-2.3.1-7f7babecebff7885af82f5941d603450d48895f5.jar" />
+        revision="23.0.2"
+        sha1="516c03b21d50a644d538de0f0369c620989cd8f0">
+        <dex dex="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\pre-dexed\pro\release\jsr305-2.0.1_64a227b23252a5d79d07b1dc421bec9478c1a5a9.jar" />
     </item>
     <item
         jar="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\jars\classes.jar"
         jumboMode="false"
-        revision="23.0.1"
+        revision="23.0.2"
         sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
-        <dex dex="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\pre-dexed\pro\release\classes-6c0512768191f5bbe4ea5e7ea344df9649edecb1.jar" />
+        <dex dex="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\pre-dexed\pro\release\com.android.support-appcompat-v7-23.0.1_6c0512768191f5bbe4ea5e7ea344df9649edecb1.jar" />
+    </item>
+    <item
+        jar="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\libs\internal_impl-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\pre-dexed\pro\release\internal_impl-23.0.1_398207b8f0ca103cd814e77c7369510206a9882b.jar" />
+    </item>
+    <item
+        jar="C:\Users\Rowland\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.6.0\98476622f10715998eacf9240d6b479f12c66143\okio-1.6.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="98476622f10715998eacf9240d6b479f12c66143">
+        <dex dex="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\pre-dexed\pro\release\okio-1.6.0_ab557abf44cb2a19f5962395cc532885c2a19486.jar" />
+    </item>
+    <item
+        jar="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\exploded-aar\com.tonicartos\superslim\0.4.13\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="8adfd82229a5f0a129469305587557199017219e">
+        <dex dex="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\pre-dexed\pro\release\com.tonicartos-superslim-0.4.13_e10de61898f4697a8f6f19a524345c29f4b40590.jar" />
+    </item>
+    <item
+        jar="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\exploded-aar\com.android.support\design\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="e5c61a3169221a89654ffcaaed47bba51cf071ad">
+        <dex dex="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\pre-dexed\pro\release\com.android.support-design-23.0.1_a298b686fcbcb2c7c8582053d8f248272e903e2b.jar" />
+    </item>
+    <item
+        jar="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\exploded-aar\com.uwetrottmann\androidutils\2.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="27ad2b00618a153b9fa62ede953fc6e022072775">
+        <dex dex="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\pre-dexed\pro\release\com.uwetrottmann-androidutils-2.0.0_2b58140f6ef68b6f2e64ffc95cdf77f970661814.jar" />
+    </item>
+    <item
+        jar="C:\Users\Rowland\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.3.1\ecb6e1f8e4b0e84c4b886c2f14a1500caf309757\gson-2.3.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
+        <dex dex="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\pre-dexed\pro\release\gson-2.3.1_7f7babecebff7885af82f5941d603450d48895f5.jar" />
+    </item>
+    <item
+        jar="C:\Users\Rowland\.gradle\caches\modules-2\files-2.1\com.michaelpardo\activeandroid\3.1.0-SNAPSHOT\4ab7b0182975bc57c49efc5e0b3baa4a10e4ec08\activeandroid-3.1.0-SNAPSHOT.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="4ab7b0182975bc57c49efc5e0b3baa4a10e4ec08">
+        <dex dex="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\pre-dexed\pro\release\activeandroid-3.1.0-SNAPSHOT_0d8c132527d6336aa9cbc94aa971abc12388fa7d.jar" />
+    </item>
+    <item
+        jar="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\exploded-aar\MoviesOriginal.libraries\design\unspecified\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="986aad7a14d3122941411e0e9550777e9b5e6c6a">
+        <dex dex="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\pre-dexed\pro\release\MoviesOriginal.libraries-design-unspecified_c02013be4677ff1276ddce7c1154e1bb3b6b0570.jar" />
+    </item>
+    <item
+        jar="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\pre-dexed\pro\release\com.android.support-support-v4-23.0.1_636fe731cf467cf42041ae30ae9db1f2e920906b.jar" />
     </item>
 
 </items>

@@ -14,7 +14,7 @@ android {
     signingConfigs {
         release {
             def propFile = file('../.signing/signing.properties')
-            if(propFile.exists()) {
+            if (propFile.exists()) {
                 def props = new Properties()
                 props.load(new FileInputStream(propFile))
 
@@ -33,7 +33,8 @@ android {
             //Accessed in java code as BuildConfig.IS_PRO_VERSION
             buildConfigField "boolean", "IS_PRO_VERSION", "true"
             buildConfigField 'String', 'IMDB_API_KEY', '"153677fe3867bbfc1eedc322abc94afc"'
-            //productFlavors.pro.signingConfig signingConfigs.release
+            productFlavors.pro.signingConfig signingConfigs.release
+
         }
         //Free Version
         free {
@@ -42,7 +43,8 @@ android {
             //Accessed in java code as BuildConfig.IS_PRO_VERSION
             buildConfigField "boolean", "IS_PRO_VERSION", "false"
             buildConfigField 'String', 'IMDB_API_KEY', '"153677fe3867bbfc1eedc322abc94afc"'
-            //productFlavors.free.signingConfig signingConfigs.release
+            productFlavors.free.signingConfig signingConfigs.release
+
         }
     }
     buildTypes {
@@ -51,9 +53,6 @@ android {
         }
         release {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            if(rootProject.file('signing.properties').exists()) {
-                signingConfig signingConfigs.release
-            }
         }
     }
 }
