@@ -22,13 +22,12 @@ import android.util.Log;
 
 import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
-import com.rowland.movies.rest.callbacks.ReviewsCallBack;
+import com.rowland.movies.rest.callbacks.RestCallBack;
 import com.rowland.movies.rest.data.ReviewsData;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.pojos.Reviews;
 import com.rowland.movies.rest.services.IMoviesAPIService;
 import com.rowland.movies.rest.services.IRetrofitAPI;
-import com.rowland.movies.rest.services.RetrofitCallBack;
 import com.uwetrottmann.androidutils.GenericSimpleLoader;
 
 import java.io.IOException;
@@ -62,7 +61,17 @@ public class ReviewsLoader extends GenericSimpleLoader {
         // Retrieve the reviews data
         Call<ReviewsData> createdCall = movieService.loadReviewsData(mTmdbMovieId, BuildConfig.IMDB_API_KEY);
         // Asynchronously access
-        createdCall.enqueue(new ReviewsCallBack<ReviewsData>());
+        createdCall.enqueue(new Callback<ReviewsData>() {
+            @Override
+            public void onResponse(Response<ReviewsData> response, Retrofit retrofit) {
+
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+        });
 
         try {
             Response<ReviewsData> result = createdCall.execute();

@@ -19,8 +19,10 @@ package com.rowland.movies.rest.callbacks;
 
 import android.util.Log;
 
+import com.rowland.movies.rest.pojos.RestError;
 import com.rowland.movies.rest.pojos.Reviews;
 
+import java.io.IOException;
 import java.util.List;
 
 import retrofit.Callback;
@@ -30,31 +32,30 @@ import retrofit.Retrofit;
 /**
  * Created by Oti Rowland on 12/17/2015.
  */
-public class ReviewsCallBack<ReviewsData> implements Callback<ReviewsData> {
+public abstract class RestCallBack<T> implements Callback<T> {
 
 
     @Override
-    public void onResponse(Response<ReviewsData> response, Retrofit retrofit) {
+    public void onResponse(Response<T> response, Retrofit retrofit) {
 
         if (response.isSuccess() && response.errorBody() == null) {
             // tasks available
-            response.body().items;
+            response.body();
         } else {
-            // we got an error message
-            Log.d("Error message",response.message().toString());
-            //For getting error code. Code is integer value like 200,404 etc
-            Log.d("Error code",String.valueOf(response.code()));
 
             try {
-                MyError myError = (MyError)retrofit.responseConverter(
-                        MyError.class, MyError.class.getAnnotations())
+                RestError restError = (RestError)retrofit.responseConverter(
+                        RestError.class, RestError.class.getAnnotations())
                         .convert(response.errorBody());
                 // Do error handling here
+                // we got an error message
+                Log.d("Error message",restError.getStrMesage());
+                //For getting error code. Code is integer value like 200,404 etc
+                Log.d("Error code",String.valueOf(restError.getCode()));
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-
     }
 
     @Override
