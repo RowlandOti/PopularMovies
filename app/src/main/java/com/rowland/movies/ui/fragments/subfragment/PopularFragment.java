@@ -36,7 +36,6 @@ import java.util.List;
  */
 public class PopularFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, LoaderManager.LoaderCallbacks<List<Movies>>{
 
-
     private static PopularFragment fragmentInstance = null;
     private final String LOG_TAG = PopularFragment.class.getSimpleName();
 

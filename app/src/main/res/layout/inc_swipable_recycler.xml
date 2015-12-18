@@ -1,5 +1,4 @@
-
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2015 Oti Rowland
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,12 +15,18 @@
   ~
   -->
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sw_refresh_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.rowland.movies.ui.fragments.subfragment.PopularFragment">
+    android:layout_height="match_parent">
 
-    <include layout="@layout/inc_swipable_recycler" />
-</FrameLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/grid_recycle_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingTop="?attr/actionBarSize"
+        android:visibility="visible" />
 
+</android.support.v4.widget.SwipeRefreshLayout>
