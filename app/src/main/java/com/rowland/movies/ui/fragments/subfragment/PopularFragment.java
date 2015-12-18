@@ -19,16 +19,22 @@ package com.rowland.movies.ui.fragments.subfragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.rowland.movies.R;
+import com.rowland.movies.rest.pojos.Movies;
+
+import java.util.List;
 
 /**
  *
  */
-public class PopularFragment extends Fragment {
+public class PopularFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, LoaderManager.LoaderCallbacks<List<Movies>>{
 
 
     private static PopularFragment fragmentInstance = null;
@@ -64,5 +70,25 @@ public class PopularFragment extends Fragment {
     {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_popular, container, false);
+    }
+
+    @Override
+    public Loader<List<Movies>> onCreateLoader(int id, Bundle args) {
+        return null;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<List<Movies>> loader, List<Movies> data) {
+
+    }
+
+    @Override
+    public void onLoaderReset(Loader<List<Movies>> loader) {
+
+    }
+
+    @Override
+    public void onRefresh() {
+
     }
 }
