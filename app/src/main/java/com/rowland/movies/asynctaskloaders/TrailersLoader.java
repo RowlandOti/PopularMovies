@@ -50,6 +50,8 @@ public class TrailersLoader extends GenericSimpleLoader {
     private static final String LOG_TAG = TrailersLoader.class.getSimpleName();
     // The movie id whose trailers are retrieved
     private int mTmdbMovieId;
+    // The list of movies our loader returns
+    private List<Trailers> trailers;
 
     public TrailersLoader(Context context, int mTmdbMovieId) {
         super(context);
@@ -69,7 +71,7 @@ public class TrailersLoader extends GenericSimpleLoader {
         createdCall.enqueue(new Callback<TrailersData>() {
             @Override
             public void onResponse(Response<TrailersData> response, Retrofit retrofit) {
-                List<Trailers> trailers = response.body().items;
+                trailers = response.body().items;
 
                 for (Trailers trailer : trailers)
                 {
@@ -83,6 +85,12 @@ public class TrailersLoader extends GenericSimpleLoader {
 
             }
         });
+
+        if(trailers.size() != 0)
+        {
+            return trailers;
+        }
+
         /*try {
             Response<TrailersData> result = createdCall.execute();
             return result.body().items;

@@ -48,6 +48,8 @@ public class MoviesLoader extends GenericSimpleLoader {
     private static final String LOG_TAG = MoviesLoader.class.getSimpleName();
     // The sort order type
     private ESortOrder mSortOrder;
+    // The list of movies our loader returns
+    private List<Movies> movies;
 
     public MoviesLoader(Context context, ESortOrder mSortOrder) {
         super(context);
@@ -67,7 +69,7 @@ public class MoviesLoader extends GenericSimpleLoader {
         createdCall.enqueue(new Callback<MoviesData>() {
             @Override
             public void onResponse(Response<MoviesData> response, Retrofit retrofit) {
-                List<Movies> movies = response.body().items;
+                movies = response.body().items;
 
                 for (Movies movie : movies)
                 {
@@ -81,6 +83,11 @@ public class MoviesLoader extends GenericSimpleLoader {
 
             }
         });
+
+        if(movies.size() != 0)
+        {
+            return movies;
+        }
 
    /*     try {
             Response<MoviesData> result = createdCall.execute();

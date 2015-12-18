@@ -45,6 +45,8 @@ public class ReviewsLoader extends GenericSimpleLoader {
     private static final String LOG_TAG = ReviewsLoader.class.getSimpleName();
     // The movie id whose reviews are retrieved
     private int mTmdbMovieId;
+    // The list of movies our loader returns
+    private List<Reviews> reviews;
 
     public ReviewsLoader(Context context, int mTmdbMovieId) {
         super(context);
@@ -63,7 +65,7 @@ public class ReviewsLoader extends GenericSimpleLoader {
         createdCall.enqueue(new Callback<ReviewsData>() {
             @Override
             public void onResponse(Response<ReviewsData> response, Retrofit retrofit) {
-                List<Reviews> reviews = response.body().items;
+                reviews = response.body().items;
 
                 for (Reviews review : reviews)
                 {
@@ -77,6 +79,11 @@ public class ReviewsLoader extends GenericSimpleLoader {
 
             }
         });
+
+        if(reviews.size() != 0)
+        {
+            return reviews;
+        }
 
       /*  try {
             Response<ReviewsData> result = createdCall.execute();
