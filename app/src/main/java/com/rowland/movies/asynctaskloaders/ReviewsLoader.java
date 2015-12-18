@@ -27,6 +27,7 @@ import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.pojos.Reviews;
 import com.rowland.movies.rest.services.IMoviesAPIService;
 import com.rowland.movies.rest.services.IRetrofitAPI;
+import com.rowland.movies.rest.services.RetrofitCallBack;
 import com.uwetrottmann.androidutils.GenericSimpleLoader;
 
 import java.io.IOException;
@@ -60,22 +61,7 @@ public class ReviewsLoader extends GenericSimpleLoader {
         // Retrieve the reviews data
         Call<ReviewsData> createdCall = movieService.loadReviewsData(mTmdbMovieId, BuildConfig.IMDB_API_KEY);
         // Asynchronously access
-        createdCall.enqueue(new Callback<List<Reviews>>() {
-            @Override
-            public void onResponse(Response<List<Reviews>> response, Retrofit retrofit) {
-                if (response.isSuccess()) {
-                    // tasks available
-                } else {
-                    // error response, no access to resource?
-                }
-            }
-
-            @Override
-            public void onFailure(Throwable t) {
-                // something went completely south (like no internet connection)
-                Log.d("Error", t.getMessage());
-            }
-        };
+        createdCall.enqueue(new ReviewsCallBack<ReviewsData>());
 
         try {
             Response<ReviewsData> result = createdCall.execute();
