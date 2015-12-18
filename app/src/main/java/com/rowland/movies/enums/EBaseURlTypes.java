@@ -33,6 +33,7 @@ public enum EBaseURlTypes {
     private EBaseURlTypes(String s) {
         URLType = s;
     }
+
     // Get the url corresponding to the enum
     public String getUrlType() {
         return URLType;

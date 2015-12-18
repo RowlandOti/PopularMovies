@@ -20,6 +20,8 @@ package com.rowland.movies;
 import com.activeandroid.app.Application;
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp.StethoInterceptor;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.rowland.movies.enums.EBaseURlTypes;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.services.IRetrofitAPI;
@@ -69,9 +71,13 @@ public class ApplicationController extends Application {
     // Needed for factory pattern we’ll implement later in our singleton
     // Returns the single Retrofit instance
     public static Retrofit getRetrofit() {
+        // Set custom date format for Gson
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd")
+                .create();
         //To send out network requests to an API_MOVIE_URL, we need to use the Retrofit builder class
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(EBaseURlTypes.MOVIE_API_BASE_URL.getUrl()).addConverterFactory(GsonConverterFactory.create())
+                .baseUrl(EBaseURlTypes.MOVIE_API_BASE_URL.getUrlType()).addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         // Wollah! Retrofit instance is served hot.
         return retrofit;

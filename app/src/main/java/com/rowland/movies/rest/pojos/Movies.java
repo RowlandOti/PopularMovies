@@ -28,6 +28,7 @@ import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
 import java.util.List;
 
 @Table(name = "Movies")
@@ -52,6 +53,12 @@ public class Movies extends Model {
     //ActiveAndroid Annotations
     @Column(name = "overview")
     private String overview;
+
+    // Gson annotations
+    @SerializedName("release_date")
+    //ActiveAndroid Annotations
+    @Column(name = "release_date")
+    public Date releaseDate;
 
     // Gson annotations
     @SerializedName("original_title")
@@ -147,6 +154,24 @@ public class Movies extends Model {
      */
     public void setPosterPath(String posterPath) {
         this.posterPath = posterPath;
+    }
+
+    /**
+     *
+     * @return
+     * The overview
+     */
+    public Date getReleaseDate() {
+        return releaseDate;
+    }
+
+    /**
+     *
+     * @param releaseDate
+     * The releaseDate
+     */
+    public void setReleaseDate(Date releaseDate) {
+        this.releaseDate = releaseDate;
     }
 
     /**

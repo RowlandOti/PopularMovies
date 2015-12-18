@@ -28,10 +28,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.rowland.movies.R;
+import com.rowland.movies.enums.EBaseImageSize;
 import com.rowland.movies.enums.EBaseURlTypes;
 import com.rowland.movies.rest.pojos.Movies;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import butterknife.Bind;
@@ -44,6 +46,8 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
 
     // A list of the movie items
     private List<Movies> movieList = new ArrayList<>();
+    // A Calendar object to help in formatting time
+    private Calendar mCalendar;
 
     public GridAdapter(ArrayList<Movies> mMovieLists) {
         this.movieList = mMovieLists;
@@ -63,10 +67,10 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
         // Movie item at this position
         final Movies movie = movieList.get(position);
 
-        holder.mGridItemContainer.setContentDescription(holder.mGridItemContainer.getContext().getString(R.string.a11y_movie_title, movieData.originalTitle));
+        holder.mGridItemContainer.setContentDescription(holder.mGridItemContainer.getContext().getString(R.string.a11y_movie_title, movie.getOriginalTitle()));
 
-        if (movie.getFormattedDate() != null) {
-            mCalendar.setTime(movie.getFormattedDate());
+        if (movie.getReleaseDate() != null) {
+            mCalendar.setTime(movie.getReleaseDate());
             holder.mReleaseDateTextView.setText(String.valueOf(mCalendar.get(Calendar.YEAR)));
             holder.mReleaseDateTextView.setContentDescription(holder.mReleaseDateTextView.getContext().getString(R.string.a11y_movie_year, String.valueOf(mCalendar.get(Calendar.YEAR))));
         }
@@ -79,7 +83,8 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
             holder.mSortTypeValueTextView.setText(String.valueOf(Math.round(movie.getVoteAverage())));
         }
 
-        String imageUrl = EBaseURlTypes.MOVIE_API_IMAGE_BASE_URL + Constants.IMAGE_SIZE_W185 + movie.getPosterPath();
+
+        String imageUrl = EBaseURlTypes.MOVIE_API_IMAGE_BASE_URL.getUrlType() + EBaseImageSize.IMAGE_SIZE_W185.getImageSize() + movie.getPosterPath();
         final RelativeLayout container = holder.mMovieTitleContainer;
 
     }
