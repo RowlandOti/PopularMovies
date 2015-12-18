@@ -93,9 +93,9 @@ public class FavouriteFragment extends ABaseFragment implements SwipeRefreshLayo
     public void onLoaderReset(Loader<List<Movies>> loader) {
 
     }
-
+    // When RefreshLayout is triggered reload the loader
     @Override
     public void onRefresh() {
-
+        getLoaderManager().restartLoader(0, null, this);
     }
 }

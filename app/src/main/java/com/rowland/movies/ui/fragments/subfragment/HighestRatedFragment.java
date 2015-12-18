@@ -29,6 +29,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rowland.movies.R;
+import com.rowland.movies.asynctaskloaders.MoviesLoader;
+import com.rowland.movies.asynctaskloaders.enums.ESortOrder;
 import com.rowland.movies.rest.pojos.Movies;
 
 import java.util.List;
@@ -75,7 +77,7 @@ public class HighestRatedFragment extends ABaseFragment implements SwipeRefreshL
 
     @Override
     public Loader<List<Movies>> onCreateLoader(int id, Bundle args) {
-        return null;
+        return new MoviesLoader(getActivity(), ESortOrder.HIGHEST_RATED_DESCENDING);
     }
 
     @Override
@@ -86,10 +88,11 @@ public class HighestRatedFragment extends ABaseFragment implements SwipeRefreshL
     @Override
     public void onLoaderReset(Loader<List<Movies>> loader) {
 
+        swRefreshLayout.setRefreshing(false);
     }
-
+    // When RefreshLayout is triggered reload the loader
     @Override
     public void onRefresh() {
-
+        getLoaderManager().restartLoader(0, null, this);
     }
 }
