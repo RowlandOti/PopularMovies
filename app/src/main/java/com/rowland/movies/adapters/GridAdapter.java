@@ -27,6 +27,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.rowland.movies.R;
+import com.rowland.movies.rest.pojos.Movies;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -36,16 +40,26 @@ import butterknife.ButterKnife;
  */
 public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder>{
 
-    @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // Layout to inflate for View holder
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.grid_item_column, parent, false);
-        //Return the inflated view holder
-        return new ViewHolder(v);
+    // A list of the movie items
+    private List<Movies> movieList = new ArrayList<>();
+
+    public GridAdapter(ArrayList<Movies> mMovieLists) {
+        this.movieList = mMovieLists;
     }
 
+    // Called when RecyclerView needs a new RecyclerView.ViewHolder of the given type to represent an item.
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        // Layout to inflate for ViewHolder
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.grid_item_column, parent, false);
+        // Return new new ViewHolder
+        return new ViewHolder(v);
+    }
+    // Called by RecyclerView to display the data at the specified position.
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+
+        final Movies movies = movieList.get(position);
 
     }
 
@@ -53,7 +67,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder>{
     public int getItemCount() {
         return 0;
     }
-
+    // Takes care of the overhead of recycling and gives better performance and scrolling
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         @Bind(R.id.grid_sort_type_text_view)

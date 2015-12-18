@@ -66,7 +66,6 @@
             android:id="@+id/grid_sort_type_image_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:src="@drawable/ic_star"
             android:visibility="visible"
             android:padding="16dp"
             android:layout_centerVertical="true"
