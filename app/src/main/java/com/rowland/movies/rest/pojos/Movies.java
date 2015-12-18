@@ -100,7 +100,7 @@ public class Movies extends Model {
     @Expose
     //ActiveAndroid Annotations
     @Column(name = "popularity")
-    private Object popularity;
+    private Double popularity;
 
     // Gson annotations
     @SerializedName("vote_average")
@@ -280,7 +280,7 @@ public class Movies extends Model {
      * @return
      * The popularity
      */
-    public Object getPopularity() {
+    public Double getPopularity() {
         return popularity;
     }
 
@@ -289,7 +289,7 @@ public class Movies extends Model {
      * @param popularity
      * The popularity
      */
-    public void setPopularity(Object popularity) {
+    public void setPopularity(Double popularity) {
         this.popularity = popularity;
     }
 

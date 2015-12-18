@@ -17,6 +17,7 @@
 
 package com.rowland.movies.adapters;
 
+import android.provider.SyncStateContract;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +28,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.rowland.movies.R;
+import com.rowland.movies.enums.EBaseURlTypes;
 import com.rowland.movies.rest.pojos.Movies;
 
 import java.util.ArrayList;
@@ -38,7 +40,7 @@ import butterknife.ButterKnife;
 /**
  * Created by Oti Rowland on 12/18/2015.
  */
-public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder>{
+public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHolder>{
 
     // A list of the movie items
     private List<Movies> movieList = new ArrayList<>();
@@ -47,19 +49,38 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder>{
         this.movieList = mMovieLists;
     }
 
-    // Called when RecyclerView needs a new RecyclerView.ViewHolder of the given type to represent an item.
+    // Called when RecyclerView needs a new CustomViewHolder of the given type to represent an item.
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // Layout to inflate for ViewHolder
+    public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        // Layout to inflate for CustomViewHolder
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.grid_item_column, parent, false);
-        // Return new new ViewHolder
-        return new ViewHolder(v);
+        // Return new new CustomViewHolder
+        return new CustomViewHolder(v);
     }
     // Called by RecyclerView to display the data at the specified position.
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(CustomViewHolder holder, int position) {
+        // Movie item at this position
+        final Movies movie = movieList.get(position);
 
-        final Movies movies = movieList.get(position);
+        holder.mGridItemContainer.setContentDescription(holder.mGridItemContainer.getContext().getString(R.string.a11y_movie_title, movieData.originalTitle));
+
+        if (movie.getFormattedDate() != null) {
+            mCalendar.setTime(movie.getFormattedDate());
+            holder.mReleaseDateTextView.setText(String.valueOf(mCalendar.get(Calendar.YEAR)));
+            holder.mReleaseDateTextView.setContentDescription(holder.mReleaseDateTextView.getContext().getString(R.string.a11y_movie_year, String.valueOf(mCalendar.get(Calendar.YEAR))));
+        }
+
+        if (SyncStateContract.Constants.SORT_BY_POPULARITY_DESC.equals(sortType)) {
+            setIconForType(holder, sortType, movieData);
+            holder.mSortTypeValueTextView.setText(String.valueOf(Math.round(movie.getPopularity())));
+        } else {
+            setIconForType(holder, sortType, movieData);
+            holder.mSortTypeValueTextView.setText(String.valueOf(Math.round(movie.getVoteAverage())));
+        }
+
+        String imageUrl = EBaseURlTypes.MOVIE_API_IMAGE_BASE_URL + Constants.IMAGE_SIZE_W185 + movie.getPosterPath();
+        final RelativeLayout container = holder.mMovieTitleContainer;
 
     }
 
@@ -68,7 +89,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder>{
         return 0;
     }
     // Takes care of the overhead of recycling and gives better performance and scrolling
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class CustomViewHolder extends RecyclerView.ViewHolder {
 
         @Bind(R.id.grid_sort_type_text_view)
         TextView mSortTypeValueTextView;
@@ -88,7 +109,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder>{
         @Bind(R.id.grid_container)
         FrameLayout mGridItemContainer;
 
-        public ViewHolder(View itemView) {
+        public CustomViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }

@@ -18,23 +18,23 @@
 package com.rowland.movies.enums;
 
 /**
- * Created by Oti Rowland on 12/12/2015.
+ * Created by Oti Rowland on 12/18/2015.
  */
-public enum EBaseURlTypes {
+public enum EBaseImageSize {
 
-    // All the url that the application will query
-    MOVIE_API_BASE_URL("http://api.themoviedb.org"),
-    MOVIE_API_IMAGE_BASE_URL("http://image.tmdb.org/t/p/"),
-    YOUTUBE_VIDEO_URL("http://www.youtube.com/watch?v="),
-    YOUTUBE_THUMNAIL_URL("http://img.youtube.com/vi/%s/default.jpg");
+    // All the image sizes that the application will query
+    IMAGE_SIZE_W185("w185"),
+    IMAGE_SIZE_W342("w342"),
+    IMAGE_SIZE_W500("w500"),
+    IMAGE_SIZE_W780("w780");
 
-    private String URLType;
+    private String imageSize;
 
-    private EBaseURlTypes(String s) {
-        URLType = s;
+    private EBaseImageSize(String imageSize) {
+        imageSize = imageSize;
     }
     // Get the url corresponding to the enum
-    public String getUrlType() {
-        return URLType;
+    public String getImageSize() {
+        return imageSize;
     }
 }
