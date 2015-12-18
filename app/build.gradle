@@ -69,6 +69,8 @@ dependencies {
     // Use - Rest API support
     compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
     compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
+    // Use - Image Loading
+    compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.tonicartos:superslim:0.4.13'
     // Use - General Utilities support
     compile 'com.uwetrottmann:androidutils:2.0.0'

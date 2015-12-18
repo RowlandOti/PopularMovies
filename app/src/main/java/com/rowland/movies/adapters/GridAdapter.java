@@ -31,6 +31,7 @@ import com.rowland.movies.R;
 import com.rowland.movies.enums.EBaseImageSize;
 import com.rowland.movies.enums.EBaseURlTypes;
 import com.rowland.movies.rest.pojos.Movies;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -78,6 +79,9 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
 
         String imageUrl = EBaseURlTypes.MOVIE_API_IMAGE_BASE_URL.getUrlType() + EBaseImageSize.IMAGE_SIZE_W185.getImageSize() + movie.getPosterPath();
         final RelativeLayout container = holder.mMovieTitleContainer;
+
+        Picasso.with(holder.mMovieImageView.getContext()).load(imageUrl).placeholder(R.drawable.ic_movie_placeholder).
+                into(holder.mMovieImageView);
 
     }
 
