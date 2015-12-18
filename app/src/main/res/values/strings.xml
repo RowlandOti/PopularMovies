@@ -8,15 +8,8 @@
     <string name="action_share" translatable="false">Share</string>
     <string name="action_drawflow" translatable="false">Drawer</string>
 
-<string name="movie_title">Title: </string>
-<string name="movie_year">Year of release: </string>
+    <string name="movie_title">Title: </string>
+    <string name="movie_year">Year of release: </string>
 
-    <!-- IMDB API related Constants-->
-    <string name="movie_api_url">http://api.themoviedb.org</string>
-    <string name="movie_api_image_url">http://image.tmdb.org/t/p/</string>
-    <string name="movie_api_youtube_image_url">http://img.youtube.com/vi/%s/default.jpg</string>
-    <string name="movie_api_youtube_video_url">http://www.youtube.com/watch?v=</string>
-    <!-- Sorting related Constants-->
-    <string name="movie_api_url">http://api.themoviedb.org</string>
 
 </resources>

@@ -75,14 +75,6 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
             holder.mReleaseDateTextView.setContentDescription(holder.mReleaseDateTextView.getContext().getString(R.string.movie_year, String.valueOf(mCalendar.get(Calendar.YEAR))));
         }
 
-        /*if (SyncStateContract.Constants.SORT_BY_POPULARITY_DESC.equals(sortType)) {
-            setIconForType(holder, sortType, movieData);
-            holder.mSortTypeValueTextView.setText(String.valueOf(Math.round(movie.getPopularity())));
-        } else {
-            setIconForType(holder, sortType, movieData);
-            holder.mSortTypeValueTextView.setText(String.valueOf(Math.round(movie.getVoteAverage())));
-        }*/
-
 
         String imageUrl = EBaseURlTypes.MOVIE_API_IMAGE_BASE_URL.getUrlType() + EBaseImageSize.IMAGE_SIZE_W185.getImageSize() + movie.getPosterPath();
         final RelativeLayout container = holder.mMovieTitleContainer;
