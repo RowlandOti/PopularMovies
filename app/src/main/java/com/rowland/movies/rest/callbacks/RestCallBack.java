@@ -19,6 +19,7 @@ package com.rowland.movies.rest.callbacks;
 
 import android.util.Log;
 
+import com.rowland.movies.rest.data.ReviewsData;
 import com.rowland.movies.rest.pojos.RestError;
 import com.rowland.movies.rest.pojos.Reviews;
 
@@ -32,20 +33,20 @@ import retrofit.Retrofit;
 /**
  * Created by Oti Rowland on 12/17/2015.
  */
-public abstract class RestCallBack<T> implements Callback<T> {
-
+public abstract class RestCallBack<ReviewsData> implements Callback<ReviewsData> {
 
     @Override
-    public void onResponse(Response<T> response, Retrofit retrofit) {
+    public void onResponse(Response<ReviewsData> response, Retrofit retrofit) {
 
         if (response.isSuccess() && response.errorBody() == null) {
             // tasks available
             response.body();
+            List<Reviews> items = response.body().items;
         } else {
 
             try {
-                RestError restError = (RestError)retrofit.responseConverter(
-                        RestError.class, RestError.class.getAnnotations())
+                RestError restError = (RestError)retrofit.responseConverter(RestError.class,
+                        RestError.class.getAnnotations())
                         .convert(response.errorBody());
                 // Do error handling here
                 // we got an error message

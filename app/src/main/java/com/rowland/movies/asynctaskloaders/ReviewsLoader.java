@@ -22,7 +22,6 @@ import android.util.Log;
 
 import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
-import com.rowland.movies.rest.callbacks.RestCallBack;
 import com.rowland.movies.rest.data.ReviewsData;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.pojos.Reviews;
@@ -64,7 +63,13 @@ public class ReviewsLoader extends GenericSimpleLoader {
         createdCall.enqueue(new Callback<ReviewsData>() {
             @Override
             public void onResponse(Response<ReviewsData> response, Retrofit retrofit) {
+                List<Reviews> reviews = response.body().items;
 
+                for (Reviews review : reviews)
+                {
+                    // Save revies in the database
+                    review.save();
+                }
             }
 
             @Override
@@ -73,15 +78,14 @@ public class ReviewsLoader extends GenericSimpleLoader {
             }
         });
 
-        try {
+      /*  try {
             Response<ReviewsData> result = createdCall.execute();
             return result.body().items;
         } catch (IOException e) {
             e.printStackTrace();
             Log.e(LOG_TAG, "IOException during loadInBackground()");
-        }
+        }*/
+
         return null;
     }
-
-
 }

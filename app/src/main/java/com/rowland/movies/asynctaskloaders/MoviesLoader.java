@@ -24,8 +24,10 @@ import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
 import com.rowland.movies.asynctaskloaders.enums.ESortOrder;
 import com.rowland.movies.rest.data.MoviesData;
+import com.rowland.movies.rest.data.ReviewsData;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.pojos.Movies;
+import com.rowland.movies.rest.pojos.Reviews;
 import com.rowland.movies.rest.services.IMoviesAPIService;
 import com.rowland.movies.rest.services.IRetrofitAPI;
 import com.uwetrottmann.androidutils.GenericSimpleLoader;
@@ -34,7 +36,9 @@ import java.io.IOException;
 import java.util.List;
 
 import retrofit.Call;
+import retrofit.Callback;
 import retrofit.Response;
+import retrofit.Retrofit;
 
 /**
  * Created by Oti Rowland on 12/12/2015.
@@ -59,13 +63,33 @@ public class MoviesLoader extends GenericSimpleLoader {
         // Retrieve the movies data
         Call<MoviesData> createdCall = movieService.loadMoviesData(BuildConfig.IMDB_API_KEY, mSortOrder.getSortOrder());
 
-        try {
+        // Asynchronously access
+        createdCall.enqueue(new Callback<MoviesData>() {
+            @Override
+            public void onResponse(Response<MoviesData> response, Retrofit retrofit) {
+                List<Movies> movies = response.body().items;
+
+                for (Movies movie : movies)
+                {
+                    // Save movies in the database
+                    movie.save();
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+        });
+
+   /*     try {
             Response<MoviesData> result = createdCall.execute();
             return result.body().items;
         } catch (IOException e) {
             e.printStackTrace();
             Log.e(LOG_TAG, "IOException during loadInBackground()");
-        }
+        }*/
+
         return null;
     }
 }
