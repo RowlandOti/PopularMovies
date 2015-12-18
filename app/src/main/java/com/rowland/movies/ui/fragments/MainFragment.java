@@ -30,13 +30,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
+import com.rowland.movies.R;
 import com.rowland.movies.adapters.ListPopupWindowAdapter;
 import com.rowland.movies.adapters.SmartNestedViewPagerAdapter;
-import com.rowland.movies.R;
 import com.rowland.movies.objects.ListPopupMenu;
 import com.rowland.movies.utilities.Utilities;
 
 import java.util.ArrayList;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * Use the {@link MainFragment#newInstance} factory method to
@@ -44,56 +47,49 @@ import java.util.ArrayList;
  */
 public class MainFragment extends Fragment {
 
+    @Bind(R.id.slidingTabStrips) SlidingTabStripLayout slidingTabStrips;
+    @Bind(R.id.viewPager) ViewPager pager;
+
     private final String LOG_TAG = MainFragment.class.getSimpleName();
-    private String[] TITLES = { "Popular", "Highest Rated", "Favorite" };
-    private static MainFragment fragmentInstance = null;
+    private String[] TITLES = {"Popular", "Highest Rated", "Favorite"};
     private SmartNestedViewPagerAdapter pagerAdapter;
-    private SlidingTabStripLayout slidingTabStrips;
-    private ViewPager pager;
     private float mPopupMaxWidth;
 
-    public MainFragment()
-    {
+    public MainFragment() {
         setRetainInstance(true);
     }
 
 
-    public static MainFragment newInstance(Bundle args)
-    {
-        fragmentInstance = new MainFragment();
-        if(args != null)
-        {
+    public static MainFragment newInstance(Bundle args) {
+        MainFragment fragmentInstance = new MainFragment();
+        if (args != null) {
             fragmentInstance.setArguments(args);
         }
         return fragmentInstance;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
         //Get the maximum width of our ListPopupWindow
-        this.mPopupMaxWidth = Math.max(this.getResources().getDisplayMetrics().widthPixels/2,
+        this.mPopupMaxWidth = Math.max(this.getResources().getDisplayMetrics().widthPixels / 2,
                 this.getResources().getDimensionPixelSize(R.dimen.config_prefListPopupWindowWidth));
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-
         // Initialize the ViewPager and TabStripLayout
-        this.pager = (ViewPager) rootView.findViewById(R.id.viewPager);
-        this.slidingTabStrips = (SlidingTabStripLayout) rootView.findViewById(R.id.slidingTabStrips);
-
+        ButterKnife.bind(this, rootView);
+        // Return the view for this fragment
         return rootView;
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
-    {
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         // Clear old menu.
         menu.clear();
@@ -102,10 +98,8 @@ public class MainFragment extends Fragment {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        switch (item.getItemId())
-        {
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
             case R.id.action_search:
                 return true;
             case R.id.action_overflow:
@@ -113,15 +107,13 @@ public class MainFragment extends Fragment {
                 final View menuItemView = getActivity().findViewById(R.id.action_overflow);
                 onListPopUp(menuItemView);
                 return true;
-            default:
-            {
+            default: {
                 return super.onOptionsItemSelected(item);
             }
         }
     }
 
-    public void onListPopUp(View anchor)
-    {
+    public void onListPopUp(View anchor) {
         // This a sample dat to fill our ListView
         ArrayList<ListPopupMenu> menuItem = new ArrayList<ListPopupMenu>();
         menuItem.add(new ListPopupMenu(R.drawable.ic_popular_black_48dp, "Popular"));
@@ -140,7 +132,7 @@ public class MainFragment extends Fragment {
         // Setting this enables window to be dismissed by click outside ListPopupWindow
         pop.setModal(true);
         // Sets the width of the ListPopupWindow
-        pop.setContentWidth((int)this.mPopupMaxWidth);
+        pop.setContentWidth((int) this.mPopupMaxWidth);
         // Sets the Height of the ListPopupWindow
         pop.setHeight(ListPopupWindow.WRAP_CONTENT);
         // Set up a click listener for the ListView items
@@ -152,8 +144,7 @@ public class MainFragment extends Fragment {
                 String sortType;
                 String menuName = ((ListPopupMenu) adapterView.getItemAtPosition(position)).getName();
 
-                switch (menuName)
-                {
+                switch (menuName) {
                     case "Popular":
                         sortType = getResources().getString(R.string.sort_popular);
                         slidingTabStrips.setScrollPosition(0, 0.0F, true);
@@ -181,20 +172,17 @@ public class MainFragment extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState)
-    {
+    public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         // Set an Adapter: pass data, etc.
         this.pagerAdapter = new SmartNestedViewPagerAdapter(getActivity().getSupportFragmentManager(), getActivity().getApplicationContext());
         this.pager.setAdapter(pagerAdapter);
-        //this.slidingTabStrips.setCustomTabView(R.layout.tab_custom, R.id.psts_tab_textview_title);
         // Bind the slidingTabStrips to the ViewPager
         this.slidingTabStrips.setupWithViewPager(pager);
     }
 
-    public String[] getTITLES()
-    {
+    public String[] getTITLES() {
         return TITLES;
     }
 
@@ -203,10 +191,9 @@ public class MainFragment extends Fragment {
      * implement. This mechanism allows activities to be notified of item
      * selections.
      */
-    public interface onMainFragmentMovieSelectedCallback
-    {
+    public interface onMainFragmentMovieSelectedCallback {
         /**
-         *MovieItemFragmentCallback for when an item has been selected.
+         * MovieItemFragmentCallback for when an item has been selected.
          */
         void onMainFragmentMovieSelected(String arg);
     }

@@ -21,7 +21,9 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,17 +33,24 @@ import com.rowland.movies.rest.pojos.Movies;
 
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 /**
  *
  */
 public class PopularFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, LoaderManager.LoaderCallbacks<List<Movies>>{
 
-    private static PopularFragment fragmentInstance = null;
+    // ButterKnife injected Views
+    @Bind(R.id.sw_refresh_layout) SwipeRefreshLayout swRefreshLayout;
+    @Bind(R.id.grid_recycle_view) RecyclerView recycleView;
+    // Logging tracker for this class
     private final String LOG_TAG = PopularFragment.class.getSimpleName();
 
     public static PopularFragment newInstance(Bundle args)
     {
-        fragmentInstance = new PopularFragment();
+        PopularFragment fragmentInstance = new PopularFragment();
+
         if(args != null)
         {
             fragmentInstance.setArguments(args);
@@ -68,7 +77,11 @@ public class PopularFragment extends Fragment implements SwipeRefreshLayout.OnRe
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_popular, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_popular, container, false);
+        // Initialize the ViewPager and TabStripLayout
+        ButterKnife.bind(this, rootView);
+        // Return the view for this fragment
+        return rootView;
     }
 
     @Override

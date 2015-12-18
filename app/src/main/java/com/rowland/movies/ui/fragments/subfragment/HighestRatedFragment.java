@@ -19,20 +19,28 @@ package com.rowland.movies.ui.fragments.subfragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.rowland.movies.R;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 
 public class HighestRatedFragment extends Fragment {
 
-    private static HighestRatedFragment fragmentInstance = null;
+    // ButterKnife injected Views
+    @Bind(R.id.sw_refresh_layout) SwipeRefreshLayout swRefreshLayout;
+    @Bind(R.id.grid_recycle_view) RecyclerView recycleView;
+    // Logging tracker for this class
     private final String LOG_TAG = HighestRatedFragment.class.getSimpleName();
 
     public static HighestRatedFragment newInstance(Bundle args) {
-        fragmentInstance = new HighestRatedFragment();
+        HighestRatedFragment  fragmentInstance = new HighestRatedFragment();
         if (args != null) {
             fragmentInstance.setArguments(args);
         }
@@ -54,6 +62,10 @@ public class HighestRatedFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_highestrated, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_highestrated, container, false);
+        // Initialize the ViewPager and TabStripLayout
+        ButterKnife.bind(this, rootView);
+        // Return the view for this fragment
+        return rootView;
     }
 }
