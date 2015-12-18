@@ -39,7 +39,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 
-public class HighestRatedFragment extends ABaseFragment implements SwipeRefreshLayout.OnRefreshListener, LoaderManager.LoaderCallbacks<List<Movies>>{
+public class HighestRatedFragment extends ABaseFragment implements LoaderManager.LoaderCallbacks<List<Movies>>{
 
     // Logging tracker for this class
     private final String LOG_TAG = HighestRatedFragment.class.getSimpleName();

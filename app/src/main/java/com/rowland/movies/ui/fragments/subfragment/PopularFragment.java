@@ -37,7 +37,7 @@ import butterknife.ButterKnife;
 /**
  *
  */
-public class PopularFragment extends ABaseFragment implements SwipeRefreshLayout.OnRefreshListener, LoaderManager.LoaderCallbacks<List<Movies>>{
+public class PopularFragment extends ABaseFragment implements LoaderManager.LoaderCallbacks<List<Movies>>{
 
     // Logging tracker for this class
     private final String LOG_TAG = PopularFragment.class.getSimpleName();

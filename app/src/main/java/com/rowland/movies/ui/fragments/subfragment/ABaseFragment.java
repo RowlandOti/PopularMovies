@@ -25,22 +25,30 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.rowland.movies.R;
+import com.rowland.movies.adapters.GridAdapter;
+import com.rowland.movies.rest.pojos.Movies;
+
+import java.util.ArrayList;
 
 import butterknife.Bind;
 
 /**
  * Created by Oti Rowland on 12/18/2015.
  */
-public class ABaseFragment extends Fragment {
+public class ABaseFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
 
     // Logging tracker for this class
     private final String LOG_TAG = ABaseFragment.class.getSimpleName();
+    // AN arrayList of the movies
+    private ArrayList<Movies> mMovieLists;
+    // The grid adapter
+    private GridAdapter mMovieAdapter;
 
     // ButterKnife injected Views
     @Bind(R.id.sw_refresh_layout)
     SwipeRefreshLayout swRefreshLayout;
     @Bind(R.id.grid_recycle_view)
-    RecyclerView mRecycleView;
+    RecyclerView mGridRecycleView;
 
     public static ABaseFragment newInstance(ABaseFragment fragment, Bundle args) {
 
@@ -64,7 +72,16 @@ public class ABaseFragment extends Fragment {
 
         final GridLayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
 
-        mRecycleView.setLayoutManager(mLayoutManager);
-        mRecycleView.setHasFixedSize(true);
+        mGridRecycleView.setLayoutManager(mLayoutManager);
+        mGridRecycleView.setHasFixedSize(true);
+
+        mMovieAdapter = new GridAdapter(mMovieLists);
+
+        mGridRecycleView.setAdapter(mMovieAdapter);
+        swRefreshLayout.setOnRefreshListener(this);
+    }
+
+    @Override
+    public void onRefresh() {
     }
 }

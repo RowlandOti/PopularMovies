@@ -79,7 +79,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
 
         String imageUrl = EBaseURlTypes.MOVIE_API_IMAGE_BASE_URL.getUrlType() + EBaseImageSize.IMAGE_SIZE_W185.getImageSize() + movie.getPosterPath();
         final RelativeLayout container = holder.mMovieTitleContainer;
-
+        // Use Picasso to load the images
         Picasso.with(holder.mMovieImageView.getContext()).load(imageUrl).placeholder(R.drawable.ic_movie_placeholder).
                 into(holder.mMovieImageView);
 
