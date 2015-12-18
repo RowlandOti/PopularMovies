@@ -146,24 +146,19 @@ public class MainFragment extends Fragment {
 
                 switch (menuName) {
                     case "Popular":
-                        sortType = getResources().getString(R.string.sort_popular);
                         slidingTabStrips.setScrollPosition(0, 0.0F, true);
                         break;
                     case "Highest Rated":
-                        sortType = getResources().getString(R.string.sort_highest_rated);
                         slidingTabStrips.setScrollPosition(1, 0.0F, true);
                         break;
                     case "Favourite":
-                        sortType = getResources().getString(R.string.sort_favorited);
                         slidingTabStrips.setScrollPosition(2, 0.0F, true);
                         break;
                     default:
-                        sortType = getResources().getString(R.string.sort_highest_rated);
                         slidingTabStrips.setScrollPosition(0, 0.0F, true);
                         break;
                 }
 
-                Utilities.PreferenceUtility.savePrefs(getActivity(), getResources().getString(R.string.sort_type), sortType);
 
                 pop.dismiss();
             }

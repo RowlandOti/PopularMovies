@@ -67,21 +67,21 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
         // Movie item at this position
         final Movies movie = movieList.get(position);
 
-        holder.mGridItemContainer.setContentDescription(holder.mGridItemContainer.getContext().getString(R.string.a11y_movie_title, movie.getOriginalTitle()));
+        holder.mGridItemContainer.setContentDescription(holder.mGridItemContainer.getContext().getString(R.string.movie_title, movie.getOriginalTitle()));
 
         if (movie.getReleaseDate() != null) {
             mCalendar.setTime(movie.getReleaseDate());
             holder.mReleaseDateTextView.setText(String.valueOf(mCalendar.get(Calendar.YEAR)));
-            holder.mReleaseDateTextView.setContentDescription(holder.mReleaseDateTextView.getContext().getString(R.string.a11y_movie_year, String.valueOf(mCalendar.get(Calendar.YEAR))));
+            holder.mReleaseDateTextView.setContentDescription(holder.mReleaseDateTextView.getContext().getString(R.string.movie_year, String.valueOf(mCalendar.get(Calendar.YEAR))));
         }
 
-        if (SyncStateContract.Constants.SORT_BY_POPULARITY_DESC.equals(sortType)) {
+        /*if (SyncStateContract.Constants.SORT_BY_POPULARITY_DESC.equals(sortType)) {
             setIconForType(holder, sortType, movieData);
             holder.mSortTypeValueTextView.setText(String.valueOf(Math.round(movie.getPopularity())));
         } else {
             setIconForType(holder, sortType, movieData);
             holder.mSortTypeValueTextView.setText(String.valueOf(Math.round(movie.getVoteAverage())));
-        }
+        }*/
 
 
         String imageUrl = EBaseURlTypes.MOVIE_API_IMAGE_BASE_URL.getUrlType() + EBaseImageSize.IMAGE_SIZE_W185.getImageSize() + movie.getPosterPath();
