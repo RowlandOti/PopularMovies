@@ -22,53 +22,22 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.rowland.movies.R;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
-
-public class HighestRatedFragment extends Fragment {
+/**
+ * Created by Oti Rowland on 12/18/2015.
+ */
+public abstract class ABaseFragment extends Fragment {
 
     // ButterKnife injected Views
-    @Bind(R.id.sw_refresh_layout) SwipeRefreshLayout swRefreshLayout;
-    @Bind(R.id.grid_recycle_view) RecyclerView mRecycleView;
-    // Logging tracker for this class
-    private final String LOG_TAG = HighestRatedFragment.class.getSimpleName();
-
-    public static HighestRatedFragment newInstance(Bundle args) {
-        HighestRatedFragment  fragmentInstance = new HighestRatedFragment();
-        if (args != null) {
-            fragmentInstance.setArguments(args);
-        }
-        return fragmentInstance;
-    }
-
-    public HighestRatedFragment() {
-
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_highestrated, container, false);
-        // Initialize the ViewPager and TabStripLayout
-        ButterKnife.bind(this, rootView);
-        // Return the view for this fragment
-        return rootView;
-    }
+    @Bind(R.id.sw_refresh_layout)
+    SwipeRefreshLayout swRefreshLayout;
+    @Bind(R.id.grid_recycle_view)
+    RecyclerView mRecycleView;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState)

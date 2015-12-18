@@ -20,6 +20,7 @@ package com.rowland.movies.ui.fragments.subfragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,10 +34,8 @@ import butterknife.ButterKnife;
 /**
  *
  */
-public class FavouriteFragment extends Fragment {
-    // ButterKnife injected Views
-    @Bind(R.id.sw_refresh_layout) SwipeRefreshLayout swRefreshLayout;
-    @Bind(R.id.grid_recycle_view) RecyclerView recycleView;
+public class FavouriteFragment extends BaseFragment {
+
     // Logging tracker for this class
     private final String LOG_TAG = FavouriteFragment.class.getSimpleName();
 
@@ -75,4 +74,6 @@ public class FavouriteFragment extends Fragment {
         // Return the view for this fragment
         return rootView;
     }
+
+
 }
