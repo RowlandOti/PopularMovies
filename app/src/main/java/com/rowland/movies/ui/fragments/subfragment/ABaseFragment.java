@@ -31,13 +31,28 @@ import butterknife.Bind;
 /**
  * Created by Oti Rowland on 12/18/2015.
  */
-public abstract class ABaseFragment extends Fragment {
+public class ABaseFragment extends Fragment {
+
+    // Logging tracker for this class
+    private final String LOG_TAG = ABaseFragment.class.getSimpleName();
 
     // ButterKnife injected Views
     @Bind(R.id.sw_refresh_layout)
     SwipeRefreshLayout swRefreshLayout;
     @Bind(R.id.grid_recycle_view)
     RecyclerView mRecycleView;
+
+    public static ABaseFragment newInstance(ABaseFragment fragment, Bundle args) {
+
+        // Create the new fragment instance
+        ABaseFragment  fragmentInstance = fragment;
+        // Set arguments if it is not null
+        if (args != null) {
+            fragmentInstance.setArguments(args);
+        }
+        // Return the new fragment
+        return fragmentInstance;
+    }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState)

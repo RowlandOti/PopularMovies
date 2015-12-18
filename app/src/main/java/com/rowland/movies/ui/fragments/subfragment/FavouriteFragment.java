@@ -19,6 +19,8 @@ package com.rowland.movies.ui.fragments.subfragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,6 +29,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rowland.movies.R;
+import com.rowland.movies.rest.pojos.Movies;
+
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -34,18 +39,16 @@ import butterknife.ButterKnife;
 /**
  *
  */
-public class FavouriteFragment extends BaseFragment {
+public class FavouriteFragment extends ABaseFragment implements SwipeRefreshLayout.OnRefreshListener, LoaderManager.LoaderCallbacks<List<Movies>>{
 
     // Logging tracker for this class
     private final String LOG_TAG = FavouriteFragment.class.getSimpleName();
 
     public static FavouriteFragment newInstance(Bundle args)
     {
-        FavouriteFragment fragmentInstance = new FavouriteFragment();
-        if(args != null)
-        {
-            fragmentInstance.setArguments(args);
-        }
+        // Create the new fragment instance
+        FavouriteFragment fragmentInstance = (FavouriteFragment)newInstance(new FavouriteFragment(), args);
+        // Return the new fragment
         return fragmentInstance;
 
     }
@@ -76,4 +79,23 @@ public class FavouriteFragment extends BaseFragment {
     }
 
 
+    @Override
+    public Loader<List<Movies>> onCreateLoader(int id, Bundle args) {
+        return null;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<List<Movies>> loader, List<Movies> data) {
+
+    }
+
+    @Override
+    public void onLoaderReset(Loader<List<Movies>> loader) {
+
+    }
+
+    @Override
+    public void onRefresh() {
+
+    }
 }

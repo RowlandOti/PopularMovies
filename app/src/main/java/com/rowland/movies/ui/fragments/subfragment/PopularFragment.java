@@ -40,23 +40,15 @@ import butterknife.ButterKnife;
 /**
  *
  */
-public class PopularFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, LoaderManager.LoaderCallbacks<List<Movies>>{
+public class PopularFragment extends ABaseFragment implements SwipeRefreshLayout.OnRefreshListener, LoaderManager.LoaderCallbacks<List<Movies>>{
 
-    // ButterKnife injected Views
-    @Bind(R.id.sw_refresh_layout) SwipeRefreshLayout swRefreshLayout;
-    @Bind(R.id.grid_recycle_view) RecyclerView mRecycleView;
     // Logging tracker for this class
     private final String LOG_TAG = PopularFragment.class.getSimpleName();
 
     public static PopularFragment newInstance(Bundle args)
     {
         // Create the new fragment instance
-        PopularFragment fragmentInstance = new PopularFragment();
-        // Set arguments if it is not null
-        if(args != null)
-        {
-            fragmentInstance.setArguments(args);
-        }
+        PopularFragment fragmentInstance = (PopularFragment)newInstance(new PopularFragment(), args);
         // Return the new fragment
         return fragmentInstance;
 
@@ -85,20 +77,6 @@ public class PopularFragment extends Fragment implements SwipeRefreshLayout.OnRe
         ButterKnife.bind(this, rootView);
         // Return the view for this fragment
         return rootView;
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState)
-    {
-        super.onViewCreated(view, savedInstanceState);
-
-        swRefreshLayout.setColorSchemeResources(R.color.apptheme_accent_teal);
-        swRefreshLayout.setProgressViewOffset(true, 100, 400);
-
-        final GridLayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
-
-        mRecycleView.setLayoutManager(mLayoutManager);
-        mRecycleView.setHasFixedSize(true);
     }
 
     @Override

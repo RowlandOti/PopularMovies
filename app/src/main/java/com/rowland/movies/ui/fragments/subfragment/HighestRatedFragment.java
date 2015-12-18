@@ -19,6 +19,8 @@ package com.rowland.movies.ui.fragments.subfragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,25 +29,26 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rowland.movies.R;
+import com.rowland.movies.rest.pojos.Movies;
+
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 
-public class HighestRatedFragment extends Fragment {
+public class HighestRatedFragment extends ABaseFragment implements SwipeRefreshLayout.OnRefreshListener, LoaderManager.LoaderCallbacks<List<Movies>>{
 
-    // ButterKnife injected Views
-    @Bind(R.id.sw_refresh_layout) SwipeRefreshLayout swRefreshLayout;
-    @Bind(R.id.grid_recycle_view) RecyclerView mRecycleView;
     // Logging tracker for this class
     private final String LOG_TAG = HighestRatedFragment.class.getSimpleName();
 
-    public static HighestRatedFragment newInstance(Bundle args) {
-        HighestRatedFragment  fragmentInstance = new HighestRatedFragment();
-        if (args != null) {
-            fragmentInstance.setArguments(args);
-        }
+    public static HighestRatedFragment newInstance(Bundle args)
+    {
+        // Create the new fragment instance
+        HighestRatedFragment fragmentInstance = (HighestRatedFragment)newInstance(new HighestRatedFragment(), args);
+        // Return the new fragment
         return fragmentInstance;
+
     }
 
     public HighestRatedFragment() {
@@ -71,16 +74,22 @@ public class HighestRatedFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState)
-    {
-        super.onViewCreated(view, savedInstanceState);
+    public Loader<List<Movies>> onCreateLoader(int id, Bundle args) {
+        return null;
+    }
 
-        swRefreshLayout.setColorSchemeResources(R.color.apptheme_accent_teal);
-        swRefreshLayout.setProgressViewOffset(true, 100, 400);
+    @Override
+    public void onLoadFinished(Loader<List<Movies>> loader, List<Movies> data) {
 
-        final GridLayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
+    }
 
-        mRecycleView.setLayoutManager(mLayoutManager);
-        mRecycleView.setHasFixedSize(true);
+    @Override
+    public void onLoaderReset(Loader<List<Movies>> loader) {
+
+    }
+
+    @Override
+    public void onRefresh() {
+
     }
 }
