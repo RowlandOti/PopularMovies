@@ -50,9 +50,13 @@ android {
     buildTypes {
         debug {
             applicationIdSuffix ".debug"
+            // Show the logs when debugging
+            buildConfigField "Boolean", "IS_DEBUG_MODE", "true"
         }
         release {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            // Hide all the logs on product release
+            buildConfigField "Boolean", "IS_DEBUG_MODE", "false"
         }
     }
 }

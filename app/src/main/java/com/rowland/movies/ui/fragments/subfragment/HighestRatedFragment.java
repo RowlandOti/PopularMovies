@@ -81,7 +81,7 @@ public class HighestRatedFragment extends BaseGridFragment implements LoaderMana
     @Override
     public Loader<List<Movies>> onCreateLoader(int id, Bundle args) {
         MoviesLoader movieLoader = new MoviesLoader(getActivity(), ESortOrder.HIGHEST_RATED_DESCENDING);
-        Log.d(LOG_TAG, ""+movieLoader);
+        // Return our Loader containg the list of movies
         return movieLoader;
     }
 

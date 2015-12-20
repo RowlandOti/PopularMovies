@@ -33,7 +33,9 @@ import java.io.IOException;
 import java.util.List;
 
 import retrofit.Call;
+import retrofit.Callback;
 import retrofit.Response;
+import retrofit.Retrofit;
 
 /**
  * Created by Oti Rowland on 12/12/2015.
@@ -89,8 +91,8 @@ public class MoviesLoader extends BaseLoader {
 
         if (movies != null && !movies.isEmpty()) {
             return movies;
-        }*/
-
+        }
+*/
         try {
             Response<MoviesData> result = createdCall.execute();
             Log.d(LOG_TAG, ""+result.body().items);

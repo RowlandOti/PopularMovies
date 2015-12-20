@@ -34,7 +34,6 @@ public class MainActivity extends BaseToolBarActivity {
     // Class Variables
     private final String LOG_TAG = MainActivity.class.getSimpleName();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
