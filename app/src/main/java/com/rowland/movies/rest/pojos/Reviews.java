@@ -24,12 +24,14 @@ package com.rowland.movies.rest.pojos;
 
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
+@Table(name = "reviews")
 public class Reviews extends Model {
 
     // A movie has many trailers so lets associate each movie to a trailer in a many-to-one relation
+    //ActiveAndroid Annotations
     @Column(name = "movie", onDelete = Column.ForeignKeyAction.CASCADE)
     public Movies movie;
     // Gson annotations

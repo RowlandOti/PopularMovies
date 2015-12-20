@@ -31,7 +31,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.Date;
 import java.util.List;
 
-@Table(name = "Movies")
+@Table(name = "movies")
 public class Movies extends Model {
 
     // Gson annotations

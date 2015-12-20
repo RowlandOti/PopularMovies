@@ -17,15 +17,103 @@
 
 package com.rowland.movies.rest.collections;
 
+import com.activeandroid.annotation.Table;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import com.rowland.movies.rest.pojos.Movies;
 
 import java.util.List;
 
-/**
- * Created by Rowland on 12/11/2015.
- */
+@Table(name = "Movies")
 public class MoviesCollection {
 
-    public List<Movies> results;
+    // Gson annotations
+    @SerializedName("page")
+    @Expose
+    private Integer page;
+    // Gson annotations
+    @SerializedName("results")
+    @Expose
+    private List<Movies> results;
+    // Gson annotations
+    @SerializedName("total_results")
+    @Expose
+    private Integer totalResults;
+    // Gson annotations
+    @SerializedName("total_pages")
+    @Expose
+    private Integer totalPages;
+
+    /**
+     *
+     * @return
+     * The page
+     */
+    public Integer getPage() {
+        return page;
+    }
+
+    /**
+     *
+     * @param page
+     * The page
+     */
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    /**
+     *
+     * @return
+     * The results
+     */
+    public List<Movies> getResults() {
+        return results;
+    }
+
+    /**
+     *
+     * @param results
+     * The results
+     */
+    public void setResults(List<Movies> results) {
+        this.results = results;
+    }
+
+    /**
+     *
+     * @return
+     * The totalResults
+     */
+    public Integer getTotalResults() {
+        return totalResults;
+    }
+
+    /**
+     *
+     * @param totalResults
+     * The total_results
+     */
+    public void setTotalResults(Integer totalResults) {
+        this.totalResults = totalResults;
+    }
+
+    /**
+     *
+     * @return
+     * The totalPages
+     */
+    public Integer getTotalPages() {
+        return totalPages;
+    }
+
+    /**
+     *
+     * @param totalPages
+     * The total_pages
+     */
+    public void setTotalPages(Integer totalPages) {
+        this.totalPages = totalPages;
+    }
 
 }

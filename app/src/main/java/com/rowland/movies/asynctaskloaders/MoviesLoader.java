@@ -45,7 +45,7 @@ public class MoviesLoader extends BaseLoader {
     // The sort order type
     private ESortOrder mSortOrder;
     // The list of movies our loader returns
-    private List<Movies> movies;
+    private List<Movies> moviesCollection;
 
     public MoviesLoader(Context context, ESortOrder mSortOrder) {
         super(context);
@@ -72,9 +72,9 @@ public class MoviesLoader extends BaseLoader {
 
                 if (response.isSuccess()) {
                     // movies available
-                    movies = response.body().results;
+                    moviesCollection = response.body().getResults();
 
-                    for (Movies movie : movies) {
+                    for (Movies movie : moviesCollection) {
                         // Save movies in the database
                         movie.save();
                         // Check wether we are in debug mode
@@ -94,9 +94,9 @@ public class MoviesLoader extends BaseLoader {
                 Log.d(LOG_TAG, t.getMessage());
             }
         });
-
-        if (movies != null && !movies.isEmpty()) {
-            return movies;
+        // Return the list of movies
+        if (moviesCollection != null && !moviesCollection.isEmpty()) {
+            return moviesCollection;
         }
 
         return null;
