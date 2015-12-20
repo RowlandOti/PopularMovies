@@ -65,7 +65,7 @@ public class TrailersLoader extends GenericSimpleLoader {
         createdCall.enqueue(new Callback<TrailersData>() {
             @Override
             public void onResponse(Response<TrailersData> response, Retrofit retrofit) {
-                trailers = response.body().items;
+                trailers = response.body().results;
 
                 for (Trailers trailer : trailers) {
                     // Save revies in the database
@@ -97,12 +97,12 @@ public class TrailersLoader extends GenericSimpleLoader {
     // Handy method, might help in future
     private Trailers extractTrailer(TrailersData videos) {
         // If no trailer videos are found return
-        if (videos == null || videos.items == null || videos.items.size() == 0) {
+        if (videos == null || videos.results == null || videos.results.size() == 0) {
             return null;
         }
 
         // Pop out the lead YouTube trailer
-        for (Trailers video : videos.items) {
+        for (Trailers video : videos.results) {
             if ("Trailer".equals(video.getType()) && "YouTube".equals(video.getSite()) && !TextUtils.isEmpty(video.getKey())) {
                 return video;
             }

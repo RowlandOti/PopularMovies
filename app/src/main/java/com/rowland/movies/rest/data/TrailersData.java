@@ -27,6 +27,6 @@ import java.util.List;
  */
 public class TrailersData {
 
-    public List<Trailers> items;
+    public List<Trailers> results;
 
 }

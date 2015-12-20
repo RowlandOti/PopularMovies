@@ -18,6 +18,7 @@
 package com.rowland.movies.asynctaskloaders;
 
 import android.content.Context;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 
 import com.rowland.movies.ApplicationController;
@@ -57,11 +58,13 @@ public class MoviesLoader extends BaseLoader {
     public List<Movies> loadInBackground() {
         // Get the RetrofitApi with correct Endpoint
         IRetrofitAPI moviesAPI = ApplicationController.getApplicationInstance().getApiOfType(EAPITypes.MOVIES_API);
-        //Log.d(LOG_TAG, "" + moviesAPI.getClass());
-        // Get the MoviesAPIService
+        // Get the MoviesAPIService and use it to retrieve a list of movies
         IMoviesAPIService movieService = moviesAPI.getMoviesApiServiceInstance();
-        Log.d(LOG_TAG, "Print AAAA" + movieService.getClass());
-        Log.d(LOG_TAG, "Print AAAA" + mSortOrder.getSortOrder());
+        // Return the list of movies
+        return getMovies(movieService);
+    }
+
+    private List<Movies> getMovies(IMoviesAPIService movieService) {
         // Retrieve the movies data
         Call<MoviesData> createdCall = movieService.loadMoviesData(mSortOrder.getSortOrder(), BuildConfig.IMDB_API_KEY);
         // Asynchronously access
@@ -70,25 +73,26 @@ public class MoviesLoader extends BaseLoader {
             public void onResponse(Response<MoviesData> response, Retrofit retrofit) {
 
                 if (response.isSuccess()) {
-
-                    if(BuildConfig.IS_DEBUG_MODE) {
-                        Log.d(LOG_TAG, "ResponseBody " + response.raw());
-                        Log.d(LOG_TAG, "ResponseBody " + response.body().items);
-                    }
                     // movies available
-                    movies = response.body().items;
+                    movies = response.body().results;
 
                     for (Movies movie : movies) {
                         // Save movies in the database
                         movie.save();
+                        // Check wether we are in debug mode
+                        if(BuildConfig.IS_DEBUG_MODE) {
+                            Log.d(LOG_TAG, "Movie " + movie.getTitle());
+                        }
                     }
                 } else {
                     // error response, no access to resource?
+                    Log.d(LOG_TAG, "No accessible resources found");
                 }
             }
 
             @Override
             public void onFailure(Throwable t) {
+                // Inform user of failure due to no network e.t.c
                 Log.d(LOG_TAG, t.getMessage());
             }
         });
@@ -97,16 +101,6 @@ public class MoviesLoader extends BaseLoader {
             return movies;
         }
 
-        /*try {
-            Response<MoviesData> result = createdCall.execute();
-            Log.d(LOG_TAG, ""+result.body().items);
-            return result.body().items;
-        } catch (IOException e) {
-            e.printStackTrace();
-            if(BuildConfig.IS_DEBUG_MODE) {
-                Log.e(LOG_TAG, "IOException during loadInBackground()");
-            }
-        }*/
         return null;
     }
 }

@@ -63,7 +63,7 @@ public class ReviewsLoader extends GenericSimpleLoader {
         createdCall.enqueue(new Callback<ReviewsData>() {
             @Override
             public void onResponse(Response<ReviewsData> response, Retrofit retrofit) {
-                reviews = response.body().items;
+                reviews = response.body().results;
 
                 for (Reviews review : reviews) {
                     // Save revies in the database

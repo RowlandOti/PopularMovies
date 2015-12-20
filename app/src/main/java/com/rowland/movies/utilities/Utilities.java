@@ -3,6 +3,8 @@ package com.rowland.movies.utilities;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
 
 /**
@@ -11,7 +13,7 @@ import android.preference.PreferenceManager;
 public class Utilities {
 
     /**
-     * Class used for storing shared preferecen data in the app
+     * Class used for storing shared preferecences data in the app
      * Created by Otieno Rowland on 20/9/2015. <email>rowland@skyllabler.com</email>  on 20/9/2015
      */
     public static class PreferenceUtility {
@@ -63,7 +65,22 @@ public class Utilities {
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
             return sp.getBoolean(key, defaultValue);
         }
+    }
 
+    /**
+     * Class is used to provide network availability information
+     */
+    public static class NetworkUtility
+    {
+        /**
+         * Returns true if network is available or about to become available
+         * */
+        public static boolean isNetworkAvailable(Context context)
+        {
+            ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+            return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+        }
 
     }
 }
