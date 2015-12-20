@@ -19,22 +19,16 @@ package com.rowland.movies.asynctaskloaders;
 
 import android.content.Context;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
-import com.rowland.movies.rest.data.MoviesData;
-import com.rowland.movies.rest.data.ReviewsData;
 import com.rowland.movies.rest.data.TrailersData;
 import com.rowland.movies.rest.enums.EAPITypes;
-import com.rowland.movies.rest.pojos.Movies;
-import com.rowland.movies.rest.pojos.Reviews;
 import com.rowland.movies.rest.pojos.Trailers;
-import com.rowland.movies.rest.services.IRetrofitAPI;
 import com.rowland.movies.rest.services.IMoviesAPIService;
+import com.rowland.movies.rest.services.IRetrofitAPI;
 import com.uwetrottmann.androidutils.GenericSimpleLoader;
 
-import java.io.IOException;
 import java.util.List;
 
 import retrofit.Call;
@@ -73,8 +67,7 @@ public class TrailersLoader extends GenericSimpleLoader {
             public void onResponse(Response<TrailersData> response, Retrofit retrofit) {
                 trailers = response.body().items;
 
-                for (Trailers trailer : trailers)
-                {
+                for (Trailers trailer : trailers) {
                     // Save revies in the database
                     trailer.save();
                 }
@@ -86,8 +79,7 @@ public class TrailersLoader extends GenericSimpleLoader {
             }
         });
 
-        if(trailers.size() != 0)
-        {
+        if (trailers.size() != 0) {
             return trailers;
         }
 
@@ -100,6 +92,7 @@ public class TrailersLoader extends GenericSimpleLoader {
         }*/
         return null;
     }
+
     // Extract the individual movie trailers
     // Handy method, might help in future
     private Trailers extractTrailer(TrailersData videos) {

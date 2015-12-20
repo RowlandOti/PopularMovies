@@ -34,37 +34,33 @@ import butterknife.ButterKnife;
 /**
  *
  */
-public class FavouriteFragment extends BaseGridFragment implements LoaderManager.LoaderCallbacks<List<Movies>>{
+public class FavouriteFragment extends BaseGridFragment implements LoaderManager.LoaderCallbacks<List<Movies>> {
 
     // Logging tracker for this class
     private final String LOG_TAG = FavouriteFragment.class.getSimpleName();
 
-    public static FavouriteFragment newInstance(Bundle args)
-    {
+    public FavouriteFragment() {
+
+    }
+
+    public static FavouriteFragment newInstance(Bundle args) {
         // Create the new fragment instance
-        FavouriteFragment fragmentInstance = (FavouriteFragment)newInstance(new FavouriteFragment(), args);
+        FavouriteFragment fragmentInstance = (FavouriteFragment) newInstance(new FavouriteFragment(), args);
         // Return the new fragment
         return fragmentInstance;
 
     }
-    public FavouriteFragment()
-    {
-
-    }
 
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null)
-        {
+        if (getArguments() != null) {
 
         }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_favourite, container, false);
         // Initialize the Views
@@ -88,6 +84,7 @@ public class FavouriteFragment extends BaseGridFragment implements LoaderManager
     public void onLoaderReset(Loader<List<Movies>> loader) {
 
     }
+
     // When RefreshLayout is triggered reload the loader
     @Override
     public void onRefresh() {

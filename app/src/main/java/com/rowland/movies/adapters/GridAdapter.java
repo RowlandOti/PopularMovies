@@ -17,7 +17,6 @@
 
 package com.rowland.movies.adapters;
 
-import android.provider.SyncStateContract;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +42,7 @@ import butterknife.ButterKnife;
 /**
  * Created by Oti Rowland on 12/18/2015.
  */
-public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHolder>{
+public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHolder> {
 
     // A list of the movie items
     private List<Movies> movieList = new ArrayList<>();
@@ -62,6 +61,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
         // Return new new CustomViewHolder
         return new CustomViewHolder(v);
     }
+
     // Called by RecyclerView to display the data at the specified position.
     @Override
     public void onBindViewHolder(CustomViewHolder holder, int position) {
@@ -89,6 +89,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
     public int getItemCount() {
         return 0;
     }
+
     // Takes care of the overhead of recycling and gives better performance and scrolling
     public class CustomViewHolder extends RecyclerView.ViewHolder {
 

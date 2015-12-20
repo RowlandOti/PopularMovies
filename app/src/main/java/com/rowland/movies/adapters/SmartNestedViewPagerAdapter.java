@@ -30,34 +30,28 @@ import com.rowland.movies.ui.fragments.subfragment.PopularFragment;
 /**
  * Created by Rowland on 6/11/2015.
  */
-public class SmartNestedViewPagerAdapter extends SmartFragmentStatePagerAdapter  {
+public class SmartNestedViewPagerAdapter extends SmartFragmentStatePagerAdapter {
 
-    private MainFragment ht = new MainFragment();
     private final Context mContext;
+    private MainFragment ht = new MainFragment();
 
-    public SmartNestedViewPagerAdapter(FragmentManager fm, Context context)
-    {
+    public SmartNestedViewPagerAdapter(FragmentManager fm, Context context) {
         super(fm);
         mContext = context;
     }
 
     @Override
-    public Fragment getItem(int index)
-    {
-        switch (index)
-        {
-            case 0:
-            {
+    public Fragment getItem(int index) {
+        switch (index) {
+            case 0: {
                 // Home -Tweet fragment activity
                 return new PopularFragment().newInstance(null);
             }
-            case 1:
-            {
+            case 1: {
                 // Favourite fragment activity
                 return new HighestRatedFragment().newInstance(null);
             }
-            case 2:
-            {
+            case 2: {
                 // Graph fragment activity
                 return new FavouriteFragment().newInstance(null);
             }

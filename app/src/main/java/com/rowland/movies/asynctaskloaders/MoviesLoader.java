@@ -21,22 +21,14 @@ import android.content.Context;
 import android.util.Log;
 
 import com.rowland.movies.ApplicationController;
-import com.rowland.movies.BuildConfig;
 import com.rowland.movies.enums.ESortOrder;
-import com.rowland.movies.rest.data.MoviesData;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.pojos.Movies;
 import com.rowland.movies.rest.services.IMoviesAPIService;
 import com.rowland.movies.rest.services.IRetrofitAPI;
 import com.uwetrottmann.androidutils.GenericSimpleLoader;
 
-import java.io.IOException;
 import java.util.List;
-
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.Response;
-import retrofit.Retrofit;
 
 /**
  * Created by Oti Rowland on 12/12/2015.

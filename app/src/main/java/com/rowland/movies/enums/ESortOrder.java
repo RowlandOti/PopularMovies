@@ -29,6 +29,7 @@ public enum ESortOrder {
     private ESortOrder(String s) {
         sortOrder = s;
     }
+
     // Get the correspinding sort order
     public String getSortOrder() {
         return sortOrder;

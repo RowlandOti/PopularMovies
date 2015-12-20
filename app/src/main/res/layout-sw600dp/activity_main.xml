@@ -1,4 +1,3 @@
-
 <!--
   ~ Copyright 2015 Oti Rowland
   ~
@@ -20,8 +19,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:fitsSystemWindows="true"
+    android:orientation="vertical"
     tools:context="com.rowland.movies.ui.activities.MainActivity">
 
     <include layout="@layout/toolbar" />
@@ -31,8 +30,7 @@
         android:layout_height="match_parent"
         android:baselineAligned="false"
         android:divider="?android:attr/dividerHorizontal"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
         <!--
         This layout is a two-pane layout for the Items master/detail flow.
         -->

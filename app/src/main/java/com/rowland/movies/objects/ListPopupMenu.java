@@ -25,18 +25,16 @@ public class ListPopupMenu {
     private String name;
     private int icon;
 
-    public ListPopupMenu(int profilepicRes, String name)
-    {
+    public ListPopupMenu(int profilepicRes, String name) {
         this.icon = profilepicRes;
         this.name = name;
     }
 
-    public int getProfilePic()
-    {
+    public int getProfilePic() {
         return this.icon;
     }
-    public String getName()
-    {
+
+    public String getName() {
         return this.name;
     }
 }

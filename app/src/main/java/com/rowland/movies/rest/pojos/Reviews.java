@@ -29,27 +29,27 @@ import com.google.gson.annotations.SerializedName;
 
 public class Reviews extends Model {
 
+    // A movie has many trailers so lets associate each movie to a trailer in a many-to-one relation
+    @Column(name = "movie", onDelete = Column.ForeignKeyAction.CASCADE)
+    public Movies movie;
     // Gson annotations
     @SerializedName("author")
     @Expose
     //ActiveAndroid Annotations
     @Column(name = "author")
     private String author;
-
     // Gson annotations
     @SerializedName("content")
     @Expose
     //ActiveAndroid Annotations
     @Column(name = "content")
     private String content;
-
     // Gson annotations
     @SerializedName("url")
     @Expose
     //ActiveAndroid Annotations
     @Column(name = "url")
     private String url;
-
     // Gson annotations
     @SerializedName("id_")
     @Expose
@@ -57,84 +57,63 @@ public class Reviews extends Model {
     @Column(name = "id_")
     private String id_;
 
-    // A movie has many trailers so lets associate each movie to a trailer in a many-to-one relation
-    @Column(name = "movie", onDelete = Column.ForeignKeyAction.CASCADE)
-    public Movies movie;
 
-
-    public Reviews()
-    {
+    public Reviews() {
         // You have to call super in each constructor to create the table.
         super();
     }
 
     /**
-     *
-     * @return
-     * The author
+     * @return The author
      */
     public String getAuthor() {
         return author;
     }
 
     /**
-     *
-     * @param author
-     * The author
+     * @param author The author
      */
     public void setAuthor(String author) {
         this.author = author;
     }
 
     /**
-     *
-     * @return
-     * The content
+     * @return The content
      */
     public String getContent() {
         return content;
     }
 
     /**
-     *
-     * @param content
-     * The content
+     * @param content The content
      */
     public void setContent(String content) {
         this.content = content;
     }
 
     /**
-     *
-     * @return
-     * The url
+     * @return The url
      */
     public String getUrl() {
         return url;
     }
 
     /**
-     *
-     * @param url
-     * The url
+     * @param url The url
      */
     public void setUrl(String url) {
         this.url = url;
     }
 
     /**
-     *
-     * @return
-     * The id
+     * @return The id
      */
     public String getId_() {
         return id_;
     }
 
     /**
-     *
-     * @param id_
-     * The id
+     * @param id_ The id
      */
     public void setId(String id_) {
         this.id_ = id_;

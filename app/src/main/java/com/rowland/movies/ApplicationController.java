@@ -17,8 +17,6 @@
 
 package com.rowland.movies;
 
-import android.util.Log;
-
 import com.activeandroid.app.Application;
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp.StethoInterceptor;
@@ -40,7 +38,7 @@ public class ApplicationController extends Application {
     /**
      * I should only ever call retrofit.create() once and re-use the
      * same instance of IMoviesAPIService every time you need to interaction with it.
-     *
+     * <p/>
      * I used the regular singleton pattern in order to ensure that there only is ever a single
      * instance of this class that I use everywhere. A dependency injection framework would
      * also be something that I could used to manage these instances but would be a bit overkill since
@@ -52,6 +50,26 @@ public class ApplicationController extends Application {
 
     // Declare ApplicationController singleton instance
     private static ApplicationController instance;
+
+    // Returns the single Application instance
+    public static synchronized ApplicationController getApplicationInstance() {
+        return instance;
+    }
+
+    // Needed for factory pattern we’ll implement later in our singleton
+    // Returns the single Retrofit instance
+    public static Retrofit getRetrofit() {
+        // Set custom date format for Gson
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd")
+                .create();
+        //To send out network requests to an API_MOVIE_URL, we need to use the Retrofit builder class
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(EBaseURlTypes.MOVIE_API_BASE_URL.getUrlType()).addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+        // Wollah! Retrofit instance is served hot.
+        return retrofit;
+    }
 
     @Override
     public void onCreate() {
@@ -69,24 +87,7 @@ public class ApplicationController extends Application {
         OkHttpClient client = new OkHttpClient();
         client.networkInterceptors().add(new StethoInterceptor());
     }
-    // Returns the single Application instance
-    public static synchronized ApplicationController getApplicationInstance() {
-        return instance;
-    }
-    // Needed for factory pattern we’ll implement later in our singleton
-    // Returns the single Retrofit instance
-    public static Retrofit getRetrofit() {
-        // Set custom date format for Gson
-        Gson gson = new GsonBuilder()
-                .setDateFormat("yyyy-MM-dd")
-                .create();
-        //To send out network requests to an API_MOVIE_URL, we need to use the Retrofit builder class
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(EBaseURlTypes.MOVIE_API_BASE_URL.getUrlType()).addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-        // Wollah! Retrofit instance is served hot.
-        return retrofit;
-    }
+
     // Factory method will return to us the appropriate IRetrofitAPI Whenever we need to access our api
     // we call ApplicationController.getApiOfType method with appriopriate type and we get class with
     // desired enpoints. Wollah! Awesome encapsualtion.

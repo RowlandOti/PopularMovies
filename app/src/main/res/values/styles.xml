@@ -4,6 +4,7 @@
     <style name="AppThemeActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
     </style>
+
     <style name="AppTheme.Dark" parent="AppBaseThemeNoActionBar.Dark" />
 
 
@@ -22,7 +23,6 @@
         <!-- ListPopUpWindow styles -->
         <item name="listPopupWindowStyle">@style/Widget.App.ListPopupWindow</item>
     </style>
-
 
 
     <!-- TextView styles -->
@@ -80,6 +80,6 @@
         <item name="tabGravity">fill</item>
         <item name="tabMode">fixed</item>
     </style>
-    
+
 
 </resources>

@@ -35,7 +35,7 @@ import butterknife.Bind;
 /**
  * Created by Oti Rowland on 12/18/2015.
  */
-public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
+public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     // Logging tracker for this class
     private final String LOG_TAG = BaseGridFragment.class.getSimpleName();
@@ -63,8 +63,7 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState)
-    {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         mSwRefreshLayout.setColorSchemeResources(R.color.apptheme_accent_teal);

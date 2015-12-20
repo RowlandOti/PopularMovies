@@ -31,7 +31,7 @@ public class MoviesAPI implements IRetrofitAPI {
     /**
      * I should only ever call retrofit.create() once and re-use the
      * same instance of IMoviesAPIService every time you need to interaction with it.
-     *
+     * <p/>
      * I used the regular singleton pattern in order to ensure that there only is ever a single
      * instance of this class that I use everywhere. A dependency injection framework would
      * also be something that I could used to manage these instances but would be a bit overkill since
@@ -43,18 +43,17 @@ public class MoviesAPI implements IRetrofitAPI {
     // Declare IMoviesAPIService instance
     private IMoviesAPIService imoviesApiServiceInstance;
 
-    public MoviesAPI()
-    {
+    public MoviesAPI() {
         // Wollah! We have our application-wide Retrofit instance
         Retrofit retrofit = ApplicationController.getRetrofit();
         // Initialise the singleton instance
         imoviesApiServiceInstance = retrofit.create(IMoviesAPIService.class);
-        Log.d(LOG_TAG, ""+retrofit.getClass());
-        Log.d(LOG_TAG, ""+imoviesApiServiceInstance.getClass());
+        Log.d(LOG_TAG, "" + retrofit.getClass());
+        Log.d(LOG_TAG, "" + imoviesApiServiceInstance.getClass());
     }
+
     // Return the singleton instance
-    public IMoviesAPIService getMoviesApiServiceInstance()
-    {
+    public IMoviesAPIService getMoviesApiServiceInstance() {
         return imoviesApiServiceInstance;
     }
 }

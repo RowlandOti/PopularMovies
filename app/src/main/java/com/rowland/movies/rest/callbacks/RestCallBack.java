@@ -19,12 +19,9 @@ package com.rowland.movies.rest.callbacks;
 
 import android.util.Log;
 
-import com.rowland.movies.rest.data.ReviewsData;
 import com.rowland.movies.rest.pojos.RestError;
-import com.rowland.movies.rest.pojos.Reviews;
 
 import java.io.IOException;
-import java.util.List;
 
 import retrofit.Callback;
 import retrofit.Response;
@@ -45,14 +42,14 @@ public abstract class RestCallBack<ReviewsData> implements Callback<ReviewsData>
         } else {
 
             try {
-                RestError restError = (RestError)retrofit.responseConverter(RestError.class,
+                RestError restError = (RestError) retrofit.responseConverter(RestError.class,
                         RestError.class.getAnnotations())
                         .convert(response.errorBody());
                 // Do error handling here
                 // we got an error message
-                Log.d("Error message",restError.getStrMesage());
+                Log.d("Error message", restError.getStrMesage());
                 //For getting error code. Code is integer value like 200,404 etc
-                Log.d("Error code",String.valueOf(restError.getCode()));
+                Log.d("Error code", String.valueOf(restError.getCode()));
             } catch (IOException e) {
                 e.printStackTrace();
             }

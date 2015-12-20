@@ -29,41 +29,39 @@ import com.google.gson.annotations.SerializedName;
 
 public class Trailers extends Model {
 
+    // A movie has many trailers so lets associate each movie to a trailer in a many-to-one relation
+    @Column(name = "movie", onDelete = Column.ForeignKeyAction.CASCADE)
+    public Movies movie;
     // Gson annotations
     @SerializedName("name")
     @Expose
     // ActiveAndroid Annotations
     @Column(name = "name")
     private String name;
-
     // Gson annotations
     @SerializedName("site")
     @Expose
     //ActiveAndroid Annotations
     @Column(name = "site")
     private String site;
-
     // Gson annotations
     @SerializedName("type")
     @Expose
     //ActiveAndroid Annotations
     @Column(name = "type")
     private String type;
-
     // Gson annotations
     @SerializedName("id_")
     @Expose
     //ActiveAndroid Annotations
     @Column(name = "id_")
     private Double id_;
-
     // Gson annotations
     @SerializedName("key")
     @Expose
     //ActiveAndroid Annotations
     @Column(name = "key")
     private String key;
-
     // Gson annotations
     @SerializedName("size")
     @Expose
@@ -71,119 +69,90 @@ public class Trailers extends Model {
     @Column(name = "size")
     private Integer size;
 
-    // A movie has many trailers so lets associate each movie to a trailer in a many-to-one relation
-    @Column(name = "movie", onDelete = Column.ForeignKeyAction.CASCADE)
-    public Movies movie;
-
-    public Trailers()
-    {
+    public Trailers() {
         // You have to call super in each constructor to create the table.
         super();
     }
 
     /**
-     *
-     * @return
-     * The name
+     * @return The name
      */
     public String getName() {
         return name;
     }
 
     /**
-     *
-     * @param name
-     * The name
+     * @param name The name
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     *
-     * @return
-     * The site
+     * @return The site
      */
     public String getSite() {
         return site;
     }
 
     /**
-     *
-     * @param site
-     * The site
+     * @param site The site
      */
     public void setSite(String site) {
         this.site = site;
     }
 
     /**
-     *
-     * @return
-     * The type
+     * @return The type
      */
     public String getType() {
         return type;
     }
 
     /**
-     *
-     * @param type
-     * The type
+     * @param type The type
      */
     public void setType(String type) {
         this.type = type;
     }
 
     /**
-     *
-     * @return
-     * The id_
+     * @return The id_
      */
     public Double getId_() {
         return id_;
     }
 
     /**
-     *
-     * @param id
-     * The id
+     * @param id The id
      */
     public void setId(Double id) {
         this.id_ = id_;
     }
 
     /**
-     *
-     * @return
-     * The key
+     * @return The key
      */
     public String getKey() {
         return key;
     }
 
     /**
-     *
-     * @param key
-     * The key
+     * @param key The key
      */
     public void setKey(String key) {
         this.key = key;
     }
 
     /**
-     *
-     * @return
-     * The size
+     * @return The size
      */
     public Integer getSize() {
         return size;
     }
 
     /**
-     *
-     * @param size
-     * The size
+     * @param size The size
      */
     public void setSize(Integer size) {
         this.size = size;

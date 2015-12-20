@@ -33,6 +33,7 @@ public enum EBaseImageSize {
     private EBaseImageSize(String imageSize) {
         imageSize = imageSize;
     }
+
     // Get the url corresponding to the enum
     public String getImageSize() {
         return imageSize;

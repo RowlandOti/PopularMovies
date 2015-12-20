@@ -35,21 +35,20 @@ import java.util.List;
 import butterknife.ButterKnife;
 
 
-public class HighestRatedFragment extends BaseGridFragment implements LoaderManager.LoaderCallbacks<List<Movies>>{
+public class HighestRatedFragment extends BaseGridFragment implements LoaderManager.LoaderCallbacks<List<Movies>> {
 
     // Logging tracker for this class
     private final String LOG_TAG = HighestRatedFragment.class.getSimpleName();
 
-    public static HighestRatedFragment newInstance(Bundle args)
-    {
-        // Create the new fragment instance
-        HighestRatedFragment fragmentInstance = (HighestRatedFragment)newInstance(new HighestRatedFragment(), args);
-        // Return the new fragment
-        return fragmentInstance;
+    public HighestRatedFragment() {
 
     }
 
-    public HighestRatedFragment() {
+    public static HighestRatedFragment newInstance(Bundle args) {
+        // Create the new fragment instance
+        HighestRatedFragment fragmentInstance = (HighestRatedFragment) newInstance(new HighestRatedFragment(), args);
+        // Return the new fragment
+        return fragmentInstance;
 
     }
 
@@ -96,6 +95,7 @@ public class HighestRatedFragment extends BaseGridFragment implements LoaderMana
 
         mSwRefreshLayout.setRefreshing(false);
     }
+
     // When RefreshLayout is triggered reload the loader
     @Override
     public void onRefresh() {

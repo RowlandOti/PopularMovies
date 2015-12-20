@@ -18,7 +18,6 @@
 package com.rowland.movies.asynctaskloaders;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
@@ -29,7 +28,6 @@ import com.rowland.movies.rest.services.IMoviesAPIService;
 import com.rowland.movies.rest.services.IRetrofitAPI;
 import com.uwetrottmann.androidutils.GenericSimpleLoader;
 
-import java.io.IOException;
 import java.util.List;
 
 import retrofit.Call;
@@ -67,8 +65,7 @@ public class ReviewsLoader extends GenericSimpleLoader {
             public void onResponse(Response<ReviewsData> response, Retrofit retrofit) {
                 reviews = response.body().items;
 
-                for (Reviews review : reviews)
-                {
+                for (Reviews review : reviews) {
                     // Save revies in the database
                     review.save();
                 }
@@ -80,8 +77,7 @@ public class ReviewsLoader extends GenericSimpleLoader {
             }
         });
 
-        if(reviews.size() != 0)
-        {
+        if (reviews.size() != 0) {
             return reviews;
         }
 

@@ -32,11 +32,9 @@ public class DetailsFragment extends Fragment {
 
     private final String LOG_TAG = DetailsFragment.class.getSimpleName();
 
-    public static DetailsFragment newInstance(Bundle args)
-    {
+    public static DetailsFragment newInstance(Bundle args) {
         fragmentInstance = new DetailsFragment();
-        if(args != null)
-        {
+        if (args != null) {
             fragmentInstance.setArguments(args);
         }
         return fragmentInstance;
@@ -44,18 +42,15 @@ public class DetailsFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null)
-        {
+        if (getArguments() != null) {
 
         }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_details, container, false);
     }

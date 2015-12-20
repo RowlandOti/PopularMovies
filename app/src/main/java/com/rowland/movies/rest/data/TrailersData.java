@@ -18,14 +18,15 @@
 
 package com.rowland.movies.rest.data;
 
-import java.util.List;
 import com.rowland.movies.rest.pojos.Trailers;
+
+import java.util.List;
 
 /**
  * Created by Rowland on 12/11/2015.
  */
 public class TrailersData {
 
-  public List<Trailers> items;
+    public List<Trailers> items;
 
 }

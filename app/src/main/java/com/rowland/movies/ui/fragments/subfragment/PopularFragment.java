@@ -41,15 +41,15 @@ public class PopularFragment extends BaseGridFragment implements LoaderManager.L
     // Logging tracker for this class
     private final String LOG_TAG = PopularFragment.class.getSimpleName();
 
+    public PopularFragment() {
+
+    }
+
     public static PopularFragment newInstance(Bundle args) {
         // Create the new fragment instance
         PopularFragment fragmentInstance = (PopularFragment) newInstance(new PopularFragment(), args);
         // Return the new fragment
         return fragmentInstance;
-
-    }
-
-    public PopularFragment() {
 
     }
 

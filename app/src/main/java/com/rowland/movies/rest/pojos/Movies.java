@@ -34,321 +34,258 @@ import java.util.List;
 @Table(name = "Movies")
 public class Movies extends Model {
 
-    public Movies()
-    {
-        // You have to call super in each constructor to create the table.
-        super();
-    }
-
+    // Gson annotations
+    @SerializedName("release_date")
+    //ActiveAndroid Annotations
+    @Column(name = "release_date")
+    public Date releaseDate;
+    // Movies owns these items
+    public List<Reviews> movieReviews;
+    public List<Trailers> movieTrailers;
     // Gson annotations
     @SerializedName("poster_path")
     @Expose
     //ActiveAndroid Annotations
     @Column(name = "poster_path")
     private String posterPath;
-
     // Gson annotations
     @SerializedName("overview")
     @Expose
     //ActiveAndroid Annotations
     @Column(name = "overview")
     private String overview;
-
-    // Gson annotations
-    @SerializedName("release_date")
-    //ActiveAndroid Annotations
-    @Column(name = "release_date")
-    public Date releaseDate;
-
     // Gson annotations
     @SerializedName("original_title")
     @Expose
     //ActiveAndroid Annotations
     @Column(name = "originalTitle")
     private String originalTitle;
-
     // Gson annotations
     @SerializedName("original_language")
     @Expose
     //ActiveAndroid Annotations
     @Column(name = "originalLanguage")
     private String originalLanguage;
-
     // Gson annotations
     @SerializedName("title")
     @Expose
     //ActiveAndroid Annotations
     @Column(name = "title")
     private String title;
-
     // Gson annotations
     @SerializedName("backdrop_path")
     @Expose
     //ActiveAndroid Annotations
     @Column(name = "backdropPath")
     private String backdropPath;
-
     // Gson annotations
     @SerializedName("vote_count")
     @Expose
     //ActiveAndroid Annotations
     @Column(name = "voteCount")
     private Integer voteCount;
-
     // Gson annotations
     @SerializedName("id_")
     @Expose
     //ActiveAndroid Annotations
     @Column(name = "id_")
     private Integer id_;
-
     // Gson annotations
     @SerializedName("popularity")
     @Expose
     //ActiveAndroid Annotations
     @Column(name = "popularity")
     private Double popularity;
-
     // Gson annotations
     @SerializedName("vote_average")
     @Expose
     //ActiveAndroid Annotations
     @Column(name = "voteAverage")
     private Double voteAverage;
-
     // Gson annotations
     @SerializedName("adult")
     @Expose
     //ActiveAndroid Annotations
     @Column(name = "adult")
     private Boolean adult;
-
-    // Movies owns these items
-    public List<Reviews> movieReviews;
-    public List<Trailers> movieTrailers;
+    public Movies() {
+        // You have to call super in each constructor to create the table.
+        super();
+    }
 
     // Retrieve all the movie owned trailers
-    public List<Trailers> getMovieTrailers()
-    {
+    public List<Trailers> getMovieTrailers() {
         return getMany(Trailers.class, "Trailers");
     }
+
     // Retrieve all the movie owned reviews
-    public List<Reviews> getMovieReviews()
-    {
+    public List<Reviews> getMovieReviews() {
         return getMany(Reviews.class, "Reviews");
     }
 
     /**
-     *
-     * @return
-     * The posterPath
+     * @return The posterPath
      */
     public String getPosterPath() {
         return posterPath;
     }
 
     /**
-     *
-     * @param posterPath
-     * The poster_path
+     * @param posterPath The poster_path
      */
     public void setPosterPath(String posterPath) {
         this.posterPath = posterPath;
     }
 
     /**
-     *
-     * @return
-     * The overview
+     * @return The overview
      */
     public Date getReleaseDate() {
         return releaseDate;
     }
 
     /**
-     *
-     * @param releaseDate
-     * The releaseDate
+     * @param releaseDate The releaseDate
      */
     public void setReleaseDate(Date releaseDate) {
         this.releaseDate = releaseDate;
     }
 
     /**
-     *
-     * @return
-     * The overview
+     * @return The overview
      */
     public String getOverview() {
         return overview;
     }
 
     /**
-     *
-     * @param overview
-     * The overview
+     * @param overview The overview
      */
     public void setOverview(String overview) {
         this.overview = overview;
     }
 
     /**
-     *
-     * @return
-     * The originalTitle
+     * @return The originalTitle
      */
     public String getOriginalTitle() {
         return originalTitle;
     }
 
     /**
-     *
-     * @param originalTitle
-     * The original_title
+     * @param originalTitle The original_title
      */
     public void setOriginalTitle(String originalTitle) {
         this.originalTitle = originalTitle;
     }
 
     /**
-     *
-     * @return
-     * The originalLanguage
+     * @return The originalLanguage
      */
     public String getOriginalLanguage() {
         return originalLanguage;
     }
 
     /**
-     *
-     * @param originalLanguage
-     * The original_language
+     * @param originalLanguage The original_language
      */
     public void setOriginalLanguage(String originalLanguage) {
         this.originalLanguage = originalLanguage;
     }
 
     /**
-     *
-     * @return
-     * The title
+     * @return The title
      */
     public String getTitle() {
         return title;
     }
 
     /**
-     *
-     * @param title
-     * The title
+     * @param title The title
      */
     public void setTitle(String title) {
         this.title = title;
     }
 
     /**
-     *
-     * @return
-     * The backdropPath
+     * @return The backdropPath
      */
     public String getBackdropPath() {
         return backdropPath;
     }
 
     /**
-     *
-     * @param backdropPath
-     * The backdrop_path
+     * @param backdropPath The backdrop_path
      */
     public void setBackdropPath(String backdropPath) {
         this.backdropPath = backdropPath;
     }
 
     /**
-     *
-     * @return
-     * The voteCount
+     * @return The voteCount
      */
     public Integer getVoteCount() {
         return voteCount;
     }
 
     /**
-     *
-     * @param voteCount
-     * The vote_count
+     * @param voteCount The vote_count
      */
     public void setVoteCount(Integer voteCount) {
         this.voteCount = voteCount;
     }
 
     /**
-     *
-     * @return
-     * The id
+     * @return The id
      */
     public Integer getId_() {
         return id_;
     }
 
     /**
-     *
-     * @param id_
-     * The id
+     * @param id_ The id
      */
     public void setId(Integer id_) {
         this.id_ = id_;
     }
 
     /**
-     *
-     * @return
-     * The popularity
+     * @return The popularity
      */
     public Double getPopularity() {
         return popularity;
     }
 
     /**
-     *
-     * @param popularity
-     * The popularity
+     * @param popularity The popularity
      */
     public void setPopularity(Double popularity) {
         this.popularity = popularity;
     }
 
     /**
-     *
-     * @return
-     * The voteAverage
+     * @return The voteAverage
      */
     public Double getVoteAverage() {
         return voteAverage;
     }
 
     /**
-     *
-     * @param voteAverage
-     * The vote_average
+     * @param voteAverage The vote_average
      */
     public void setVoteAverage(Double voteAverage) {
         this.voteAverage = voteAverage;
     }
 
     /**
-     *
-     * @return
-     * The adult
+     * @return The adult
      */
     public Boolean getAdult() {
         return adult;
     }
 
     /**
-     *
-     * @param adult
-     * The adult
+     * @param adult The adult
      */
     public void setAdult(Boolean adult) {
         this.adult = adult;

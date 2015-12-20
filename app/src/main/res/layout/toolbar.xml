@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2015 Oti Rowland
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,13 +15,12 @@
   ~
   -->
 
-<android.support.v7.widget.Toolbar
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/toolbar"
-    android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="?attr/colorPrimary"
     android:minHeight="?attr/actionBarSize"
-    android:background="?attr/colorPrimary">
+    android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
 </android.support.v7.widget.Toolbar>

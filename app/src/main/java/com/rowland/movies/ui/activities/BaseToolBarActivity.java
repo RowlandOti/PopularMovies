@@ -44,10 +44,12 @@ public class BaseToolBarActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
     // Derived classes have acess to this method
     protected void setToolbar(boolean showHomeUp, boolean showTitle) {
         setToolbar(mToolbar, showHomeUp, showTitle);
     }
+
     // Derived methods have no direct access to this class
     private void setToolbar(Toolbar mToolbar, boolean isShowHomeUp, boolean isShowTitle) {
         // Does the toolbar exist?

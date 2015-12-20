@@ -34,7 +34,6 @@ import com.rowland.movies.R;
 import com.rowland.movies.adapters.ListPopupWindowAdapter;
 import com.rowland.movies.adapters.SmartNestedViewPagerAdapter;
 import com.rowland.movies.objects.ListPopupMenu;
-import com.rowland.movies.utilities.Utilities;
 
 import java.util.ArrayList;
 
@@ -47,10 +46,11 @@ import butterknife.ButterKnife;
  */
 public class MainFragment extends Fragment {
 
-    @Bind(R.id.slidingTabStrips) SlidingTabStripLayout slidingTabStrips;
-    @Bind(R.id.viewPager) ViewPager pager;
-
     private final String LOG_TAG = MainFragment.class.getSimpleName();
+    @Bind(R.id.slidingTabStrips)
+    SlidingTabStripLayout slidingTabStrips;
+    @Bind(R.id.viewPager)
+    ViewPager pager;
     private String[] TITLES = {"Popular", "Highest Rated", "Favorite"};
     private SmartNestedViewPagerAdapter pagerAdapter;
     private float mPopupMaxWidth;
