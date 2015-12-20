@@ -13,20 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *
  */
 
-package com.rowland.movies.rest.data;
+package com.rowland.movies.rest.collections;
 
-import com.rowland.movies.rest.pojos.Reviews;
+import com.rowland.movies.rest.pojos.Movies;
 
 import java.util.List;
 
 /**
  * Created by Rowland on 12/11/2015.
  */
-public class ReviewsData {
+public class MoviesCollection {
 
-    public List<Reviews> results;
+    public List<Movies> results;
 
 }

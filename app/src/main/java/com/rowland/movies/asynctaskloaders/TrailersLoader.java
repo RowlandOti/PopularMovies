@@ -22,7 +22,7 @@ import android.text.TextUtils;
 
 import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
-import com.rowland.movies.rest.data.TrailersData;
+import com.rowland.movies.rest.collections.TrailersCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.pojos.Trailers;
 import com.rowland.movies.rest.services.IMoviesAPIService;
@@ -59,12 +59,12 @@ public class TrailersLoader extends GenericSimpleLoader {
         // Get the MoviesAPIService
         IMoviesAPIService movieService = moviesAPI.getMoviesApiServiceInstance();
         // Retrieve the trailers data
-        Call<TrailersData> createdCall = movieService.loadTrailersData(mTmdbMovieId, BuildConfig.IMDB_API_KEY);
+        Call<TrailersCollection> createdCall = movieService.loadTrailersData(mTmdbMovieId, BuildConfig.IMDB_API_KEY);
 
         // Asynchronously access
-        createdCall.enqueue(new Callback<TrailersData>() {
+        createdCall.enqueue(new Callback<TrailersCollection>() {
             @Override
-            public void onResponse(Response<TrailersData> response, Retrofit retrofit) {
+            public void onResponse(Response<TrailersCollection> response, Retrofit retrofit) {
                 trailers = response.body().results;
 
                 for (Trailers trailer : trailers) {
@@ -84,7 +84,7 @@ public class TrailersLoader extends GenericSimpleLoader {
         }
 
         /*try {
-            Response<TrailersData> result = createdCall.execute();
+            Response<TrailersCollection> result = createdCall.execute();
             return result.body().items;
         } catch (IOException e) {
             e.printStackTrace();
@@ -95,7 +95,7 @@ public class TrailersLoader extends GenericSimpleLoader {
 
     // Extract the individual movie trailers
     // Handy method, might help in future
-    private Trailers extractTrailer(TrailersData videos) {
+    private Trailers extractTrailer(TrailersCollection videos) {
         // If no trailer videos are found return
         if (videos == null || videos.results == null || videos.results.size() == 0) {
             return null;

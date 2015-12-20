@@ -18,9 +18,9 @@
 
 package com.rowland.movies.rest.services;
 
-import com.rowland.movies.rest.data.MoviesData;
-import com.rowland.movies.rest.data.ReviewsData;
-import com.rowland.movies.rest.data.TrailersData;
+import com.rowland.movies.rest.collections.MoviesCollection;
+import com.rowland.movies.rest.collections.ReviewsCollection;
+import com.rowland.movies.rest.collections.TrailersCollection;
 
 import retrofit.Call;
 import retrofit.http.GET;
@@ -44,13 +44,13 @@ public interface IMoviesAPIService {
 
     // Load our movies
     @GET(MOVIES_ENDPOINT)
-    Call<MoviesData> loadMoviesData(@Query("sort_by") String sortBy, @Query("api_key") String apiKey);
+    Call<MoviesCollection> loadMoviesData(@Query("sort_by") String sortBy, @Query("api_key") String apiKey);
 
     // Load the movie's trailer videos
     @GET(MOVIES_TRAILERS_ENDPOINT)
-    Call<TrailersData> loadTrailersData(@Path("id") int mTmdbMovieId, @Query("api_key") String apiKey);
+    Call<TrailersCollection> loadTrailersData(@Path("id") int mTmdbMovieId, @Query("api_key") String apiKey);
 
     // Load the movie's trailers
     @GET(MOVIES_REVIEWS_ENDPOINT)
-    Call<ReviewsData> loadReviewsData(@Path("id") int mTmdbMovieId, @Query("api_key") String apiKey);
+    Call<ReviewsCollection> loadReviewsData(@Path("id") int mTmdbMovieId, @Query("api_key") String apiKey);
 }

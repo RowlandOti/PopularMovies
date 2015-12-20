@@ -16,7 +16,7 @@
  *
  */
 
-package com.rowland.movies.rest.data;
+package com.rowland.movies.rest.collections;
 
 import com.rowland.movies.rest.pojos.Trailers;
 
@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * Created by Rowland on 12/11/2015.
  */
-public class TrailersData {
+public class TrailersCollection {
 
     public List<Trailers> results;
 

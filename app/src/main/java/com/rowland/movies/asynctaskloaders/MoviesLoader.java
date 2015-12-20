@@ -18,19 +18,17 @@
 package com.rowland.movies.asynctaskloaders;
 
 import android.content.Context;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 
 import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
 import com.rowland.movies.enums.ESortOrder;
-import com.rowland.movies.rest.data.MoviesData;
+import com.rowland.movies.rest.collections.MoviesCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.pojos.Movies;
 import com.rowland.movies.rest.services.IMoviesAPIService;
 import com.rowland.movies.rest.services.IRetrofitAPI;
 
-import java.io.IOException;
 import java.util.List;
 
 import retrofit.Call;
@@ -66,11 +64,11 @@ public class MoviesLoader extends BaseLoader {
 
     private List<Movies> getMovies(IMoviesAPIService movieService) {
         // Retrieve the movies data
-        Call<MoviesData> createdCall = movieService.loadMoviesData(mSortOrder.getSortOrder(), BuildConfig.IMDB_API_KEY);
+        Call<MoviesCollection> createdCall = movieService.loadMoviesData(mSortOrder.getSortOrder(), BuildConfig.IMDB_API_KEY);
         // Asynchronously access
-        createdCall.enqueue(new Callback<MoviesData>() {
+        createdCall.enqueue(new Callback<MoviesCollection>() {
             @Override
-            public void onResponse(Response<MoviesData> response, Retrofit retrofit) {
+            public void onResponse(Response<MoviesCollection> response, Retrofit retrofit) {
 
                 if (response.isSuccess()) {
                     // movies available

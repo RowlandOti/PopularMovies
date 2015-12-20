@@ -21,7 +21,7 @@ import android.content.Context;
 
 import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
-import com.rowland.movies.rest.data.ReviewsData;
+import com.rowland.movies.rest.collections.ReviewsCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.pojos.Reviews;
 import com.rowland.movies.rest.services.IMoviesAPIService;
@@ -58,11 +58,11 @@ public class ReviewsLoader extends GenericSimpleLoader {
         // Get the MoviesAPIService
         IMoviesAPIService movieService = moviesAPI.getMoviesApiServiceInstance();
         // Retrieve the reviews data
-        Call<ReviewsData> createdCall = movieService.loadReviewsData(mTmdbMovieId, BuildConfig.IMDB_API_KEY);
+        Call<ReviewsCollection> createdCall = movieService.loadReviewsData(mTmdbMovieId, BuildConfig.IMDB_API_KEY);
         // Asynchronously access
-        createdCall.enqueue(new Callback<ReviewsData>() {
+        createdCall.enqueue(new Callback<ReviewsCollection>() {
             @Override
-            public void onResponse(Response<ReviewsData> response, Retrofit retrofit) {
+            public void onResponse(Response<ReviewsCollection> response, Retrofit retrofit) {
                 reviews = response.body().results;
 
                 for (Reviews review : reviews) {
@@ -82,7 +82,7 @@ public class ReviewsLoader extends GenericSimpleLoader {
         }
 
       /*  try {
-            Response<ReviewsData> result = createdCall.execute();
+            Response<ReviewsCollection> result = createdCall.execute();
             return result.body().items;
         } catch (IOException e) {
             e.printStackTrace();
