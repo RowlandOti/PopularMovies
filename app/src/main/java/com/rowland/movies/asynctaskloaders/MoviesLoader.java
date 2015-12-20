@@ -65,12 +65,16 @@ public class MoviesLoader extends BaseLoader {
         // Retrieve the movies data
         Call<MoviesData> createdCall = movieService.loadMoviesData(mSortOrder.getSortOrder(), BuildConfig.IMDB_API_KEY);
         // Asynchronously access
-        /*createdCall.enqueue(new Callback<MoviesData>() {
+        createdCall.enqueue(new Callback<MoviesData>() {
             @Override
             public void onResponse(Response<MoviesData> response, Retrofit retrofit) {
 
                 if (response.isSuccess()) {
-                    Log.d(LOG_TAG, "ResponseBody" + response.body());
+
+                    if(BuildConfig.IS_DEBUG_MODE) {
+                        Log.d(LOG_TAG, "ResponseBody " + response.raw());
+                        Log.d(LOG_TAG, "ResponseBody " + response.body().items);
+                    }
                     // movies available
                     movies = response.body().items;
 
@@ -92,15 +96,17 @@ public class MoviesLoader extends BaseLoader {
         if (movies != null && !movies.isEmpty()) {
             return movies;
         }
-*/
-        try {
+
+        /*try {
             Response<MoviesData> result = createdCall.execute();
             Log.d(LOG_TAG, ""+result.body().items);
             return result.body().items;
         } catch (IOException e) {
             e.printStackTrace();
-            Log.e(LOG_TAG, "IOException during loadInBackground()");
-        }
+            if(BuildConfig.IS_DEBUG_MODE) {
+                Log.e(LOG_TAG, "IOException during loadInBackground()");
+            }
+        }*/
         return null;
     }
 }

@@ -64,7 +64,7 @@ public class ApplicationController extends Application {
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd")
                 .create();
-        /*HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         // set your desired log level
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         // Our client
@@ -72,11 +72,11 @@ public class ApplicationController extends Application {
         // Set other interceptors
         client.networkInterceptors().add(new StethoInterceptor());
         // Set HttpLoggingInterceptor instance as last interceptor
-        client.interceptors().add(logging);  // <-- this is the important line!*/
+        client.interceptors().add(logging);  // <-- this is the important line!
         //To send out network requests to an API_MOVIE_URL, we need to use the Retrofit builder class
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(EBaseURlTypes.MOVIE_API_BASE_URL.getUrlType()).addConverterFactory(GsonConverterFactory.create(gson))
-                //.client(client)
+                .client(client)
                 .build();
         // Wollah! Retrofit instance is served hot.
         return retrofit;
