@@ -81,4 +81,6 @@ dependencies {
     compile 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
     // Use - View Injection
     compile 'com.jakewharton:butterknife:7.0.1'
+    // Use - Network debugging
+    compile 'com.squareup.okhttp:logging-interceptor:2.6.0'
 }

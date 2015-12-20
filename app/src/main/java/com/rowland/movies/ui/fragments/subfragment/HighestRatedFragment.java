@@ -20,6 +20,7 @@ package com.rowland.movies.ui.fragments.subfragment;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,7 +80,9 @@ public class HighestRatedFragment extends BaseGridFragment implements LoaderMana
 
     @Override
     public Loader<List<Movies>> onCreateLoader(int id, Bundle args) {
-        return new MoviesLoader(getActivity(), ESortOrder.HIGHEST_RATED_DESCENDING);
+        MoviesLoader movieLoader = new MoviesLoader(getActivity(), ESortOrder.HIGHEST_RATED_DESCENDING);
+        Log.d(LOG_TAG, ""+movieLoader);
+        return movieLoader;
     }
 
     @Override

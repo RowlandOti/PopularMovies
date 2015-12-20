@@ -21,19 +21,24 @@ import android.content.Context;
 import android.util.Log;
 
 import com.rowland.movies.ApplicationController;
+import com.rowland.movies.BuildConfig;
 import com.rowland.movies.enums.ESortOrder;
+import com.rowland.movies.rest.data.MoviesData;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.pojos.Movies;
 import com.rowland.movies.rest.services.IMoviesAPIService;
 import com.rowland.movies.rest.services.IRetrofitAPI;
-import com.uwetrottmann.androidutils.GenericSimpleLoader;
 
+import java.io.IOException;
 import java.util.List;
+
+import retrofit.Call;
+import retrofit.Response;
 
 /**
  * Created by Oti Rowland on 12/12/2015.
  */
-public class MoviesLoader extends GenericSimpleLoader {
+public class MoviesLoader extends BaseLoader {
     // The class Log identifier
     private static final String LOG_TAG = MoviesLoader.class.getSimpleName();
     // The sort order type
@@ -54,8 +59,9 @@ public class MoviesLoader extends GenericSimpleLoader {
         // Get the MoviesAPIService
         IMoviesAPIService movieService = moviesAPI.getMoviesApiServiceInstance();
         Log.d(LOG_TAG, "Print AAAA" + movieService.getClass());
+        Log.d(LOG_TAG, "Print AAAA" + mSortOrder.getSortOrder());
         // Retrieve the movies data
-        //Call<MoviesData> createdCall = movieService.loadMoviesData(mSortOrder.getSortOrder(), BuildConfig.IMDB_API_KEY);
+        Call<MoviesData> createdCall = movieService.loadMoviesData(mSortOrder.getSortOrder(), BuildConfig.IMDB_API_KEY);
         // Asynchronously access
         /*createdCall.enqueue(new Callback<MoviesData>() {
             @Override
@@ -85,14 +91,14 @@ public class MoviesLoader extends GenericSimpleLoader {
             return movies;
         }*/
 
-        /*try {
+        try {
             Response<MoviesData> result = createdCall.execute();
             Log.d(LOG_TAG, ""+result.body().items);
             return result.body().items;
         } catch (IOException e) {
             e.printStackTrace();
             Log.e(LOG_TAG, "IOException during loadInBackground()");
-        }*/
+        }
         return null;
     }
 }

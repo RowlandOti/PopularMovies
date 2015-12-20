@@ -26,6 +26,7 @@ import com.rowland.movies.enums.EBaseURlTypes;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.services.IRetrofitAPI;
 import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.logging.HttpLoggingInterceptor;
 
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
@@ -63,9 +64,19 @@ public class ApplicationController extends Application {
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd")
                 .create();
+        /*HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        // set your desired log level
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+        // Our client
+        OkHttpClient client = new OkHttpClient();
+        // Set other interceptors
+        client.networkInterceptors().add(new StethoInterceptor());
+        // Set HttpLoggingInterceptor instance as last interceptor
+        client.interceptors().add(logging);  // <-- this is the important line!*/
         //To send out network requests to an API_MOVIE_URL, we need to use the Retrofit builder class
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(EBaseURlTypes.MOVIE_API_BASE_URL.getUrlType()).addConverterFactory(GsonConverterFactory.create(gson))
+                //.client(client)
                 .build();
         // Wollah! Retrofit instance is served hot.
         return retrofit;
@@ -84,8 +95,6 @@ public class ApplicationController extends Application {
         instance = this;
 
         Stetho.initializeWithDefaults(this);
-        OkHttpClient client = new OkHttpClient();
-        client.networkInterceptors().add(new StethoInterceptor());
     }
 
     // Factory method will return to us the appropriate IRetrofitAPI Whenever we need to access our api
