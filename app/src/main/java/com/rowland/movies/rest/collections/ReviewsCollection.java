@@ -18,6 +18,8 @@
 
 package com.rowland.movies.rest.collections;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import com.rowland.movies.rest.pojos.Reviews;
 
 import java.util.List;
@@ -27,6 +29,9 @@ import java.util.List;
  */
 public class ReviewsCollection {
 
+    // Gson annotations
+    @SerializedName("results")
+    @Expose
     public List<Reviews> results;
 
 }
