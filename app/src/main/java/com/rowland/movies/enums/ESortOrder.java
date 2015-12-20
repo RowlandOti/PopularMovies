@@ -18,22 +18,20 @@
 package com.rowland.movies.enums;
 
 /**
- * Created by Oti Rowland on 12/18/2015.
+ * Created by Oti Rowland on 12/12/2015.
  */
-public enum ESortType {
+public enum ESortOrder {
+    // The sort order for retrieving the movies
+    POPULAR_DESCENDING("popularity.desc"), HIGHEST_RATED_DESCENDING("vote_average.desc");
 
-    // All the image sizes that the application will query
-    SORT_POPULARITY("popularity.desc"),
-    SORT_HIGHEST_RATED("vote_average.desc"),
-    SORT_FAVORITED("favorited");
+    private String sortOrder;
 
-    private String sortType;
-
-    private ESortType(String sortType) {
-        sortType = sortType;
+    private ESortOrder(String s) {
+        sortOrder = s;
     }
-    // Get the url corresponding to the enum
-    public String getSortType() {
-        return sortType;
+    // Get the correspinding sort order
+    public String getSortOrder() {
+        return sortOrder;
     }
+
 }

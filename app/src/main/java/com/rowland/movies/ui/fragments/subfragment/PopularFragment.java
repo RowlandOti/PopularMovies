@@ -20,14 +20,13 @@ package com.rowland.movies.ui.fragments.subfragment;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.rowland.movies.R;
 import com.rowland.movies.asynctaskloaders.MoviesLoader;
-import com.rowland.movies.asynctaskloaders.enums.ESortOrder;
+import com.rowland.movies.enums.ESortOrder;
 import com.rowland.movies.rest.pojos.Movies;
 
 import java.util.List;
@@ -37,37 +36,33 @@ import butterknife.ButterKnife;
 /**
  *
  */
-public class PopularFragment extends ABaseFragment implements LoaderManager.LoaderCallbacks<List<Movies>>{
+public class PopularFragment extends BaseGridFragment implements LoaderManager.LoaderCallbacks<List<Movies>> {
 
     // Logging tracker for this class
     private final String LOG_TAG = PopularFragment.class.getSimpleName();
 
-    public static PopularFragment newInstance(Bundle args)
-    {
+    public static PopularFragment newInstance(Bundle args) {
         // Create the new fragment instance
-        PopularFragment fragmentInstance = (PopularFragment)newInstance(new PopularFragment(), args);
+        PopularFragment fragmentInstance = (PopularFragment) newInstance(new PopularFragment(), args);
         // Return the new fragment
         return fragmentInstance;
 
     }
-    public PopularFragment()
-    {
+
+    public PopularFragment() {
 
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null)
-        {
+        if (getArguments() != null) {
 
         }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_popular, container, false);
         // Initialize the ViewPager and TabStripLayout
@@ -90,6 +85,7 @@ public class PopularFragment extends ABaseFragment implements LoaderManager.Load
     public void onLoaderReset(Loader<List<Movies>> loader) {
 
     }
+
     // When RefreshLayout is triggered reload the loader
     @Override
     public void onRefresh() {

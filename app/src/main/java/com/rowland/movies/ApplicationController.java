@@ -17,6 +17,8 @@
 
 package com.rowland.movies;
 
+import android.util.Log;
+
 import com.activeandroid.app.Application;
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp.StethoInterceptor;
@@ -44,6 +46,9 @@ public class ApplicationController extends Application {
      * also be something that I could used to manage these instances but would be a bit overkill since
      * I am not already utilizing it.
      */
+
+    // The class Log identifier
+    private static final String LOG_TAG = ApplicationController.class.getSimpleName();
 
     // Declare ApplicationController singleton instance
     private static ApplicationController instance;

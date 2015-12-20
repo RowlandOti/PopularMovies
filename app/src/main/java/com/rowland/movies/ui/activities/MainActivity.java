@@ -28,7 +28,7 @@ import com.rowland.movies.ui.fragments.DetailsFragment;
 import com.rowland.movies.ui.fragments.MainFragment;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseToolBarActivity {
 
     // Class Variables
     private final String LOG_TAG = MainActivity.class.getSimpleName();

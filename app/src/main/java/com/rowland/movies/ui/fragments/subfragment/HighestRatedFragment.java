@@ -26,7 +26,7 @@ import android.view.ViewGroup;
 
 import com.rowland.movies.R;
 import com.rowland.movies.asynctaskloaders.MoviesLoader;
-import com.rowland.movies.asynctaskloaders.enums.ESortOrder;
+import com.rowland.movies.enums.ESortOrder;
 import com.rowland.movies.rest.pojos.Movies;
 
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 
 
-public class HighestRatedFragment extends ABaseFragment implements LoaderManager.LoaderCallbacks<List<Movies>>{
+public class HighestRatedFragment extends BaseGridFragment implements LoaderManager.LoaderCallbacks<List<Movies>>{
 
     // Logging tracker for this class
     private final String LOG_TAG = HighestRatedFragment.class.getSimpleName();

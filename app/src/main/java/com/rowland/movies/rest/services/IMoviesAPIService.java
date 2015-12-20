@@ -44,13 +44,13 @@ public interface IMoviesAPIService {
 
     // Load our movies
     @GET(MOVIES_ENDPOINT)
-    Call<MoviesData> loadMoviesData(@Query("apiKey") String apiKey, @Query("sortBy") String sortBy);
+    Call<MoviesData> loadMoviesData(@Query("sort_y") String sortBy, @Query("api_key") String apiKey);
 
     // Load the movie's trailer videos
     @GET(MOVIES_TRAILERS_ENDPOINT)
-    Call<TrailersData> loadTrailersData(@Path("id") int mTmdbMovieId, @Query("apiKey") String apiKey);
+    Call<TrailersData> loadTrailersData(@Path("id") int mTmdbMovieId, @Query("api_key") String apiKey);
 
     // Load the movie's trailers
     @GET(MOVIES_REVIEWS_ENDPOINT)
-    Call<ReviewsData> loadReviewsData(@Path("id") int mTmdbMovieId, @Query("apiKey") String apiKey);
+    Call<ReviewsData> loadReviewsData(@Path("id") int mTmdbMovieId, @Query("api_key") String apiKey);
 }

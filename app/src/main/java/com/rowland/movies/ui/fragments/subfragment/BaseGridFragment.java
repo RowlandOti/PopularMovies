@@ -35,10 +35,10 @@ import butterknife.Bind;
 /**
  * Created by Oti Rowland on 12/18/2015.
  */
-public class ABaseFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
+public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
 
     // Logging tracker for this class
-    private final String LOG_TAG = ABaseFragment.class.getSimpleName();
+    private final String LOG_TAG = BaseGridFragment.class.getSimpleName();
     // AN arrayList of the movies
     protected ArrayList<Movies> mMovieLists;
     // The grid adapter
@@ -46,14 +46,14 @@ public class ABaseFragment extends Fragment implements SwipeRefreshLayout.OnRefr
 
     // ButterKnife injected Views
     @Bind(R.id.sw_refresh_layout)
-    SwipeRefreshLayout mSwRefreshLayout;
+    protected SwipeRefreshLayout mSwRefreshLayout;
     @Bind(R.id.grid_recycle_view)
-    RecyclerView mGridRecycleView;
+    protected RecyclerView mGridRecycleView;
 
-    protected static ABaseFragment newInstance(ABaseFragment fragment, Bundle args) {
+    protected static BaseGridFragment newInstance(BaseGridFragment fragment, Bundle args) {
 
         // Create the new fragment instance
-        ABaseFragment  fragmentInstance = fragment;
+        BaseGridFragment fragmentInstance = fragment;
         // Set arguments if it is not null
         if (args != null) {
             fragmentInstance.setArguments(args);

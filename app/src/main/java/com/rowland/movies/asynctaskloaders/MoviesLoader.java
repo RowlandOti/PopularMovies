@@ -22,12 +22,10 @@ import android.util.Log;
 
 import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
-import com.rowland.movies.asynctaskloaders.enums.ESortOrder;
+import com.rowland.movies.enums.ESortOrder;
 import com.rowland.movies.rest.data.MoviesData;
-import com.rowland.movies.rest.data.ReviewsData;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.pojos.Movies;
-import com.rowland.movies.rest.pojos.Reviews;
 import com.rowland.movies.rest.services.IMoviesAPIService;
 import com.rowland.movies.rest.services.IRetrofitAPI;
 import com.uwetrottmann.androidutils.GenericSimpleLoader;
@@ -60,43 +58,49 @@ public class MoviesLoader extends GenericSimpleLoader {
     public List<Movies> loadInBackground() {
         // Get the RetrofitApi with correct Endpoint
         IRetrofitAPI moviesAPI = ApplicationController.getApplicationInstance().getApiOfType(EAPITypes.MOVIES_API);
+        //Log.d(LOG_TAG, "" + moviesAPI.getClass());
         // Get the MoviesAPIService
         IMoviesAPIService movieService = moviesAPI.getMoviesApiServiceInstance();
+        Log.d(LOG_TAG, "Print AAAA" + movieService.getClass());
         // Retrieve the movies data
-        Call<MoviesData> createdCall = movieService.loadMoviesData(BuildConfig.IMDB_API_KEY, mSortOrder.getSortOrder());
-
+        //Call<MoviesData> createdCall = movieService.loadMoviesData(mSortOrder.getSortOrder(), BuildConfig.IMDB_API_KEY);
         // Asynchronously access
-        createdCall.enqueue(new Callback<MoviesData>() {
+        /*createdCall.enqueue(new Callback<MoviesData>() {
             @Override
             public void onResponse(Response<MoviesData> response, Retrofit retrofit) {
-                movies = response.body().items;
 
-                for (Movies movie : movies)
-                {
-                    // Save movies in the database
-                    movie.save();
+                if (response.isSuccess()) {
+                    Log.d(LOG_TAG, "ResponseBody" + response.body());
+                    // movies available
+                    movies = response.body().items;
+
+                    for (Movies movie : movies) {
+                        // Save movies in the database
+                        movie.save();
+                    }
+                } else {
+                    // error response, no access to resource?
                 }
             }
 
             @Override
             public void onFailure(Throwable t) {
-
+                Log.d(LOG_TAG, t.getMessage());
             }
         });
 
-        if(movies.size() != 0)
-        {
+        if (movies != null && !movies.isEmpty()) {
             return movies;
-        }
+        }*/
 
-   /*     try {
+        /*try {
             Response<MoviesData> result = createdCall.execute();
+            Log.d(LOG_TAG, ""+result.body().items);
             return result.body().items;
         } catch (IOException e) {
             e.printStackTrace();
             Log.e(LOG_TAG, "IOException during loadInBackground()");
         }*/
-
         return null;
     }
 }
