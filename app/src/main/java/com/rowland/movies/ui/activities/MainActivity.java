@@ -26,6 +26,8 @@ import com.rowland.movies.R;
 import com.rowland.movies.ui.fragments.DetailsFragment;
 import com.rowland.movies.ui.fragments.MainFragment;
 
+import butterknife.ButterKnife;
+
 
 public class MainActivity extends BaseToolBarActivity {
 
@@ -33,19 +35,15 @@ public class MainActivity extends BaseToolBarActivity {
     private final String LOG_TAG = MainActivity.class.getSimpleName();
 
     private boolean mTwoPane;
-    private Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // Initialize the mToolbar and set it as an ActionBar
-        this.mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setIcon(R.drawable.ic_logo_48px);
-        this.mToolbar.setLogo(R.drawable.ic_logo_48px);
+        // Inject all the views
+        ButterKnife.bind(this);
+        // Setup the toolbar
+        setToolbar(false, false, R.drawable.ic_logo_48px);
 
         if (findViewById(R.id.detail_container) != null) {
             // The detail container view will be present only in the large-screen layouts
@@ -57,6 +55,8 @@ public class MainActivity extends BaseToolBarActivity {
             if (savedInstanceState != null) {
                 return;
             } else {
+                // Get Facebook Stetho doing its job
+                initStetho();
                 // In two-pane mode, show the detail view in this activity by
                 // adding or replacing the detail fragment using a fragment transaction.
                 showDetailFragment(null);

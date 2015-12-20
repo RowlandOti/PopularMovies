@@ -18,10 +18,12 @@
 package com.rowland.movies.ui.activities;
 
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.facebook.stetho.Stetho;
 import com.rowland.movies.R;
 
 import butterknife.Bind;
@@ -46,12 +48,12 @@ public class BaseToolBarActivity extends AppCompatActivity {
     }
 
     // Derived classes have acess to this method
-    protected void setToolbar(boolean showHomeUp, boolean showTitle) {
-        setToolbar(mToolbar, showHomeUp, showTitle);
+    protected void setToolbar(boolean showHomeUp, boolean showTitle, int iconResource) {
+        setToolbar(mToolbar, showHomeUp, showTitle,iconResource);
     }
 
     // Derived methods have no direct access to this class
-    private void setToolbar(Toolbar mToolbar, boolean isShowHomeUp, boolean isShowTitle) {
+    private void setToolbar(Toolbar mToolbar, boolean isShowHomeUp, boolean isShowTitle,int iconResource) {
         // Does the toolbar exist?
         if (mToolbar != null) {
             setSupportActionBar(mToolbar);
@@ -60,8 +62,19 @@ public class BaseToolBarActivity extends AppCompatActivity {
             // Should we display the title on the toolbar?
             getSupportActionBar().setDisplayShowTitleEnabled(isShowTitle);
             // Should we set logo to appear in toolbar?
-            getSupportActionBar().setIcon(R.drawable.ic_logo_48px);
+            getSupportActionBar().setIcon(iconResource);
             //this.mToolbar.setLogo(R.drawable.ic_logo_48px);
         }
     }
+    // Network monitoring using facebook's lethal Stetho
+    protected void initStetho() {
+        Stetho.initialize(
+                Stetho.newInitializerBuilder(this)
+                        .enableDumpapp(
+                                Stetho.defaultDumperPluginsProvider(this))
+                        .enableWebKitInspector(
+                                Stetho.defaultInspectorModulesProvider(this))
+                        .build());
+    }
+
 }
