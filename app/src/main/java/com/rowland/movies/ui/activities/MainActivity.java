@@ -34,7 +34,6 @@ public class MainActivity extends BaseToolBarActivity {
     // Class Variables
     private final String LOG_TAG = MainActivity.class.getSimpleName();
 
-    private boolean mTwoPane;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +48,7 @@ public class MainActivity extends BaseToolBarActivity {
             // The detail container view will be present only in the large-screen layouts
             // (res/layout-sw600dp). If this view is present, then the activity should be
             // in two-pane mode.
-            mTwoPane = true;
+            toggleShowTwoPane(true);
             // If we're being restored from a previous state, don't need to do anything
             // and should return or else we could end up with overlapping fragments.
             if (savedInstanceState != null) {
@@ -62,7 +61,7 @@ public class MainActivity extends BaseToolBarActivity {
                 showDetailFragment(null);
             }
         } else {
-            mTwoPane = false;
+            toggleShowTwoPane(false);
         }
 
         showMainFragment(null);
