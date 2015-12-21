@@ -49,7 +49,7 @@ public class TrailersLoader extends BaseLoader {
     public TrailersLoader(Context context, int mTmdbMovieId) {
         super(context);
         this.mTmdbMovieId = mTmdbMovieId;
-        setmLoaderObserver(new BaseLoaderBroadCastReceiver(this,new IntentFilter("REVIEWS_RELOADER_DATA")));
+        setmLoaderObserver(new BaseLoaderBroadCastReceiver(this,new IntentFilter("TRAILERS_RELOADER_DATA")));
     }
 
     @Override
@@ -66,7 +66,7 @@ public class TrailersLoader extends BaseLoader {
         // Retrieve the reviews data
         Call<TrailersCollection> createdCall = movieService.loadTrailersData(mTmdbMovieId, BuildConfig.IMDB_API_KEY);
         // Asynchronous access
-        createdCall.enqueue(new TrailersCallBack(){
+        createdCall.enqueue(new TrailersCallBack(getContext()){
             // Gain access to the TrailersList
             @Override
             public void retrieveTrailersList() {

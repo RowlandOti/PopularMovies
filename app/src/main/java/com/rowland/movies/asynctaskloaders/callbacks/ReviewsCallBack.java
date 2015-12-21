@@ -17,6 +17,9 @@
 
 package com.rowland.movies.asynctaskloaders.callbacks;
 
+import android.content.Context;
+import android.content.Intent;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.rowland.movies.BuildConfig;
@@ -40,6 +43,12 @@ public abstract class ReviewsCallBack implements Callback<ReviewsCollection> {
     private static final String LOG_TAG = ReviewsCallBack.class.getSimpleName();
     // The list of reviews our loader returns
     private List<Reviews> reviewsList;
+    // Context instance
+    private Context context;
+
+    public ReviewsCallBack(Context context) {
+        this.context = context;
+    }
 
     @Override
     public void onResponse(Response<ReviewsCollection> response, Retrofit retrofit) {
@@ -56,6 +65,8 @@ public abstract class ReviewsCallBack implements Callback<ReviewsCollection> {
                     Log.d(LOG_TAG, "Review " + review.getAuthor());
                     Log.d(LOG_TAG, "Review " + review.getContent());
                 }
+                // BroadCast the changes locally
+                LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent("REVIEWS_RELOADER_DATA"));
             }
         } else {
 

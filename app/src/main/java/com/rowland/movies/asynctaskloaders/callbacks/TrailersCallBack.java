@@ -17,6 +17,9 @@
 
 package com.rowland.movies.asynctaskloaders.callbacks;
 
+import android.content.Context;
+import android.content.Intent;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.rowland.movies.BuildConfig;
@@ -40,6 +43,12 @@ public abstract class TrailersCallBack implements Callback<TrailersCollection> {
     private static final String LOG_TAG = TrailersCallBack.class.getSimpleName();
     // The list of movies our loader returns
     private List<Trailers> trailersList;
+    // Context instance
+    private Context context;
+
+    public TrailersCallBack(Context context) {
+        this.context = context;
+    }
 
     @Override
     public void onResponse(Response<TrailersCollection> response, Retrofit retrofit) {
@@ -69,6 +78,8 @@ public abstract class TrailersCallBack implements Callback<TrailersCollection> {
                     //For getting error code. Code is integer value like 200,404 etc
                     Log.d(LOG_TAG, String.valueOf(restError.getCode()));
                 }
+                // BroadCast the changes locally
+                LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent("TRAILERS_RELOADER_DATA"));
 
             } catch (IOException e) {
                 e.printStackTrace();

@@ -17,6 +17,9 @@
 
 package com.rowland.movies.asynctaskloaders.callbacks;
 
+import android.content.Context;
+import android.content.Intent;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.rowland.movies.BuildConfig;
@@ -40,6 +43,12 @@ public abstract class MoviesCallBack implements Callback<MoviesCollection> {
     private static final String LOG_TAG = MoviesCallBack.class.getSimpleName();
     // The list of movies our loader returns
     private List<Movies> moviesList;
+    // Context instance
+    private Context context;
+
+    public MoviesCallBack(Context context) {
+        this.context = context;
+    }
 
     @Override
     public void onResponse(Response<MoviesCollection> response, Retrofit retrofit) {
@@ -56,6 +65,8 @@ public abstract class MoviesCallBack implements Callback<MoviesCollection> {
                     Log.d(LOG_TAG, "Movie " + movie.getTitle());
                     Log.d(LOG_TAG, "Movie " + movie.getReleaseDate());
                 }
+                // BroadCast the changes locally
+                LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent("MOVIES_RELOADER_DATA"));
             }
         } else {
 
