@@ -22,7 +22,7 @@ import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp.StethoInterceptor;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.rowland.movies.enums.EBaseURlTypes;
+import com.rowland.movies.rest.enums.EBaseURlTypes;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.services.IRetrofitAPI;
 import com.squareup.okhttp.OkHttpClient;

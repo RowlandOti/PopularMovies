@@ -22,7 +22,7 @@ import android.content.Context;
 import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
 import com.rowland.movies.asynctaskloaders.callbacks.MoviesCallBack;
-import com.rowland.movies.enums.ESortOrder;
+import com.rowland.movies.rest.enums.ESortOrder;
 import com.rowland.movies.rest.collections.MoviesCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.pojos.Movies;
