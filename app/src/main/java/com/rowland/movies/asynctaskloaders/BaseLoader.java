@@ -26,7 +26,9 @@ import android.content.Context;
 import com.uwetrottmann.androidutils.GenericSimpleLoader;
 
 import java.util.List;
-
+/*ToDo: Improve Loader using tutorial below
+* <a>http://www.androiddesignpatterns.com/2012/08/implementing-loaders.html</a>
+* */
 public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
 
 
@@ -38,10 +40,14 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
     @Override
     protected void onStartLoading() {
         if (mItems != null) {
+            // Deliver any previously loaded data immediately.
             deliverResult(mItems);
         }
-
+        // When the observer detects a change, it should call onContentChanged()
+        // on the Loader, which will cause the next call to takeContentChanged() to return true.
         if (takeContentChanged() || mItems == null) {
+            // If the data has changed since the last time it was loaded
+            // or is not currently available, force a new load.
             forceLoad();
         }
     }
