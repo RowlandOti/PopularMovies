@@ -18,9 +18,11 @@
 package com.rowland.movies.asynctaskloaders;
 
 import android.content.Context;
+import android.content.IntentFilter;
 
 import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
+import com.rowland.movies.asynctaskloaders.broadcastrecievers.BaseLoaderBroadCastReceiver;
 import com.rowland.movies.asynctaskloaders.callbacks.MoviesCallBack;
 import com.rowland.movies.rest.enums.ESortOrder;
 import com.rowland.movies.rest.collections.MoviesCollection;
@@ -47,6 +49,7 @@ public class MoviesLoader extends BaseLoader {
     public MoviesLoader(Context context, ESortOrder mSortOrder) {
         super(context);
         this.mSortOrder = mSortOrder;
+        setmLoaderObserver(new BaseLoaderBroadCastReceiver(this,new IntentFilter("MOVIES_RELOADER_DATA")));
     }
 
     @Override

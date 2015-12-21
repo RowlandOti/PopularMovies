@@ -22,7 +22,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v4.content.Loader;
-import android.support.v4.content.LocalBroadcastManager;
 
 
 /**
@@ -30,17 +29,17 @@ import android.support.v4.content.LocalBroadcastManager;
  */
 public class BaseLoaderBroadCastReceiver extends BroadcastReceiver
 {
+    // The loader that owns this listener
     final private Loader mLoader;
 
-    public BaseLoaderBroadCastReceiver(Loader loader)
+    public BaseLoaderBroadCastReceiver(Loader loader, IntentFilter mLFilter)
     {
+        // Assign loader to this listener
         this.mLoader = loader;
-        // Register for events related to sdcard installation.
-        IntentFilter mLFilter = new IntentFilter();
-        mLFilter.addAction("RELOADER_DATA");
+        // Register reciever to listen for above IntentFilter
         mLoader.getContext().registerReceiver(this, mLFilter);
     }
-
+    // Inform if contents of database is changed
     @Override
     public void onReceive(Context context, Intent intent)
     {

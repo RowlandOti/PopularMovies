@@ -18,9 +18,11 @@
 package com.rowland.movies.asynctaskloaders;
 
 import android.content.Context;
+import android.content.IntentFilter;
 
 import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
+import com.rowland.movies.asynctaskloaders.broadcastrecievers.BaseLoaderBroadCastReceiver;
 import com.rowland.movies.asynctaskloaders.callbacks.ReviewsCallBack;
 import com.rowland.movies.rest.collections.ReviewsCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
@@ -46,6 +48,7 @@ public class ReviewsLoader extends BaseLoader {
     public ReviewsLoader(Context context, int mTmdbMovieId) {
         super(context);
         this.mTmdbMovieId = mTmdbMovieId;
+        setmLoaderObserver(new BaseLoaderBroadCastReceiver(this,new IntentFilter("REVIEWS_RELOADER_DATA")));
     }
 
     @Override

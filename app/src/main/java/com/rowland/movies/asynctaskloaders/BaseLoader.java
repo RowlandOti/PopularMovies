@@ -19,20 +19,16 @@
 
 package com.rowland.movies.asynctaskloaders;
 
-import android.annotation.TargetApi;
-import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.content.IntentFilter;
-import android.support.v4.content.LocalBroadcastManager;
 
 import com.rowland.movies.asynctaskloaders.broadcastrecievers.BaseLoaderBroadCastReceiver;
 import com.uwetrottmann.androidutils.GenericSimpleLoader;
-
-import java.util.List;
 /*ToDo: Improve Loader using tutorial below
 * <a>http://www.androiddesignpatterns.com/2012/08/implementing-loaders.html</a>
 * */
 public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
+
     // An observer to listen for changes in data
     private BaseLoaderBroadCastReceiver mLoaderObserver;
 
@@ -50,9 +46,12 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
             // Deliver any previously loaded data immediately.
             deliverResult(mItems);
         }
-        // Register Observer - Start watching for changes in the app data.
+        // Create Observer if it is not set yet
         if (mLoaderObserver == null) {
-            mLoaderObserver = new BaseLoaderBroadCastReceiver(this);
+            // Custom filter to map data changes.
+            IntentFilter mLFilter = new IntentFilter("RELOADER_DATA");
+            // Register Observer - Start watching for changes in the app data.
+            mLoaderObserver = new BaseLoaderBroadCastReceiver(this, mLFilter);
         }
         // When the observer detects a change, it should call onContentChanged()
         // on the Loader, which will cause the next call to takeContentChanged() to return true.
@@ -83,5 +82,13 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
             getContext().unregisterReceiver(mLoaderObserver);
             mLoaderObserver = null;
         }
+    }
+    // Get the loader observer
+    protected BaseLoaderBroadCastReceiver getmLoaderObserver() {
+        return mLoaderObserver;
+    }
+    // Set the loader observer
+    protected void setmLoaderObserver(BaseLoaderBroadCastReceiver mLoaderObserver) {
+        this.mLoaderObserver = mLoaderObserver;
     }
 }
