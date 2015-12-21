@@ -34,4 +34,22 @@ public class ReviewsCollection {
     @Expose
     public List<Reviews> results;
 
+    /**
+     *
+     * @return
+     * The results
+     */
+    public List<Reviews> getResults() {
+        return results;
+    }
+
+    /**
+     *
+     * @param results
+     * The results
+     */
+    public void setResults(List<Reviews> results) {
+        this.results = results;
+    }
+
 }

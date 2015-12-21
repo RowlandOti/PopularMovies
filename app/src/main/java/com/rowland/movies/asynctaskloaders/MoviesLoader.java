@@ -18,7 +18,6 @@
 package com.rowland.movies.asynctaskloaders;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
@@ -27,17 +26,12 @@ import com.rowland.movies.enums.ESortOrder;
 import com.rowland.movies.rest.collections.MoviesCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.pojos.Movies;
-import com.rowland.movies.rest.pojos.RestError;
 import com.rowland.movies.rest.services.IMoviesAPIService;
 import com.rowland.movies.rest.services.IRetrofitAPI;
 
-import java.io.IOException;
 import java.util.List;
 
 import retrofit.Call;
-import retrofit.Callback;
-import retrofit.Response;
-import retrofit.Retrofit;
 
 /**
  * Created by Oti Rowland on 12/12/2015.
@@ -48,7 +42,7 @@ public class MoviesLoader extends BaseLoader {
     // The sort order type
     private ESortOrder mSortOrder;
     // The list of movies our loader returns
-    private List<Movies> moviesCollection;
+    private List<Movies> moviesList;
 
     public MoviesLoader(Context context, ESortOrder mSortOrder) {
         super(context);
@@ -64,21 +58,21 @@ public class MoviesLoader extends BaseLoader {
         // Return the list of movies
         return getMovies(movieService);
     }
-
+    // Get the list of movies
     private List<Movies> getMovies(IMoviesAPIService movieService) {
         // Retrieve the movies data
         Call<MoviesCollection> createdCall = movieService.loadMoviesData(mSortOrder.getSortOrder(), BuildConfig.IMDB_API_KEY);
         // Asynchronously access
         createdCall.enqueue(new MoviesCallBack() {
-            // Gain access to the MoviesCollection object
+            // Gain access to the MoviesList
             @Override
-            public void retrieveMoviesCollection() {
-                moviesCollection = super.getMoviesCollection();
+            public void retrieveMoviesList() {
+                moviesList = super.getMoviesList();
             }
         });
         // Return the list of movies
-        if (moviesCollection != null && !moviesCollection.isEmpty()) {
-            return moviesCollection;
+        if (moviesList != null && !moviesList.isEmpty()) {
+            return moviesList;
         }
 
         return null;

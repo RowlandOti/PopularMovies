@@ -20,9 +20,9 @@ package com.rowland.movies.asynctaskloaders.callbacks;
 import android.util.Log;
 
 import com.rowland.movies.BuildConfig;
-import com.rowland.movies.rest.collections.MoviesCollection;
-import com.rowland.movies.rest.pojos.Movies;
+import com.rowland.movies.rest.collections.ReviewsCollection;
 import com.rowland.movies.rest.pojos.RestError;
+import com.rowland.movies.rest.pojos.Reviews;
 
 import java.io.IOException;
 import java.util.List;
@@ -34,27 +34,27 @@ import retrofit.Retrofit;
 /**
  * Created by Oti Rowland on 12/21/2015.
  */
-public abstract class MoviesCallBack implements Callback<MoviesCollection> {
+public abstract class ReviewsCallBack implements Callback<ReviewsCollection> {
 
     // The class Log identifier
     private static final String LOG_TAG = MoviesCallBack.class.getSimpleName();
-    // The list of movies our loader returns
-    private List<Movies> moviesList;
+    // The list of reviews our loader returns
+    private List<Reviews> reviewsList;
 
     @Override
-    public void onResponse(Response<MoviesCollection> response, Retrofit retrofit) {
+    public void onResponse(Response<ReviewsCollection> response, Retrofit retrofit) {
 
         if (response.isSuccess() && response.errorBody() == null) {
             // movies available
-            moviesList = response.body().getResults();
+            reviewsList = response.body().getResults();
 
-            for (Movies movie : moviesList) {
-                // Save movies in the database
-                movie.save();
+            for (Reviews review : reviewsList) {
+                // Save reviews in the database
+                review.save();
                 // Check wether we are in debug mode
                 if (BuildConfig.IS_DEBUG_MODE) {
-                    Log.d(LOG_TAG, "Movie " + movie.getTitle());
-                    Log.d(LOG_TAG, "Movie " + movie.getReleaseDate());
+                    Log.d(LOG_TAG, "Review " + review.getAuthor());
+                    Log.d(LOG_TAG, "Review " + review.getContent());
                 }
             }
         } else {
@@ -82,11 +82,11 @@ public abstract class MoviesCallBack implements Callback<MoviesCollection> {
         Log.d(LOG_TAG, t.getMessage());
     }
     // Getter method for moviesCollection
-    public List<Movies> getMoviesList() {
+    public List<Reviews> getReviewsList() {
 
-        return this.moviesList;
+        return this.reviewsList;
     }
     // A handy method to retrieve the collection from the callback
     // Implement this method to gain access
-    public abstract void retrieveMoviesList();
+    public abstract void retrieveReviewsList();
 }

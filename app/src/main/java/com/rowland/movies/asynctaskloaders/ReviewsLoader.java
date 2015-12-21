@@ -38,7 +38,7 @@ import retrofit.Retrofit;
 /**
  * Created by Oti Rowland on 12/12/2015.
  */
-public class ReviewsLoader extends GenericSimpleLoader {
+public class ReviewsLoader extends BaseLoader {
     // The class Log identifier
     private static final String LOG_TAG = ReviewsLoader.class.getSimpleName();
     // The movie id whose reviews are retrieved
@@ -57,6 +57,12 @@ public class ReviewsLoader extends GenericSimpleLoader {
         IRetrofitAPI moviesAPI = ApplicationController.getApplicationInstance().getApiOfType(EAPITypes.MOVIES_API);
         // Get the MoviesAPIService
         IMoviesAPIService movieService = moviesAPI.getMoviesApiServiceInstance();
+        // Return the list of reviews
+        return getReviews(movieService);
+    }
+    // Get the list of reviews
+    private List<Reviews> getReviews(IMoviesAPIService movieService) {
+
         // Retrieve the reviews data
         Call<ReviewsCollection> createdCall = movieService.loadReviewsData(mTmdbMovieId, BuildConfig.IMDB_API_KEY);
         // Asynchronously access
@@ -81,14 +87,7 @@ public class ReviewsLoader extends GenericSimpleLoader {
             return reviews;
         }
 
-      /*  try {
-            Response<ReviewsCollection> result = createdCall.execute();
-            return result.body().items;
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.e(LOG_TAG, "IOException during loadInBackground()");
-        }*/
-
         return null;
+
     }
 }

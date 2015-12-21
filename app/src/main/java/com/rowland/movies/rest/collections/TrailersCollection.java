@@ -34,4 +34,22 @@ public class TrailersCollection {
     @Expose
     public List<Trailers> results;
 
+    /**
+     *
+     * @return
+     * The results
+     */
+    public List<Trailers> getResults() {
+        return results;
+    }
+
+    /**
+     *
+     * @param results
+     * The results
+     */
+    public void setResults(List<Trailers> results) {
+        this.results = results;
+    }
+
 }
