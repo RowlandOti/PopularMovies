@@ -53,10 +53,8 @@ public class ReviewsLoader extends BaseLoader {
 
     @Override
     public List<Reviews> loadInBackground() {
-        // Get the RetrofitApi with correct Endpoint
-        IRetrofitAPI moviesAPI = ApplicationController.getApplicationInstance().getApiOfType(EAPITypes.MOVIES_API);
-        // Get the MoviesAPIService
-        IMoviesAPIService movieService = moviesAPI.getMoviesApiServiceInstance();
+        // Get the MoviesAPIService and use it to retrieve a list of reviews
+        IMoviesAPIService movieService = ApplicationController.getApplicationInstance().getMovieServiceOfApiType(EAPITypes.MOVIES_API);
         // Return the list of reviews
         return getReviews(movieService);
     }

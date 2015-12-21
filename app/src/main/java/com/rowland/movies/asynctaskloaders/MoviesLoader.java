@@ -29,7 +29,6 @@ import com.rowland.movies.rest.collections.MoviesCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.models.Movies;
 import com.rowland.movies.rest.services.IMoviesAPIService;
-import com.rowland.movies.rest.services.IRetrofitAPI;
 
 import java.util.List;
 
@@ -54,15 +53,13 @@ public class MoviesLoader extends BaseLoader {
 
     @Override
     public List<Movies> loadInBackground() {
-        // Get the RetrofitApi with correct Endpoint
-        IRetrofitAPI moviesAPI = ApplicationController.getApplicationInstance().getApiOfType(EAPITypes.MOVIES_API);
         // Get the MoviesAPIService and use it to retrieve a list of movies
-        IMoviesAPIService movieService = moviesAPI.getMoviesApiServiceInstance();
+        IMoviesAPIService movieService = ApplicationController.getApplicationInstance().getMovieServiceOfApiType(EAPITypes.MOVIES_API);
         // Return the list of movies
-        return getMovies(movieService);
+        return getOnlineMovies(movieService);
     }
     // Get the list of movies
-    private List<Movies> getMovies(IMoviesAPIService movieService) {
+    private List<Movies> getOnlineMovies(IMoviesAPIService movieService) {
         // Retrieve the movies data
         Call<MoviesCollection> createdCall = movieService.loadMoviesData(mSortOrder.getSortOrder(), BuildConfig.IMDB_API_KEY);
         // Asynchronous access
