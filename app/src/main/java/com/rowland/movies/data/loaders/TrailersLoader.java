@@ -23,15 +23,13 @@ import android.text.TextUtils;
 
 import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
-import com.rowland.movies.data.broadcastrecievers.LoaderBroadCastReceiver;
+import com.rowland.movies.data.broadcastrecievers.DataSetChangeBroadCastReceiver;
 import com.rowland.movies.data.callbacks.TrailersCallBack;
 import com.rowland.movies.data.interfaces.ILoaders;
 import com.rowland.movies.rest.collections.TrailersCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
-import com.rowland.movies.rest.models.Reviews;
 import com.rowland.movies.rest.models.Trailers;
 import com.rowland.movies.rest.services.IMoviesAPIService;
-import com.rowland.movies.utilities.Utilities;
 
 import java.util.List;
 
@@ -51,7 +49,7 @@ public class TrailersLoader extends BaseLoader implements ILoaders<Trailers> {
     public TrailersLoader(Context context, int mTmdbMovieId) {
         super(context);
         this.mTmdbMovieId = mTmdbMovieId;
-        setLoaderObserver(new LoaderBroadCastReceiver(this,new IntentFilter("TRAILERS_RELOADER_DATA")));
+        setLoaderObserver(new DataSetChangeBroadCastReceiver(this,new IntentFilter("TRAILERS_RELOADER_DATA")));
     }
 
     @Override

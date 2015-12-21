@@ -30,14 +30,14 @@ import com.rowland.movies.BuildConfig;
 /**
  * Created by Oti Rowland on 12/21/2015.
  */
-public class LoaderBroadCastReceiver extends BroadcastReceiver
+public class DataSetChangeBroadCastReceiver extends BroadcastReceiver
 {
     // The class Log identifier
-    private static final String LOG_TAG = LoaderBroadCastReceiver.class.getSimpleName();
+    private static final String LOG_TAG = DataSetChangeBroadCastReceiver.class.getSimpleName();
     // The loader that owns this listener
     final private Loader mLoader;
 
-    public LoaderBroadCastReceiver(Loader loader, IntentFilter mLFilter)
+    public DataSetChangeBroadCastReceiver(Loader loader, IntentFilter mLFilter)
     {
         // Assign loader to this listener
         this.mLoader = loader;

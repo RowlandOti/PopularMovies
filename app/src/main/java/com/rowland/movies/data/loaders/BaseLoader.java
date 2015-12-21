@@ -22,7 +22,7 @@ package com.rowland.movies.data.loaders;
 import android.content.Context;
 import android.content.IntentFilter;
 
-import com.rowland.movies.data.broadcastrecievers.LoaderBroadCastReceiver;
+import com.rowland.movies.data.broadcastrecievers.DataSetChangeBroadCastReceiver;
 import com.rowland.movies.utilities.Utilities;
 import com.uwetrottmann.androidutils.GenericSimpleLoader;
 /*ToDo: Improve Loader using tutorial below
@@ -32,7 +32,7 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
     // Check if we are online
     protected boolean isOnline = Utilities.NetworkUtility.isNetworkAvailable(getContext());
     // An observer to listen for changes in data
-    private LoaderBroadCastReceiver mLoaderObserver;
+    private DataSetChangeBroadCastReceiver mLoaderObserver;
 
     public BaseLoader(Context context) {
         super(context);
@@ -53,7 +53,7 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
             // Custom filter to map data changes.
             IntentFilter mLFilter = new IntentFilter("RELOADER_DATA");
             // Register Observer - Start watching for changes in the app data.
-            mLoaderObserver = new LoaderBroadCastReceiver(this, mLFilter);
+            mLoaderObserver = new DataSetChangeBroadCastReceiver(this, mLFilter);
         }
         // When the observer detects a change, it should call onContentChanged()
         // on the Loader, which will cause the next call to takeContentChanged() to return true.
@@ -86,11 +86,11 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
         }
     }
     // Get the loader observer
-    protected LoaderBroadCastReceiver getmLoaderObserver() {
+    protected DataSetChangeBroadCastReceiver getmLoaderObserver() {
         return mLoaderObserver;
     }
     // Set the loader observer
-    protected void setLoaderObserver(LoaderBroadCastReceiver mLoaderObserver) {
+    protected void setLoaderObserver(DataSetChangeBroadCastReceiver mLoaderObserver) {
         this.mLoaderObserver = mLoaderObserver;
     }
 }
