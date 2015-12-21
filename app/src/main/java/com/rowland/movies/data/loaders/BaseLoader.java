@@ -81,7 +81,6 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
             onReleaseResources(mItems);
             mItems = null;
         }
-
         // Unregister Observer - Stop monitoring for data set changes.
         if (mDataSetChangeObserver != null) {
             getContext().unregisterReceiver(mDataSetChangeObserver);
