@@ -22,7 +22,7 @@ package com.rowland.movies.asynctaskloaders;
 import android.content.Context;
 import android.content.IntentFilter;
 
-import com.rowland.movies.asynctaskloaders.broadcastrecievers.BaseLoaderBroadCastReceiver;
+import com.rowland.movies.asynctaskloaders.broadcastrecievers.LoaderBroadCastReceiver;
 import com.uwetrottmann.androidutils.GenericSimpleLoader;
 /*ToDo: Improve Loader using tutorial below
 * <a>http://www.androiddesignpatterns.com/2012/08/implementing-loaders.html</a>
@@ -30,7 +30,7 @@ import com.uwetrottmann.androidutils.GenericSimpleLoader;
 public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
 
     // An observer to listen for changes in data
-    private BaseLoaderBroadCastReceiver mLoaderObserver;
+    private LoaderBroadCastReceiver mLoaderObserver;
 
     public BaseLoader(Context context) {
         super(context);
@@ -51,7 +51,7 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
             // Custom filter to map data changes.
             IntentFilter mLFilter = new IntentFilter("RELOADER_DATA");
             // Register Observer - Start watching for changes in the app data.
-            mLoaderObserver = new BaseLoaderBroadCastReceiver(this, mLFilter);
+            mLoaderObserver = new LoaderBroadCastReceiver(this, mLFilter);
         }
         // When the observer detects a change, it should call onContentChanged()
         // on the Loader, which will cause the next call to takeContentChanged() to return true.
@@ -84,11 +84,11 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
         }
     }
     // Get the loader observer
-    protected BaseLoaderBroadCastReceiver getmLoaderObserver() {
+    protected LoaderBroadCastReceiver getmLoaderObserver() {
         return mLoaderObserver;
     }
     // Set the loader observer
-    protected void setmLoaderObserver(BaseLoaderBroadCastReceiver mLoaderObserver) {
+    protected void setmLoaderObserver(LoaderBroadCastReceiver mLoaderObserver) {
         this.mLoaderObserver = mLoaderObserver;
     }
 }

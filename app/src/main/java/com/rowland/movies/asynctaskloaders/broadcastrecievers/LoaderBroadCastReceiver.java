@@ -27,12 +27,12 @@ import android.support.v4.content.Loader;
 /**
  * Created by Oti Rowland on 12/21/2015.
  */
-public class BaseLoaderBroadCastReceiver extends BroadcastReceiver
+public class LoaderBroadCastReceiver extends BroadcastReceiver
 {
     // The loader that owns this listener
     final private Loader mLoader;
 
-    public BaseLoaderBroadCastReceiver(Loader loader, IntentFilter mLFilter)
+    public LoaderBroadCastReceiver(Loader loader, IntentFilter mLFilter)
     {
         // Assign loader to this listener
         this.mLoader = loader;
