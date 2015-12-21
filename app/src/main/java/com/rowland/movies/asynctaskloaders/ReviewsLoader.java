@@ -24,17 +24,13 @@ import com.rowland.movies.BuildConfig;
 import com.rowland.movies.asynctaskloaders.callbacks.ReviewsCallBack;
 import com.rowland.movies.rest.collections.ReviewsCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
-import com.rowland.movies.rest.pojos.Reviews;
+import com.rowland.movies.rest.models.Reviews;
 import com.rowland.movies.rest.services.IMoviesAPIService;
 import com.rowland.movies.rest.services.IRetrofitAPI;
-import com.uwetrottmann.androidutils.GenericSimpleLoader;
 
 import java.util.List;
 
 import retrofit.Call;
-import retrofit.Callback;
-import retrofit.Response;
-import retrofit.Retrofit;
 
 /**
  * Created by Oti Rowland on 12/12/2015.

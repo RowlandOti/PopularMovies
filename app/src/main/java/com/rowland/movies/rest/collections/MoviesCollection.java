@@ -20,7 +20,7 @@ package com.rowland.movies.rest.collections;
 import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.rowland.movies.rest.pojos.Movies;
+import com.rowland.movies.rest.models.Movies;
 
 import java.util.List;
 

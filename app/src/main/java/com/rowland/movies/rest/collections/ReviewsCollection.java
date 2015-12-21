@@ -20,7 +20,7 @@ package com.rowland.movies.rest.collections;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.rowland.movies.rest.pojos.Reviews;
+import com.rowland.movies.rest.models.Reviews;
 
 import java.util.List;
 

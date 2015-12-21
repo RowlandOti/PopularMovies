@@ -29,7 +29,7 @@ import android.widget.TextView;
 import com.rowland.movies.R;
 import com.rowland.movies.rest.enums.EBaseImageSize;
 import com.rowland.movies.rest.enums.EBaseURlTypes;
-import com.rowland.movies.rest.pojos.Movies;
+import com.rowland.movies.rest.models.Movies;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

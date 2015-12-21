@@ -15,7 +15,7 @@
  *
  */
 
-package com.rowland.movies.rest.pojos;
+package com.rowland.movies.rest.models;
 
 /**
  * Generated with love from <>http://www.jsonschema2pojo.org/</>

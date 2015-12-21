@@ -15,7 +15,7 @@
  *
  */
 
-package com.rowland.movies.rest.pojos;
+package com.rowland.movies.rest.models;
 
 /**
  * Generated with love from <>http://www.jsonschema2pojo.org/</>
@@ -27,138 +27,98 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
-@Table(name = "trailers")
-public class Trailers extends Model {
+@Table(name = "reviews")
+public class Reviews extends Model {
 
     // A movie has many trailers so lets associate each movie to a trailer in a many-to-one relation
     //ActiveAndroid Annotations
     @Column(name = "movie", onDelete = Column.ForeignKeyAction.CASCADE)
     public Movies movie;
     // Gson annotations
-    @SerializedName("name")
-    @Expose
-    // ActiveAndroid Annotations
-    @Column(name = "name")
-    private String name;
-    // Gson annotations
-    @SerializedName("site")
+    @SerializedName("author")
     @Expose
     //ActiveAndroid Annotations
-    @Column(name = "site")
-    private String site;
+    @Column(name = "author")
+    private String author;
     // Gson annotations
-    @SerializedName("type")
+    @SerializedName("content")
     @Expose
     //ActiveAndroid Annotations
-    @Column(name = "type")
-    private String type;
+    @Column(name = "content")
+    private String content;
+    // Gson annotations
+    @SerializedName("url")
+    @Expose
+    //ActiveAndroid Annotations
+    @Column(name = "url")
+    private String url;
     // Gson annotations
     @SerializedName("id_")
     @Expose
     //ActiveAndroid Annotations
     @Column(name = "id_")
-    private Double id_;
-    // Gson annotations
-    @SerializedName("key")
-    @Expose
-    //ActiveAndroid Annotations
-    @Column(name = "key")
-    private String key;
-    // Gson annotations
-    @SerializedName("size")
-    @Expose
-    //ActiveAndroid Annotations
-    @Column(name = "size")
-    private Integer size;
+    private String id_;
 
-    public Trailers() {
+
+    public Reviews() {
         // You have to call super in each constructor to create the table.
         super();
     }
 
     /**
-     * @return The name
+     * @return The author
      */
-    public String getName() {
-        return name;
+    public String getAuthor() {
+        return author;
     }
 
     /**
-     * @param name The name
+     * @param author The author
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     /**
-     * @return The site
+     * @return The content
      */
-    public String getSite() {
-        return site;
+    public String getContent() {
+        return content;
     }
 
     /**
-     * @param site The site
+     * @param content The content
      */
-    public void setSite(String site) {
-        this.site = site;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     /**
-     * @return The type
+     * @return The url
      */
-    public String getType() {
-        return type;
+    public String getUrl() {
+        return url;
     }
 
     /**
-     * @param type The type
+     * @param url The url
      */
-    public void setType(String type) {
-        this.type = type;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     /**
-     * @return The id_
+     * @return The id
      */
-    public Double getId_() {
+    public String getId_() {
         return id_;
     }
 
     /**
-     * @param id The id
+     * @param id_ The id
      */
-    public void setId(Double id) {
+    public void setId(String id_) {
         this.id_ = id_;
-    }
-
-    /**
-     * @return The key
-     */
-    public String getKey() {
-        return key;
-    }
-
-    /**
-     * @param key The key
-     */
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    /**
-     * @return The size
-     */
-    public Integer getSize() {
-        return size;
-    }
-
-    /**
-     * @param size The size
-     */
-    public void setSize(Integer size) {
-        this.size = size;
     }
 
 }

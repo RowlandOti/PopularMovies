@@ -27,7 +27,7 @@ import android.view.ViewGroup;
 import com.rowland.movies.R;
 import com.rowland.movies.asynctaskloaders.MoviesLoader;
 import com.rowland.movies.rest.enums.ESortOrder;
-import com.rowland.movies.rest.pojos.Movies;
+import com.rowland.movies.rest.models.Movies;
 
 import java.util.List;
 

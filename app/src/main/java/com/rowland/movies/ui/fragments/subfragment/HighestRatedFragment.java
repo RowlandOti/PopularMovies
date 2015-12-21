@@ -20,7 +20,6 @@ package com.rowland.movies.ui.fragments.subfragment;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +27,7 @@ import android.view.ViewGroup;
 import com.rowland.movies.R;
 import com.rowland.movies.asynctaskloaders.MoviesLoader;
 import com.rowland.movies.rest.enums.ESortOrder;
-import com.rowland.movies.rest.pojos.Movies;
+import com.rowland.movies.rest.models.Movies;
 
 import java.util.ArrayList;
 import java.util.List;

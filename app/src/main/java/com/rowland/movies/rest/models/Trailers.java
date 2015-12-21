@@ -15,7 +15,7 @@
  *
  */
 
-package com.rowland.movies.rest.pojos;
+package com.rowland.movies.rest.models;
 
 /**
  * Generated with love from <>http://www.jsonschema2pojo.org/</>
@@ -27,98 +27,138 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-@Table(name = "reviews")
-public class Reviews extends Model {
+
+@Table(name = "trailers")
+public class Trailers extends Model {
 
     // A movie has many trailers so lets associate each movie to a trailer in a many-to-one relation
     //ActiveAndroid Annotations
     @Column(name = "movie", onDelete = Column.ForeignKeyAction.CASCADE)
     public Movies movie;
     // Gson annotations
-    @SerializedName("author")
+    @SerializedName("name")
     @Expose
-    //ActiveAndroid Annotations
-    @Column(name = "author")
-    private String author;
+    // ActiveAndroid Annotations
+    @Column(name = "name")
+    private String name;
     // Gson annotations
-    @SerializedName("content")
+    @SerializedName("site")
     @Expose
     //ActiveAndroid Annotations
-    @Column(name = "content")
-    private String content;
+    @Column(name = "site")
+    private String site;
     // Gson annotations
-    @SerializedName("url")
+    @SerializedName("type")
     @Expose
     //ActiveAndroid Annotations
-    @Column(name = "url")
-    private String url;
+    @Column(name = "type")
+    private String type;
     // Gson annotations
     @SerializedName("id_")
     @Expose
     //ActiveAndroid Annotations
     @Column(name = "id_")
-    private String id_;
+    private Double id_;
+    // Gson annotations
+    @SerializedName("key")
+    @Expose
+    //ActiveAndroid Annotations
+    @Column(name = "key")
+    private String key;
+    // Gson annotations
+    @SerializedName("size")
+    @Expose
+    //ActiveAndroid Annotations
+    @Column(name = "size")
+    private Integer size;
 
-
-    public Reviews() {
+    public Trailers() {
         // You have to call super in each constructor to create the table.
         super();
     }
 
     /**
-     * @return The author
+     * @return The name
      */
-    public String getAuthor() {
-        return author;
+    public String getName() {
+        return name;
     }
 
     /**
-     * @param author The author
+     * @param name The name
      */
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
-     * @return The content
+     * @return The site
      */
-    public String getContent() {
-        return content;
+    public String getSite() {
+        return site;
     }
 
     /**
-     * @param content The content
+     * @param site The site
      */
-    public void setContent(String content) {
-        this.content = content;
+    public void setSite(String site) {
+        this.site = site;
     }
 
     /**
-     * @return The url
+     * @return The type
      */
-    public String getUrl() {
-        return url;
+    public String getType() {
+        return type;
     }
 
     /**
-     * @param url The url
+     * @param type The type
      */
-    public void setUrl(String url) {
-        this.url = url;
+    public void setType(String type) {
+        this.type = type;
     }
 
     /**
-     * @return The id
+     * @return The id_
      */
-    public String getId_() {
+    public Double getId_() {
         return id_;
     }
 
     /**
-     * @param id_ The id
+     * @param id The id
      */
-    public void setId(String id_) {
+    public void setId(Double id) {
         this.id_ = id_;
+    }
+
+    /**
+     * @return The key
+     */
+    public String getKey() {
+        return key;
+    }
+
+    /**
+     * @param key The key
+     */
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    /**
+     * @return The size
+     */
+    public Integer getSize() {
+        return size;
+    }
+
+    /**
+     * @param size The size
+     */
+    public void setSize(Integer size) {
+        this.size = size;
     }
 
 }

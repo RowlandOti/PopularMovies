@@ -21,8 +21,8 @@ import android.util.Log;
 
 import com.rowland.movies.BuildConfig;
 import com.rowland.movies.rest.collections.MoviesCollection;
-import com.rowland.movies.rest.pojos.Movies;
-import com.rowland.movies.rest.pojos.RestError;
+import com.rowland.movies.rest.models.Movies;
+import com.rowland.movies.rest.models.RestError;
 
 import java.io.IOException;
 import java.util.List;

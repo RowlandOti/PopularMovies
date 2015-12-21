@@ -26,7 +26,7 @@ import android.view.View;
 
 import com.rowland.movies.R;
 import com.rowland.movies.adapters.GridAdapter;
-import com.rowland.movies.rest.pojos.Movies;
+import com.rowland.movies.rest.models.Movies;
 
 import java.util.ArrayList;
 

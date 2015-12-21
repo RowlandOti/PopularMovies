@@ -15,7 +15,7 @@
  *
  */
 
-package com.rowland.movies.rest.pojos;
+package com.rowland.movies.rest.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

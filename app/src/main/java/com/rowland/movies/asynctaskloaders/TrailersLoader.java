@@ -25,10 +25,9 @@ import com.rowland.movies.BuildConfig;
 import com.rowland.movies.asynctaskloaders.callbacks.TrailersCallBack;
 import com.rowland.movies.rest.collections.TrailersCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
-import com.rowland.movies.rest.pojos.Trailers;
+import com.rowland.movies.rest.models.Trailers;
 import com.rowland.movies.rest.services.IMoviesAPIService;
 import com.rowland.movies.rest.services.IRetrofitAPI;
-import com.uwetrottmann.androidutils.GenericSimpleLoader;
 
 import java.util.List;
 
