@@ -15,18 +15,17 @@
  *
  */
 
-package com.rowland.movies.asynctaskloaders;
+package com.rowland.movies.data.loaders;
 
 import android.content.Context;
 import android.content.IntentFilter;
 
 import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
-import com.rowland.movies.asynctaskloaders.broadcastrecievers.LoaderBroadCastReceiver;
-import com.rowland.movies.asynctaskloaders.callbacks.ReviewsCallBack;
+import com.rowland.movies.data.broadcastrecievers.LoaderBroadCastReceiver;
+import com.rowland.movies.data.callbacks.ReviewsCallBack;
 import com.rowland.movies.rest.collections.ReviewsCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
-import com.rowland.movies.rest.models.Movies;
 import com.rowland.movies.rest.models.Reviews;
 import com.rowland.movies.rest.services.IMoviesAPIService;
 import com.rowland.movies.utilities.Utilities;

@@ -15,7 +15,7 @@
  *
  */
 
-package com.rowland.movies.asynctaskloaders.broadcastrecievers;
+package com.rowland.movies.data.broadcastrecievers;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

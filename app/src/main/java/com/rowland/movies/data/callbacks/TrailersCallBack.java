@@ -15,7 +15,7 @@
  *
  */
 
-package com.rowland.movies.asynctaskloaders.callbacks;
+package com.rowland.movies.data.callbacks;
 
 import android.content.Context;
 import android.content.Intent;
@@ -23,9 +23,9 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.rowland.movies.BuildConfig;
-import com.rowland.movies.rest.collections.ReviewsCollection;
+import com.rowland.movies.rest.collections.TrailersCollection;
 import com.rowland.movies.rest.models.RestError;
-import com.rowland.movies.rest.models.Reviews;
+import com.rowland.movies.rest.models.Trailers;
 
 import java.io.IOException;
 import java.util.List;
@@ -37,36 +37,34 @@ import retrofit.Retrofit;
 /**
  * Created by Oti Rowland on 12/21/2015.
  */
-public abstract class ReviewsCallBack implements Callback<ReviewsCollection> {
+public abstract class TrailersCallBack implements Callback<TrailersCollection> {
 
     // The class Log identifier
-    private static final String LOG_TAG = ReviewsCallBack.class.getSimpleName();
-    // The list of reviews our loader returns
-    private List<Reviews> reviewsList;
+    private static final String LOG_TAG = TrailersCallBack.class.getSimpleName();
+    // The list of movies our loader returns
+    private List<Trailers> trailersList;
     // Context instance
     private Context context;
 
-    public ReviewsCallBack(Context context) {
+    public TrailersCallBack(Context context) {
         this.context = context;
     }
 
     @Override
-    public void onResponse(Response<ReviewsCollection> response, Retrofit retrofit) {
+    public void onResponse(Response<TrailersCollection> response, Retrofit retrofit) {
 
         if (response.isSuccess() && response.errorBody() == null) {
             // movies available
-            reviewsList = response.body().getResults();
+            trailersList = response.body().getResults();
 
-            for (Reviews review : reviewsList) {
-                // Save reviews in the database
-                review.save();
+            for (Trailers trailer : trailersList) {
+                // Save movies in the database
+                trailer.save();
                 // Check wether we are in debug mode
                 if (BuildConfig.IS_DEBUG_MODE) {
-                    Log.d(LOG_TAG, "Review " + review.getAuthor());
-                    Log.d(LOG_TAG, "Review " + review.getContent());
+                    Log.d(LOG_TAG, "Trailer " + trailer.getName());
+                    Log.d(LOG_TAG, "Trailer " + trailer.getSite());
                 }
-                // BroadCast the changes locally
-                LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent("REVIEWS_RELOADER_DATA"));
             }
         } else {
 
@@ -80,6 +78,8 @@ public abstract class ReviewsCallBack implements Callback<ReviewsCollection> {
                     //For getting error code. Code is integer value like 200,404 etc
                     Log.d(LOG_TAG, String.valueOf(restError.getCode()));
                 }
+                // BroadCast the changes locally
+                LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent("TRAILERS_RELOADER_DATA"));
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -92,12 +92,12 @@ public abstract class ReviewsCallBack implements Callback<ReviewsCollection> {
         // Inform user of failure due to no network e.t.c
         Log.d(LOG_TAG, t.getMessage());
     }
-    // Getter method for moviesCollection
-    public List<Reviews> getReviewsList() {
+    // Getter method for moviesList
+    public List<Trailers> getTrailersList() {
 
-        return this.reviewsList;
+        return this.trailersList;
     }
-    // A handy method to retrieve the collection from the callback
+    // A handy method to retrieve the list from the callback
     // Implement this method to gain access
-    public abstract void retrieveReviewsList();
+    public abstract void retrieveTrailersList();
 }

@@ -17,16 +17,12 @@
  *
  */
 
-package com.rowland.movies.asynctaskloaders;
+package com.rowland.movies.data.loaders;
 
 import android.content.Context;
 import android.content.IntentFilter;
 
-import com.rowland.movies.ApplicationController;
-import com.rowland.movies.asynctaskloaders.broadcastrecievers.LoaderBroadCastReceiver;
-import com.rowland.movies.rest.enums.EAPITypes;
-import com.rowland.movies.rest.services.IMoviesAPIService;
-import com.rowland.movies.rest.services.IRetrofitAPI;
+import com.rowland.movies.data.broadcastrecievers.LoaderBroadCastReceiver;
 import com.uwetrottmann.androidutils.GenericSimpleLoader;
 /*ToDo: Improve Loader using tutorial below
 * <a>http://www.androiddesignpatterns.com/2012/08/implementing-loaders.html</a>

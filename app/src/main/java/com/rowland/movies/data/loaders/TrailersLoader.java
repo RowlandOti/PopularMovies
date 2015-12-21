@@ -15,7 +15,7 @@
  *
  */
 
-package com.rowland.movies.asynctaskloaders;
+package com.rowland.movies.data.loaders;
 
 import android.content.Context;
 import android.content.IntentFilter;
@@ -23,8 +23,8 @@ import android.text.TextUtils;
 
 import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
-import com.rowland.movies.asynctaskloaders.broadcastrecievers.LoaderBroadCastReceiver;
-import com.rowland.movies.asynctaskloaders.callbacks.TrailersCallBack;
+import com.rowland.movies.data.broadcastrecievers.LoaderBroadCastReceiver;
+import com.rowland.movies.data.callbacks.TrailersCallBack;
 import com.rowland.movies.rest.collections.TrailersCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.models.Trailers;

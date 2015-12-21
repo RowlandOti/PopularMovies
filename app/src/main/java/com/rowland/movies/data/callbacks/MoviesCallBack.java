@@ -15,7 +15,7 @@
  *
  */
 
-package com.rowland.movies.asynctaskloaders.callbacks;
+package com.rowland.movies.data.callbacks;
 
 import android.content.Context;
 import android.content.Intent;
