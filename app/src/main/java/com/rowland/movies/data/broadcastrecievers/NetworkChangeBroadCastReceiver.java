@@ -57,7 +57,13 @@ public class NetworkChangeBroadCastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent)
     {
-        mLoader.setOnline(Utilities.NetworkUtility.isNetworkAvailable(context));
+        // Check wether we are in debug mode
+        if (BuildConfig.IS_DEBUG_MODE) {
+            Log.d(LOG_TAG, "Online Network Status " +Utilities.NetworkUtility.isNetworkAvailable(context));
+        }
+        boolean isOnline = Utilities.NetworkUtility.isNetworkAvailable(context);
+
+        mLoader.setOnline(isOnline);
         // Check wether we are in debug mode
         if (BuildConfig.IS_DEBUG_MODE) {
             Log.d(LOG_TAG, "Connection broadcast fired from " + mLoader.getClass().getSimpleName());

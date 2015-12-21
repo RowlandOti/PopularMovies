@@ -27,6 +27,8 @@ import com.rowland.movies.data.broadcastrecievers.NetworkChangeBroadCastReceiver
 import com.uwetrottmann.androidutils.GenericSimpleLoader;
 /*ToDo: Improve Loader using tutorial below
 * <a>http://www.androiddesignpatterns.com/2012/08/implementing-loaders.html</a>
+* Major motivation from
+* <a>http://developer.android.com/reference/android/content/AsyncTaskLoader.html</>
 * */
 public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
 
