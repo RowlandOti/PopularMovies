@@ -37,12 +37,12 @@ import retrofit.Call;
 /**
  * Created by Oti Rowland on 12/12/2015.
  */
-public class TrailersLoader extends GenericSimpleLoader {
+public class TrailersLoader extends BaseLoader {
     // The class Log identifier
     private static final String LOG_TAG = TrailersLoader.class.getSimpleName();
     // The movie id whose trailers are retrieved
     private int mTmdbMovieId;
-    // The list of movies our loader returns
+    // The list of trailers our loader returns
     private List<Trailers> trailers;
 
     public TrailersLoader(Context context, int mTmdbMovieId) {
@@ -56,14 +56,14 @@ public class TrailersLoader extends GenericSimpleLoader {
         IRetrofitAPI moviesAPI = ApplicationController.getApplicationInstance().getApiOfType(EAPITypes.MOVIES_API);
         // Get the MoviesAPIService
         IMoviesAPIService movieService = moviesAPI.getMoviesApiServiceInstance();
-        // Return the list of reviews
+        // Return the list of trailers
         return getTrailers(movieService);
     }
     // Get the list of reviews
     private List<Trailers> getTrailers(IMoviesAPIService movieService) {
         // Retrieve the reviews data
         Call<TrailersCollection> createdCall = movieService.loadTrailersData(mTmdbMovieId, BuildConfig.IMDB_API_KEY);
-        // Asynchronously access
+        // Asynchronous access
         createdCall.enqueue(new TrailersCallBack(){
 
             @Override

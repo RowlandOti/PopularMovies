@@ -62,7 +62,7 @@ public class MoviesLoader extends BaseLoader {
     private List<Movies> getMovies(IMoviesAPIService movieService) {
         // Retrieve the movies data
         Call<MoviesCollection> createdCall = movieService.loadMoviesData(mSortOrder.getSortOrder(), BuildConfig.IMDB_API_KEY);
-        // Asynchronously access
+        // Asynchronous access
         createdCall.enqueue(new MoviesCallBack() {
             // Gain access to the MoviesList
             @Override

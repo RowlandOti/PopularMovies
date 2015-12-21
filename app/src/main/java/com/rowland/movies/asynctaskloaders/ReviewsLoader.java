@@ -65,7 +65,7 @@ public class ReviewsLoader extends BaseLoader {
     private List<Reviews> getReviews(IMoviesAPIService movieService) {
         // Retrieve the reviews data
         Call<ReviewsCollection> createdCall = movieService.loadReviewsData(mTmdbMovieId, BuildConfig.IMDB_API_KEY);
-        // Asynchronously access
+        // Asynchronous access
         createdCall.enqueue(new ReviewsCallBack(){
 
             @Override
