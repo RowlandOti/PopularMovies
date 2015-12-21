@@ -22,6 +22,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v4.content.Loader;
+import android.util.Log;
+
+import com.rowland.movies.BuildConfig;
 
 
 /**
@@ -29,6 +32,8 @@ import android.support.v4.content.Loader;
  */
 public class LoaderBroadCastReceiver extends BroadcastReceiver
 {
+    // The class Log identifier
+    private static final String LOG_TAG = LoaderBroadCastReceiver.class.getSimpleName();
     // The loader that owns this listener
     final private Loader mLoader;
 
@@ -44,5 +49,9 @@ public class LoaderBroadCastReceiver extends BroadcastReceiver
     public void onReceive(Context context, Intent intent)
     {
         mLoader.onContentChanged();
+        // Check wether we are in debug mode
+        if (BuildConfig.IS_DEBUG_MODE) {
+            Log.d(LOG_TAG, "Reload broadcast fired from " + mLoader.getClass().getSimpleName());
+        }
     }
 }
