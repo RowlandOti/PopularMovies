@@ -23,12 +23,14 @@ import android.content.Context;
 import android.content.IntentFilter;
 
 import com.rowland.movies.data.broadcastrecievers.LoaderBroadCastReceiver;
+import com.rowland.movies.utilities.Utilities;
 import com.uwetrottmann.androidutils.GenericSimpleLoader;
 /*ToDo: Improve Loader using tutorial below
 * <a>http://www.androiddesignpatterns.com/2012/08/implementing-loaders.html</a>
 * */
 public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
-
+    // Check if we are online
+    protected boolean isOnline = Utilities.NetworkUtility.isNetworkAvailable(getContext());
     // An observer to listen for changes in data
     private LoaderBroadCastReceiver mLoaderObserver;
 

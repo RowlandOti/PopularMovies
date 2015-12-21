@@ -55,8 +55,6 @@ public class MoviesLoader extends BaseLoader implements ILoaders<Movies> {
 
     @Override
     public List<Movies> loadInBackground() {
-        // Check if we are online
-        boolean isOnline = Utilities.NetworkUtility.isNetworkAvailable(getContext());
         // If we are online query movies from API
         if(isOnline){
             // Get the MoviesAPIService and use it to retrieve a list of movies
