@@ -22,13 +22,16 @@ import android.util.Log;
 
 import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
+import com.rowland.movies.asynctaskloaders.callbacks.MoviesCallBack;
 import com.rowland.movies.enums.ESortOrder;
 import com.rowland.movies.rest.collections.MoviesCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.pojos.Movies;
+import com.rowland.movies.rest.pojos.RestError;
 import com.rowland.movies.rest.services.IMoviesAPIService;
 import com.rowland.movies.rest.services.IRetrofitAPI;
 
+import java.io.IOException;
 import java.util.List;
 
 import retrofit.Call;
@@ -66,32 +69,11 @@ public class MoviesLoader extends BaseLoader {
         // Retrieve the movies data
         Call<MoviesCollection> createdCall = movieService.loadMoviesData(mSortOrder.getSortOrder(), BuildConfig.IMDB_API_KEY);
         // Asynchronously access
-        createdCall.enqueue(new Callback<MoviesCollection>() {
+        createdCall.enqueue(new MoviesCallBack() {
+            // Gain access to the MoviesCollection object
             @Override
-            public void onResponse(Response<MoviesCollection> response, Retrofit retrofit) {
-
-                if (response.isSuccess()) {
-                    // movies available
-                    moviesCollection = response.body().getResults();
-
-                    for (Movies movie : moviesCollection) {
-                        // Save movies in the database
-                        movie.save();
-                        // Check wether we are in debug mode
-                        if(BuildConfig.IS_DEBUG_MODE) {
-                            Log.d(LOG_TAG, "Movie " + movie.getTitle());
-                        }
-                    }
-                } else {
-                    // error response, no access to resource?
-                    Log.d(LOG_TAG, "No accessible resources found");
-                }
-            }
-
-            @Override
-            public void onFailure(Throwable t) {
-                // Inform user of failure due to no network e.t.c
-                Log.d(LOG_TAG, t.getMessage());
+            public void retrieveMoviesCollection() {
+                moviesCollection = super.getMoviesCollection();
             }
         });
         // Return the list of movies
