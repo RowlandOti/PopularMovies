@@ -29,6 +29,7 @@ import com.rowland.movies.rest.collections.TrailersCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.models.Trailers;
 import com.rowland.movies.rest.services.IMoviesAPIService;
+import com.rowland.movies.utilities.Utilities;
 
 import java.util.List;
 
@@ -40,10 +41,10 @@ import retrofit.Call;
 public class TrailersLoader extends BaseLoader {
     // The class Log identifier
     private static final String LOG_TAG = TrailersLoader.class.getSimpleName();
-    // The movie id whose trailers are retrieved
+    // The movie id whose trailersList are retrieved
     private int mTmdbMovieId;
-    // The list of trailers our loader returns
-    private List<Trailers> trailers;
+    // The list of trailersList our loader returns
+    private List<Trailers> trailersList;
 
     public TrailersLoader(Context context, int mTmdbMovieId) {
         super(context);
@@ -53,13 +54,20 @@ public class TrailersLoader extends BaseLoader {
 
     @Override
     public List<Trailers> loadInBackground() {
-        // Get the MoviesAPIService and use it to retrieve a list of trailers
-        IMoviesAPIService movieService = ApplicationController.getApplicationInstance().getMovieServiceOfApiType(EAPITypes.MOVIES_API);
-        // Return the list of trailers
-        return getTrailers(movieService);
+        // Check if we are online
+        boolean isOnline = Utilities.NetworkUtility.isNetworkAvailable(getContext());
+        // If we are online query movies from API
+        if(isOnline) {
+            // Get the MoviesAPIService and use it to retrieve a list of trailersList
+            IMoviesAPIService movieService = ApplicationController.getApplicationInstance().getMovieServiceOfApiType(EAPITypes.MOVIES_API);
+            // Return the list of trailersList
+            return getOnlineTrailers(movieService);
+        }
+        // Return the list of movies from local
+        return getLocalTrailers();
     }
     // Get the list of reviews
-    private List<Trailers> getTrailers(IMoviesAPIService movieService) {
+    private List<Trailers> getOnlineTrailers(IMoviesAPIService movieService) {
         // Retrieve the reviews data
         Call<TrailersCollection> createdCall = movieService.loadTrailersData(mTmdbMovieId, BuildConfig.IMDB_API_KEY);
         // Asynchronous access
@@ -67,19 +75,24 @@ public class TrailersLoader extends BaseLoader {
             // Gain access to the TrailersList
             @Override
             public void retrieveTrailersList() {
-                trailers = super.getTrailersList();
+                trailersList = super.getTrailersList();
             }
         });
 
-        if (trailers.size() != 0) {
-            return trailers;
+        if (trailersList.size() != 0) {
+            return trailersList;
         }
-        // Return null, if there are no trailers
+        // Return null, if there are no trailersList
         return null;
 
     }
+    // Get the list of reviews from local
+    private List<Trailers> getLocalTrailers() {
+        // Return local list
+        return trailersList;
+    }
 
-    // Extract the individual movie trailers
+    // Extract the individual movie trailersList
     // Handy method, might help in future
     private Trailers extractTrailer(TrailersCollection videos) {
         // If no trailer videos are found return
