@@ -15,7 +15,7 @@
  *
  */
 
-package com.rowland.movies.enums;
+package com.rowland.movies.rest.enums;
 
 /**
  * Created by Oti Rowland on 12/18/2015.
