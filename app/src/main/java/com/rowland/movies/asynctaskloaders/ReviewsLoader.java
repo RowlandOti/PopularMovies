@@ -28,7 +28,6 @@ import com.rowland.movies.rest.collections.ReviewsCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.models.Reviews;
 import com.rowland.movies.rest.services.IMoviesAPIService;
-import com.rowland.movies.rest.services.IRetrofitAPI;
 
 import java.util.List;
 
@@ -48,7 +47,7 @@ public class ReviewsLoader extends BaseLoader {
     public ReviewsLoader(Context context, int mTmdbMovieId) {
         super(context);
         this.mTmdbMovieId = mTmdbMovieId;
-        setmLoaderObserver(new LoaderBroadCastReceiver(this,new IntentFilter("REVIEWS_RELOADER_DATA")));
+        setLoaderObserver(new LoaderBroadCastReceiver(this,new IntentFilter("REVIEWS_RELOADER_DATA")));
     }
 
     @Override

@@ -92,7 +92,7 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
         return mLoaderObserver;
     }
     // Set the loader observer
-    protected void setmLoaderObserver(LoaderBroadCastReceiver mLoaderObserver) {
+    protected void setLoaderObserver(LoaderBroadCastReceiver mLoaderObserver) {
         this.mLoaderObserver = mLoaderObserver;
     }
 }

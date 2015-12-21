@@ -48,7 +48,7 @@ public class MoviesLoader extends BaseLoader {
     public MoviesLoader(Context context, ESortOrder mSortOrder) {
         super(context);
         this.mSortOrder = mSortOrder;
-        setmLoaderObserver(new LoaderBroadCastReceiver(this,new IntentFilter("MOVIES_RELOADER_DATA")));
+        setLoaderObserver(new LoaderBroadCastReceiver(this,new IntentFilter("MOVIES_RELOADER_DATA")));
     }
 
     @Override

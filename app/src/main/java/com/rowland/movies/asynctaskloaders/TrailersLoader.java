@@ -29,7 +29,6 @@ import com.rowland.movies.rest.collections.TrailersCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.models.Trailers;
 import com.rowland.movies.rest.services.IMoviesAPIService;
-import com.rowland.movies.rest.services.IRetrofitAPI;
 
 import java.util.List;
 
@@ -49,7 +48,7 @@ public class TrailersLoader extends BaseLoader {
     public TrailersLoader(Context context, int mTmdbMovieId) {
         super(context);
         this.mTmdbMovieId = mTmdbMovieId;
-        setmLoaderObserver(new LoaderBroadCastReceiver(this,new IntentFilter("TRAILERS_RELOADER_DATA")));
+        setLoaderObserver(new LoaderBroadCastReceiver(this,new IntentFilter("TRAILERS_RELOADER_DATA")));
     }
 
     @Override
