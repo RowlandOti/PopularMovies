@@ -24,6 +24,7 @@ import android.text.TextUtils;
 import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
 import com.rowland.movies.data.broadcastrecievers.DataSetChangeBroadCastReceiver;
+import com.rowland.movies.data.broadcastrecievers.NetworkChangeBroadCastReceiver;
 import com.rowland.movies.data.callbacks.TrailersCallBack;
 import com.rowland.movies.data.interfaces.ILoaders;
 import com.rowland.movies.rest.collections.TrailersCollection;
@@ -49,7 +50,10 @@ public class TrailersLoader extends BaseLoader implements ILoaders<Trailers> {
     public TrailersLoader(Context context, int mTmdbMovieId) {
         super(context);
         this.mTmdbMovieId = mTmdbMovieId;
+        // Set the data set change observer
         setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this,new IntentFilter("TRAILERS_RELOADER_DATA")));
+        // Set the network change observer
+        setNetworkChangeObserver(new NetworkChangeBroadCastReceiver(this));
     }
 
     @Override

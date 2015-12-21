@@ -23,6 +23,7 @@ import android.content.IntentFilter;
 import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
 import com.rowland.movies.data.broadcastrecievers.DataSetChangeBroadCastReceiver;
+import com.rowland.movies.data.broadcastrecievers.NetworkChangeBroadCastReceiver;
 import com.rowland.movies.data.callbacks.ReviewsCallBack;
 import com.rowland.movies.data.interfaces.ILoaders;
 import com.rowland.movies.rest.collections.ReviewsCollection;
@@ -49,6 +50,7 @@ public class ReviewsLoader extends BaseLoader implements ILoaders<Reviews> {
         super(context);
         this.mTmdbMovieId = mTmdbMovieId;
         setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this,new IntentFilter("REVIEWS_RELOADER_DATA")));
+        setNetworkChangeObserver(new NetworkChangeBroadCastReceiver(this));
     }
 
     @Override

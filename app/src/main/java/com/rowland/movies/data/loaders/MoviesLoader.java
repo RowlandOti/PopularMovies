@@ -23,6 +23,7 @@ import android.content.IntentFilter;
 import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
 import com.rowland.movies.data.broadcastrecievers.DataSetChangeBroadCastReceiver;
+import com.rowland.movies.data.broadcastrecievers.NetworkChangeBroadCastReceiver;
 import com.rowland.movies.data.callbacks.MoviesCallBack;
 import com.rowland.movies.data.interfaces.ILoaders;
 import com.rowland.movies.rest.enums.ESortOrder;
@@ -50,6 +51,7 @@ public class MoviesLoader extends BaseLoader implements ILoaders<Movies> {
         super(context);
         this.mSortOrder = mSortOrder;
         setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this,new IntentFilter("MOVIES_RELOADER_DATA")));
+        setNetworkChangeObserver(new NetworkChangeBroadCastReceiver(this));
     }
 
     @Override

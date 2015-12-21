@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.IntentFilter;
 
 import com.rowland.movies.data.broadcastrecievers.DataSetChangeBroadCastReceiver;
+import com.rowland.movies.data.broadcastrecievers.NetworkChangeBroadCastReceiver;
 import com.uwetrottmann.androidutils.GenericSimpleLoader;
 /*ToDo: Improve Loader using tutorial below
 * <a>http://www.androiddesignpatterns.com/2012/08/implementing-loaders.html</a>
@@ -33,6 +34,8 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
     private boolean isOnline;
     // An observer to listen for changes in data
     private DataSetChangeBroadCastReceiver mDataSetChangeObserver;
+    // An observer to listen for network changes
+    private NetworkChangeBroadCastReceiver mNetworkChangeObserver;
 
     public BaseLoader(Context context) {
         super(context);
@@ -52,7 +55,7 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
         if (mDataSetChangeObserver == null) {
             // Custom filter to map data changes.
             IntentFilter mLFilter = new IntentFilter("RELOADER_DATA");
-            // Register Observer - Start watching for changes in the app data.
+            // Register Observer - Start watching for data set changes.
             mDataSetChangeObserver = new DataSetChangeBroadCastReceiver(this, mLFilter);
         }
         // When the observer detects a change, it should call onContentChanged()
@@ -79,19 +82,33 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
             mItems = null;
         }
 
-        // Unregister Observer - Stop monitoring for changes.
+        // Unregister Observer - Stop monitoring for data set changes.
         if (mDataSetChangeObserver != null) {
             getContext().unregisterReceiver(mDataSetChangeObserver);
             mDataSetChangeObserver = null;
         }
+        // Unregister Observer - Stop monitoring for network changes.
+        if (mNetworkChangeObserver != null) {
+            getContext().unregisterReceiver(mNetworkChangeObserver);
+            mNetworkChangeObserver = null;
+        }
     }
-    // Get the loader observer
+    // Get the data set change observer
     protected DataSetChangeBroadCastReceiver getDataSetChangeObserver() {
         return mDataSetChangeObserver;
     }
-    // Set the loader observer
+    // Set the data set change observer
     protected void setDataSetChangeObserver(DataSetChangeBroadCastReceiver mDataSetChangeObserver) {
         this.mDataSetChangeObserver = mDataSetChangeObserver;
+    }
+
+    // Get the network change observer
+    protected NetworkChangeBroadCastReceiver getNetworkChangeObserver() {
+        return mNetworkChangeObserver;
+    }
+    // Set the network change observer
+    protected void setNetworkChangeObserver(NetworkChangeBroadCastReceiver mNetworkChangeObserver) {
+        this.mNetworkChangeObserver = mNetworkChangeObserver;
     }
     // Get online status
     protected boolean getIsOnline() {
