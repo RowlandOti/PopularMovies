@@ -20,6 +20,7 @@ package com.rowland.movies.rest.services;
 import android.util.Log;
 
 import com.rowland.movies.ApplicationController;
+import com.rowland.movies.BuildConfig;
 
 import retrofit.Retrofit;
 
@@ -48,8 +49,11 @@ public class MoviesAPI implements IRetrofitAPI {
         Retrofit retrofit = ApplicationController.getRetrofit();
         // Initialise the singleton instance
         imoviesApiServiceInstance = retrofit.create(IMoviesAPIService.class);
-        Log.d(LOG_TAG, "" + retrofit.getClass());
-        Log.d(LOG_TAG, "" + imoviesApiServiceInstance.getClass());
+        // Check wether we are in debug mode
+        if (BuildConfig.IS_DEBUG_MODE) {
+            Log.d(LOG_TAG, "" + retrofit.getClass());
+            Log.d(LOG_TAG, "" + imoviesApiServiceInstance.getClass());
+        }
     }
 
     // Return the singleton instance
