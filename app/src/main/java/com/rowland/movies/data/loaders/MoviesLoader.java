@@ -24,6 +24,7 @@ import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
 import com.rowland.movies.data.broadcastrecievers.LoaderBroadCastReceiver;
 import com.rowland.movies.data.callbacks.MoviesCallBack;
+import com.rowland.movies.data.interfaces.ILoaders;
 import com.rowland.movies.rest.enums.ESortOrder;
 import com.rowland.movies.rest.collections.MoviesCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
@@ -38,7 +39,7 @@ import retrofit.Call;
 /**
  * Created by Oti Rowland on 12/12/2015.
  */
-public class MoviesLoader extends BaseLoader {
+public class MoviesLoader extends BaseLoader implements ILoaders<Movies> {
     // The class Log identifier
     private static final String LOG_TAG = MoviesLoader.class.getSimpleName();
     // The sort order type
@@ -61,13 +62,14 @@ public class MoviesLoader extends BaseLoader {
             // Get the MoviesAPIService and use it to retrieve a list of movies
             IMoviesAPIService movieService = ApplicationController.getApplicationInstance().getMovieServiceOfApiType(EAPITypes.MOVIES_API);
             // Return the list of movies from online
-            return getOnlineMovies(movieService);
+            return getOnlineData(movieService);
         }
         // Return the list of movies from local
-        return getLocalMovies();
+        return getLocalData();
     }
     // Get the list of movies from online
-    private List<Movies> getOnlineMovies(IMoviesAPIService movieService) {
+    @Override
+    public List<Movies> getOnlineData(IMoviesAPIService movieService) {
         // Retrieve the movies data
         Call<MoviesCollection> createdCall = movieService.loadMoviesData(mSortOrder.getSortOrder(), BuildConfig.IMDB_API_KEY);
         // Asynchronous access
@@ -87,7 +89,8 @@ public class MoviesLoader extends BaseLoader {
         return null;
     }
     // Get the list of movies from local
-    private List<Movies> getLocalMovies() {
+    @Override
+    public List<Movies> getLocalData() {
         // Return local list
         return moviesList;
     }

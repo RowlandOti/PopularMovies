@@ -25,8 +25,10 @@ import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
 import com.rowland.movies.data.broadcastrecievers.LoaderBroadCastReceiver;
 import com.rowland.movies.data.callbacks.TrailersCallBack;
+import com.rowland.movies.data.interfaces.ILoaders;
 import com.rowland.movies.rest.collections.TrailersCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
+import com.rowland.movies.rest.models.Reviews;
 import com.rowland.movies.rest.models.Trailers;
 import com.rowland.movies.rest.services.IMoviesAPIService;
 import com.rowland.movies.utilities.Utilities;
@@ -38,7 +40,7 @@ import retrofit.Call;
 /**
  * Created by Oti Rowland on 12/12/2015.
  */
-public class TrailersLoader extends BaseLoader {
+public class TrailersLoader extends BaseLoader implements ILoaders<Trailers> {
     // The class Log identifier
     private static final String LOG_TAG = TrailersLoader.class.getSimpleName();
     // The movie id whose trailersList are retrieved
@@ -61,13 +63,14 @@ public class TrailersLoader extends BaseLoader {
             // Get the MoviesAPIService and use it to retrieve a list of trailersList
             IMoviesAPIService movieService = ApplicationController.getApplicationInstance().getMovieServiceOfApiType(EAPITypes.MOVIES_API);
             // Return the list of trailersList
-            return getOnlineTrailers(movieService);
+            return getOnlineData(movieService);
         }
         // Return the list of movies from local
-        return getLocalTrailers();
+        return getLocalData();
     }
     // Get the list of reviews
-    private List<Trailers> getOnlineTrailers(IMoviesAPIService movieService) {
+    @Override
+    public List<Trailers> getOnlineData(IMoviesAPIService movieService) {
         // Retrieve the reviews data
         Call<TrailersCollection> createdCall = movieService.loadTrailersData(mTmdbMovieId, BuildConfig.IMDB_API_KEY);
         // Asynchronous access
@@ -87,7 +90,8 @@ public class TrailersLoader extends BaseLoader {
 
     }
     // Get the list of reviews from local
-    private List<Trailers> getLocalTrailers() {
+    @Override
+    public List<Trailers> getLocalData() {
         // Return local list
         return trailersList;
     }

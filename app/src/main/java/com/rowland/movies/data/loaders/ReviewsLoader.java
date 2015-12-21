@@ -24,6 +24,7 @@ import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
 import com.rowland.movies.data.broadcastrecievers.LoaderBroadCastReceiver;
 import com.rowland.movies.data.callbacks.ReviewsCallBack;
+import com.rowland.movies.data.interfaces.ILoaders;
 import com.rowland.movies.rest.collections.ReviewsCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.models.Reviews;
@@ -37,7 +38,7 @@ import retrofit.Call;
 /**
  * Created by Oti Rowland on 12/12/2015.
  */
-public class ReviewsLoader extends BaseLoader {
+public class ReviewsLoader extends BaseLoader implements ILoaders<Reviews> {
     // The class Log identifier
     private static final String LOG_TAG = ReviewsLoader.class.getSimpleName();
     // The movie id whose reviewsList are retrieved
@@ -60,13 +61,14 @@ public class ReviewsLoader extends BaseLoader {
             // Get the MoviesAPIService and use it to retrieve a list of reviewsList
             IMoviesAPIService movieService = ApplicationController.getApplicationInstance().getMovieServiceOfApiType(EAPITypes.MOVIES_API);
             // Return the list of reviewsList
-            return getOnlineReviews(movieService);
+            return getOnlineData(movieService);
         }
         // Return the list of movies from local
-        return getLocalReviews();
+        return getLocalData();
     }
     // Get the list of reviews from online
-    private List<Reviews> getOnlineReviews(IMoviesAPIService movieService) {
+    @Override
+    public List<Reviews> getOnlineData(IMoviesAPIService movieService) {
         // Retrieve the reviewsList data
         Call<ReviewsCollection> createdCall = movieService.loadReviewsData(mTmdbMovieId, BuildConfig.IMDB_API_KEY);
         // Asynchronous access
@@ -85,7 +87,8 @@ public class ReviewsLoader extends BaseLoader {
         return null;
     }
     // Get the list of reviews from local
-    private List<Reviews> getLocalReviews() {
+    @Override
+    public List<Reviews> getLocalData() {
         // Return local list
         return reviewsList;
     }

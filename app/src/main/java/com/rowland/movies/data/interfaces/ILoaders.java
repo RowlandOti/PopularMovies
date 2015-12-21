@@ -17,11 +17,21 @@
 
 package com.rowland.movies.data.interfaces;
 
+import com.rowland.movies.rest.models.Movies;
+import com.rowland.movies.rest.services.IMoviesAPIService;
+
+import java.util.List;
+
 /**
  * Created by Oti Rowland on 12/21/2015.
  *
  * All loaders will implement this class
  */
-public interface ILoaders {
+public interface ILoaders<T> {
+
+    // Implement to retrive data from online
+    List<T> getOnlineData(IMoviesAPIService movieService);
+    // Implement to retrive data from local cache
+    List<T> getLocalData();
 
 }
