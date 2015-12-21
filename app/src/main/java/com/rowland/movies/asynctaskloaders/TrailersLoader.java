@@ -64,7 +64,7 @@ public class TrailersLoader extends BaseLoader {
         Call<TrailersCollection> createdCall = movieService.loadTrailersData(mTmdbMovieId, BuildConfig.IMDB_API_KEY);
         // Asynchronous access
         createdCall.enqueue(new TrailersCallBack(){
-
+            // Gain access to the TrailersList
             @Override
             public void retrieveTrailersList() {
                 trailers = super.getTrailersList();
