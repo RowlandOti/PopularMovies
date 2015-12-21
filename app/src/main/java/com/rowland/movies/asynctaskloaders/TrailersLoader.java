@@ -74,7 +74,7 @@ public class TrailersLoader extends BaseLoader {
         if (trailers.size() != 0) {
             return trailers;
         }
-
+        // Return null, if there are no trailers
         return null;
 
     }

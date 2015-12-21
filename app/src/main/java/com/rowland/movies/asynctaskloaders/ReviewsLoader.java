@@ -26,8 +26,10 @@ import com.rowland.movies.asynctaskloaders.broadcastrecievers.LoaderBroadCastRec
 import com.rowland.movies.asynctaskloaders.callbacks.ReviewsCallBack;
 import com.rowland.movies.rest.collections.ReviewsCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
+import com.rowland.movies.rest.models.Movies;
 import com.rowland.movies.rest.models.Reviews;
 import com.rowland.movies.rest.services.IMoviesAPIService;
+import com.rowland.movies.utilities.Utilities;
 
 import java.util.List;
 
@@ -39,10 +41,10 @@ import retrofit.Call;
 public class ReviewsLoader extends BaseLoader {
     // The class Log identifier
     private static final String LOG_TAG = ReviewsLoader.class.getSimpleName();
-    // The movie id whose reviews are retrieved
+    // The movie id whose reviewsList are retrieved
     private int mTmdbMovieId;
     // The list of movies our loader returns
-    private List<Reviews> reviews;
+    private List<Reviews> reviewsList;
 
     public ReviewsLoader(Context context, int mTmdbMovieId) {
         super(context);
@@ -52,29 +54,40 @@ public class ReviewsLoader extends BaseLoader {
 
     @Override
     public List<Reviews> loadInBackground() {
-        // Get the MoviesAPIService and use it to retrieve a list of reviews
-        IMoviesAPIService movieService = ApplicationController.getApplicationInstance().getMovieServiceOfApiType(EAPITypes.MOVIES_API);
-        // Return the list of reviews
-        return getReviews(movieService);
+        // Check if we are online
+        boolean isOnline = Utilities.NetworkUtility.isNetworkAvailable(getContext());
+        // If we are online query movies from API
+        if(isOnline){
+            // Get the MoviesAPIService and use it to retrieve a list of reviewsList
+            IMoviesAPIService movieService = ApplicationController.getApplicationInstance().getMovieServiceOfApiType(EAPITypes.MOVIES_API);
+            // Return the list of reviewsList
+            return getOnlineReviews(movieService);
+        }
+        // Return the list of movies from local
+        return getLocalReviews();
     }
-    // Get the list of reviews
-    private List<Reviews> getReviews(IMoviesAPIService movieService) {
-        // Retrieve the reviews data
+    // Get the list of reviews from online
+    private List<Reviews> getOnlineReviews(IMoviesAPIService movieService) {
+        // Retrieve the reviewsList data
         Call<ReviewsCollection> createdCall = movieService.loadReviewsData(mTmdbMovieId, BuildConfig.IMDB_API_KEY);
         // Asynchronous access
         createdCall.enqueue(new ReviewsCallBack(getContext()){
             // Gain access to the Reviews List
             @Override
             public void retrieveReviewsList() {
-                reviews = super.getReviewsList();
+                reviewsList = super.getReviewsList();
             }
         });
 
-        if (reviews.size() != 0) {
-            return reviews;
+        if (reviewsList.size() != 0) {
+            return reviewsList;
         }
-
+        // Return null, if there are no reviews
         return null;
-
+    }
+    // Get the list of reviews from local
+    private List<Reviews> getLocalReviews() {
+        // Return local list
+        return reviewsList;
     }
 }

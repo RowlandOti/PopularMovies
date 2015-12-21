@@ -29,6 +29,7 @@ import com.rowland.movies.rest.collections.MoviesCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.models.Movies;
 import com.rowland.movies.rest.services.IMoviesAPIService;
+import com.rowland.movies.utilities.Utilities;
 
 import java.util.List;
 
@@ -53,12 +54,19 @@ public class MoviesLoader extends BaseLoader {
 
     @Override
     public List<Movies> loadInBackground() {
-        // Get the MoviesAPIService and use it to retrieve a list of movies
-        IMoviesAPIService movieService = ApplicationController.getApplicationInstance().getMovieServiceOfApiType(EAPITypes.MOVIES_API);
-        // Return the list of movies
-        return getOnlineMovies(movieService);
+        // Check if we are online
+        boolean isOnline = Utilities.NetworkUtility.isNetworkAvailable(getContext());
+        // If we are online query movies from API
+        if(isOnline){
+            // Get the MoviesAPIService and use it to retrieve a list of movies
+            IMoviesAPIService movieService = ApplicationController.getApplicationInstance().getMovieServiceOfApiType(EAPITypes.MOVIES_API);
+            // Return the list of movies from online
+            return getOnlineMovies(movieService);
+        }
+        // Return the list of movies from local
+        return getLocalMovies();
     }
-    // Get the list of movies
+    // Get the list of movies from online
     private List<Movies> getOnlineMovies(IMoviesAPIService movieService) {
         // Retrieve the movies data
         Call<MoviesCollection> createdCall = movieService.loadMoviesData(mSortOrder.getSortOrder(), BuildConfig.IMDB_API_KEY);
@@ -70,11 +78,17 @@ public class MoviesLoader extends BaseLoader {
                 moviesList = super.getMoviesList();
             }
         });
-        // Return the list of movies
+        // Return the list of online movies
         if (moviesList != null && !moviesList.isEmpty()) {
+            // Return online list
             return moviesList;
         }
-
+        // Return null, if there are no movies
         return null;
+    }
+    // Get the list of movies from local
+    private List<Movies> getLocalMovies() {
+        // Return local list
+        return moviesList;
     }
 }
