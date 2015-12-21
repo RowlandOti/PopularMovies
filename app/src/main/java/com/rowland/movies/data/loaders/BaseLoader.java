@@ -116,7 +116,7 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
         return isOnline;
     }
     // Set online status
-    public void setOnline(boolean online) {
+    public void setIsOnline(boolean online) {
         isOnline = online;
     }
 }

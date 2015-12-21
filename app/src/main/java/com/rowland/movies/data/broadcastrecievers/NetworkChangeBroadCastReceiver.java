@@ -22,7 +22,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
-import android.support.v4.content.Loader;
 import android.util.Log;
 
 import com.rowland.movies.BuildConfig;
@@ -57,16 +56,13 @@ public class NetworkChangeBroadCastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent)
     {
-        // Check wether we are in debug mode
-        if (BuildConfig.IS_DEBUG_MODE) {
-            Log.d(LOG_TAG, "Online Network Status " +Utilities.NetworkUtility.isNetworkAvailable(context));
-        }
+        // network status
         boolean isOnline = Utilities.NetworkUtility.isNetworkAvailable(context);
-
-        mLoader.setOnline(isOnline);
+        // Set network status of loader
+        mLoader.setIsOnline(isOnline);
         // Check wether we are in debug mode
         if (BuildConfig.IS_DEBUG_MODE) {
-            Log.d(LOG_TAG, "Connection broadcast fired from " + mLoader.getClass().getSimpleName());
+            Log.d(LOG_TAG, "Connection broadcast fired from " + mLoader.getClass().getSimpleName() +isOnline);
         }
     }
 }

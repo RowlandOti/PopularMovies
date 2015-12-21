@@ -19,6 +19,7 @@ package com.rowland.movies.data.loaders;
 
 import android.content.Context;
 import android.content.IntentFilter;
+import android.util.Log;
 
 import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
@@ -57,11 +58,15 @@ public class MoviesLoader extends BaseLoader implements ILoaders<Movies> {
     @Override
     public List<Movies> loadInBackground() {
         // If we are online query movies from API
-        if(getIsOnline()){
+        if(getIsOnline()== true){
             // Get the MoviesAPIService and use it to retrieve a list of movies
             IMoviesAPIService movieService = ApplicationController.getApplicationInstance().getMovieServiceOfApiType(EAPITypes.MOVIES_API);
             // Return the list of movies from online
             return getOnlineData(movieService);
+        }
+        // Check wether we are in debug mode
+        if (BuildConfig.IS_DEBUG_MODE) {
+            Log.d(LOG_TAG, "Online Status "+getIsOnline());
         }
         // Return the list of movies from local
         return getLocalData();
@@ -90,6 +95,10 @@ public class MoviesLoader extends BaseLoader implements ILoaders<Movies> {
     // Get the list of movies from local
     @Override
     public List<Movies> getLocalData() {
+        // Check wether we are in debug mode
+        if (BuildConfig.IS_DEBUG_MODE) {
+            Log.d(LOG_TAG, "Local data loaded ");
+        }
         // Return local list
         return moviesList;
     }
