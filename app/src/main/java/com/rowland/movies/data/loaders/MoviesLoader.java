@@ -49,7 +49,7 @@ public class MoviesLoader extends BaseLoader implements ILoaders<Movies> {
     public MoviesLoader(Context context, ESortOrder mSortOrder) {
         super(context);
         this.mSortOrder = mSortOrder;
-        setLoaderObserver(new DataSetChangeBroadCastReceiver(this,new IntentFilter("MOVIES_RELOADER_DATA")));
+        setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this,new IntentFilter("MOVIES_RELOADER_DATA")));
     }
 
     @Override

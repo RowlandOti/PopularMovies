@@ -23,7 +23,6 @@ import android.content.Context;
 import android.content.IntentFilter;
 
 import com.rowland.movies.data.broadcastrecievers.DataSetChangeBroadCastReceiver;
-import com.rowland.movies.utilities.Utilities;
 import com.uwetrottmann.androidutils.GenericSimpleLoader;
 /*ToDo: Improve Loader using tutorial below
 * <a>http://www.androiddesignpatterns.com/2012/08/implementing-loaders.html</a>
@@ -33,7 +32,7 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
     // Check if we are online
     private boolean isOnline;
     // An observer to listen for changes in data
-    private DataSetChangeBroadCastReceiver mLoaderObserver;
+    private DataSetChangeBroadCastReceiver mDataSetChangeObserver;
 
     public BaseLoader(Context context) {
         super(context);
@@ -50,11 +49,11 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
             deliverResult(mItems);
         }
         // Create Observer if it is not set yet
-        if (mLoaderObserver == null) {
+        if (mDataSetChangeObserver == null) {
             // Custom filter to map data changes.
             IntentFilter mLFilter = new IntentFilter("RELOADER_DATA");
             // Register Observer - Start watching for changes in the app data.
-            mLoaderObserver = new DataSetChangeBroadCastReceiver(this, mLFilter);
+            mDataSetChangeObserver = new DataSetChangeBroadCastReceiver(this, mLFilter);
         }
         // When the observer detects a change, it should call onContentChanged()
         // on the Loader, which will cause the next call to takeContentChanged() to return true.
@@ -81,18 +80,18 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
         }
 
         // Unregister Observer - Stop monitoring for changes.
-        if (mLoaderObserver != null) {
-            getContext().unregisterReceiver(mLoaderObserver);
-            mLoaderObserver = null;
+        if (mDataSetChangeObserver != null) {
+            getContext().unregisterReceiver(mDataSetChangeObserver);
+            mDataSetChangeObserver = null;
         }
     }
     // Get the loader observer
-    protected DataSetChangeBroadCastReceiver getmLoaderObserver() {
-        return mLoaderObserver;
+    protected DataSetChangeBroadCastReceiver getDataSetChangeObserver() {
+        return mDataSetChangeObserver;
     }
     // Set the loader observer
-    protected void setLoaderObserver(DataSetChangeBroadCastReceiver mLoaderObserver) {
-        this.mLoaderObserver = mLoaderObserver;
+    protected void setDataSetChangeObserver(DataSetChangeBroadCastReceiver mDataSetChangeObserver) {
+        this.mDataSetChangeObserver = mDataSetChangeObserver;
     }
     // Get online status
     protected boolean getIsOnline() {

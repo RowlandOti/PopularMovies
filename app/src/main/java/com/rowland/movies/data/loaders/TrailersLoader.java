@@ -49,7 +49,7 @@ public class TrailersLoader extends BaseLoader implements ILoaders<Trailers> {
     public TrailersLoader(Context context, int mTmdbMovieId) {
         super(context);
         this.mTmdbMovieId = mTmdbMovieId;
-        setLoaderObserver(new DataSetChangeBroadCastReceiver(this,new IntentFilter("TRAILERS_RELOADER_DATA")));
+        setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this,new IntentFilter("TRAILERS_RELOADER_DATA")));
     }
 
     @Override

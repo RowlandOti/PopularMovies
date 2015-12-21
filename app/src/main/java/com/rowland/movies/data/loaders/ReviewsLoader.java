@@ -48,7 +48,7 @@ public class ReviewsLoader extends BaseLoader implements ILoaders<Reviews> {
     public ReviewsLoader(Context context, int mTmdbMovieId) {
         super(context);
         this.mTmdbMovieId = mTmdbMovieId;
-        setLoaderObserver(new DataSetChangeBroadCastReceiver(this,new IntentFilter("REVIEWS_RELOADER_DATA")));
+        setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this,new IntentFilter("REVIEWS_RELOADER_DATA")));
     }
 
     @Override
