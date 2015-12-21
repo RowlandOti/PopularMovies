@@ -37,7 +37,7 @@ import retrofit.Retrofit;
 public abstract class TrailersCallBack implements Callback<TrailersCollection> {
 
     // The class Log identifier
-    private static final String LOG_TAG = MoviesCallBack.class.getSimpleName();
+    private static final String LOG_TAG = TrailersCallBack.class.getSimpleName();
     // The list of movies our loader returns
     private List<Trailers> trailersList;
 

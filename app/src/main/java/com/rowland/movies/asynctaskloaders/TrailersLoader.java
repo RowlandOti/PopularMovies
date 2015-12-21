@@ -22,6 +22,7 @@ import android.text.TextUtils;
 
 import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
+import com.rowland.movies.asynctaskloaders.callbacks.TrailersCallBack;
 import com.rowland.movies.rest.collections.TrailersCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.pojos.Trailers;
@@ -32,9 +33,6 @@ import com.uwetrottmann.androidutils.GenericSimpleLoader;
 import java.util.List;
 
 import retrofit.Call;
-import retrofit.Callback;
-import retrofit.Response;
-import retrofit.Retrofit;
 
 /**
  * Created by Oti Rowland on 12/12/2015.
@@ -58,24 +56,19 @@ public class TrailersLoader extends GenericSimpleLoader {
         IRetrofitAPI moviesAPI = ApplicationController.getApplicationInstance().getApiOfType(EAPITypes.MOVIES_API);
         // Get the MoviesAPIService
         IMoviesAPIService movieService = moviesAPI.getMoviesApiServiceInstance();
-        // Retrieve the trailers data
+        // Return the list of reviews
+        return getTrailers(movieService);
+    }
+    // Get the list of reviews
+    private List<Trailers> getTrailers(IMoviesAPIService movieService) {
+        // Retrieve the reviews data
         Call<TrailersCollection> createdCall = movieService.loadTrailersData(mTmdbMovieId, BuildConfig.IMDB_API_KEY);
-
         // Asynchronously access
-        createdCall.enqueue(new Callback<TrailersCollection>() {
-            @Override
-            public void onResponse(Response<TrailersCollection> response, Retrofit retrofit) {
-                trailers = response.body().results;
-
-                for (Trailers trailer : trailers) {
-                    // Save revies in the database
-                    trailer.save();
-                }
-            }
+        createdCall.enqueue(new TrailersCallBack(){
 
             @Override
-            public void onFailure(Throwable t) {
-
+            public void retrieveTrailersList() {
+                trailers = super.getTrailersList();
             }
         });
 
@@ -83,14 +76,8 @@ public class TrailersLoader extends GenericSimpleLoader {
             return trailers;
         }
 
-        /*try {
-            Response<TrailersCollection> result = createdCall.execute();
-            return result.body().items;
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.e(LOG_TAG, "IOException during loadInBackground()");
-        }*/
         return null;
+
     }
 
     // Extract the individual movie trailers
@@ -100,7 +87,6 @@ public class TrailersLoader extends GenericSimpleLoader {
         if (videos == null || videos.results == null || videos.results.size() == 0) {
             return null;
         }
-
         // Pop out the lead YouTube trailer
         for (Trailers video : videos.results) {
             if ("Trailer".equals(video.getType()) && "YouTube".equals(video.getSite()) && !TextUtils.isEmpty(video.getKey())) {

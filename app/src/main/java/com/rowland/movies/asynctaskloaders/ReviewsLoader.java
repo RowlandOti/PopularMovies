@@ -21,6 +21,7 @@ import android.content.Context;
 
 import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
+import com.rowland.movies.asynctaskloaders.callbacks.ReviewsCallBack;
 import com.rowland.movies.rest.collections.ReviewsCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.pojos.Reviews;
@@ -62,24 +63,14 @@ public class ReviewsLoader extends BaseLoader {
     }
     // Get the list of reviews
     private List<Reviews> getReviews(IMoviesAPIService movieService) {
-
         // Retrieve the reviews data
         Call<ReviewsCollection> createdCall = movieService.loadReviewsData(mTmdbMovieId, BuildConfig.IMDB_API_KEY);
         // Asynchronously access
-        createdCall.enqueue(new Callback<ReviewsCollection>() {
-            @Override
-            public void onResponse(Response<ReviewsCollection> response, Retrofit retrofit) {
-                reviews = response.body().results;
-
-                for (Reviews review : reviews) {
-                    // Save revies in the database
-                    review.save();
-                }
-            }
+        createdCall.enqueue(new ReviewsCallBack(){
 
             @Override
-            public void onFailure(Throwable t) {
-
+            public void retrieveReviewsList() {
+                reviews = super.getReviewsList();
             }
         });
 

@@ -37,7 +37,7 @@ import retrofit.Retrofit;
 public abstract class ReviewsCallBack implements Callback<ReviewsCollection> {
 
     // The class Log identifier
-    private static final String LOG_TAG = MoviesCallBack.class.getSimpleName();
+    private static final String LOG_TAG = ReviewsCallBack.class.getSimpleName();
     // The list of reviews our loader returns
     private List<Reviews> reviewsList;
 
