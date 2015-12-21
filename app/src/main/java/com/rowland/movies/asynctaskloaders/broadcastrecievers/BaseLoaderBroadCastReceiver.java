@@ -20,24 +20,30 @@ package com.rowland.movies.asynctaskloaders.broadcastrecievers;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v4.content.Loader;
+import android.support.v4.content.LocalBroadcastManager;
 
 
 /**
  * Created by Oti Rowland on 12/21/2015.
  */
-public abstract class BaseLoaderBroadCastReceiver extends BroadcastReceiver
+public class BaseLoaderBroadCastReceiver extends BroadcastReceiver
 {
-    private Loader loader;
+    final private Loader mLoader;
 
     public BaseLoaderBroadCastReceiver(Loader loader)
     {
-        this.loader = loader;
+        this.mLoader = loader;
+        // Register for events related to sdcard installation.
+        IntentFilter mLFilter = new IntentFilter();
+        mLFilter.addAction("RELOADER_DATA");
+        mLoader.getContext().registerReceiver(this, mLFilter);
     }
 
     @Override
     public void onReceive(Context context, Intent intent)
     {
-        loader.onContentChanged();
+        mLoader.onContentChanged();
     }
 }
