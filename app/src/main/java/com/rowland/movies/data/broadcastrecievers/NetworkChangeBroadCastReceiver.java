@@ -22,9 +22,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
+import android.support.v4.content.Loader;
 import android.util.Log;
 
 import com.rowland.movies.BuildConfig;
+import com.rowland.movies.data.loaders.BaseLoader;
+import com.rowland.movies.utilities.Utilities;
 
 /**
  * Created by Oti Rowland on 12/21/2015.
@@ -36,20 +39,25 @@ public class NetworkChangeBroadCastReceiver extends BroadcastReceiver {
 
     // The class Log identifier
     private static final String LOG_TAG = NetworkChangeBroadCastReceiver.class.getSimpleName();
+    // The loader that owns this listener
+    final private BaseLoader mLoader;
 
-    public NetworkChangeBroadCastReceiver(Context context)
+    public NetworkChangeBroadCastReceiver(BaseLoader loader)
     {
+        // Assign loader to this listener
+        this.mLoader = loader;
         // Create an IntentFilter
         IntentFilter intentFilter = new IntentFilter();
         // Declare the type of Action for the IntentFilter
         intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
         // Register reciever to listen for above IntentFilter
-        context.registerReceiver(this, intentFilter);
+        mLoader.getContext().registerReceiver(this, intentFilter);
     }
     // Inform if contents of database is changed
     @Override
     public void onReceive(Context context, Intent intent)
     {
+        mLoader.setOnline(Utilities.NetworkUtility.isNetworkAvailable(context));
         // Check wether we are in debug mode
         if (BuildConfig.IS_DEBUG_MODE) {
             Log.d(LOG_TAG, "Connection broadcast fired from " + mLoader.getClass().getSimpleName());

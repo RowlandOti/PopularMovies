@@ -48,6 +48,7 @@ public class DataSetChangeBroadCastReceiver extends BroadcastReceiver
     @Override
     public void onReceive(Context context, Intent intent)
     {
+        // Notify the loader of content change
         mLoader.onContentChanged();
         // Check wether we are in debug mode
         if (BuildConfig.IS_DEBUG_MODE) {

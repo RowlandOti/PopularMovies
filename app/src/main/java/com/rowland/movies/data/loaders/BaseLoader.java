@@ -29,8 +29,9 @@ import com.uwetrottmann.androidutils.GenericSimpleLoader;
 * <a>http://www.androiddesignpatterns.com/2012/08/implementing-loaders.html</a>
 * */
 public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
+
     // Check if we are online
-    protected boolean isOnline = Utilities.NetworkUtility.isNetworkAvailable(getContext());
+    private boolean isOnline;
     // An observer to listen for changes in data
     private DataSetChangeBroadCastReceiver mLoaderObserver;
 
@@ -92,5 +93,13 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
     // Set the loader observer
     protected void setLoaderObserver(DataSetChangeBroadCastReceiver mLoaderObserver) {
         this.mLoaderObserver = mLoaderObserver;
+    }
+    // Get online status
+    protected boolean getIsOnline() {
+        return isOnline;
+    }
+    // Set online status
+    public void setOnline(boolean online) {
+        isOnline = online;
     }
 }

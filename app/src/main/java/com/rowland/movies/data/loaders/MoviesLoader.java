@@ -55,7 +55,7 @@ public class MoviesLoader extends BaseLoader implements ILoaders<Movies> {
     @Override
     public List<Movies> loadInBackground() {
         // If we are online query movies from API
-        if(isOnline){
+        if(getIsOnline()){
             // Get the MoviesAPIService and use it to retrieve a list of movies
             IMoviesAPIService movieService = ApplicationController.getApplicationInstance().getMovieServiceOfApiType(EAPITypes.MOVIES_API);
             // Return the list of movies from online
