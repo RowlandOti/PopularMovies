@@ -26,6 +26,7 @@ import com.rowland.movies.BuildConfig;
 import com.rowland.movies.data.broadcastrecievers.DataSetChangeBroadCastReceiver;
 import com.rowland.movies.data.callbacks.MoviesCallBack;
 import com.rowland.movies.data.interfaces.ILoader;
+import com.rowland.movies.data.repository.MovieRepository;
 import com.rowland.movies.rest.collections.MoviesCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.enums.ESortOrder;
@@ -43,6 +44,8 @@ public class MoviesLoader extends BaseLoader implements ILoader<Movies> {
 
     // The class Log identifier
     private static final String LOG_TAG = MoviesLoader.class.getSimpleName();
+    // MovieRepository instance
+    private MovieRepository mMovieRepository;
     // The sort order type
     private ESortOrder mSortOrder;
     // The list of movies our loader returns
@@ -51,6 +54,7 @@ public class MoviesLoader extends BaseLoader implements ILoader<Movies> {
     public MoviesLoader(Context context, ESortOrder mSortOrder) {
         super(context);
         this.mSortOrder = mSortOrder;
+        this.mMovieRepository = new MovieRepository();
         setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this,new IntentFilter("MOVIES_RELOADER_DATA")));
     }
 
@@ -60,15 +64,17 @@ public class MoviesLoader extends BaseLoader implements ILoader<Movies> {
         if(getIsOnline()){
             // Get the MoviesAPIService and use it to retrieve a list of movies
             IMoviesAPIService movieService = ApplicationController.getApplicationInstance().getMovieServiceOfApiType(EAPITypes.MOVIES_API);
-            // Return the list of movies from online
-            return getOnlineData(movieService);
+            // Get online movies and then update local database
+            getOnlineData(movieService);
+            // Return the list of movies from local database
+            return getLocalData();
         }
-            // Return the list of movies from local
+            // Return the list of movies from local database
             return getLocalData();
     }
     // Get the list of movies from online
     @Override
-    public List<Movies> getOnlineData(IMoviesAPIService movieService) {
+    public void getOnlineData(IMoviesAPIService movieService) {
         // Check wether we are in debug mode
         if (BuildConfig.IS_DEBUG_MODE) {
             Log.d(LOG_TAG, "Online data loaded ");
@@ -88,23 +94,15 @@ public class MoviesLoader extends BaseLoader implements ILoader<Movies> {
                 }
             }
         });
-
-        // Return the list of online movies
-        if (moviesList != null && !moviesList.isEmpty()) {
-            // Return online list
-            return moviesList;
-        }
-        // Return null, if there are no movies
-        return null;
     }
     // Get the list of movies from local
     @Override
     public List<Movies> getLocalData() {
-        // Check wether we are in debug mode
+        // Check whether we are in debug mode
         if (BuildConfig.IS_DEBUG_MODE) {
             Log.d(LOG_TAG, "Local data loaded ");
         }
         // Return local list
-        return moviesList;
+        return mMovieRepository.getAll();
     }
 }

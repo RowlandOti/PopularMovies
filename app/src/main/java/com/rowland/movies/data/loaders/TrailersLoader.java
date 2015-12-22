@@ -64,15 +64,18 @@ public class TrailersLoader extends BaseLoader implements ILoader<Trailers> {
         if(getIsOnline()) {
             // Get the MoviesAPIService and use it to retrieve a list of trailersList
             IMoviesAPIService movieService = ApplicationController.getApplicationInstance().getMovieServiceOfApiType(EAPITypes.MOVIES_API);
-            // Return the list of trailersList
-            return getOnlineData(movieService);
+            // Get online trailers and then update local database
+            getOnlineData(movieService);
+            // Return the list of trailers from local database
+            return getLocalData();
         }
-        // Return the list of movies from local
+        // Return the list of movies from local database
         return getLocalData();
+
     }
     // Get the list of reviews
     @Override
-    public List<Trailers> getOnlineData(IMoviesAPIService movieService) {
+    public void getOnlineData(IMoviesAPIService movieService) {
         // Retrieve the reviews data
         Call<TrailersCollection> createdCall = movieService.loadTrailersData(mTmdbMovieId, BuildConfig.IMDB_API_KEY);
         // Asynchronous access
@@ -83,12 +86,6 @@ public class TrailersLoader extends BaseLoader implements ILoader<Trailers> {
                 trailersList = super.getTrailersList();
             }
         });
-
-        if (trailersList.size() != 0) {
-            return trailersList;
-        }
-        // Return null, if there are no trailersList
-        return null;
 
     }
     // Get the list of reviews from local

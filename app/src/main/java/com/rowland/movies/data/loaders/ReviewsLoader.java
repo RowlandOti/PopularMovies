@@ -49,42 +49,41 @@ public class ReviewsLoader extends BaseLoader implements ILoader<Reviews> {
     public ReviewsLoader(Context context, int mTmdbMovieId) {
         super(context);
         this.mTmdbMovieId = mTmdbMovieId;
-        setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this,new IntentFilter("REVIEWS_RELOADER_DATA")));
+        setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this, new IntentFilter("REVIEWS_RELOADER_DATA")));
         setNetworkChangeObserver(new NetworkChangeBroadCastReceiver(this));
     }
 
     @Override
     public List<Reviews> loadInBackground() {
         // If we are online query movies from API
-        if(getIsOnline()){
+        if (getIsOnline()) {
             // Get the MoviesAPIService and use it to retrieve a list of reviewsList
             IMoviesAPIService movieService = ApplicationController.getApplicationInstance().getMovieServiceOfApiType(EAPITypes.MOVIES_API);
-            // Return the list of reviewsList
-            return getOnlineData(movieService);
+            // Get online movies and then update local database
+            getOnlineData(movieService);
+            // Return the list of movies from local database
+            return getLocalData();
         }
-        // Return the list of movies from local
+        // Return the list of movies from local database
         return getLocalData();
+
     }
+
     // Get the list of reviews from online
     @Override
-    public List<Reviews> getOnlineData(IMoviesAPIService movieService) {
+    public void getOnlineData(IMoviesAPIService movieService) {
         // Retrieve the reviewsList data
         Call<ReviewsCollection> createdCall = movieService.loadReviewsData(mTmdbMovieId, BuildConfig.IMDB_API_KEY);
         // Asynchronous access
-        createdCall.enqueue(new ReviewsCallBack(getContext()){
+        createdCall.enqueue(new ReviewsCallBack(getContext()) {
             // Gain access to the Reviews List
             @Override
             public void retrieveReviewsList() {
                 reviewsList = super.getReviewsList();
             }
         });
-
-        if (reviewsList.size() != 0) {
-            return reviewsList;
-        }
-        // Return null, if there are no reviews
-        return null;
     }
+
     // Get the list of reviews from local
     @Override
     public List<Reviews> getLocalData() {
