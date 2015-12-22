@@ -14,63 +14,72 @@
   ~ limitations under the License.
   ~
   -->
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    card_view:cardCornerRadius="8dp"
+    card_view:cardUseCompatPadding="true">
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/grid_container"
-    android:layout_width="match_parent"
-    android:layout_height="270dp">
-
-    <ImageView
-        android:id="@+id/grid_poster_image_view"
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/grid_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="fitXY"
-        android:transitionName="posterImageView" />
-
-    <RelativeLayout
-        android:id="@+id/grid_title_container"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_gravity="center_horizontal|bottom"
-        android:layout_marginBottom="1dp"
-        android:background="@color/apptheme_transparent"
-        android:gravity="bottom">
-
-        <TextView
-            android:id="@+id/grid_sort_type_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/grid_sort_type_image_view"
-            android:layout_toLeftOf="@+id/grid_release_date_text_view"
-            android:layout_toRightOf="@+id/grid_sort_type_image_view"
-            android:textColor="@color/apptheme_primary_text_white"
-            android:textSize="16sp"
-            tools:text="9.2" />
-
-        <TextView
-            android:id="@+id/grid_release_date_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignTop="@+id/grid_sort_type_text_view"
-            android:paddingRight="16dp"
-            android:textColor="@color/apptheme_primary_text_white"
-            android:textSize="16sp"
-            tools:text="2015" />
+        android:layout_height="270dp">
 
         <ImageView
-            android:id="@+id/grid_sort_type_image_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:padding="16dp"
-            android:visibility="visible" />
+            android:id="@+id/grid_poster_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:transitionName="posterImageView" />
 
-    </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/grid_title_container"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="1dp"
+            android:background="@color/apptheme_transparent"
+            android:gravity="bottom">
 
-</FrameLayout>
+            <TextView
+                android:id="@+id/grid_sort_type_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/grid_sort_type_image_view"
+                android:layout_toLeftOf="@+id/grid_release_date_text_view"
+                android:layout_toRightOf="@+id/grid_sort_type_image_view"
+                android:textColor="@color/apptheme_primary_text_white"
+                android:textSize="16sp"
+                tools:text="9.2" />
+
+            <TextView
+                android:id="@+id/grid_release_date_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/grid_sort_type_text_view"
+                android:paddingRight="16dp"
+                android:textColor="@color/apptheme_primary_text_white"
+                android:textSize="16sp"
+                tools:text="2015" />
+
+            <ImageView
+                android:id="@+id/grid_sort_type_image_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:padding="16dp"
+                android:visibility="visible" />
+
+        </RelativeLayout>
+
+    </FrameLayout>
+</android.support.v7.widget.CardView>

@@ -22,6 +22,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
 import com.rowland.movies.R;
@@ -76,9 +77,11 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
         mSwRefreshLayout.setColorSchemeResources(R.color.apptheme_accent_teal);
         mSwRefreshLayout.setProgressViewOffset(true, 100, 400);
 
-        final GridLayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
+        final GridLayoutManager mGridLayoutManager = new GridLayoutManager(getActivity(), 2);
+        final StaggeredGridLayoutManager mStaggeredLayoutManger = new StaggeredGridLayoutManager(StaggeredGridLayoutManager.VERTICAL, 2);
 
-        mGridRecycleView.setLayoutManager(mLayoutManager);
+        //mGridRecycleView.setLayoutManager(mGridLayoutManager);
+        mGridRecycleView.setLayoutManager(mStaggeredLayoutManger);
         mGridRecycleView.setHasFixedSize(true);
 
         mGridAdapter = new GridAdapter(mMovieLists, getContext());
