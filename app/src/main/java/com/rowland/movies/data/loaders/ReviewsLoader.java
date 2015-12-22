@@ -25,7 +25,7 @@ import com.rowland.movies.BuildConfig;
 import com.rowland.movies.data.broadcastrecievers.DataSetChangeBroadCastReceiver;
 import com.rowland.movies.data.broadcastrecievers.NetworkChangeBroadCastReceiver;
 import com.rowland.movies.data.callbacks.ReviewsCallBack;
-import com.rowland.movies.data.interfaces.ILoaders;
+import com.rowland.movies.data.interfaces.ILoader;
 import com.rowland.movies.rest.collections.ReviewsCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.models.Reviews;
@@ -38,13 +38,15 @@ import retrofit.Call;
 /**
  * Created by Oti Rowland on 12/12/2015.
  */
-public class ReviewsLoader extends BaseLoader implements ILoaders<Reviews> {
+public class ReviewsLoader extends BaseLoader implements ILoader<Reviews> {
     // The class Log identifier
     private static final String LOG_TAG = ReviewsLoader.class.getSimpleName();
     // The movie id whose reviewsList are retrieved
     private int mTmdbMovieId;
     // The list of movies our loader returns
     private List<Reviews> reviewsList;
+    // Check if we are online
+    private boolean isOnline;
 
     public ReviewsLoader(Context context, int mTmdbMovieId) {
         super(context);
@@ -90,5 +92,15 @@ public class ReviewsLoader extends BaseLoader implements ILoaders<Reviews> {
     public List<Reviews> getLocalData() {
         // Return local list
         return reviewsList;
+    }
+    // Get online status
+    @Override
+    public boolean getIsOnline() {
+        return isOnline;
+    }
+    // Set online status
+    @Override
+    public void setIsOnline(boolean online) {
+        this.isOnline = online;
     }
 }

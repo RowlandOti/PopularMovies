@@ -25,6 +25,7 @@ import android.net.ConnectivityManager;
 import android.util.Log;
 
 import com.rowland.movies.BuildConfig;
+import com.rowland.movies.data.interfaces.ILoader;
 import com.rowland.movies.data.loaders.BaseLoader;
 import com.rowland.movies.utilities.Utilities;
 
@@ -39,9 +40,9 @@ public class NetworkChangeBroadCastReceiver extends BroadcastReceiver {
     // The class Log identifier
     private static final String LOG_TAG = NetworkChangeBroadCastReceiver.class.getSimpleName();
     // The loader that owns this listener
-    final private BaseLoader mLoader;
+    final private ILoader mLoader;
 
-    public NetworkChangeBroadCastReceiver(BaseLoader loader)
+    public NetworkChangeBroadCastReceiver(ILoader loader)
     {
         // Assign loader to this listener
         this.mLoader = loader;
@@ -62,7 +63,7 @@ public class NetworkChangeBroadCastReceiver extends BroadcastReceiver {
         mLoader.setIsOnline(isOnline);
         // Check wether we are in debug mode
         if (BuildConfig.IS_DEBUG_MODE) {
-            Log.d(LOG_TAG, "Connection broadcast fired from " + mLoader.getClass().getSimpleName() +isOnline);
+            Log.d(LOG_TAG, "Connection broadcast fired from " + mLoader.getClass().getSimpleName()+ " " +this.mLoader.getIsOnline());
         }
     }
 }

@@ -24,6 +24,7 @@ import android.content.IntentFilter;
 
 import com.rowland.movies.data.broadcastrecievers.DataSetChangeBroadCastReceiver;
 import com.rowland.movies.data.broadcastrecievers.NetworkChangeBroadCastReceiver;
+import com.rowland.movies.data.interfaces.ILoader;
 import com.uwetrottmann.androidutils.GenericSimpleLoader;
 /*ToDo: Improve Loader using tutorial below
 * <a>http://www.androiddesignpatterns.com/2012/08/implementing-loaders.html</a>
@@ -32,8 +33,6 @@ import com.uwetrottmann.androidutils.GenericSimpleLoader;
 * */
 public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
 
-    // Check if we are online
-    private boolean isOnline;
     // An observer to listen for changes in data
     private DataSetChangeBroadCastReceiver mDataSetChangeObserver;
     // An observer to listen for network changes
@@ -111,12 +110,11 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
     protected void setNetworkChangeObserver(NetworkChangeBroadCastReceiver mNetworkChangeObserver) {
         this.mNetworkChangeObserver = mNetworkChangeObserver;
     }
-    // Get online status
-    protected boolean getIsOnline() {
-        return isOnline;
-    }
-    // Set online status
-    public void setIsOnline(boolean online) {
-        isOnline = online;
+    // Get the Context
+    public Context getContext(){
+        //Get Context
+        Context context = getContext();
+        // Return Context
+        return context;
     }
 }

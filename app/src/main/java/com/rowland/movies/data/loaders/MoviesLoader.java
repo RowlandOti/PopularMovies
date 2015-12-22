@@ -26,7 +26,7 @@ import com.rowland.movies.BuildConfig;
 import com.rowland.movies.data.broadcastrecievers.DataSetChangeBroadCastReceiver;
 import com.rowland.movies.data.broadcastrecievers.NetworkChangeBroadCastReceiver;
 import com.rowland.movies.data.callbacks.MoviesCallBack;
-import com.rowland.movies.data.interfaces.ILoaders;
+import com.rowland.movies.data.interfaces.ILoader;
 import com.rowland.movies.rest.enums.ESortOrder;
 import com.rowland.movies.rest.collections.MoviesCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
@@ -40,9 +40,12 @@ import retrofit.Call;
 /**
  * Created by Oti Rowland on 12/12/2015.
  */
-public class MoviesLoader extends BaseLoader implements ILoaders<Movies> {
+public class MoviesLoader extends BaseLoader implements ILoader<Movies> {
+
     // The class Log identifier
     private static final String LOG_TAG = MoviesLoader.class.getSimpleName();
+    // Check if we are online
+    private boolean isOnline;
     // The sort order type
     private ESortOrder mSortOrder;
     // The list of movies our loader returns
@@ -58,18 +61,20 @@ public class MoviesLoader extends BaseLoader implements ILoaders<Movies> {
     @Override
     public List<Movies> loadInBackground() {
         // If we are online query movies from API
-        if(getIsOnline()== true){
+        if(getIsOnline()){
             // Get the MoviesAPIService and use it to retrieve a list of movies
             IMoviesAPIService movieService = ApplicationController.getApplicationInstance().getMovieServiceOfApiType(EAPITypes.MOVIES_API);
             // Return the list of movies from online
             return getOnlineData(movieService);
         }
-        // Check wether we are in debug mode
-        if (BuildConfig.IS_DEBUG_MODE) {
-            Log.d(LOG_TAG, "Online Status "+getIsOnline());
+        else{
+            // Check wether we are in debug mode
+            if (BuildConfig.IS_DEBUG_MODE) {
+                Log.d(LOG_TAG, "Online Status "+this.getIsOnline());
+            }
+            // Return the list of movies from local
+            return getLocalData();
         }
-        // Return the list of movies from local
-        return getLocalData();
     }
     // Get the list of movies from online
     @Override
@@ -101,5 +106,16 @@ public class MoviesLoader extends BaseLoader implements ILoaders<Movies> {
         }
         // Return local list
         return moviesList;
+    }
+
+    // Get online status
+    @Override
+    public boolean getIsOnline() {
+        return isOnline;
+    }
+    // Set online status
+    @Override
+    public void setIsOnline(boolean online) {
+        this.isOnline = online;
     }
 }

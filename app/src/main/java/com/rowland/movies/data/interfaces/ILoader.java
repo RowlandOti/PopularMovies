@@ -17,6 +17,8 @@
 
 package com.rowland.movies.data.interfaces;
 
+import android.content.Context;
+
 import com.rowland.movies.rest.models.Movies;
 import com.rowland.movies.rest.services.IMoviesAPIService;
 
@@ -27,11 +29,17 @@ import java.util.List;
  *
  * All loaders will implement this class
  */
-public interface ILoaders<T> {
+public interface ILoader<T> {
 
     // Implement to retrive data from online
     List<T> getOnlineData(IMoviesAPIService movieService);
     // Implement to retrive data from local cache
     List<T> getLocalData();
+    // Get online status
+    boolean getIsOnline();
+    // Set online status
+    void setIsOnline(boolean isOnline);
+    // Get the Context
+    Context getContext();
 
 }

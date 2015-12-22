@@ -26,7 +26,7 @@ import com.rowland.movies.BuildConfig;
 import com.rowland.movies.data.broadcastrecievers.DataSetChangeBroadCastReceiver;
 import com.rowland.movies.data.broadcastrecievers.NetworkChangeBroadCastReceiver;
 import com.rowland.movies.data.callbacks.TrailersCallBack;
-import com.rowland.movies.data.interfaces.ILoaders;
+import com.rowland.movies.data.interfaces.ILoader;
 import com.rowland.movies.rest.collections.TrailersCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.models.Trailers;
@@ -39,13 +39,15 @@ import retrofit.Call;
 /**
  * Created by Oti Rowland on 12/12/2015.
  */
-public class TrailersLoader extends BaseLoader implements ILoaders<Trailers> {
+public class TrailersLoader extends BaseLoader implements ILoader<Trailers> {
     // The class Log identifier
     private static final String LOG_TAG = TrailersLoader.class.getSimpleName();
     // The movie id whose trailersList are retrieved
     private int mTmdbMovieId;
     // The list of trailersList our loader returns
     private List<Trailers> trailersList;
+    // Check if we are online
+    private boolean isOnline;
 
     public TrailersLoader(Context context, int mTmdbMovieId) {
         super(context);
@@ -94,6 +96,16 @@ public class TrailersLoader extends BaseLoader implements ILoaders<Trailers> {
     public List<Trailers> getLocalData() {
         // Return local list
         return trailersList;
+    }
+    // Get online status
+    @Override
+    public boolean getIsOnline() {
+        return isOnline;
+    }
+    // Set online status
+    @Override
+    public void setIsOnline(boolean online) {
+        this.isOnline = online;
     }
 
     // Extract the individual movie trailersList
