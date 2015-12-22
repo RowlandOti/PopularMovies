@@ -25,6 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rowland.movies.R;
+import com.rowland.movies.adapters.GridAdapter;
 import com.rowland.movies.data.loaders.MoviesLoader;
 import com.rowland.movies.rest.enums.ESortOrder;
 import com.rowland.movies.rest.models.Movies;
@@ -34,17 +35,18 @@ import java.util.List;
 import butterknife.ButterKnife;
 
 /**
- *
+ * Display Popular Movies
  */
 public class PopularFragment extends BaseGridFragment implements LoaderManager.LoaderCallbacks<List<Movies>> {
 
     // Logging tracker for this class
     private final String LOG_TAG = PopularFragment.class.getSimpleName();
 
+    // Default constructor
     public PopularFragment() {
 
     }
-
+    // Create fragment with arguments
     public static PopularFragment newInstance(Bundle args) {
         // Create the new fragment instance
         PopularFragment fragmentInstance = (PopularFragment) newInstance(new PopularFragment(), args);

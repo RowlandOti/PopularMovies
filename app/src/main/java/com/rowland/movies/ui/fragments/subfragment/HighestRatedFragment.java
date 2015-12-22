@@ -34,7 +34,9 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 
-
+/**
+ * Display Highest Rated Movies
+ */
 public class HighestRatedFragment extends BaseGridFragment implements LoaderManager.LoaderCallbacks<List<Movies>> {
 
     // Logging tracker for this class

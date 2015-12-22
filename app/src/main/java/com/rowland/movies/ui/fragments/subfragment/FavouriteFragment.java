@@ -32,7 +32,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 
 /**
- *
+ * Display Favourite Movies
  */
 public class FavouriteFragment extends BaseGridFragment implements LoaderManager.LoaderCallbacks<List<Movies>> {
 

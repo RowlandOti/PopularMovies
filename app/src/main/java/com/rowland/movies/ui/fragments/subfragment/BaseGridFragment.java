@@ -42,7 +42,7 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
     // AN arrayList of the movies
     protected ArrayList<Movies> mMovieLists;
     // The grid adapter
-    protected GridAdapter mMovieAdapter;
+    protected GridAdapter mGridAdapter;
 
     // ButterKnife injected Views
     @Bind(R.id.sw_refresh_layout)
@@ -51,7 +51,6 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
     protected RecyclerView mGridRecycleView;
 
     protected static BaseGridFragment newInstance(BaseGridFragment fragment, Bundle args) {
-
         // Create the new fragment instance
         BaseGridFragment fragmentInstance = fragment;
         // Set arguments if it is not null
@@ -74,9 +73,9 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
         mGridRecycleView.setLayoutManager(mLayoutManager);
         mGridRecycleView.setHasFixedSize(true);
 
-        mMovieAdapter = new GridAdapter(mMovieLists);
+        mGridAdapter = new GridAdapter(mMovieLists);
 
-        mGridRecycleView.setAdapter(mMovieAdapter);
+        mGridRecycleView.setAdapter(mGridAdapter);
         mSwRefreshLayout.setOnRefreshListener(this);
     }
 
