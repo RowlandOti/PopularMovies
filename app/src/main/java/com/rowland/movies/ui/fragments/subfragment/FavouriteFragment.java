@@ -25,8 +25,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rowland.movies.R;
+import com.rowland.movies.data.loaders.MovieLoader;
+import com.rowland.movies.rest.enums.ESortOrder;
 import com.rowland.movies.rest.models.Movie;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -71,18 +74,33 @@ public class FavouriteFragment extends BaseGridFragment implements LoaderManager
 
 
     @Override
-    public Loader<List<Movie>> onCreateLoader(int id, Bundle args) {
-        return null;
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mMovieLists = new ArrayList<>();
+        getLoaderManager().initLoader(0, null, this);
     }
 
     @Override
-    public void onLoadFinished(Loader<List<Movie>> loader, List<Movie> data) {
+    public Loader<List<Movie>> onCreateLoader(int id, Bundle args) {
+        return new MovieLoader(getActivity(), ESortOrder.FAVOURITE_DESCENDING);
+    }
 
+    @Override
+    public void onLoadFinished(Loader<List<Movie>> loader, List<Movie> movieList) {
+        // Set refreshing off, when done loading
+        mSwRefreshLayout.setRefreshing(false);
+        // Fill our movies list with data
+        mMovieLists = movieList;
+        // Pass it on to our adapter
+        mGridAdapter.addMovies(movieList);
     }
 
     @Override
     public void onLoaderReset(Loader<List<Movie>> loader) {
-
+        // Set refreshing off, when resetting
+        mSwRefreshLayout.setRefreshing(false);
+        // We reset the loader, nullify old data
+        mGridAdapter.addMovies(null);
     }
 
     // When RefreshLayout is triggered reload the loader
