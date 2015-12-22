@@ -56,7 +56,7 @@ public class MovieCallBack implements Callback<MovieCollection> {
 
     @Override
     public void onResponse(Response<MovieCollection> response, Retrofit retrofit) {
-
+        // Check status of response before proceeding
         if (response.isSuccess() && response.errorBody() == null) {
             // movies available
             moviesList = response.body().getResults();
