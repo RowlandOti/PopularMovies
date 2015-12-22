@@ -56,25 +56,21 @@ public class MoviesLoader extends BaseLoader implements ILoader<Movies> {
     public List<Movies> loadInBackground() {
         // If we are online query movies from API
         if(getIsOnline()){
-            // Check wether we are in debug mode
-            if (BuildConfig.IS_DEBUG_MODE) {
-                Log.d(LOG_TAG, "Online Status "+this.getIsOnline());
-            }
             // Get the MoviesAPIService and use it to retrieve a list of movies
             IMoviesAPIService movieService = ApplicationController.getApplicationInstance().getMovieServiceOfApiType(EAPITypes.MOVIES_API);
             // Return the list of movies from online
             return getOnlineData(movieService);
         }
-            // Check wether we are in debug mode
-            if (BuildConfig.IS_DEBUG_MODE) {
-                Log.d(LOG_TAG, "Online Status "+this.getIsOnline());
-            }
             // Return the list of movies from local
             return getLocalData();
     }
     // Get the list of movies from online
     @Override
     public List<Movies> getOnlineData(IMoviesAPIService movieService) {
+        // Check wether we are in debug mode
+        if (BuildConfig.IS_DEBUG_MODE) {
+            Log.d(LOG_TAG, "Online data loaded ");
+        }
         // Retrieve the movies data
         Call<MoviesCollection> createdCall = movieService.loadMoviesData(mSortOrder.getSortOrder(), BuildConfig.IMDB_API_KEY);
         // Asynchronous access
