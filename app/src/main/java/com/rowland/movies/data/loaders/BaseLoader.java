@@ -21,7 +21,9 @@ package com.rowland.movies.data.loaders;
 
 import android.content.Context;
 import android.content.IntentFilter;
+import android.util.Log;
 
+import com.rowland.movies.BuildConfig;
 import com.rowland.movies.data.broadcastrecievers.DataSetChangeBroadCastReceiver;
 import com.rowland.movies.data.broadcastrecievers.NetworkChangeBroadCastReceiver;
 import com.rowland.movies.utilities.Utilities;
@@ -34,6 +36,8 @@ import com.uwetrottmann.androidutils.GenericSimpleLoader;
 * */
 public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
 
+    // The class Log identifier
+    private static final String LOG_TAG = BaseLoader.class.getSimpleName();
     // An observer to listen for changes in data
     private DataSetChangeBroadCastReceiver mDataSetChangeObserver;
     // An observer to listen for network changes
@@ -57,7 +61,6 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
             // Deliver any previously loaded data immediately.
             deliverResult(mItems);
         }
-
         // Create dat set change Observer if it is not set yet
         if (mDataSetChangeObserver == null) {
             // Custom filter to map data changes.

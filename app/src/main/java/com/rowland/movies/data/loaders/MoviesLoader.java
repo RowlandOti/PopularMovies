@@ -18,10 +18,12 @@
 package com.rowland.movies.data.loaders;
 
 import android.content.Context;
+import android.content.IntentFilter;
 import android.util.Log;
 
 import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
+import com.rowland.movies.data.broadcastrecievers.DataSetChangeBroadCastReceiver;
 import com.rowland.movies.data.callbacks.MoviesCallBack;
 import com.rowland.movies.data.interfaces.ILoader;
 import com.rowland.movies.rest.collections.MoviesCollection;
@@ -49,7 +51,7 @@ public class MoviesLoader extends BaseLoader implements ILoader<Movies> {
     public MoviesLoader(Context context, ESortOrder mSortOrder) {
         super(context);
         this.mSortOrder = mSortOrder;
-        //setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this,new IntentFilter("MOVIES_RELOADER_DATA")));
+        setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this,new IntentFilter("MOVIES_RELOADER_DATA")));
     }
 
     @Override
@@ -75,10 +77,15 @@ public class MoviesLoader extends BaseLoader implements ILoader<Movies> {
         Call<MoviesCollection> createdCall = movieService.loadMoviesData(mSortOrder.getSortOrder(), BuildConfig.IMDB_API_KEY);
         // Asynchronous access
         createdCall.enqueue(new MoviesCallBack(getContext()) {
+            // ToDo: Remove method, it never gets called
             // Gain access to the MoviesList
             @Override
             public void retrieveMoviesList() {
                 moviesList = super.getMoviesList();
+                // Check whether we are in debug mode
+                if (BuildConfig.IS_DEBUG_MODE) {
+                    Log.d(LOG_TAG, "List Size "+moviesList.size());
+                }
             }
         });
         // Return the list of online movies

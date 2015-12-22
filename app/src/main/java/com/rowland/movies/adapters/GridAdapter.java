@@ -18,6 +18,7 @@
 package com.rowland.movies.adapters;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.rowland.movies.BuildConfig;
 import com.rowland.movies.R;
 import com.rowland.movies.rest.enums.EBaseImageSize;
 import com.rowland.movies.rest.enums.EBaseURlTypes;
@@ -44,13 +46,15 @@ import butterknife.ButterKnife;
  */
 public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHolder> {
 
+    // The class Log identifier
+    private static final String LOG_TAG = GridAdapter.class.getSimpleName();
     // A list of the movie items
-    private List<Movies> movieList = new ArrayList<>();
+    private List<Movies> mMovieList = new ArrayList<>();
     // A Calendar object to help in formatting time
     private Calendar mCalendar;
 
-    public GridAdapter(ArrayList<Movies> mMovieLists) {
-        this.movieList = mMovieLists;
+    public GridAdapter(List<Movies> mMovieLists) {
+        this.mMovieList = mMovieLists;
     }
 
     // Called when RecyclerView needs a new CustomViewHolder of the given type to represent an item.
@@ -66,7 +70,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
     @Override
     public void onBindViewHolder(CustomViewHolder holder, int position) {
         // Movie item at this position
-        final Movies movie = movieList.get(position);
+        final Movies movie = mMovieList.get(position);
 
         holder.mGridItemContainer.setContentDescription(holder.mGridItemContainer.getContext().getString(R.string.movie_title, movie.getOriginalTitle()));
 
@@ -84,9 +88,18 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
                 into(holder.mMovieImageView);
 
     }
-
+    // What's the size of the movie List
     @Override
     public int getItemCount() {
+        // Check size of List first
+        if(mMovieList != null && !mMovieList.isEmpty())
+        {
+            // Check wether we are in debug mode
+            if (BuildConfig.IS_DEBUG_MODE) {
+                Log.d(LOG_TAG, "List Count: "+mMovieList.size());
+            }
+            return mMovieList.size();
+        }
         return 0;
     }
 
@@ -115,5 +128,13 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+    }
+    // Handy method for passing the list to the adapter
+    public void addMovies(List<Movies> movieList) {
+        if (movieList == null) {
+            movieList = new ArrayList<>();
+        }
+        mMovieList = movieList;
+        notifyDataSetChanged();
     }
 }

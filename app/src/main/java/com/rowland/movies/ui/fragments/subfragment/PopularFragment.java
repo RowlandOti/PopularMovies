@@ -20,16 +20,19 @@ package com.rowland.movies.ui.fragments.subfragment;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.rowland.movies.BuildConfig;
 import com.rowland.movies.R;
 import com.rowland.movies.adapters.GridAdapter;
 import com.rowland.movies.data.loaders.MoviesLoader;
 import com.rowland.movies.rest.enums.ESortOrder;
 import com.rowland.movies.rest.models.Movies;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -74,18 +77,33 @@ public class PopularFragment extends BaseGridFragment implements LoaderManager.L
     }
 
     @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mMovieLists = new ArrayList<>();
+        getLoaderManager().initLoader(0, null, this);
+    }
+
+    @Override
     public Loader<List<Movies>> onCreateLoader(int id, Bundle args) {
         return new MoviesLoader(getActivity(), ESortOrder.POPULAR_DESCENDING);
     }
 
     @Override
-    public void onLoadFinished(Loader<List<Movies>> loader, List<Movies> data) {
-
+    public void onLoadFinished(Loader<List<Movies>> loader, List<Movies> movieList) {
+        // Set refreshing off, when done loading
+        mSwRefreshLayout.setRefreshing(false);
+        // Fill our movies list with data
+        mMovieLists = movieList;
+        // Pass it on to our adapter
+        mGridAdapter.addMovies(movieList);
     }
 
     @Override
     public void onLoaderReset(Loader<List<Movies>> loader) {
-
+        // Set refreshing off, when resetting
+        mSwRefreshLayout.setRefreshing(false);
+        // We reset the loader, nullify old data
+        mGridAdapter.addMovies(null);
     }
 
     // When RefreshLayout is triggered reload the loader

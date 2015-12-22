@@ -94,7 +94,10 @@ public abstract class MoviesCallBack implements Callback<MoviesCollection> {
     }
     // Getter method for moviesCollection
     public List<Movies> getMoviesList() {
-
+        // Check wether we are in debug mode
+        if (BuildConfig.IS_DEBUG_MODE) {
+            Log.d(LOG_TAG, "List Size "+moviesList.size());
+        }
         return this.moviesList;
     }
     // A handy method to retrieve the collection from the callback

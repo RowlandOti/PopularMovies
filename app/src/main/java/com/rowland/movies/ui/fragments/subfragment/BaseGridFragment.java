@@ -29,8 +29,10 @@ import com.rowland.movies.adapters.GridAdapter;
 import com.rowland.movies.rest.models.Movies;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * Created by Oti Rowland on 12/18/2015.
@@ -40,7 +42,7 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
     // Logging tracker for this class
     private final String LOG_TAG = BaseGridFragment.class.getSimpleName();
     // AN arrayList of the movies
-    protected ArrayList<Movies> mMovieLists;
+    protected List<Movies> mMovieLists;
     // The grid adapter
     protected GridAdapter mGridAdapter;
 
@@ -81,5 +83,11 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
 
     @Override
     public void onRefresh() {
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
     }
 }
