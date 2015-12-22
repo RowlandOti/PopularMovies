@@ -63,6 +63,13 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //Don't destroy fragment across orientation change
+        setRetainInstance(true);
+    }
+
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 

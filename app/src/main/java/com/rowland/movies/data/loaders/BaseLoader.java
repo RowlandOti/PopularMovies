@@ -29,6 +29,8 @@ import com.rowland.movies.data.broadcastrecievers.NetworkChangeBroadCastReceiver
 import com.rowland.movies.utilities.Utilities;
 import com.uwetrottmann.androidutils.GenericSimpleLoader;
 
+import java.io.IOException;
+
 /*ToDo: Improve Loader using tutorial below
 * <a>http://www.androiddesignpatterns.com/2012/08/implementing-loaders.html</a>
 * Major motivation from
@@ -94,8 +96,18 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
         }
         // Unregister Observer - Stop monitoring the underlying data source.
         if (mDataSetChangeObserver != null) {
-            getContext().unregisterReceiver(mDataSetChangeObserver);
-            mDataSetChangeObserver = null;
+            // Sometimes the Fragment onDestroy() unregisters the observer before calling below code
+            // See <a>http://stackoverflow.com/questions/6165070/receiver-not-registered-exception-error</a>
+            try  {
+                getContext().unregisterReceiver(mDataSetChangeObserver);
+                mDataSetChangeObserver = null;
+            }
+            catch (IllegalArgumentException e) {
+                // Check wether we are in debug mode
+                if (BuildConfig.IS_DEBUG_MODE) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
