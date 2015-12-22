@@ -20,7 +20,7 @@ package com.rowland.movies.rest.collections;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.rowland.movies.rest.models.Trailers;
+import com.rowland.movies.rest.models.Trailer;
 
 import java.util.List;
 
@@ -32,14 +32,14 @@ public class TrailersCollection {
     // Gson annotations
     @SerializedName("results")
     @Expose
-    public List<Trailers> results;
+    public List<Trailer> results;
 
     /**
      *
      * @return
      * The results
      */
-    public List<Trailers> getResults() {
+    public List<Trailer> getResults() {
         return results;
     }
 
@@ -48,7 +48,7 @@ public class TrailersCollection {
      * @param results
      * The results
      */
-    public void setResults(List<Trailers> results) {
+    public void setResults(List<Trailer> results) {
         this.results = results;
     }
 

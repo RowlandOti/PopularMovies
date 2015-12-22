@@ -17,8 +17,26 @@
 
 package com.rowland.movies.data.repository;
 
+import com.activeandroid.query.Select;
+import com.rowland.movies.rest.models.Trailer;
+
+import java.util.List;
+
 /**
  * Created by Oti Rowland on 12/22/2015.
  */
 public class TrailerRepository {
+    public TrailerRepository() {
+    }
+
+    public List<Trailer> getAll() {
+
+        // Query ActiveAndroid for list of data
+        List<Trailer> queryResults = new Select()
+                .from(Trailer.class)
+                .orderBy("id_ ASC")
+                .limit(100).execute();
+        // This is how you execute a query
+        return queryResults;
+    }
 }

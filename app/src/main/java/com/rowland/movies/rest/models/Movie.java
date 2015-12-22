@@ -32,16 +32,16 @@ import java.util.Date;
 import java.util.List;
 
 @Table(name = "movies")
-public class Movies extends Model {
+public class Movie extends Model {
 
     // Gson annotations
     @SerializedName("release_date")
     //ActiveAndroid Annotations
     @Column(name = "release_date")
     public Date releaseDate;
-    // Movies owns these items
-    public List<Reviews> movieReviews;
-    public List<Trailers> movieTrailers;
+    // Movie owns these items
+    public List<Review> movieReviews;
+    public List<Trailer> movieTrailers;
     // Gson annotations
     @SerializedName("poster_path")
     @Expose
@@ -108,19 +108,19 @@ public class Movies extends Model {
     //ActiveAndroid Annotations
     @Column(name = "adult")
     private Boolean adult;
-    public Movies() {
+    public Movie() {
         // You have to call super in each constructor to create the table.
         super();
     }
 
     // Retrieve all the movie owned trailers
-    public List<Trailers> getMovieTrailers() {
-        return getMany(Trailers.class, "Trailers");
+    public List<Trailer> getMovieTrailers() {
+        return getMany(Trailer.class, "Trailer");
     }
 
     // Retrieve all the movie owned reviews
-    public List<Reviews> getMovieReviews() {
-        return getMany(Reviews.class, "Reviews");
+    public List<Review> getMovieReviews() {
+        return getMany(Review.class, "Review");
     }
 
     /**

@@ -30,7 +30,7 @@ import com.rowland.movies.data.repository.MovieRepository;
 import com.rowland.movies.rest.collections.MoviesCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.enums.ESortOrder;
-import com.rowland.movies.rest.models.Movies;
+import com.rowland.movies.rest.models.Movie;
 import com.rowland.movies.rest.services.IMoviesAPIService;
 
 import java.util.List;
@@ -40,7 +40,7 @@ import retrofit.Call;
 /**
  * Created by Oti Rowland on 12/12/2015.
  */
-public class MoviesLoader extends BaseLoader implements ILoader<Movies> {
+public class MoviesLoader extends BaseLoader implements ILoader<Movie> {
 
     // The class Log identifier
     private static final String LOG_TAG = MoviesLoader.class.getSimpleName();
@@ -49,7 +49,7 @@ public class MoviesLoader extends BaseLoader implements ILoader<Movies> {
     // The sort order type
     private ESortOrder mSortOrder;
     // The list of movies our loader returns
-    private List<Movies> moviesList;
+    private List<Movie> moviesList;
 
     public MoviesLoader(Context context, ESortOrder mSortOrder) {
         super(context);
@@ -59,7 +59,7 @@ public class MoviesLoader extends BaseLoader implements ILoader<Movies> {
     }
 
     @Override
-    public List<Movies> loadInBackground() {
+    public List<Movie> loadInBackground() {
         // If we are online query movies from API
         if(getIsOnline()){
             // Get the MoviesAPIService and use it to retrieve a list of movies
@@ -86,7 +86,7 @@ public class MoviesLoader extends BaseLoader implements ILoader<Movies> {
     }
     // Get the list of movies from local
     @Override
-    public List<Movies> getLocalData() {
+    public List<Movie> getLocalData() {
         // Check whether we are in debug mode
         if (BuildConfig.IS_DEBUG_MODE) {
             Log.d(LOG_TAG, "Local data loaded ");

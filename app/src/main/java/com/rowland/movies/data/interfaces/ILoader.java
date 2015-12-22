@@ -19,7 +19,6 @@ package com.rowland.movies.data.interfaces;
 
 import android.content.Context;
 
-import com.rowland.movies.rest.models.Movies;
 import com.rowland.movies.rest.services.IMoviesAPIService;
 
 import java.util.List;

@@ -20,11 +20,11 @@ package com.rowland.movies.rest.collections;
 import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.rowland.movies.rest.models.Movies;
+import com.rowland.movies.rest.models.Movie;
 
 import java.util.List;
 
-@Table(name = "Movies")
+@Table(name = "Movie")
 public class MoviesCollection {
 
     // Gson annotations
@@ -34,7 +34,7 @@ public class MoviesCollection {
     // Gson annotations
     @SerializedName("results")
     @Expose
-    private List<Movies> results;
+    private List<Movie> results;
     // Gson annotations
     @SerializedName("total_results")
     @Expose
@@ -67,7 +67,7 @@ public class MoviesCollection {
      * @return
      * The results
      */
-    public List<Movies> getResults() {
+    public List<Movie> getResults() {
         return results;
     }
 
@@ -76,7 +76,7 @@ public class MoviesCollection {
      * @param results
      * The results
      */
-    public void setResults(List<Movies> results) {
+    public void setResults(List<Movie> results) {
         this.results = results;
     }
 

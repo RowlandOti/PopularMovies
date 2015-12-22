@@ -20,17 +20,14 @@ package com.rowland.movies.ui.fragments.subfragment;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.rowland.movies.BuildConfig;
 import com.rowland.movies.R;
-import com.rowland.movies.adapters.GridAdapter;
 import com.rowland.movies.data.loaders.MoviesLoader;
 import com.rowland.movies.rest.enums.ESortOrder;
-import com.rowland.movies.rest.models.Movies;
+import com.rowland.movies.rest.models.Movie;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,9 +35,9 @@ import java.util.List;
 import butterknife.ButterKnife;
 
 /**
- * Display Popular Movies
+ * Display Popular Movie
  */
-public class PopularFragment extends BaseGridFragment implements LoaderManager.LoaderCallbacks<List<Movies>> {
+public class PopularFragment extends BaseGridFragment implements LoaderManager.LoaderCallbacks<List<Movie>> {
 
     // Logging tracker for this class
     private final String LOG_TAG = PopularFragment.class.getSimpleName();
@@ -84,12 +81,12 @@ public class PopularFragment extends BaseGridFragment implements LoaderManager.L
     }
 
     @Override
-    public Loader<List<Movies>> onCreateLoader(int id, Bundle args) {
+    public Loader<List<Movie>> onCreateLoader(int id, Bundle args) {
         return new MoviesLoader(getActivity(), ESortOrder.POPULAR_DESCENDING);
     }
 
     @Override
-    public void onLoadFinished(Loader<List<Movies>> loader, List<Movies> movieList) {
+    public void onLoadFinished(Loader<List<Movie>> loader, List<Movie> movieList) {
         // Set refreshing off, when done loading
         mSwRefreshLayout.setRefreshing(false);
         // Fill our movies list with data
@@ -99,7 +96,7 @@ public class PopularFragment extends BaseGridFragment implements LoaderManager.L
     }
 
     @Override
-    public void onLoaderReset(Loader<List<Movies>> loader) {
+    public void onLoaderReset(Loader<List<Movie>> loader) {
         // Set refreshing off, when resetting
         mSwRefreshLayout.setRefreshing(false);
         // We reset the loader, nullify old data

@@ -28,7 +28,7 @@ import com.rowland.movies.data.callbacks.ReviewsCallBack;
 import com.rowland.movies.data.interfaces.ILoader;
 import com.rowland.movies.rest.collections.ReviewsCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
-import com.rowland.movies.rest.models.Reviews;
+import com.rowland.movies.rest.models.Review;
 import com.rowland.movies.rest.services.IMoviesAPIService;
 
 import java.util.List;
@@ -38,13 +38,13 @@ import retrofit.Call;
 /**
  * Created by Oti Rowland on 12/12/2015.
  */
-public class ReviewsLoader extends BaseLoader implements ILoader<Reviews> {
+public class ReviewsLoader extends BaseLoader implements ILoader<Review> {
     // The class Log identifier
     private static final String LOG_TAG = ReviewsLoader.class.getSimpleName();
     // The movie id whose reviewsList are retrieved
     private int mTmdbMovieId;
     // The list of movies our loader returns
-    private List<Reviews> reviewsList;
+    private List<Review> reviewsList;
 
     public ReviewsLoader(Context context, int mTmdbMovieId) {
         super(context);
@@ -54,7 +54,7 @@ public class ReviewsLoader extends BaseLoader implements ILoader<Reviews> {
     }
 
     @Override
-    public List<Reviews> loadInBackground() {
+    public List<Review> loadInBackground() {
         // If we are online query movies from API
         if (getIsOnline()) {
             // Get the MoviesAPIService and use it to retrieve a list of reviewsList
@@ -76,7 +76,7 @@ public class ReviewsLoader extends BaseLoader implements ILoader<Reviews> {
         Call<ReviewsCollection> createdCall = movieService.loadReviewsData(mTmdbMovieId, BuildConfig.IMDB_API_KEY);
         // Asynchronous access
         createdCall.enqueue(new ReviewsCallBack(getContext()) {
-            // Gain access to the Reviews List
+            // Gain access to the Review List
             @Override
             public void retrieveReviewsList() {
                 reviewsList = super.getReviewsList();
@@ -86,7 +86,7 @@ public class ReviewsLoader extends BaseLoader implements ILoader<Reviews> {
 
     // Get the list of reviews from local
     @Override
-    public List<Reviews> getLocalData() {
+    public List<Review> getLocalData() {
         // Return local list
         return reviewsList;
     }

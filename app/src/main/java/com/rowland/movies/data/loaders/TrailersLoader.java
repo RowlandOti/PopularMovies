@@ -29,7 +29,7 @@ import com.rowland.movies.data.callbacks.TrailersCallBack;
 import com.rowland.movies.data.interfaces.ILoader;
 import com.rowland.movies.rest.collections.TrailersCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
-import com.rowland.movies.rest.models.Trailers;
+import com.rowland.movies.rest.models.Trailer;
 import com.rowland.movies.rest.services.IMoviesAPIService;
 
 import java.util.List;
@@ -39,13 +39,13 @@ import retrofit.Call;
 /**
  * Created by Oti Rowland on 12/12/2015.
  */
-public class TrailersLoader extends BaseLoader implements ILoader<Trailers> {
+public class TrailersLoader extends BaseLoader implements ILoader<Trailer> {
     // The class Log identifier
     private static final String LOG_TAG = TrailersLoader.class.getSimpleName();
     // The movie id whose trailersList are retrieved
     private int mTmdbMovieId;
     // The list of trailersList our loader returns
-    private List<Trailers> trailersList;
+    private List<Trailer> trailersList;
     // Check if we are online
     private boolean isOnline;
 
@@ -59,7 +59,7 @@ public class TrailersLoader extends BaseLoader implements ILoader<Trailers> {
     }
 
     @Override
-    public List<Trailers> loadInBackground() {
+    public List<Trailer> loadInBackground() {
         // If we are online query movies from API
         if(getIsOnline()) {
             // Get the MoviesAPIService and use it to retrieve a list of trailersList
@@ -90,19 +90,19 @@ public class TrailersLoader extends BaseLoader implements ILoader<Trailers> {
     }
     // Get the list of reviews from local
     @Override
-    public List<Trailers> getLocalData() {
+    public List<Trailer> getLocalData() {
         // Return local list
         return trailersList;
     }
     // Extract the individual movie trailersList
     // Handy method, might help in future
-    private Trailers extractTrailer(TrailersCollection videos) {
+    private Trailer extractTrailer(TrailersCollection videos) {
         // If no trailer videos are found return
         if (videos == null || videos.results == null || videos.results.size() == 0) {
             return null;
         }
         // Pop out the lead YouTube trailer
-        for (Trailers video : videos.results) {
+        for (Trailer video : videos.results) {
             if ("Trailer".equals(video.getType()) && "YouTube".equals(video.getSite()) && !TextUtils.isEmpty(video.getKey())) {
                 return video;
             }

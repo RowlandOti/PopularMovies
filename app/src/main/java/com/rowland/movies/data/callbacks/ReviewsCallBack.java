@@ -25,7 +25,7 @@ import android.util.Log;
 import com.rowland.movies.BuildConfig;
 import com.rowland.movies.rest.collections.ReviewsCollection;
 import com.rowland.movies.rest.models.RestError;
-import com.rowland.movies.rest.models.Reviews;
+import com.rowland.movies.rest.models.Review;
 
 import java.io.IOException;
 import java.util.List;
@@ -42,7 +42,7 @@ public abstract class ReviewsCallBack implements Callback<ReviewsCollection> {
     // The class Log identifier
     private static final String LOG_TAG = ReviewsCallBack.class.getSimpleName();
     // The list of reviews our loader returns
-    private List<Reviews> reviewsList;
+    private List<Review> reviewsList;
     // Context instance
     private Context context;
 
@@ -57,7 +57,7 @@ public abstract class ReviewsCallBack implements Callback<ReviewsCollection> {
             // movies available
             reviewsList = response.body().getResults();
 
-            for (Reviews review : reviewsList) {
+            for (Review review : reviewsList) {
                 // Save reviews in the database
                 review.save();
                 // Check wether we are in debug mode
@@ -93,7 +93,7 @@ public abstract class ReviewsCallBack implements Callback<ReviewsCollection> {
         Log.d(LOG_TAG, t.getMessage());
     }
     // Getter method for moviesCollection
-    public List<Reviews> getReviewsList() {
+    public List<Review> getReviewsList() {
 
         return this.reviewsList;
     }

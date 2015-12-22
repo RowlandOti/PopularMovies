@@ -27,7 +27,7 @@ import android.view.ViewGroup;
 import com.rowland.movies.R;
 import com.rowland.movies.data.loaders.MoviesLoader;
 import com.rowland.movies.rest.enums.ESortOrder;
-import com.rowland.movies.rest.models.Movies;
+import com.rowland.movies.rest.models.Movie;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +35,9 @@ import java.util.List;
 import butterknife.ButterKnife;
 
 /**
- * Display Highest Rated Movies
+ * Display Highest Rated Movie
  */
-public class HighestRatedFragment extends BaseGridFragment implements LoaderManager.LoaderCallbacks<List<Movies>> {
+public class HighestRatedFragment extends BaseGridFragment implements LoaderManager.LoaderCallbacks<List<Movie>> {
 
     // Logging tracker for this class
     private final String LOG_TAG = HighestRatedFragment.class.getSimpleName();
@@ -80,22 +80,22 @@ public class HighestRatedFragment extends BaseGridFragment implements LoaderMana
     }
 
     @Override
-    public Loader<List<Movies>> onCreateLoader(int id, Bundle args) {
+    public Loader<List<Movie>> onCreateLoader(int id, Bundle args) {
         MoviesLoader movieLoader = new MoviesLoader(getActivity(), ESortOrder.HIGHEST_RATED_DESCENDING);
         // Return our Loader containg the list of movies
         return movieLoader;
     }
 
     @Override
-    public void onLoadFinished(Loader<List<Movies>> loader, List<Movies> data) {
+    public void onLoadFinished(Loader<List<Movie>> loader, List<Movie> data) {
 
         mSwRefreshLayout.setRefreshing(false);
-        mMovieLists = (ArrayList<Movies>) data;
+        mMovieLists = (ArrayList<Movie>) data;
 
     }
 
     @Override
-    public void onLoaderReset(Loader<List<Movies>> loader) {
+    public void onLoaderReset(Loader<List<Movie>> loader) {
 
         mSwRefreshLayout.setRefreshing(false);
     }

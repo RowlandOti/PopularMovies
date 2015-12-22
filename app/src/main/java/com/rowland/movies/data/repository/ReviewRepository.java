@@ -17,8 +17,26 @@
 
 package com.rowland.movies.data.repository;
 
+import com.activeandroid.query.Select;
+import com.rowland.movies.rest.models.Review;
+
+import java.util.List;
+
 /**
  * Created by Oti Rowland on 12/22/2015.
  */
 public class ReviewRepository {
+    public ReviewRepository() {
+    }
+
+    public List<Review> getAll() {
+
+        // Query ActiveAndroid for list of data
+        List<Review> queryResults = new Select()
+                .from(Review.class)
+                .orderBy("id_ ASC")
+                .limit(100).execute();
+        // This is how you execute a query
+        return queryResults;
+    }
 }

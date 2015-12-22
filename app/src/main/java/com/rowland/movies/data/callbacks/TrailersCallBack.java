@@ -25,7 +25,7 @@ import android.util.Log;
 import com.rowland.movies.BuildConfig;
 import com.rowland.movies.rest.collections.TrailersCollection;
 import com.rowland.movies.rest.models.RestError;
-import com.rowland.movies.rest.models.Trailers;
+import com.rowland.movies.rest.models.Trailer;
 
 import java.io.IOException;
 import java.util.List;
@@ -42,7 +42,7 @@ public abstract class TrailersCallBack implements Callback<TrailersCollection> {
     // The class Log identifier
     private static final String LOG_TAG = TrailersCallBack.class.getSimpleName();
     // The list of movies our loader returns
-    private List<Trailers> trailersList;
+    private List<Trailer> trailersList;
     // Context instance
     private Context context;
 
@@ -57,7 +57,7 @@ public abstract class TrailersCallBack implements Callback<TrailersCollection> {
             // movies available
             trailersList = response.body().getResults();
 
-            for (Trailers trailer : trailersList) {
+            for (Trailer trailer : trailersList) {
                 // Save movies in the database
                 trailer.save();
                 // Check wether we are in debug mode
@@ -93,7 +93,7 @@ public abstract class TrailersCallBack implements Callback<TrailersCollection> {
         Log.d(LOG_TAG, t.getMessage());
     }
     // Getter method for moviesList
-    public List<Trailers> getTrailersList() {
+    public List<Trailer> getTrailersList() {
 
         return this.trailersList;
     }

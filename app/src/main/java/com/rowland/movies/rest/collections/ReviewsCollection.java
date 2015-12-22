@@ -20,7 +20,7 @@ package com.rowland.movies.rest.collections;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.rowland.movies.rest.models.Reviews;
+import com.rowland.movies.rest.models.Review;
 
 import java.util.List;
 
@@ -32,14 +32,14 @@ public class ReviewsCollection {
     // Gson annotations
     @SerializedName("results")
     @Expose
-    public List<Reviews> results;
+    public List<Review> results;
 
     /**
      *
      * @return
      * The results
      */
-    public List<Reviews> getResults() {
+    public List<Review> getResults() {
         return results;
     }
 
@@ -48,7 +48,7 @@ public class ReviewsCollection {
      * @param results
      * The results
      */
-    public void setResults(List<Reviews> results) {
+    public void setResults(List<Review> results) {
         this.results = results;
     }
 

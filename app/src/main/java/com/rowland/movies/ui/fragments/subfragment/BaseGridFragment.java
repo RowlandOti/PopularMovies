@@ -26,9 +26,8 @@ import android.view.View;
 
 import com.rowland.movies.R;
 import com.rowland.movies.adapters.GridAdapter;
-import com.rowland.movies.rest.models.Movies;
+import com.rowland.movies.rest.models.Movie;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -42,7 +41,7 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
     // Logging tracker for this class
     private final String LOG_TAG = BaseGridFragment.class.getSimpleName();
     // AN arrayList of the movies
-    protected List<Movies> mMovieLists;
+    protected List<Movie> mMovieLists;
     // The grid adapter
     protected GridAdapter mGridAdapter;
 

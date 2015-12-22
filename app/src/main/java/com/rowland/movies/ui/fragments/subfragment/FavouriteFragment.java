@@ -25,16 +25,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rowland.movies.R;
-import com.rowland.movies.rest.models.Movies;
+import com.rowland.movies.rest.models.Movie;
 
 import java.util.List;
 
 import butterknife.ButterKnife;
 
 /**
- * Display Favourite Movies
+ * Display Favourite Movie
  */
-public class FavouriteFragment extends BaseGridFragment implements LoaderManager.LoaderCallbacks<List<Movies>> {
+public class FavouriteFragment extends BaseGridFragment implements LoaderManager.LoaderCallbacks<List<Movie>> {
 
     // Logging tracker for this class
     private final String LOG_TAG = FavouriteFragment.class.getSimpleName();
@@ -71,17 +71,17 @@ public class FavouriteFragment extends BaseGridFragment implements LoaderManager
 
 
     @Override
-    public Loader<List<Movies>> onCreateLoader(int id, Bundle args) {
+    public Loader<List<Movie>> onCreateLoader(int id, Bundle args) {
         return null;
     }
 
     @Override
-    public void onLoadFinished(Loader<List<Movies>> loader, List<Movies> data) {
+    public void onLoadFinished(Loader<List<Movie>> loader, List<Movie> data) {
 
     }
 
     @Override
-    public void onLoaderReset(Loader<List<Movies>> loader) {
+    public void onLoaderReset(Loader<List<Movie>> loader) {
 
     }
 

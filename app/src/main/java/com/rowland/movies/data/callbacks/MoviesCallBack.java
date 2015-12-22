@@ -24,7 +24,7 @@ import android.util.Log;
 
 import com.rowland.movies.BuildConfig;
 import com.rowland.movies.rest.collections.MoviesCollection;
-import com.rowland.movies.rest.models.Movies;
+import com.rowland.movies.rest.models.Movie;
 import com.rowland.movies.rest.models.RestError;
 
 import java.io.IOException;
@@ -42,7 +42,7 @@ public class MoviesCallBack implements Callback<MoviesCollection> {
     // The class Log identifier
     private static final String LOG_TAG = MoviesCallBack.class.getSimpleName();
     // The list of movies our loader returns
-    private List<Movies> moviesList;
+    private List<Movie> moviesList;
     // Context instance
     private Context context;
 
@@ -57,7 +57,7 @@ public class MoviesCallBack implements Callback<MoviesCollection> {
             // movies available
             moviesList = response.body().getResults();
 
-            for (Movies movie : moviesList) {
+            for (Movie movie : moviesList) {
                 // Save movies in the database
                 movie.save();
                 // Check wether we are in debug mode

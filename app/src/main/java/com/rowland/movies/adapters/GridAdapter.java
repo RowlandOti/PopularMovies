@@ -31,7 +31,7 @@ import com.rowland.movies.BuildConfig;
 import com.rowland.movies.R;
 import com.rowland.movies.rest.enums.EBaseImageSize;
 import com.rowland.movies.rest.enums.EBaseURlTypes;
-import com.rowland.movies.rest.models.Movies;
+import com.rowland.movies.rest.models.Movie;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -49,11 +49,11 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
     // The class Log identifier
     private static final String LOG_TAG = GridAdapter.class.getSimpleName();
     // A list of the movie items
-    private List<Movies> mMovieList = new ArrayList<>();
+    private List<Movie> mMovieList = new ArrayList<>();
     // A Calendar object to help in formatting time
     private Calendar mCalendar;
 
-    public GridAdapter(List<Movies> mMovieLists) {
+    public GridAdapter(List<Movie> mMovieLists) {
         this.mMovieList = mMovieLists;
         this.mCalendar = Calendar.getInstance();
     }
@@ -71,7 +71,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
     @Override
     public void onBindViewHolder(CustomViewHolder holder, int position) {
         // Movie item at this position
-        final Movies movie = mMovieList.get(position);
+        final Movie movie = mMovieList.get(position);
 
         holder.mGridItemContainer.setContentDescription(holder.mGridItemContainer.getContext().getString(R.string.movie_title, movie.getOriginalTitle()));
 
@@ -135,7 +135,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
         }
     }
     // Handy method for passing the list to the adapter
-    public void addMovies(List<Movies> movieList) {
+    public void addMovies(List<Movie> movieList) {
         if (movieList == null) {
             movieList = new ArrayList<>();
         }
