@@ -81,23 +81,26 @@ public class HighestRatedFragment extends BaseGridFragment implements LoaderMana
 
     @Override
     public Loader<List<Movie>> onCreateLoader(int id, Bundle args) {
-        MoviesLoader movieLoader = new MoviesLoader(getActivity(), ESortOrder.HIGHEST_RATED_DESCENDING);
         // Return our Loader containg the list of movies
-        return movieLoader;
+        return new MoviesLoader(getActivity(), ESortOrder.HIGHEST_RATED_DESCENDING);
     }
 
     @Override
-    public void onLoadFinished(Loader<List<Movie>> loader, List<Movie> data) {
-
+    public void onLoadFinished(Loader<List<Movie>> loader, List<Movie> movieList) {
+        // Set refreshing off, when done loading
         mSwRefreshLayout.setRefreshing(false);
-        mMovieLists = (ArrayList<Movie>) data;
-
+        // Fill our movies list with data
+        mMovieLists = movieList;
+        // Pass it on to our adapter
+        mGridAdapter.addMovies(movieList);
     }
 
     @Override
     public void onLoaderReset(Loader<List<Movie>> loader) {
-
+        // Set refreshing off, when resetting
         mSwRefreshLayout.setRefreshing(false);
+        // We reset the loader, nullify old data
+        mGridAdapter.addMovies(null);
     }
 
     // When RefreshLayout is triggered reload the loader
