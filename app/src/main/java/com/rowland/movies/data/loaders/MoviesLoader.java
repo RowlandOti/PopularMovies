@@ -92,6 +92,6 @@ public class MoviesLoader extends BaseLoader implements ILoader<Movie> {
             Log.d(LOG_TAG, "Local data loaded ");
         }
         // Return local list
-        return mMovieRepository.getAllByOrderOf(mSortOrder);
+        return mMovieRepository.getAllWhere(mSortOrder);
     }
 }

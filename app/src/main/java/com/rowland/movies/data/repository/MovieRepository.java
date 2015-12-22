@@ -34,7 +34,7 @@ public class MovieRepository {
 
     }
 
-    public List<Movie> getAllByOrderOf(ESortOrder sortOrder) {
+    public List<Movie> getAllWhere(ESortOrder sortOrder) {
         // Holds the where clause
         String whereClause = "";
         // Find out which where clause to use
