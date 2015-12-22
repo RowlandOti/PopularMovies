@@ -70,10 +70,10 @@ public class MovieCallBack implements Callback<MovieCollection> {
                 movie.save();
                 // Check wether we are in debug mode
                 if (BuildConfig.IS_DEBUG_MODE) {
-                    Log.d(LOG_TAG, "Movie " + movie.getTitle());
-                    Log.d(LOG_TAG, "Movie " + movie.getReleaseDate());
-                    Log.d(LOG_TAG, "Movie HighestRated" + movie.getIsHighestRated());
-                    Log.d(LOG_TAG, "Movie Popular" + movie.getIsPopular());
+                    Log.d(LOG_TAG, "Movie: " + movie.getTitle());
+                    Log.d(LOG_TAG, "Movie: " + movie.getReleaseDate());
+                    Log.d(LOG_TAG, "Movie HighestRated: " + movie.getIsHighestRated());
+                    Log.d(LOG_TAG, "Movie Popular: " + movie.getIsPopular());
                 }
                 // BroadCast the changes locally
                 LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent("MOVIES_RELOADER_DATA"));
