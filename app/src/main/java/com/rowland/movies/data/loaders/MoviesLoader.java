@@ -82,7 +82,7 @@ public class MoviesLoader extends BaseLoader implements ILoader<Movie> {
         // Retrieve the movies data
         Call<MovieCollection> createdCall = movieService.loadMoviesData(mSortOrder.getSortOrder(), BuildConfig.IMDB_API_KEY);
         // Asynchronous access
-        createdCall.enqueue(new MoviesCallBack(getContext()));
+        createdCall.enqueue(new MoviesCallBack(getContext(), mSortOrder));
     }
     // Get the list of movies from local
     @Override
@@ -92,6 +92,6 @@ public class MoviesLoader extends BaseLoader implements ILoader<Movie> {
             Log.d(LOG_TAG, "Local data loaded ");
         }
         // Return local list
-        return mMovieRepository.getAll();
+        return mMovieRepository.getAllByOrderOf(mSortOrder);
     }
 }

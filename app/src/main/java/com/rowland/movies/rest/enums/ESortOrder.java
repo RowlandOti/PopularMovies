@@ -25,14 +25,38 @@ public enum ESortOrder {
     POPULAR_DESCENDING("popularity.desc"), HIGHEST_RATED_DESCENDING("vote_average.desc");
 
     private String sortOrder;
+    private boolean isHighestRated;
+    private boolean isPopular;
 
     private ESortOrder(String s) {
         sortOrder = s;
     }
-
+    // Get the correspinding sort order
+    private void setSortOrderType(ESortOrder sortOrderType) {
+        // Find out which sort this is
+        switch (sortOrderType) {
+            case POPULAR_DESCENDING:
+                this.isPopular = true;
+                break;
+            case HIGHEST_RATED_DESCENDING:
+                this.isHighestRated = true;
+                break;
+        }
+    }
     // Get the correspinding sort order
     public String getSortOrder() {
-        return sortOrder;
+        return this.sortOrder;
     }
+    // Get whether we sorted by popularity
+    public boolean isPopular() {
+        setSortOrderType(this);
+        return isPopular;
+    }
+    // Get whether we sorted by rating
+    public boolean isHighestRated() {
+        setSortOrderType(this);
+        return isHighestRated;
+    }
+
 
 }

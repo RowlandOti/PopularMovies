@@ -24,6 +24,7 @@ import android.util.Log;
 
 import com.rowland.movies.BuildConfig;
 import com.rowland.movies.rest.collections.MovieCollection;
+import com.rowland.movies.rest.enums.ESortOrder;
 import com.rowland.movies.rest.models.Movie;
 import com.rowland.movies.rest.models.RestError;
 
@@ -45,9 +46,12 @@ public class MoviesCallBack implements Callback<MovieCollection> {
     private List<Movie> moviesList;
     // Context instance
     private Context context;
+    // Context instance
+    private ESortOrder sortOrder;
 
-    public MoviesCallBack(Context context) {
+    public MoviesCallBack(Context context, ESortOrder sortOrder) {
         this.context = context;
+        this.sortOrder = sortOrder;
     }
 
     @Override
@@ -58,12 +62,17 @@ public class MoviesCallBack implements Callback<MovieCollection> {
             moviesList = response.body().getResults();
 
             for (Movie movie : moviesList) {
+                // Set any necessary details
+                movie.setIsHighestRated(sortOrder.isHighestRated());
+                movie.setIsPopular(sortOrder.isPopular());
                 // Save movies in the database
                 movie.save();
                 // Check wether we are in debug mode
                 if (BuildConfig.IS_DEBUG_MODE) {
                     Log.d(LOG_TAG, "Movie " + movie.getTitle());
                     Log.d(LOG_TAG, "Movie " + movie.getReleaseDate());
+                    Log.d(LOG_TAG, "Movie HighestRated" + movie.getIsHighestRated());
+                    Log.d(LOG_TAG, "Movie Popular" + movie.getPopularity());
                 }
                 // BroadCast the changes locally
                 LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent("MOVIES_RELOADER_DATA"));

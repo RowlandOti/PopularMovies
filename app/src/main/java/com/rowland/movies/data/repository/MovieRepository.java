@@ -18,6 +18,7 @@
 package com.rowland.movies.data.repository;
 
 import com.activeandroid.query.Select;
+import com.rowland.movies.rest.enums.ESortOrder;
 import com.rowland.movies.rest.models.Movie;
 
 import java.util.List;
@@ -33,16 +34,25 @@ public class MovieRepository {
 
     }
 
-    public List<Movie> getAll() {
+    public List<Movie> getAllByOrderOf(ESortOrder sortOrder) {
+        // Holds the where clause
+        String whereClause = "";
+        // Find out which where clause to use
+        switch (sortOrder) {
+            case POPULAR_DESCENDING:
+                whereClause = "isPopular = true";
+                break;
+            case HIGHEST_RATED_DESCENDING:
+                whereClause = "isHighestRated = true";
+                break;
+        }
 
         // Query ActiveAndroid for list of data
         List<Movie> queryResults = new Select()
-                .from(Movie.class)
+                .from(Movie.class).where("")
                 .orderBy("id_ ASC")
                 .limit(100).execute();
         // This is how you execute a query
         return queryResults;
     }
-
-
 }
