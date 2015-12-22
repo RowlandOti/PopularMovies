@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v4.content.Loader;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.rowland.movies.BuildConfig;
@@ -42,7 +43,7 @@ public class DataSetChangeBroadCastReceiver extends BroadcastReceiver
         // Assign loader to this listener
         this.mLoader = loader;
         // Register reciever to listen for above IntentFilter
-        mLoader.getContext().registerReceiver(this, mLFilter);
+        LocalBroadcastManager.getInstance(mLoader.getContext()).registerReceiver(this, mLFilter);
     }
     // Inform if contents of database is changed
     @Override
