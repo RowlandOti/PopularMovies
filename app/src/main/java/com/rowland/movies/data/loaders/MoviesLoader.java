@@ -88,6 +88,7 @@ public class MoviesLoader extends BaseLoader implements ILoader<Movies> {
                 }
             }
         });
+
         // Return the list of online movies
         if (moviesList != null && !moviesList.isEmpty()) {
             // Return online list
