@@ -148,6 +148,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
             movieList = new ArrayList<>();
         }
         mMovieList = movieList;
+        // Notify others of the data changes
         notifyDataSetChanged();
     }
 }

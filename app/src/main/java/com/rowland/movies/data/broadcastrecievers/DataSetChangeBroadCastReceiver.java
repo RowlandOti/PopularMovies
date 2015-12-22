@@ -53,7 +53,7 @@ public class DataSetChangeBroadCastReceiver extends BroadcastReceiver
         mLoader.onContentChanged();
         // Check wether we are in debug mode
         if (BuildConfig.IS_DEBUG_MODE) {
-            Log.d(LOG_TAG, "Reload broadcast fired from " + mLoader.getClass().getSimpleName());
+            Log.d(LOG_TAG, "Broadcast fired from " + mLoader.getClass().getSimpleName());
         }
     }
 }
