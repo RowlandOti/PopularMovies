@@ -24,6 +24,7 @@ import com.rowland.movies.rest.collections.TrailerCollection;
 
 import retrofit.Call;
 import retrofit.http.GET;
+import retrofit.http.Headers;
 import retrofit.http.Path;
 import retrofit.http.Query;
 
@@ -43,14 +44,17 @@ public interface IMoviesAPIService {
     static final String MOVIES_REVIEWS_ENDPOINT = "/3/movie/{id}/reviews";
 
     // Load our movies
+    @Headers({"User-Agent: Popular Movies"})
     @GET(MOVIES_ENDPOINT)
     Call<MovieCollection> loadMoviesData(@Query("sort_by") String sortBy, @Query("api_key") String apiKey);
 
     // Load the movie's trailer videos
+    @Headers({"User-Agent: Popular Movies"})
     @GET(MOVIES_TRAILERS_ENDPOINT)
     Call<TrailerCollection> loadTrailersData(@Path("id") int mTmdbMovieId, @Query("api_key") String apiKey);
 
     // Load the movie's trailers
+    @Headers({"User-Agent: Popular Movies"})
     @GET(MOVIES_REVIEWS_ENDPOINT)
     Call<ReviewCollection> loadReviewsData(@Path("id") int mTmdbMovieId, @Query("api_key") String apiKey);
 }
