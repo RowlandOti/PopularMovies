@@ -26,7 +26,7 @@ import com.rowland.movies.data.broadcastrecievers.DataSetChangeBroadCastReceiver
 import com.rowland.movies.data.broadcastrecievers.NetworkChangeBroadCastReceiver;
 import com.rowland.movies.data.callbacks.ReviewsCallBack;
 import com.rowland.movies.data.interfaces.ILoader;
-import com.rowland.movies.rest.collections.ReviewsCollection;
+import com.rowland.movies.rest.collections.ReviewCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.models.Review;
 import com.rowland.movies.rest.services.IMoviesAPIService;
@@ -73,7 +73,7 @@ public class ReviewsLoader extends BaseLoader implements ILoader<Review> {
     @Override
     public void getOnlineData(IMoviesAPIService movieService) {
         // Retrieve the reviewsList data
-        Call<ReviewsCollection> createdCall = movieService.loadReviewsData(mTmdbMovieId, BuildConfig.IMDB_API_KEY);
+        Call<ReviewCollection> createdCall = movieService.loadReviewsData(mTmdbMovieId, BuildConfig.IMDB_API_KEY);
         // Asynchronous access
         createdCall.enqueue(new ReviewsCallBack(getContext()) {
             // Gain access to the Review List

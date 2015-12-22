@@ -25,7 +25,7 @@ import com.rowland.movies.rest.models.Movie;
 import java.util.List;
 
 @Table(name = "Movie")
-public class MoviesCollection {
+public class MovieCollection {
 
     // Gson annotations
     @SerializedName("page")

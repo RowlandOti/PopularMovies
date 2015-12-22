@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * Created by Rowland on 12/11/2015.
  */
-public class ReviewsCollection {
+public class ReviewCollection {
 
     // Gson annotations
     @SerializedName("results")

@@ -27,7 +27,7 @@ import com.rowland.movies.data.broadcastrecievers.DataSetChangeBroadCastReceiver
 import com.rowland.movies.data.broadcastrecievers.NetworkChangeBroadCastReceiver;
 import com.rowland.movies.data.callbacks.TrailersCallBack;
 import com.rowland.movies.data.interfaces.ILoader;
-import com.rowland.movies.rest.collections.TrailersCollection;
+import com.rowland.movies.rest.collections.TrailerCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.models.Trailer;
 import com.rowland.movies.rest.services.IMoviesAPIService;
@@ -77,7 +77,7 @@ public class TrailersLoader extends BaseLoader implements ILoader<Trailer> {
     @Override
     public void getOnlineData(IMoviesAPIService movieService) {
         // Retrieve the reviews data
-        Call<TrailersCollection> createdCall = movieService.loadTrailersData(mTmdbMovieId, BuildConfig.IMDB_API_KEY);
+        Call<TrailerCollection> createdCall = movieService.loadTrailersData(mTmdbMovieId, BuildConfig.IMDB_API_KEY);
         // Asynchronous access
         createdCall.enqueue(new TrailersCallBack(getContext()){
             // Gain access to the TrailersList
@@ -96,7 +96,7 @@ public class TrailersLoader extends BaseLoader implements ILoader<Trailer> {
     }
     // Extract the individual movie trailersList
     // Handy method, might help in future
-    private Trailer extractTrailer(TrailersCollection videos) {
+    private Trailer extractTrailer(TrailerCollection videos) {
         // If no trailer videos are found return
         if (videos == null || videos.results == null || videos.results.size() == 0) {
             return null;

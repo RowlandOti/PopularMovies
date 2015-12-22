@@ -27,7 +27,7 @@ import com.rowland.movies.data.broadcastrecievers.DataSetChangeBroadCastReceiver
 import com.rowland.movies.data.callbacks.MoviesCallBack;
 import com.rowland.movies.data.interfaces.ILoader;
 import com.rowland.movies.data.repository.MovieRepository;
-import com.rowland.movies.rest.collections.MoviesCollection;
+import com.rowland.movies.rest.collections.MovieCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.enums.ESortOrder;
 import com.rowland.movies.rest.models.Movie;
@@ -80,7 +80,7 @@ public class MoviesLoader extends BaseLoader implements ILoader<Movie> {
             Log.d(LOG_TAG, "Online data loaded ");
         }
         // Retrieve the movies data
-        Call<MoviesCollection> createdCall = movieService.loadMoviesData(mSortOrder.getSortOrder(), BuildConfig.IMDB_API_KEY);
+        Call<MovieCollection> createdCall = movieService.loadMoviesData(mSortOrder.getSortOrder(), BuildConfig.IMDB_API_KEY);
         // Asynchronous access
         createdCall.enqueue(new MoviesCallBack(getContext()));
     }

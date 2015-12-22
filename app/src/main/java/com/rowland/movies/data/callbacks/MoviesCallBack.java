@@ -23,7 +23,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.rowland.movies.BuildConfig;
-import com.rowland.movies.rest.collections.MoviesCollection;
+import com.rowland.movies.rest.collections.MovieCollection;
 import com.rowland.movies.rest.models.Movie;
 import com.rowland.movies.rest.models.RestError;
 
@@ -37,7 +37,7 @@ import retrofit.Retrofit;
 /**
  * Created by Oti Rowland on 12/21/2015.
  */
-public class MoviesCallBack implements Callback<MoviesCollection> {
+public class MoviesCallBack implements Callback<MovieCollection> {
 
     // The class Log identifier
     private static final String LOG_TAG = MoviesCallBack.class.getSimpleName();
@@ -51,7 +51,7 @@ public class MoviesCallBack implements Callback<MoviesCollection> {
     }
 
     @Override
-    public void onResponse(Response<MoviesCollection> response, Retrofit retrofit) {
+    public void onResponse(Response<MovieCollection> response, Retrofit retrofit) {
 
         if (response.isSuccess() && response.errorBody() == null) {
             // movies available

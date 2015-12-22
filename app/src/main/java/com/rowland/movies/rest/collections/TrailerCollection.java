@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * Created by Rowland on 12/11/2015.
  */
-public class TrailersCollection {
+public class TrailerCollection {
 
     // Gson annotations
     @SerializedName("results")
