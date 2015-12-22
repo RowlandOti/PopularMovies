@@ -40,16 +40,16 @@ public class MovieRepository {
         // Find out which where clause to use
         switch (sortOrder) {
             case POPULAR_DESCENDING:
-                whereClause = "isPopular = true";
+                whereClause = "isPopular = ?";
                 break;
             case HIGHEST_RATED_DESCENDING:
-                whereClause = "isHighestRated = true";
+                whereClause = "isHighestRated = ?";
                 break;
         }
 
         // Query ActiveAndroid for list of data
         List<Movie> queryResults = new Select()
-                .from(Movie.class).where("")
+                .from(Movie.class).where(whereClause, true)
                 .orderBy("id_ ASC")
                 .limit(100).execute();
         // This is how you execute a query

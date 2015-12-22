@@ -72,7 +72,7 @@ public class MoviesCallBack implements Callback<MovieCollection> {
                     Log.d(LOG_TAG, "Movie " + movie.getTitle());
                     Log.d(LOG_TAG, "Movie " + movie.getReleaseDate());
                     Log.d(LOG_TAG, "Movie HighestRated" + movie.getIsHighestRated());
-                    Log.d(LOG_TAG, "Movie Popular" + movie.getPopularity());
+                    Log.d(LOG_TAG, "Movie Popular" + movie.getIsPopular());
                 }
                 // BroadCast the changes locally
                 LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent("MOVIES_RELOADER_DATA"));
