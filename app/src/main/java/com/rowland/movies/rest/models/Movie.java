@@ -108,6 +108,13 @@ public class Movie extends Model {
     //ActiveAndroid Annotations
     @Column(name = "adult")
     private Boolean adult;
+    //ActiveAndroid Annotations
+    @Column(name = "isPopular")
+    private Boolean isPopular;
+    //ActiveAndroid Annotations
+    @Column(name = "isHighestRated")
+    private Boolean isHighestRated;
+
     public Movie() {
         // You have to call super in each constructor to create the table.
         super();
@@ -121,6 +128,33 @@ public class Movie extends Model {
     // Retrieve all the movie owned reviews
     public List<Review> getMovieReviews() {
         return getMany(Review.class, "Review");
+    }
+    /**
+     * @return The isHighestRated
+     */
+    public boolean getIsHighestRated() {
+        return isHighestRated;
+    }
+
+    /**
+     * @param isHighestRated The isHighestRated
+     */
+    public void setIsHighestRated(boolean isHighestRated) {
+        this.isHighestRated = isHighestRated;
+    }
+
+    /**
+     * @return The isPopular
+     */
+    public boolean getIsPopular() {
+        return isPopular;
+    }
+
+    /**
+     * @param isPopular The isPopular
+     */
+    public void setIsPopular(boolean isPopular) {
+        this.isPopular = isPopular;
     }
 
     /**
