@@ -65,7 +65,7 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
         if (mDataSetChangeObserver == null) {
             // Custom filter to map data changes.
             IntentFilter mLFilter = new IntentFilter("RELOADER_DATA");
-            // Register Observer - Start watching for data set changes.
+            // Register Observer - Start monitoring the underlying data source.
             mDataSetChangeObserver = new DataSetChangeBroadCastReceiver(this, mLFilter);
         }
         // When the observer detects a change, it should call onContentChanged()
@@ -92,7 +92,7 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
             onReleaseResources(mItems);
             mItems = null;
         }
-        // Unregister Observer - Stop monitoring for data set changes.
+        // Unregister Observer - Stop monitoring the underlying data source.
         if (mDataSetChangeObserver != null) {
             getContext().unregisterReceiver(mDataSetChangeObserver);
             mDataSetChangeObserver = null;
