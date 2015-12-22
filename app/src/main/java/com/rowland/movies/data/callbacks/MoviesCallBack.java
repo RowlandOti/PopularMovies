@@ -65,6 +65,7 @@ public class MoviesCallBack implements Callback<MovieCollection> {
                 // Set any necessary details
                 movie.setIsHighestRated(sortOrder.isHighestRated());
                 movie.setIsPopular(sortOrder.isPopular());
+                movie.setIsPopular(sortOrder.isFavourite());
                 // Save movies in the database
                 movie.save();
                 // Check wether we are in debug mode

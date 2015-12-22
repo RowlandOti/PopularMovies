@@ -45,6 +45,9 @@ public class MovieRepository {
             case HIGHEST_RATED_DESCENDING:
                 whereClause = "isHighestRated = ?";
                 break;
+            case FAVOURITE_DESCENDING:
+                whereClause = "isFavourite = ?";
+                break;
         }
 
         // Query ActiveAndroid for list of data

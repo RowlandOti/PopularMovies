@@ -114,6 +114,9 @@ public class Movie extends Model {
     //ActiveAndroid Annotations
     @Column(name = "isHighestRated")
     private Boolean isHighestRated;
+    //ActiveAndroid Annotations
+    @Column(name = "isFavourite")
+    private Boolean isFavourite;
 
     public Movie() {
         // You have to call super in each constructor to create the table.
@@ -143,6 +146,19 @@ public class Movie extends Model {
         this.isHighestRated = isHighestRated;
     }
 
+    /**
+     * @return The isPopular
+     */
+    public boolean getIsFavourite() {
+        return isFavourite;
+    }
+
+    /**
+     * @param isFavourite The isPopular
+     */
+    public void setIsFavourite(boolean isFavourite) {
+        this.isFavourite = isFavourite;
+    }
     /**
      * @return The isPopular
      */
