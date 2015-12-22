@@ -37,7 +37,7 @@ import retrofit.Retrofit;
 /**
  * Created by Oti Rowland on 12/21/2015.
  */
-public abstract class MoviesCallBack implements Callback<MoviesCollection> {
+public class MoviesCallBack implements Callback<MoviesCollection> {
 
     // The class Log identifier
     private static final String LOG_TAG = MoviesCallBack.class.getSimpleName();
@@ -92,15 +92,4 @@ public abstract class MoviesCallBack implements Callback<MoviesCollection> {
         // Inform user of failure due to no network e.t.c
         Log.d(LOG_TAG, t.getMessage());
     }
-    // Getter method for moviesCollection
-    public List<Movies> getMoviesList() {
-        // Check wether we are in debug mode
-        if (BuildConfig.IS_DEBUG_MODE) {
-            Log.d(LOG_TAG, "List Size "+moviesList.size());
-        }
-        return this.moviesList;
-    }
-    // A handy method to retrieve the collection from the callback
-    // Implement this method to gain access
-    public abstract void retrieveMoviesList();
 }

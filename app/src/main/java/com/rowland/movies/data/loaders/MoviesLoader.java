@@ -82,18 +82,7 @@ public class MoviesLoader extends BaseLoader implements ILoader<Movies> {
         // Retrieve the movies data
         Call<MoviesCollection> createdCall = movieService.loadMoviesData(mSortOrder.getSortOrder(), BuildConfig.IMDB_API_KEY);
         // Asynchronous access
-        createdCall.enqueue(new MoviesCallBack(getContext()) {
-            // ToDo: Remove method, it never gets called
-            // Gain access to the MoviesList
-            @Override
-            public void retrieveMoviesList() {
-                moviesList = super.getMoviesList();
-                // Check whether we are in debug mode
-                if (BuildConfig.IS_DEBUG_MODE) {
-                    Log.d(LOG_TAG, "List Size "+moviesList.size());
-                }
-            }
-        });
+        createdCall.enqueue(new MoviesCallBack(getContext()));
     }
     // Get the list of movies from local
     @Override
