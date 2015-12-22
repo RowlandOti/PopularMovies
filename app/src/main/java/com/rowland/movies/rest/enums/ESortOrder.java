@@ -22,11 +22,12 @@ package com.rowland.movies.rest.enums;
  */
 public enum ESortOrder {
     // The sort order for retrieving the movies
-    POPULAR_DESCENDING("popularity.desc"), HIGHEST_RATED_DESCENDING("vote_average.desc");
+    POPULAR_DESCENDING("popularity.desc"), HIGHEST_RATED_DESCENDING("vote_average.desc"), FAVOURITE_DESCENDING("favourite.desc");
 
     private String sortOrder;
     private boolean isHighestRated;
     private boolean isPopular;
+    private boolean isFavourite;
 
     private ESortOrder(String s) {
         sortOrder = s;
@@ -40,6 +41,9 @@ public enum ESortOrder {
                 break;
             case HIGHEST_RATED_DESCENDING:
                 this.isHighestRated = true;
+                break;
+            case FAVOURITE_DESCENDING:
+                this.isFavourite = true;
                 break;
         }
     }
@@ -56,6 +60,11 @@ public enum ESortOrder {
     public boolean isHighestRated() {
         setSortOrderType(this);
         return isHighestRated;
+    }
+    // Get whether we sorted by favourite
+    public boolean isFavourite() {
+        setSortOrderType(this);
+        return isFavourite;
     }
 
 

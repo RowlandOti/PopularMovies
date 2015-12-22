@@ -17,6 +17,7 @@
 
 package com.rowland.movies.adapters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,6 +33,8 @@ import com.rowland.movies.R;
 import com.rowland.movies.rest.enums.EBaseImageSize;
 import com.rowland.movies.rest.enums.EBaseURlTypes;
 import com.rowland.movies.rest.models.Movie;
+import com.rowland.movies.utilities.Utilities;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -52,9 +55,12 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
     private List<Movie> mMovieList = new ArrayList<>();
     // A Calendar object to help in formatting time
     private Calendar mCalendar;
+    // Context instance
+    private Context mContext;
 
-    public GridAdapter(List<Movie> mMovieLists) {
+    public GridAdapter(List<Movie> mMovieLists, Context context) {
         this.mMovieList = mMovieLists;
+        this.mContext = context;
         this.mCalendar = Calendar.getInstance();
     }
 
@@ -81,12 +87,14 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
             holder.mReleaseDateTextView.setContentDescription(holder.mReleaseDateTextView.getContext().getString(R.string.movie_year, String.valueOf(mCalendar.get(Calendar.YEAR))));
         }
 
-
         String imageUrl = EBaseURlTypes.MOVIE_API_IMAGE_BASE_URL.getUrlType() + EBaseImageSize.IMAGE_SIZE_W185.getImageSize() + movie.getPosterPath();
         final RelativeLayout container = holder.mMovieTitleContainer;
         // Use Picasso to load the images
-        Picasso.with(holder.mMovieImageView.getContext()).load(imageUrl).placeholder(R.drawable.ic_movie_placeholder).
-                into(holder.mMovieImageView);
+        Picasso.with(holder.mMovieImageView.getContext())
+                .load(imageUrl)
+                //.networkPolicy(Utilities.NetworkUtility.isNetworkAvailable(mContext) ? NetworkPolicy.NO_CACHE : NetworkPolicy.OFFLINE)
+                .placeholder(R.drawable.ic_movie_placeholder)
+                .into(holder.mMovieImageView);
 
         // Check wether we are in debug mode
         if (BuildConfig.IS_DEBUG_MODE) {

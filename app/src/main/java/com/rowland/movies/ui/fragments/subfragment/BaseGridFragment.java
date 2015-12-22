@@ -74,7 +74,7 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
         mGridRecycleView.setLayoutManager(mLayoutManager);
         mGridRecycleView.setHasFixedSize(true);
 
-        mGridAdapter = new GridAdapter(mMovieLists);
+        mGridAdapter = new GridAdapter(mMovieLists, getContext());
 
         mGridRecycleView.setAdapter(mGridAdapter);
         mSwRefreshLayout.setOnRefreshListener(this);
