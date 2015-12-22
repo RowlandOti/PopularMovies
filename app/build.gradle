@@ -70,6 +70,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'com.android.support:design:23.0.1'
     compile 'com.android.support:cardview-v7:23.0.1'
+    compile 'com.android.support:recyclerview-v7:23.0.1'
     // REMOTE BINARY DEPENDENCY - Third Party
     // Use - Rest API support
     compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
@@ -78,13 +79,12 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     // Use - General Utilities support
     compile 'com.uwetrottmann:androidutils:2.0.0'
-    // Use - Data flow analytics support
+    // Use - Data & network flow analytics/debugging support
     compile 'com.facebook.stetho:stetho:1.2.0'
     compile 'com.facebook.stetho:stetho-okhttp:1.2.0'
+    compile 'com.squareup.okhttp:logging-interceptor:2.6.0'
     // Use - Database support
     compile 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
     // Use - View Injection
     compile 'com.jakewharton:butterknife:7.0.1'
-    // Use - Network debugging
-    compile 'com.squareup.okhttp:logging-interceptor:2.6.0'
 }
