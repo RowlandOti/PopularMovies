@@ -24,9 +24,9 @@ import android.content.IntentFilter;
 
 import com.rowland.movies.data.broadcastrecievers.DataSetChangeBroadCastReceiver;
 import com.rowland.movies.data.broadcastrecievers.NetworkChangeBroadCastReceiver;
-import com.rowland.movies.data.interfaces.ILoader;
 import com.rowland.movies.utilities.Utilities;
 import com.uwetrottmann.androidutils.GenericSimpleLoader;
+
 /*ToDo: Improve Loader using tutorial below
 * <a>http://www.androiddesignpatterns.com/2012/08/implementing-loaders.html</a>
 * Major motivation from
@@ -45,6 +45,7 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
         super(context);
         setIsOnline(Utilities.NetworkUtility.isNetworkAvailable(context));
     }
+
     /**
      * Handles a request to start the Loader.
      * Checking for takeContentChanged seems an important step too
@@ -72,6 +73,7 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
             forceLoad();
         }
     }
+
     /**
      * Handles a request to completely reset the Loader.
      */
@@ -93,10 +95,12 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
             mDataSetChangeObserver = null;
         }
     }
+
     // Get the data set change observer
     protected DataSetChangeBroadCastReceiver getDataSetChangeObserver() {
         return mDataSetChangeObserver;
     }
+
     // Set the data set change observer
     protected void setDataSetChangeObserver(DataSetChangeBroadCastReceiver mDataSetChangeObserver) {
         this.mDataSetChangeObserver = mDataSetChangeObserver;
@@ -106,19 +110,23 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
     protected NetworkChangeBroadCastReceiver getNetworkChangeObserver() {
         return mNetworkChangeObserver;
     }
+
     // Set the network change observer
     protected void setNetworkChangeObserver(NetworkChangeBroadCastReceiver mNetworkChangeObserver) {
         this.mNetworkChangeObserver = mNetworkChangeObserver;
     }
+
     // Get the Context
-    public Context getContext(){
+    public Context getContext() {
         // Return Context
         return super.getContext();
     }
+
     // Get online status
     public boolean getIsOnline() {
         return isOnline;
     }
+
     // Set online status
     public void setIsOnline(boolean isOnline) {
         this.isOnline = isOnline;

@@ -18,21 +18,17 @@
 package com.rowland.movies.data.loaders;
 
 import android.content.Context;
-import android.content.IntentFilter;
 import android.util.Log;
 
 import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
-import com.rowland.movies.data.broadcastrecievers.DataSetChangeBroadCastReceiver;
-import com.rowland.movies.data.broadcastrecievers.NetworkChangeBroadCastReceiver;
 import com.rowland.movies.data.callbacks.MoviesCallBack;
 import com.rowland.movies.data.interfaces.ILoader;
-import com.rowland.movies.rest.enums.ESortOrder;
 import com.rowland.movies.rest.collections.MoviesCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
+import com.rowland.movies.rest.enums.ESortOrder;
 import com.rowland.movies.rest.models.Movies;
 import com.rowland.movies.rest.services.IMoviesAPIService;
-import com.rowland.movies.utilities.Utilities;
 
 import java.util.List;
 
@@ -53,9 +49,7 @@ public class MoviesLoader extends BaseLoader implements ILoader<Movies> {
     public MoviesLoader(Context context, ESortOrder mSortOrder) {
         super(context);
         this.mSortOrder = mSortOrder;
-        //setIsOnline(Utilities.NetworkUtility.isNetworkAvailable(context));
         //setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this,new IntentFilter("MOVIES_RELOADER_DATA")));
-        //setNetworkChangeObserver(new NetworkChangeBroadCastReceiver(this));
     }
 
     @Override
