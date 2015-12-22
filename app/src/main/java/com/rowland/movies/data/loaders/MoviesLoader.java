@@ -53,8 +53,8 @@ public class MoviesLoader extends BaseLoader implements ILoader<Movies> {
     public MoviesLoader(Context context, ESortOrder mSortOrder) {
         super(context);
         this.mSortOrder = mSortOrder;
-        setIsOnline(Utilities.NetworkUtility.isNetworkAvailable(context));
-        setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this,new IntentFilter("MOVIES_RELOADER_DATA")));
+        //setIsOnline(Utilities.NetworkUtility.isNetworkAvailable(context));
+        //setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this,new IntentFilter("MOVIES_RELOADER_DATA")));
         //setNetworkChangeObserver(new NetworkChangeBroadCastReceiver(this));
     }
 

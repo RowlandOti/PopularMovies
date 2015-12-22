@@ -41,9 +41,9 @@ public class NetworkChangeBroadCastReceiver extends BroadcastReceiver {
     // The class Log identifier
     private static final String LOG_TAG = NetworkChangeBroadCastReceiver.class.getSimpleName();
     // The loader that owns this listener
-    private ILoader mLoader;
+    private BaseLoader mLoader;
 
-    public NetworkChangeBroadCastReceiver(ILoader loader)
+    public NetworkChangeBroadCastReceiver(BaseLoader loader)
     {
         // Assign loader to this listener
         this.mLoader = loader;

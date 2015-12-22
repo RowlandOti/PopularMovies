@@ -25,6 +25,7 @@ import android.content.IntentFilter;
 import com.rowland.movies.data.broadcastrecievers.DataSetChangeBroadCastReceiver;
 import com.rowland.movies.data.broadcastrecievers.NetworkChangeBroadCastReceiver;
 import com.rowland.movies.data.interfaces.ILoader;
+import com.rowland.movies.utilities.Utilities;
 import com.uwetrottmann.androidutils.GenericSimpleLoader;
 /*ToDo: Improve Loader using tutorial below
 * <a>http://www.androiddesignpatterns.com/2012/08/implementing-loaders.html</a>
@@ -42,6 +43,7 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
 
     public BaseLoader(Context context) {
         super(context);
+        setIsOnline(Utilities.NetworkUtility.isNetworkAvailable(context));
     }
     /**
      * Handles a request to start the Loader.
@@ -54,7 +56,8 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
             // Deliver any previously loaded data immediately.
             deliverResult(mItems);
         }
-        // Create Observer if it is not set yet
+
+        // Create dat set change Observer if it is not set yet
         if (mDataSetChangeObserver == null) {
             // Custom filter to map data changes.
             IntentFilter mLFilter = new IntentFilter("RELOADER_DATA");
@@ -88,11 +91,6 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
         if (mDataSetChangeObserver != null) {
             getContext().unregisterReceiver(mDataSetChangeObserver);
             mDataSetChangeObserver = null;
-        }
-        // Unregister Observer - Stop monitoring for network changes.
-        if (mNetworkChangeObserver != null) {
-            getContext().unregisterReceiver(mNetworkChangeObserver);
-            mNetworkChangeObserver = null;
         }
     }
     // Get the data set change observer
