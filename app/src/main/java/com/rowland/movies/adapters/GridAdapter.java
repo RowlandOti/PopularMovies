@@ -55,6 +55,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
 
     public GridAdapter(List<Movies> mMovieLists) {
         this.mMovieList = mMovieLists;
+        this.mCalendar = Calendar.getInstance();
     }
 
     // Called when RecyclerView needs a new CustomViewHolder of the given type to represent an item.
@@ -87,6 +88,10 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
         Picasso.with(holder.mMovieImageView.getContext()).load(imageUrl).placeholder(R.drawable.ic_movie_placeholder).
                 into(holder.mMovieImageView);
 
+        // Check wether we are in debug mode
+        if (BuildConfig.IS_DEBUG_MODE) {
+            Log.d(LOG_TAG, "Image url: "+imageUrl);
+        }
     }
     // What's the size of the movie List
     @Override

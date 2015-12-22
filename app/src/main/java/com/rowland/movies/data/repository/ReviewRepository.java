@@ -15,27 +15,10 @@
  *
  */
 
-package com.rowland.movies.rest.enums;
+package com.rowland.movies.data.repository;
 
 /**
- * Created by Oti Rowland on 12/18/2015.
+ * Created by Oti Rowland on 12/22/2015.
  */
-public enum EBaseImageSize {
-
-    // All the image sizes that the application will query
-    IMAGE_SIZE_W185("w185"),
-    IMAGE_SIZE_W342("w342"),
-    IMAGE_SIZE_W500("w500"),
-    IMAGE_SIZE_W780("w780");
-
-    private String imageSize;
-
-    private EBaseImageSize(String s) {
-        imageSize = s;
-    }
-
-    // Get the url corresponding to the enum
-    public String getImageSize() {
-        return imageSize;
-    }
+public class ReviewRepository {
 }
