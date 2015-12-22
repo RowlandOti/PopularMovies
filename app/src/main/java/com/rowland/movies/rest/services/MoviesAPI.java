@@ -49,11 +49,6 @@ public class MoviesAPI implements IRetrofitAPI {
         Retrofit retrofit = ApplicationController.getRetrofit();
         // Initialise the singleton instance
         imoviesApiServiceInstance = retrofit.create(IMoviesAPIService.class);
-        // Check wether we are in debug mode
-        if (BuildConfig.IS_DEBUG_MODE) {
-            Log.d(LOG_TAG, "" + retrofit.getClass());
-            Log.d(LOG_TAG, "" + imoviesApiServiceInstance.getClass());
-        }
     }
 
     // Return the singleton instance
