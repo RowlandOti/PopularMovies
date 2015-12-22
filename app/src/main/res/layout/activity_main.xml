@@ -26,7 +26,9 @@ This layout is a one-pane layout for the Items master/detail flow.
 
     <include layout="@layout/toolbar" />
 
-
+    <!--
+            This layout is a one-pane layout for the master flow.
+            -->
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"

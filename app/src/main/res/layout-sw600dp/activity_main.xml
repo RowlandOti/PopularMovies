@@ -32,7 +32,7 @@
         android:divider="?android:attr/dividerHorizontal"
         android:orientation="horizontal">
         <!--
-        This layout is a two-pane layout for the Items master/detail flow.
+        This layout is a two-pane layout for the master/detail flow.
         -->
 
         <FrameLayout
