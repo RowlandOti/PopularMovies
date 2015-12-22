@@ -17,8 +17,32 @@
 
 package com.rowland.movies.data.repository;
 
+import com.activeandroid.query.Select;
+import com.rowland.movies.rest.models.Movies;
+
+import java.util.List;
+
 /**
  * Created by Oti Rowland on 12/22/2015.
+ *
+ * Movie Repository
  */
 public class MovieRepository {
+
+    public MovieRepository() {
+
+    }
+
+    public List<Movies> getAll() {
+
+        // Query ActiveAndroid for list of data
+        List<Movies> queryResults = new Select()
+                .from(Movies.class)
+                .orderBy("Name ASC")
+                .limit(100).execute();
+        // This is how you execute a query
+        return queryResults;
+    }
+
+
 }
