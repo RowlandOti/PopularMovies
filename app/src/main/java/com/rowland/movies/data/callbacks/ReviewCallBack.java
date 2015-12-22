@@ -37,16 +37,16 @@ import retrofit.Retrofit;
 /**
  * Created by Oti Rowland on 12/21/2015.
  */
-public abstract class ReviewsCallBack implements Callback<ReviewCollection> {
+public abstract class ReviewCallBack implements Callback<ReviewCollection> {
 
     // The class Log identifier
-    private static final String LOG_TAG = ReviewsCallBack.class.getSimpleName();
+    private static final String LOG_TAG = ReviewCallBack.class.getSimpleName();
     // The list of reviews our loader returns
     private List<Review> reviewsList;
     // Context instance
     private Context context;
 
-    public ReviewsCallBack(Context context) {
+    public ReviewCallBack(Context context) {
         this.context = context;
     }
 

@@ -23,9 +23,10 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.rowland.movies.BuildConfig;
-import com.rowland.movies.rest.collections.TrailerCollection;
+import com.rowland.movies.rest.collections.MovieCollection;
+import com.rowland.movies.rest.enums.ESortOrder;
+import com.rowland.movies.rest.models.Movie;
 import com.rowland.movies.rest.models.RestError;
-import com.rowland.movies.rest.models.Trailer;
 
 import java.io.IOException;
 import java.util.List;
@@ -37,34 +38,45 @@ import retrofit.Retrofit;
 /**
  * Created by Oti Rowland on 12/21/2015.
  */
-public abstract class TrailersCallBack implements Callback<TrailerCollection> {
+public class MovieCallBack implements Callback<MovieCollection> {
 
     // The class Log identifier
-    private static final String LOG_TAG = TrailersCallBack.class.getSimpleName();
+    private static final String LOG_TAG = MovieCallBack.class.getSimpleName();
     // The list of movies our loader returns
-    private List<Trailer> trailersList;
+    private List<Movie> moviesList;
     // Context instance
     private Context context;
+    // Context instance
+    private ESortOrder sortOrder;
 
-    public TrailersCallBack(Context context) {
+    public MovieCallBack(Context context, ESortOrder sortOrder) {
         this.context = context;
+        this.sortOrder = sortOrder;
     }
 
     @Override
-    public void onResponse(Response<TrailerCollection> response, Retrofit retrofit) {
+    public void onResponse(Response<MovieCollection> response, Retrofit retrofit) {
 
         if (response.isSuccess() && response.errorBody() == null) {
             // movies available
-            trailersList = response.body().getResults();
+            moviesList = response.body().getResults();
 
-            for (Trailer trailer : trailersList) {
+            for (Movie movie : moviesList) {
+                // Set any necessary details
+                movie.setIsHighestRated(sortOrder.isHighestRated());
+                movie.setIsPopular(sortOrder.isPopular());
+                movie.setIsPopular(sortOrder.isFavourite());
                 // Save movies in the database
-                trailer.save();
+                movie.save();
                 // Check wether we are in debug mode
                 if (BuildConfig.IS_DEBUG_MODE) {
-                    Log.d(LOG_TAG, "Trailer " + trailer.getName());
-                    Log.d(LOG_TAG, "Trailer " + trailer.getSite());
+                    Log.d(LOG_TAG, "Movie " + movie.getTitle());
+                    Log.d(LOG_TAG, "Movie " + movie.getReleaseDate());
+                    Log.d(LOG_TAG, "Movie HighestRated" + movie.getIsHighestRated());
+                    Log.d(LOG_TAG, "Movie Popular" + movie.getIsPopular());
                 }
+                // BroadCast the changes locally
+                LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent("MOVIES_RELOADER_DATA"));
             }
         } else {
 
@@ -78,8 +90,6 @@ public abstract class TrailersCallBack implements Callback<TrailerCollection> {
                     //For getting error code. Code is integer value like 200,404 etc
                     Log.d(LOG_TAG, String.valueOf(restError.getCode()));
                 }
-                // BroadCast the changes locally
-                LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent("TRAILERS_RELOADER_DATA"));
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -92,12 +102,4 @@ public abstract class TrailersCallBack implements Callback<TrailerCollection> {
         // Inform user of failure due to no network e.t.c
         Log.d(LOG_TAG, t.getMessage());
     }
-    // Getter method for moviesList
-    public List<Trailer> getTrailersList() {
-
-        return this.trailersList;
-    }
-    // A handy method to retrieve the list from the callback
-    // Implement this method to gain access
-    public abstract void retrieveTrailersList();
 }

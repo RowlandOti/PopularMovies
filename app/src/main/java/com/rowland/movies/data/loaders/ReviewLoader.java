@@ -24,7 +24,7 @@ import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
 import com.rowland.movies.data.broadcastrecievers.DataSetChangeBroadCastReceiver;
 import com.rowland.movies.data.broadcastrecievers.NetworkChangeBroadCastReceiver;
-import com.rowland.movies.data.callbacks.ReviewsCallBack;
+import com.rowland.movies.data.callbacks.ReviewCallBack;
 import com.rowland.movies.data.interfaces.ILoader;
 import com.rowland.movies.rest.collections.ReviewCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
@@ -38,15 +38,15 @@ import retrofit.Call;
 /**
  * Created by Oti Rowland on 12/12/2015.
  */
-public class ReviewsLoader extends BaseLoader implements ILoader<Review> {
+public class ReviewLoader extends BaseLoader implements ILoader<Review> {
     // The class Log identifier
-    private static final String LOG_TAG = ReviewsLoader.class.getSimpleName();
+    private static final String LOG_TAG = ReviewLoader.class.getSimpleName();
     // The movie id whose reviewsList are retrieved
     private int mTmdbMovieId;
     // The list of movies our loader returns
     private List<Review> reviewsList;
 
-    public ReviewsLoader(Context context, int mTmdbMovieId) {
+    public ReviewLoader(Context context, int mTmdbMovieId) {
         super(context);
         this.mTmdbMovieId = mTmdbMovieId;
         setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this, new IntentFilter("REVIEWS_RELOADER_DATA")));
@@ -75,7 +75,7 @@ public class ReviewsLoader extends BaseLoader implements ILoader<Review> {
         // Retrieve the reviewsList data
         Call<ReviewCollection> createdCall = movieService.loadReviewsData(mTmdbMovieId, BuildConfig.IMDB_API_KEY);
         // Asynchronous access
-        createdCall.enqueue(new ReviewsCallBack(getContext()) {
+        createdCall.enqueue(new ReviewCallBack(getContext()) {
             // Gain access to the Review List
             @Override
             public void retrieveReviewsList() {

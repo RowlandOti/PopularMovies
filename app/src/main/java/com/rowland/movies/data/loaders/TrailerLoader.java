@@ -25,7 +25,7 @@ import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
 import com.rowland.movies.data.broadcastrecievers.DataSetChangeBroadCastReceiver;
 import com.rowland.movies.data.broadcastrecievers.NetworkChangeBroadCastReceiver;
-import com.rowland.movies.data.callbacks.TrailersCallBack;
+import com.rowland.movies.data.callbacks.TrailerCallBack;
 import com.rowland.movies.data.interfaces.ILoader;
 import com.rowland.movies.rest.collections.TrailerCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
@@ -39,9 +39,9 @@ import retrofit.Call;
 /**
  * Created by Oti Rowland on 12/12/2015.
  */
-public class TrailersLoader extends BaseLoader implements ILoader<Trailer> {
+public class TrailerLoader extends BaseLoader implements ILoader<Trailer> {
     // The class Log identifier
-    private static final String LOG_TAG = TrailersLoader.class.getSimpleName();
+    private static final String LOG_TAG = TrailerLoader.class.getSimpleName();
     // The movie id whose trailersList are retrieved
     private int mTmdbMovieId;
     // The list of trailersList our loader returns
@@ -49,7 +49,7 @@ public class TrailersLoader extends BaseLoader implements ILoader<Trailer> {
     // Check if we are online
     private boolean isOnline;
 
-    public TrailersLoader(Context context, int mTmdbMovieId) {
+    public TrailerLoader(Context context, int mTmdbMovieId) {
         super(context);
         this.mTmdbMovieId = mTmdbMovieId;
         // Set the data set change observer
@@ -79,7 +79,7 @@ public class TrailersLoader extends BaseLoader implements ILoader<Trailer> {
         // Retrieve the reviews data
         Call<TrailerCollection> createdCall = movieService.loadTrailersData(mTmdbMovieId, BuildConfig.IMDB_API_KEY);
         // Asynchronous access
-        createdCall.enqueue(new TrailersCallBack(getContext()){
+        createdCall.enqueue(new TrailerCallBack(getContext()){
             // Gain access to the TrailersList
             @Override
             public void retrieveTrailersList() {

@@ -24,7 +24,7 @@ import android.util.Log;
 import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
 import com.rowland.movies.data.broadcastrecievers.DataSetChangeBroadCastReceiver;
-import com.rowland.movies.data.callbacks.MoviesCallBack;
+import com.rowland.movies.data.callbacks.MovieCallBack;
 import com.rowland.movies.data.interfaces.ILoader;
 import com.rowland.movies.data.repository.MovieRepository;
 import com.rowland.movies.rest.collections.MovieCollection;
@@ -40,10 +40,10 @@ import retrofit.Call;
 /**
  * Created by Oti Rowland on 12/12/2015.
  */
-public class MoviesLoader extends BaseLoader implements ILoader<Movie> {
+public class MovieLoader extends BaseLoader implements ILoader<Movie> {
 
     // The class Log identifier
-    private static final String LOG_TAG = MoviesLoader.class.getSimpleName();
+    private static final String LOG_TAG = MovieLoader.class.getSimpleName();
     // MovieRepository instance
     private MovieRepository mMovieRepository;
     // The sort order type
@@ -51,7 +51,7 @@ public class MoviesLoader extends BaseLoader implements ILoader<Movie> {
     // The list of movies our loader returns
     private List<Movie> moviesList;
 
-    public MoviesLoader(Context context, ESortOrder mSortOrder) {
+    public MovieLoader(Context context, ESortOrder mSortOrder) {
         super(context);
         this.mSortOrder = mSortOrder;
         this.mMovieRepository = new MovieRepository();
@@ -82,7 +82,7 @@ public class MoviesLoader extends BaseLoader implements ILoader<Movie> {
         // Retrieve the movies data
         Call<MovieCollection> createdCall = movieService.loadMoviesData(mSortOrder.getSortOrder(), BuildConfig.IMDB_API_KEY);
         // Asynchronous access
-        createdCall.enqueue(new MoviesCallBack(getContext(), mSortOrder));
+        createdCall.enqueue(new MovieCallBack(getContext(), mSortOrder));
     }
     // Get the list of movies from local
     @Override

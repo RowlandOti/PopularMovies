@@ -25,7 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rowland.movies.R;
-import com.rowland.movies.data.loaders.MoviesLoader;
+import com.rowland.movies.data.loaders.MovieLoader;
 import com.rowland.movies.rest.enums.ESortOrder;
 import com.rowland.movies.rest.models.Movie;
 
@@ -82,7 +82,7 @@ public class HighestRatedFragment extends BaseGridFragment implements LoaderMana
     @Override
     public Loader<List<Movie>> onCreateLoader(int id, Bundle args) {
         // Return our Loader containg the list of movies
-        return new MoviesLoader(getActivity(), ESortOrder.HIGHEST_RATED_DESCENDING);
+        return new MovieLoader(getActivity(), ESortOrder.HIGHEST_RATED_DESCENDING);
     }
 
     @Override
