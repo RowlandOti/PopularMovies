@@ -97,17 +97,6 @@ public class TrailersLoader extends BaseLoader implements ILoader<Trailers> {
         // Return local list
         return trailersList;
     }
-    // Get online status
-    @Override
-    public boolean getIsOnline() {
-        return isOnline;
-    }
-    // Set online status
-    @Override
-    public void setIsOnline(boolean online) {
-        this.isOnline = online;
-    }
-
     // Extract the individual movie trailersList
     // Handy method, might help in future
     private Trailers extractTrailer(TrailersCollection videos) {

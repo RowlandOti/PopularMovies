@@ -37,6 +37,8 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
     private DataSetChangeBroadCastReceiver mDataSetChangeObserver;
     // An observer to listen for network changes
     private NetworkChangeBroadCastReceiver mNetworkChangeObserver;
+    // Check if we are online
+    private boolean isOnline = false;
 
     public BaseLoader(Context context) {
         super(context);
@@ -114,5 +116,13 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
     public Context getContext(){
         // Return Context
         return super.getContext();
+    }
+    // Get online status
+    public boolean getIsOnline() {
+        return isOnline;
+    }
+    // Set online status
+    public void setIsOnline(boolean isOnline) {
+        this.isOnline = isOnline;
     }
 }

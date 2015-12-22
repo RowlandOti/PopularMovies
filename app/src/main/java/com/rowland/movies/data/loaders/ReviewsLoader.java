@@ -45,8 +45,6 @@ public class ReviewsLoader extends BaseLoader implements ILoader<Reviews> {
     private int mTmdbMovieId;
     // The list of movies our loader returns
     private List<Reviews> reviewsList;
-    // Check if we are online
-    private boolean isOnline;
 
     public ReviewsLoader(Context context, int mTmdbMovieId) {
         super(context);
@@ -92,15 +90,5 @@ public class ReviewsLoader extends BaseLoader implements ILoader<Reviews> {
     public List<Reviews> getLocalData() {
         // Return local list
         return reviewsList;
-    }
-    // Get online status
-    @Override
-    public boolean getIsOnline() {
-        return isOnline;
-    }
-    // Set online status
-    @Override
-    public void setIsOnline(boolean online) {
-        this.isOnline = online;
     }
 }

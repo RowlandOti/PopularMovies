@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 
 import com.rowland.movies.BuildConfig;
@@ -40,7 +41,7 @@ public class NetworkChangeBroadCastReceiver extends BroadcastReceiver {
     // The class Log identifier
     private static final String LOG_TAG = NetworkChangeBroadCastReceiver.class.getSimpleName();
     // The loader that owns this listener
-    final private ILoader mLoader;
+    private ILoader mLoader;
 
     public NetworkChangeBroadCastReceiver(ILoader loader)
     {
@@ -63,7 +64,7 @@ public class NetworkChangeBroadCastReceiver extends BroadcastReceiver {
         mLoader.setIsOnline(isOnline);
         // Check wether we are in debug mode
         if (BuildConfig.IS_DEBUG_MODE) {
-            Log.d(LOG_TAG, "Connection broadcast fired from " + mLoader.getClass().getSimpleName()+ " " +this.mLoader.getIsOnline());
+            Log.d(LOG_TAG, "Connection broadcast fired from " + mLoader.getClass().getSimpleName()+ " " +mLoader.getIsOnline());
         }
     }
 }
