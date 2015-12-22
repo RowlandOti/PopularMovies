@@ -112,9 +112,7 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
     }
     // Get the Context
     public Context getContext(){
-        //Get Context
-        Context context = getContext();
         // Return Context
-        return context;
+        return super.getContext();
     }
 }
