@@ -19,7 +19,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.rowland.movies.ui.fragments.subfragment.HighestRatedFragment">
+    >
 
     <include layout="@layout/inc_swipable_recycler" />
 </FrameLayout>

@@ -20,7 +20,6 @@ package com.rowland.movies.ui.activities;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.Toolbar;
 
 import com.rowland.movies.R;
 import com.rowland.movies.ui.fragments.DetailsFragment;
@@ -33,6 +32,10 @@ public class MainActivity extends BaseToolBarActivity {
 
     // Class Variables
     private final String LOG_TAG = MainActivity.class.getSimpleName();
+    // The MainFragment
+    private MainFragment mainFragment;
+    // The DetailFragment
+    private DetailsFragment detailFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,10 +75,12 @@ public class MainActivity extends BaseToolBarActivity {
 
         FragmentTransaction ft = fm.beginTransaction();
 
-        DetailsFragment fragment = DetailsFragment.newInstance(args);
+        if (detailFragment == null) {
+            detailFragment = DetailsFragment.newInstance(args);
 
-        ft.replace(R.id.detail_container, fragment);
-        ft.commit();
+            ft.replace(R.id.detail_container, detailFragment);
+            ft.commit();
+        }
     }
 
     // Inser the MainFragment
@@ -83,10 +88,11 @@ public class MainActivity extends BaseToolBarActivity {
         FragmentManager fm = getSupportFragmentManager();
 
         FragmentTransaction ft = fm.beginTransaction();
+        if (mainFragment == null) {
+            mainFragment = MainFragment.newInstance(args);
 
-        MainFragment fragment = MainFragment.newInstance(args);
-
-        ft.add(R.id.fragment_container, fragment);
-        ft.commit();
+            ft.add(R.id.fragment_container, mainFragment);
+            ft.commit();
+        }
     }
 }
