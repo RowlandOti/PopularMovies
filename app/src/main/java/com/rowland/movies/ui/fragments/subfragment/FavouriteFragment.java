@@ -85,14 +85,7 @@ public class FavouriteFragment extends BaseGridFragment implements LoaderManager
     @Override
     public Loader<List<Movie>> onCreateLoader(int id, Bundle args) {
         //Create new loader
-        MovieLoader movieLoader = null;
-        // Handle loader creation on retrained fragments
-        if (movieLoader != null)  {
-            // Return old loader
-            return movieLoader;
-        }
-        // Otherwise create new loader
-        movieLoader =  new MovieLoader(getActivity(), ESortOrder.FAVOURITE_DESCENDING);
+        MovieLoader movieLoader =  new MovieLoader(getActivity(), ESortOrder.FAVOURITE_DESCENDING);
         // Return new loader
         return movieLoader;
     }
@@ -105,6 +98,7 @@ public class FavouriteFragment extends BaseGridFragment implements LoaderManager
         mMovieLists = movieList;
         // Pass it on to our adapter
         mGridAdapter.addMovies(movieList);
+        mGridAdapter.notifyDataSetChanged();
     }
 
     @Override

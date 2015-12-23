@@ -84,14 +84,8 @@ public class HighestRatedFragment extends BaseGridFragment implements LoaderMana
     @Override
     public Loader<List<Movie>> onCreateLoader(int id, Bundle args) {
         //Create new loader
-        MovieLoader movieLoader = null;
-        // Handle loader creation on retrained fragments
-        if (movieLoader != null)  {
-            // Return old loader
-            return movieLoader;
-        }
-        // Otherwise create new loader
-        movieLoader =  new MovieLoader(getActivity(), ESortOrder.HIGHEST_RATED_DESCENDING);       // Return new loader
+        MovieLoader movieLoader =  new MovieLoader(getActivity(), ESortOrder.HIGHEST_RATED_DESCENDING);
+        // Return new loader
         return movieLoader;
     }
 
@@ -103,6 +97,7 @@ public class HighestRatedFragment extends BaseGridFragment implements LoaderMana
         mMovieLists = movieList;
         // Pass it on to our adapter
         mGridAdapter.addMovies(movieList);
+        mGridAdapter.notifyDataSetChanged();
     }
 
     @Override
