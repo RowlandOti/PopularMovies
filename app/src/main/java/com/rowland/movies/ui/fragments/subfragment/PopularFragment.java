@@ -82,7 +82,17 @@ public class PopularFragment extends BaseGridFragment implements LoaderManager.L
 
     @Override
     public Loader<List<Movie>> onCreateLoader(int id, Bundle args) {
-        return new MovieLoader(getActivity(), ESortOrder.POPULAR_DESCENDING);
+        //Create new loader
+        MovieLoader movieLoader = null;
+        // Handle loader creation on retrained fragments
+        if (movieLoader != null)  {
+            // Return old loader
+            return movieLoader;
+        }
+        // Otherwise create new loader
+        movieLoader =  new MovieLoader(getActivity(), ESortOrder.POPULAR_DESCENDING);
+        // Return new loader
+        return movieLoader;
     }
 
     @Override

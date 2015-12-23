@@ -81,7 +81,7 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
         final StaggeredGridLayoutManager mStaggeredLayoutManger = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
 
         mGridRecycleView.setLayoutManager(mStaggeredLayoutManger);
-        mGridRecycleView.setHasFixedSize(true);
+        mGridRecycleView.setHasFixedSize(false);
 
         mGridAdapter = new GridAdapter(mMovieLists, getContext());
 
