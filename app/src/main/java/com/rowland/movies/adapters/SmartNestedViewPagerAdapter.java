@@ -21,6 +21,7 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
+import com.rowland.movies.ui.fragments.DetailsFragment;
 import com.rowland.movies.ui.fragments.MainFragment;
 import com.rowland.movies.ui.fragments.subfragment.FavouriteFragment;
 import com.rowland.movies.ui.fragments.subfragment.HighestRatedFragment;
@@ -32,28 +33,41 @@ import com.rowland.movies.ui.fragments.subfragment.PopularFragment;
  */
 public class SmartNestedViewPagerAdapter extends SmartFragmentStatePagerAdapter {
 
-    private final Context mContext;
     private MainFragment ht = new MainFragment();
+    // The PopularFragment
+    private PopularFragment popularFragment;
+    // The HighestRatedFragment
+    private HighestRatedFragment highestRatedFragment;
+    // The FavouriteFragment
+    private FavouriteFragment favouriteFragment;
 
-    public SmartNestedViewPagerAdapter(FragmentManager fm, Context context) {
+    public SmartNestedViewPagerAdapter(FragmentManager fm) {
         super(fm);
-        mContext = context;
     }
 
     @Override
     public Fragment getItem(int index) {
         switch (index) {
             case 0: {
-                // Home -Tweet fragment activity
-                return new PopularFragment().newInstance(null);
+                // Popular fragment
+                if(popularFragment != null) {
+                    popularFragment = new PopularFragment().newInstance(null);
+                }
+                return popularFragment;
             }
             case 1: {
-                // Favourite fragment activity
-                return new HighestRatedFragment().newInstance(null);
+                // Highest Rated fragment
+                if(highestRatedFragment != null) {
+                    highestRatedFragment = new HighestRatedFragment().newInstance(null);
+                }
+                return highestRatedFragment;
             }
             case 2: {
-                // Graph fragment activity
-                return new FavouriteFragment().newInstance(null);
+                // Favourite fragment
+                if(favouriteFragment != null) {
+                    favouriteFragment = new FavouriteFragment().newInstance(null);
+                }
+                return favouriteFragment;
             }
 
         }
