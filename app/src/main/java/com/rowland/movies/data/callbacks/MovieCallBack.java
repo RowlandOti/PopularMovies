@@ -18,11 +18,10 @@
 package com.rowland.movies.data.callbacks;
 
 import android.content.Context;
-import android.content.Intent;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.rowland.movies.BuildConfig;
+import com.rowland.movies.data.repository.MovieRepository;
 import com.rowland.movies.rest.collections.MovieCollection;
 import com.rowland.movies.rest.enums.ESortOrder;
 import com.rowland.movies.rest.models.Movie;
@@ -44,14 +43,14 @@ public class MovieCallBack implements Callback<MovieCollection> {
     private static final String LOG_TAG = MovieCallBack.class.getSimpleName();
     // The list of movies our loader returns
     private List<Movie> moviesList;
+    // MovieRepository instance
+    private MovieRepository mMovieRepository;
     // Context instance
-    private Context context;
-    // Context instance
-    private ESortOrder sortOrder;
+    private ESortOrder mSortOrder;
 
-    public MovieCallBack(Context context, ESortOrder sortOrder) {
-        this.context = context;
-        this.sortOrder = sortOrder;
+    public MovieCallBack(MovieRepository mMovieRepository, ESortOrder sortOrder) {
+        this.mSortOrder = sortOrder;
+        this.mMovieRepository = mMovieRepository;
     }
 
     @Override
@@ -61,23 +60,7 @@ public class MovieCallBack implements Callback<MovieCollection> {
             // movies available
             moviesList = response.body().getResults();
             // Save movies to data storage
-            for (Movie movie : moviesList) {
-                // Set any necessary details
-                movie.setIsHighestRated(sortOrder.isHighestRated());
-                movie.setIsFavourite(sortOrder.isFavourite());
-                movie.setIsPopular(sortOrder.isPopular());
-                // Save movies in the database
-                movie.save();
-                // Check wether we are in debug mode
-                if (BuildConfig.IS_DEBUG_MODE) {
-                    Log.d(LOG_TAG, "Movie: " + movie.getTitle());
-                    Log.d(LOG_TAG, "Movie: " + movie.getReleaseDate());
-                    Log.d(LOG_TAG, "Movie: " + movie.getId_());
-                    Log.d(LOG_TAG, "Movie HighestRated: " + movie.getIsHighestRated());
-                    Log.d(LOG_TAG, "Movie Favourite: " + movie.getIsFavourite());
-                    Log.d(LOG_TAG, "Movie Popular: " + movie.getIsPopular());
-                }
-            }
+            mMovieRepository.saveAll(moviesList, mSortOrder);
             // BroadCast the changes locally
             //LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent("MOVIES_RELOADER_DATA"));
         } else {
@@ -88,9 +71,9 @@ public class MovieCallBack implements Callback<MovieCollection> {
                         .convert(response.errorBody());
                 if (BuildConfig.IS_DEBUG_MODE) {
                     // we got an error message - Do error handling here
-                    //Log.d(LOG_TAG, restError.getErrorMesage());
+                    Log.d(LOG_TAG, restError.getErrorMesage());
                     //For getting error code. Code is integer value like 200,404 etc
-                    //Log.d(LOG_TAG, String.valueOf(restError.getCode()));
+                    Log.d(LOG_TAG, String.valueOf(restError.getCode()));
                 }
 
             } catch (IOException e) {

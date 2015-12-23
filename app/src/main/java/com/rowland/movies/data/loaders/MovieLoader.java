@@ -86,7 +86,7 @@ public class MovieLoader extends BaseLoader  {
         // Retrieve the movies data
         Call<MovieCollection> createdCall = movieService.loadMoviesData(mSortOrder.getSortOrder(), BuildConfig.IMDB_API_KEY);
         // Asynchronous access
-        createdCall.enqueue(new MovieCallBack(getContext(), mSortOrder));
+        createdCall.enqueue(new MovieCallBack(mMovieRepository,mSortOrder));
     }
 
     // Get the list of movies from local

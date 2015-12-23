@@ -17,7 +17,10 @@
 
 package com.rowland.movies.data.repository;
 
+import android.util.Log;
+
 import com.activeandroid.query.Select;
+import com.rowland.movies.BuildConfig;
 import com.rowland.movies.rest.enums.ESortOrder;
 import com.rowland.movies.rest.models.Movie;
 
@@ -25,11 +28,14 @@ import java.util.List;
 
 /**
  * Created by Oti Rowland on 12/22/2015.
- *
+ * <p/>
  * Movie Repository
  */
 public class MovieRepository {
 
+    // The class Log identifier
+    private static final String LOG_TAG = MovieRepository.class.getSimpleName();
+    //Default constructor
     public MovieRepository() {
 
     }
@@ -58,5 +64,29 @@ public class MovieRepository {
                 .limit(100).execute();
         // This is how you execute a query
         return queryResults;
+    }
+
+    // Save the movie list
+    public void saveAll(List<Movie> moviesList, ESortOrder sortOrder) {
+
+        for (Movie movie : moviesList) {
+
+            // Set any necessary details
+            movie.setIsHighestRated(sortOrder.isHighestRated());
+            movie.setIsFavourite(sortOrder.isFavourite());
+            movie.setIsPopular(sortOrder.isPopular());
+            // Save movies in the database
+            movie.save();
+            // Check wether we are in debug mode
+            if (BuildConfig.IS_DEBUG_MODE) {
+                Log.d(LOG_TAG, "Movie: " + movie.getTitle());
+                Log.d(LOG_TAG, "Movie: " + movie.getReleaseDate());
+                Log.d(LOG_TAG, "Movie: " + movie.getId_());
+                Log.d(LOG_TAG, "Movie HighestRated: " + movie.getIsHighestRated());
+                Log.d(LOG_TAG, "Movie Favourite: " + movie.getIsFavourite());
+                Log.d(LOG_TAG, "Movie Popular: " + movie.getIsPopular());
+            }
+
+        }
     }
 }
