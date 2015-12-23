@@ -78,7 +78,7 @@ public class MovieCallBack implements Callback<MovieCollection> {
                 }
             }
             // BroadCast the changes locally
-            LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent("MOVIES_RELOADER_DATA"));
+            //LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent("MOVIES_RELOADER_DATA"));
         } else {
 
             try {

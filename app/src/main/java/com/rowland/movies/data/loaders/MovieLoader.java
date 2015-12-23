@@ -55,7 +55,7 @@ public class MovieLoader extends BaseLoader  {
         super(context);
         this.mSortOrder = mSortOrder;
         this.mMovieRepository = new MovieRepository();
-        setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this, new IntentFilter("MOVIES_RELOADER_DATA")));
+        //setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this, new IntentFilter("MOVIES_RELOADER_DATA")));
     }
 
     @Override
