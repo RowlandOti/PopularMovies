@@ -49,8 +49,8 @@ public class ReviewLoader extends BaseLoader {
     public ReviewLoader(Context context, int mTmdbMovieId) {
         super(context);
         this.mTmdbMovieId = mTmdbMovieId;
-        setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this, new IntentFilter("REVIEWS_RELOADER_DATA")));
-        setNetworkChangeObserver(new NetworkChangeBroadCastReceiver(this));
+        //setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this, new IntentFilter("REVIEWS_RELOADER_DATA")));
+        //setNetworkChangeObserver(new NetworkChangeBroadCastReceiver(this));
     }
 
     @Override

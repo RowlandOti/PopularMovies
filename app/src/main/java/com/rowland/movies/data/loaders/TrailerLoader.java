@@ -53,9 +53,9 @@ public class TrailerLoader extends BaseLoader {
         super(context);
         this.mTmdbMovieId = mTmdbMovieId;
         // Set the data set change observer
-        setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this,new IntentFilter("TRAILERS_RELOADER_DATA")));
+        //setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this,new IntentFilter("TRAILERS_RELOADER_DATA")));
         // Set the network change observer
-        setNetworkChangeObserver(new NetworkChangeBroadCastReceiver(this));
+        //setNetworkChangeObserver(new NetworkChangeBroadCastReceiver(this));
     }
 
     @Override
