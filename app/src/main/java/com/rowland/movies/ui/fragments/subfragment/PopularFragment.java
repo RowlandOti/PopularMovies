@@ -98,7 +98,6 @@ public class PopularFragment extends BaseGridFragment implements LoaderManager.L
         mMovieLists = movieList;
         // Pass it on to our adapter
         mGridAdapter.addMovies(movieList);
-        mGridAdapter.notifyDataSetChanged();
     }
 
     @Override

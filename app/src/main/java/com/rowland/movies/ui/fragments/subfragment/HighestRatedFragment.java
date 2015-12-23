@@ -97,7 +97,6 @@ public class HighestRatedFragment extends BaseGridFragment implements LoaderMana
         mMovieLists = movieList;
         // Pass it on to our adapter
         mGridAdapter.addMovies(movieList);
-        mGridAdapter.notifyDataSetChanged();
     }
 
     @Override
