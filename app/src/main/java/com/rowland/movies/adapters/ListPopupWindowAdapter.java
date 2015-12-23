@@ -40,14 +40,14 @@ public class ListPopupWindowAdapter extends BaseAdapter {
     // Variables
     // ----------------------------------------
     private Context context;
-    private ArrayList<ListPopupMenu> personItem;
+    private ArrayList<ListPopupMenu> mItem;
     // ----------------------------------------
     // Methods
     // ----------------------------------------
 
-    public ListPopupWindowAdapter(Context context, ArrayList<ListPopupMenu> personItem) {
+    public ListPopupWindowAdapter(Context context, ArrayList<ListPopupMenu> iTem) {
         this.context = context;
-        this.personItem = personItem;
+        this.mItem = iTem;
     }
 
     // ----------------------------------------
@@ -56,7 +56,7 @@ public class ListPopupWindowAdapter extends BaseAdapter {
 
         ImageView icon;
         TextView name;
-        boolean isWithPicture = (personItem.get(position).getProfilePic() != 0);
+        boolean isWithPicture = (mItem.get(position).getProfilePic() != 0);
 
         // Small List View , no need to recycle views
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -67,7 +67,7 @@ public class ListPopupWindowAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.toolbar_overflow_item_row, parent, false);
 
             icon = (ImageView) convertView.findViewById(R.id.imageProfilePic);
-            icon.setImageResource(personItem.get(position).getProfilePic());
+            icon.setImageResource(mItem.get(position).getProfilePic());
         } else {
             //Layout for the other layout without an images
             convertView = inflater.inflate(R.layout.toolbar_overflow_item_row_text, parent, false);
@@ -75,7 +75,7 @@ public class ListPopupWindowAdapter extends BaseAdapter {
 
 
         name = (TextView) convertView.findViewById(R.id.textViewName);
-        name.setText(personItem.get(position).getName());
+        name.setText(mItem.get(position).getName());
 
 
         return convertView;
@@ -87,7 +87,7 @@ public class ListPopupWindowAdapter extends BaseAdapter {
     // ----------------------------------------
     @Override
     public Object getItem(int index) {
-        return personItem.get(index);
+        return mItem.get(index);
     }
 
     @Override
@@ -97,7 +97,7 @@ public class ListPopupWindowAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return personItem.size();
+        return mItem.size();
     }
 
 }
