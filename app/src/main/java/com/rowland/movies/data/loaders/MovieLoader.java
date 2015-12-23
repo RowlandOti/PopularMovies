@@ -55,23 +55,27 @@ public class MovieLoader extends BaseLoader implements ILoader<Movie> {
         super(context);
         this.mSortOrder = mSortOrder;
         this.mMovieRepository = new MovieRepository();
-        setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this,new IntentFilter("MOVIES_RELOADER_DATA")));
+        setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this, new IntentFilter("MOVIES_RELOADER_DATA")));
     }
 
     @Override
     public List<Movie> loadInBackground() {
         // If we are online query movies from API
-        if(getIsOnline()){
-            // Get the MoviesAPIService and use it to retrieve a list of movies
-            IMoviesAPIService movieService = ApplicationController.getApplicationInstance().getMovieServiceOfApiType(EAPITypes.MOVIES_API);
-            // Get online movies and then update local database
-            getOnlineData(movieService);
+        if (getIsOnline()) {
+            // For retrieving by favourites, we should check local database
+            if (mSortOrder != ESortOrder.FAVOURITE_DESCENDING) {
+                // Get the MoviesAPIService and use it to retrieve a list of movies
+                IMoviesAPIService movieService = ApplicationController.getApplicationInstance().getMovieServiceOfApiType(EAPITypes.MOVIES_API);
+                // Get online movies and then update local database
+                getOnlineData(movieService);
+            }
             // Return the list of movies from local database
             return getLocalData();
         }
-            // Return the list of movies from local database
-            return getLocalData();
+        // Return the list of movies from local database
+        return getLocalData();
     }
+
     // Get the list of movies from online
     @Override
     public void getOnlineData(IMoviesAPIService movieService) {
@@ -84,6 +88,7 @@ public class MovieLoader extends BaseLoader implements ILoader<Movie> {
         // Asynchronous access
         createdCall.enqueue(new MovieCallBack(getContext(), mSortOrder));
     }
+
     // Get the list of movies from local
     @Override
     public List<Movie> getLocalData() {

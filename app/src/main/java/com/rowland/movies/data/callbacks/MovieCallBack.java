@@ -60,7 +60,7 @@ public class MovieCallBack implements Callback<MovieCollection> {
         if (response.isSuccess() && response.errorBody() == null) {
             // movies available
             moviesList = response.body().getResults();
-
+            // Save movies to data storage
             for (Movie movie : moviesList) {
                 // Set any necessary details
                 movie.setIsHighestRated(sortOrder.isHighestRated());
