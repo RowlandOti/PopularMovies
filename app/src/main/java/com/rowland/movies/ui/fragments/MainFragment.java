@@ -173,10 +173,10 @@ public class MainFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        // Set an Adapter: pass data, etc.
+        // Set up the fragments adapter
         this.pagerAdapter = new SmartNestedViewPagerAdapter(getActivity().getSupportFragmentManager());
         this.pager.setAdapter(pagerAdapter);
-        // Bind the slidingTabStrips to the ViewPager
+        // Set up the viewPager
         this.slidingTabStrips.setupWithViewPager(pager);
     }
 
