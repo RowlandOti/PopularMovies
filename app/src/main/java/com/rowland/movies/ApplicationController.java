@@ -24,6 +24,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.rowland.movies.rest.enums.EBaseURlTypes;
 import com.rowland.movies.rest.enums.EAPITypes;
+import com.rowland.movies.rest.interceptors.SessionRequestInterceptor;
 import com.rowland.movies.rest.services.IMoviesAPIService;
 import com.rowland.movies.rest.services.IRetrofitAPI;
 import com.squareup.okhttp.OkHttpClient;
@@ -80,6 +81,7 @@ public class ApplicationController extends Application {
                 .setDateFormat("yyyy-MM-dd")
                 .create();
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        SessionRequestInterceptor sessionRequestInterceptor = new SessionRequestInterceptor();
         // set your desired log level
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         // Our client
@@ -87,7 +89,8 @@ public class ApplicationController extends Application {
         // Set other interceptors
         client.networkInterceptors().add(new StethoInterceptor());
         // Set HttpLoggingInterceptor instance as last interceptor
-        client.interceptors().add(logging);  // <-- this is the important line!
+        client.interceptors().add(logging);
+        client.interceptors().add(sessionRequestInterceptor);
         //To send out network requests to an API_MOVIE_URL, we need to use the Retrofit builder class
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(EBaseURlTypes.MOVIE_API_BASE_URL.getUrlType()).addConverterFactory(GsonConverterFactory.create(gson))
