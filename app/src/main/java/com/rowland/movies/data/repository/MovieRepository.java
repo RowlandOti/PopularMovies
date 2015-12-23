@@ -50,6 +50,7 @@ public class MovieRepository {
                 break;
         }
 
+        // ToDo: Move this logic to the Movie model where it belongs
         // Query ActiveAndroid for list of data
         List<Movie> queryResults = new Select()
                 .from(Movie.class).where(whereClause, true)
