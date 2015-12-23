@@ -25,7 +25,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rowland.movies.R;
-import com.rowland.movies.adapters.GridAdapter;
 import com.rowland.movies.data.loaders.MovieLoader;
 import com.rowland.movies.rest.enums.ESortOrder;
 import com.rowland.movies.rest.models.Movie;
@@ -78,7 +77,7 @@ public class PopularFragment extends BaseGridFragment implements LoaderManager.L
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         // Initialize the list
-        mMovieLists = new ArrayList<>();
+        mMovieList = new ArrayList<>();
         // Initialize the Loader
         getLoaderManager().initLoader(0, null, this);
     }
@@ -96,7 +95,7 @@ public class PopularFragment extends BaseGridFragment implements LoaderManager.L
         // Set refreshing off, when done loading
         mSwRefreshLayout.setRefreshing(false);
         // Fill our movies list with data
-        mMovieLists = movieList;
+        mMovieList = movieList;
         // Pass it on to our adapter
         mGridAdapter.addMovies(movieList);
     }

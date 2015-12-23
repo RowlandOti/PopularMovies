@@ -76,7 +76,7 @@ public class HighestRatedFragment extends BaseGridFragment implements LoaderMana
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         // Initialize the list
-        mMovieLists = new ArrayList<>();
+        mMovieList = new ArrayList<>();
         // Initialize the Loader
         getLoaderManager().initLoader(0, null, this);
     }
@@ -94,7 +94,7 @@ public class HighestRatedFragment extends BaseGridFragment implements LoaderMana
         // Set refreshing off, when done loading
         mSwRefreshLayout.setRefreshing(false);
         // Fill our movies list with data
-        mMovieLists = movieList;
+        mMovieList = movieList;
         // Pass it on to our adapter
         mGridAdapter.addMovies(movieList);
     }

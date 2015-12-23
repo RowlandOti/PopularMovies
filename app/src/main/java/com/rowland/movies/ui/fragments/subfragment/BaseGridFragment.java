@@ -20,11 +20,9 @@ package com.rowland.movies.ui.fragments.subfragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import com.rowland.movies.R;
 import com.rowland.movies.adapters.GridAdapter;
@@ -43,7 +41,7 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
     // Logging tracker for this class
     private final String LOG_TAG = BaseGridFragment.class.getSimpleName();
     // AN arrayList of the movies
-    protected List<Movie> mMovieLists;
+    protected List<Movie> mMovieList;
     // The grid adapter
     protected GridAdapter mGridAdapter;
 
@@ -89,7 +87,7 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
         mGridRecycleView.setLayoutManager(mStaggeredLayoutManger);
         mGridRecycleView.setHasFixedSize(false);
 
-        mGridAdapter = new GridAdapter(mMovieLists, getContext());
+        mGridAdapter = new GridAdapter(mMovieList, getContext());
 
         mGridRecycleView.setAdapter(mGridAdapter);
         mSwRefreshLayout.setOnRefreshListener(this);
