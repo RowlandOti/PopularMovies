@@ -61,9 +61,9 @@ public class MainFragment extends Fragment {
         setRetainInstance(true);
     }
     // Create a new Instance for this fragment
-    protected static MainFragment newInstance(MainFragment fragment, Bundle args) {
+    public static MainFragment newInstance(Bundle args) {
         // Create the new fragment instance
-        MainFragment fragmentInstance = fragment;
+        MainFragment fragmentInstance = new MainFragment();
         // Set arguments if it is not null
         if (args != null) {
             fragmentInstance.setArguments(args);
