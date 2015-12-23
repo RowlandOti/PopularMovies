@@ -42,9 +42,9 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> implements IL
     // The class Log identifier
     private static final String LOG_TAG = BaseLoader.class.getSimpleName();
     // An observer to listen for changes in data
-    private DataSetChangeBroadCastReceiver mDataSetChangeObserver;
+    //private DataSetChangeBroadCastReceiver mDataSetChangeObserver;
     // An observer to listen for network changes
-    private NetworkChangeBroadCastReceiver mNetworkChangeObserver;
+    //private NetworkChangeBroadCastReceiver mNetworkChangeObserver;
     // Check if we are online
     private boolean isOnline = false;
 
@@ -65,12 +65,12 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> implements IL
             deliverResult(mItems);
         }
         // Create dat set change Observer if it is not set yet
-        if (mDataSetChangeObserver == null) {
+        /*if (mDataSetChangeObserver == null) {
             // Custom filter to map data changes.
             IntentFilter mLFilter = new IntentFilter("RELOADER_DATA");
             // Register Observer - Start monitoring the underlying data source.
             mDataSetChangeObserver = new DataSetChangeBroadCastReceiver(this, mLFilter);
-        }
+        }*/
         // When the observer detects a change, it should call onContentChanged()
         // on the Loader, which will cause the next call to takeContentChanged() to return true.
         if (takeContentChanged() || mItems == null) {
@@ -96,7 +96,7 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> implements IL
             mItems = null;
         }
         // Unregister Observer - Stop monitoring the underlying data source.
-        if (mDataSetChangeObserver != null) {
+        /*if (mDataSetChangeObserver != null) {
             // Sometimes the Fragment onDestroy() unregisters the observer before calling below code
             // See <a>http://stackoverflow.com/questions/6165070/receiver-not-registered-exception-error</a>
             try  {
@@ -109,10 +109,10 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> implements IL
                     e.printStackTrace();
                 }
             }
-        }
+        }*/
     }
 
-    // Get the data set change observer
+/*    // Get the data set change observer
     protected DataSetChangeBroadCastReceiver getDataSetChangeObserver() {
         return mDataSetChangeObserver;
     }
@@ -130,7 +130,7 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> implements IL
     // Set the network change observer
     protected void setNetworkChangeObserver(NetworkChangeBroadCastReceiver mNetworkChangeObserver) {
         this.mNetworkChangeObserver = mNetworkChangeObserver;
-    }
+    }*/
 
     // Get the Context
     public Context getContext() {
