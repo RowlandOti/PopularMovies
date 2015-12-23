@@ -72,7 +72,8 @@ public class MainFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-
+        //Don't destroy fragment across orientation change
+        setRetainInstance(true);
         //Get the maximum width of our ListPopupWindow
         this.mPopupMaxWidth = Math.max(this.getResources().getDisplayMetrics().widthPixels / 2,
                 this.getResources().getDimensionPixelSize(R.dimen.config_prefListPopupWindowWidth));
