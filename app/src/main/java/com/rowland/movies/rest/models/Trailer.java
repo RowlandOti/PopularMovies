@@ -57,7 +57,7 @@ public class Trailer extends Model {
     @SerializedName("id_")
     @Expose
     //ActiveAndroid Annotations
-    @Column(name = "id_")
+    @Column(name = "id_", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
     private Double id_;
     // Gson annotations
     @SerializedName("key")

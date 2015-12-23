@@ -53,10 +53,10 @@ public class Review extends Model {
     @Column(name = "url")
     private String url;
     // Gson annotations
-    @SerializedName("id_")
+    @SerializedName("id")
     @Expose
     //ActiveAndroid Annotations
-    @Column(name = "id_")
+    @Column(name = "id_", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
     private String id_;
 
 
