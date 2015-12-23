@@ -85,10 +85,10 @@ public class Movie extends Model {
     @Column(name = "voteCount")
     private Integer voteCount;
     // Gson annotations
-    @SerializedName("id_")
+    @SerializedName("id")
     @Expose
     //ActiveAndroid Annotations
-    @Column(name = "id_")
+    @Column(name = "id_", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
     private Integer id_;
     // Gson annotations
     @SerializedName("popularity")

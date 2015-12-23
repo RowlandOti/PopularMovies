@@ -72,6 +72,7 @@ public class MovieCallBack implements Callback<MovieCollection> {
                 if (BuildConfig.IS_DEBUG_MODE) {
                     Log.d(LOG_TAG, "Movie: " + movie.getTitle());
                     Log.d(LOG_TAG, "Movie: " + movie.getReleaseDate());
+                    Log.d(LOG_TAG, "Movie: " + movie.getId_());
                     Log.d(LOG_TAG, "Movie HighestRated: " + movie.getIsHighestRated());
                     Log.d(LOG_TAG, "Movie Favourite: " + movie.getIsFavourite());
                     Log.d(LOG_TAG, "Movie Popular: " + movie.getIsPopular());
