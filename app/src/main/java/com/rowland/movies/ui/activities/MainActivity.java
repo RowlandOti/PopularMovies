@@ -83,7 +83,7 @@ public class MainActivity extends BaseToolBarActivity {
         }
     }
 
-    // Inser the MainFragment
+    // Insert the MainFragment
     private void showMainFragment(Bundle args) {
         FragmentManager fm = getSupportFragmentManager();
 
@@ -91,7 +91,7 @@ public class MainActivity extends BaseToolBarActivity {
         if (mainFragment == null) {
             mainFragment = MainFragment.newInstance(args);
 
-            ft.add(R.id.fragment_container, mainFragment);
+            ft.replace(R.id.fragment_container, mainFragment);
             ft.commit();
         }
     }
