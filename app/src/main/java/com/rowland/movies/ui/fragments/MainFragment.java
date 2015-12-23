@@ -55,16 +55,20 @@ public class MainFragment extends Fragment {
     private SmartNestedViewPagerAdapter pagerAdapter;
     private float mPopupMaxWidth;
 
+    // Default constructor
     public MainFragment() {
+        //Don't destroy fragment across orientation change
         setRetainInstance(true);
     }
-
-
-    public static MainFragment newInstance(Bundle args) {
-        MainFragment fragmentInstance = new MainFragment();
+    // Create a new Instance for this fragment
+    protected static MainFragment newInstance(MainFragment fragment, Bundle args) {
+        // Create the new fragment instance
+        MainFragment fragmentInstance = fragment;
+        // Set arguments if it is not null
         if (args != null) {
             fragmentInstance.setArguments(args);
         }
+        // Return the new fragment
         return fragmentInstance;
     }
 
@@ -72,8 +76,6 @@ public class MainFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        //Don't destroy fragment across orientation change
-        setRetainInstance(true);
         //Get the maximum width of our ListPopupWindow
         this.mPopupMaxWidth = Math.max(this.getResources().getDisplayMetrics().widthPixels / 2,
                 this.getResources().getDimensionPixelSize(R.dimen.config_prefListPopupWindowWidth));

@@ -43,7 +43,7 @@ public class FavouriteFragment extends BaseGridFragment implements LoaderManager
     private final String LOG_TAG = FavouriteFragment.class.getSimpleName();
 
     public FavouriteFragment() {
-
+        super();
     }
 
     public static FavouriteFragment newInstance(Bundle args) {

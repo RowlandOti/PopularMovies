@@ -53,6 +53,12 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
     @Bind(R.id.grid_recycle_view)
     protected RecyclerView mGridRecycleView;
 
+    // Default constructor
+    public BaseGridFragment() {
+        //Don't destroy fragment across orientation change
+        setRetainInstance(true);
+    }
+
     protected static BaseGridFragment newInstance(BaseGridFragment fragment, Bundle args) {
         // Create the new fragment instance
         BaseGridFragment fragmentInstance = fragment;

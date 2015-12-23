@@ -44,7 +44,7 @@ public class PopularFragment extends BaseGridFragment implements LoaderManager.L
 
     // Default constructor
     public PopularFragment() {
-
+        super();
     }
     // Create fragment with arguments
     public static PopularFragment newInstance(Bundle args) {

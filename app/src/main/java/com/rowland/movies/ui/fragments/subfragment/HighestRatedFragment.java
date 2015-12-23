@@ -43,7 +43,7 @@ public class HighestRatedFragment extends BaseGridFragment implements LoaderMana
     private final String LOG_TAG = HighestRatedFragment.class.getSimpleName();
 
     public HighestRatedFragment() {
-
+        super();
     }
 
     public static HighestRatedFragment newInstance(Bundle args) {
