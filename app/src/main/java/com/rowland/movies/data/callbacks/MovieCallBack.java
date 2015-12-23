@@ -64,8 +64,8 @@ public class MovieCallBack implements Callback<MovieCollection> {
             for (Movie movie : moviesList) {
                 // Set any necessary details
                 movie.setIsHighestRated(sortOrder.isHighestRated());
+                movie.setIsFavourite(sortOrder.isFavourite());
                 movie.setIsPopular(sortOrder.isPopular());
-                movie.setIsPopular(sortOrder.isFavourite());
                 // Save movies in the database
                 movie.save();
                 // Check wether we are in debug mode
@@ -73,7 +73,7 @@ public class MovieCallBack implements Callback<MovieCollection> {
                     Log.d(LOG_TAG, "Movie: " + movie.getTitle());
                     Log.d(LOG_TAG, "Movie: " + movie.getReleaseDate());
                     Log.d(LOG_TAG, "Movie HighestRated: " + movie.getIsHighestRated());
-                    Log.d(LOG_TAG, "Movie Popular: " + movie.getIsFavourite());
+                    Log.d(LOG_TAG, "Movie Favourite: " + movie.getIsFavourite());
                     Log.d(LOG_TAG, "Movie Popular: " + movie.getIsPopular());
                 }
                 // BroadCast the changes locally

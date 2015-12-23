@@ -25,9 +25,9 @@ public enum ESortOrder {
     POPULAR_DESCENDING("popularity.desc"), HIGHEST_RATED_DESCENDING("vote_average.desc"), FAVOURITE_DESCENDING("favourite.desc");
 
     private String sortOrder;
-    private boolean isHighestRated;
-    private boolean isPopular;
-    private boolean isFavourite;
+    private boolean isHighestRated = false;
+    private boolean isPopular = false;
+    private boolean isFavourite = false;
 
     private ESortOrder(String s) {
         sortOrder = s;
