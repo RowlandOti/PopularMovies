@@ -88,9 +88,10 @@ public class ApplicationController extends Application {
         OkHttpClient client = new OkHttpClient();
         // Set other interceptors
         client.networkInterceptors().add(new StethoInterceptor());
+        // Set SessionRequestInterceptor instance as interceptor
+        client.interceptors().add(sessionRequestInterceptor);
         // Set HttpLoggingInterceptor instance as last interceptor
         client.interceptors().add(logging);
-        client.interceptors().add(sessionRequestInterceptor);
         //To send out network requests to an API_MOVIE_URL, we need to use the Retrofit builder class
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(EBaseURlTypes.MOVIE_API_BASE_URL.getUrlType()).addConverterFactory(GsonConverterFactory.create(gson))
