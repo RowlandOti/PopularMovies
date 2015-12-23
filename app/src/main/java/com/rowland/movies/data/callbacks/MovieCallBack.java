@@ -87,9 +87,9 @@ public class MovieCallBack implements Callback<MovieCollection> {
                         .convert(response.errorBody());
                 if (BuildConfig.IS_DEBUG_MODE) {
                     // we got an error message - Do error handling here
-                    Log.d(LOG_TAG, restError.getErrorMesage());
+                    //Log.d(LOG_TAG, restError.getErrorMesage());
                     //For getting error code. Code is integer value like 200,404 etc
-                    Log.d(LOG_TAG, String.valueOf(restError.getCode()));
+                    //Log.d(LOG_TAG, String.valueOf(restError.getCode()));
                 }
 
             } catch (IOException e) {

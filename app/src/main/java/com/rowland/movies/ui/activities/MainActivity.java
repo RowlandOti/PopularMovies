@@ -64,7 +64,6 @@ public class MainActivity extends BaseToolBarActivity {
         }
 
         showMainFragment(null);
-
     }
 
     // Insert the DetailFragment
