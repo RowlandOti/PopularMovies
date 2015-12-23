@@ -75,14 +75,24 @@ public class HighestRatedFragment extends BaseGridFragment implements LoaderMana
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        // Initialize the list
         mMovieLists = new ArrayList<>();
+        // Initialize the Loader
         getLoaderManager().initLoader(0, null, this);
     }
 
     @Override
     public Loader<List<Movie>> onCreateLoader(int id, Bundle args) {
-        // Return our Loader containg the list of movies
-        return new MovieLoader(getActivity(), ESortOrder.HIGHEST_RATED_DESCENDING);
+        //Create new loader
+        MovieLoader movieLoader = null;
+        // Handle loader creation on retrained fragments
+        if (movieLoader != null)  {
+            // Return old loader
+            return movieLoader;
+        }
+        // Otherwise create new loader
+        movieLoader =  new MovieLoader(getActivity(), ESortOrder.HIGHEST_RATED_DESCENDING);       // Return new loader
+        return movieLoader;
     }
 
     @Override

@@ -76,13 +76,25 @@ public class FavouriteFragment extends BaseGridFragment implements LoaderManager
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        // Initialize the list
         mMovieLists = new ArrayList<>();
+        // Initialize the Loader
         getLoaderManager().initLoader(0, null, this);
     }
 
     @Override
     public Loader<List<Movie>> onCreateLoader(int id, Bundle args) {
-        return new MovieLoader(getActivity(), ESortOrder.FAVOURITE_DESCENDING);
+        //Create new loader
+        MovieLoader movieLoader = null;
+        // Handle loader creation on retrained fragments
+        if (movieLoader != null)  {
+            // Return old loader
+            return movieLoader;
+        }
+        // Otherwise create new loader
+        movieLoader =  new MovieLoader(getActivity(), ESortOrder.FAVOURITE_DESCENDING);
+        // Return new loader
+        return movieLoader;
     }
 
     @Override

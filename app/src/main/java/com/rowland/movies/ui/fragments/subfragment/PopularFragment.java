@@ -76,7 +76,9 @@ public class PopularFragment extends BaseGridFragment implements LoaderManager.L
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        // Initialize the list
         mMovieLists = new ArrayList<>();
+        // Initialize the Loader
         getLoaderManager().initLoader(0, null, this);
     }
 
