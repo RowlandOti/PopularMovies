@@ -27,6 +27,7 @@ import android.util.Log;
 
 import com.rowland.movies.BuildConfig;
 import com.rowland.movies.data.interfaces.ILoader;
+import com.rowland.movies.data.loaders.BaseLoader;
 
 
 /**
@@ -37,9 +38,9 @@ public class DataSetChangeBroadCastReceiver extends BroadcastReceiver
     // The class Log identifier
     private static final String LOG_TAG = DataSetChangeBroadCastReceiver.class.getSimpleName();
     // The loader that owns this listener
-    final private ILoader mLoader;
+    final private BaseLoader mLoader;
 
-    public DataSetChangeBroadCastReceiver(ILoader loader, IntentFilter mLFilter)
+    public DataSetChangeBroadCastReceiver(BaseLoader loader, IntentFilter mLFilter)
     {
         // Assign loader to this listener
         this.mLoader = loader;
@@ -51,8 +52,7 @@ public class DataSetChangeBroadCastReceiver extends BroadcastReceiver
     public void onReceive(Context context, Intent intent)
     {
         // Notify the loader of content change
-        //mLoader.onContentChanged();
-        mLoader.getLocalData();
+        mLoader.onContentChanged();
         // Check wether we are in debug mode
         if (BuildConfig.IS_DEBUG_MODE) {
             Log.d(LOG_TAG, "Broadcast fired from " + mLoader.getClass().getSimpleName());

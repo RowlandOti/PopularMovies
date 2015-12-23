@@ -33,10 +33,10 @@ public class RestError {
     // Gson annotations
     @SerializedName("error_message")
     @Expose
-    private String strMessage;
+    private String error_message;
 
-    public RestError(String strMessage) {
-        this.strMessage = strMessage;
+    public RestError(String error_message) {
+        this.error_message = error_message;
     }
 
     /**
@@ -56,14 +56,14 @@ public class RestError {
     /**
      * @return The code
      */
-    public String getStrMesage() {
-        return strMessage;
+    public String getErrorMesage() {
+        return error_message;
     }
 
     /**
-     * @param strMessage The strMessage
+     * @param error_message The error_message
      */
-    public void setStrMessage(String strMessage) {
-        this.strMessage = strMessage;
+    public void setErrorMessage(String error_message) {
+        this.error_message = error_message;
     }
 }
