@@ -23,6 +23,7 @@ package com.rowland.movies.rest.enums;
 public enum EBaseImageSize {
 
     // All the image sizes that the application will query
+    IMAGE_SIZE_W154("w154"),
     IMAGE_SIZE_W185("w185"),
     IMAGE_SIZE_W342("w342"),
     IMAGE_SIZE_W500("w500"),
