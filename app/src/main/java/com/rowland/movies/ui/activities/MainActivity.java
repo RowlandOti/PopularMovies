@@ -90,7 +90,7 @@ public class MainActivity extends BaseToolBarActivity {
         FragmentTransaction ft = fm.beginTransaction();
         if (mainFragment == null) {
             mainFragment = MainFragment.newInstance(args);
-
+            // Prefer replace() over add() see <a>https://github.com/RowlandOti/PopularMovies/issues/1</a>
             ft.replace(R.id.fragment_container, mainFragment);
             ft.commit();
         }
