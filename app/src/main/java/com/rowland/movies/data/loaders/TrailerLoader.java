@@ -39,7 +39,7 @@ import retrofit.Call;
 /**
  * Created by Oti Rowland on 12/12/2015.
  */
-public class TrailerLoader extends BaseLoader implements ILoader<Trailer> {
+public class TrailerLoader extends BaseLoader {
     // The class Log identifier
     private static final String LOG_TAG = TrailerLoader.class.getSimpleName();
     // The movie id whose trailersList are retrieved

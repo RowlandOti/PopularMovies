@@ -38,7 +38,7 @@ import retrofit.Call;
 /**
  * Created by Oti Rowland on 12/12/2015.
  */
-public class ReviewLoader extends BaseLoader implements ILoader<Review> {
+public class ReviewLoader extends BaseLoader {
     // The class Log identifier
     private static final String LOG_TAG = ReviewLoader.class.getSimpleName();
     // The movie id whose reviewsList are retrieved

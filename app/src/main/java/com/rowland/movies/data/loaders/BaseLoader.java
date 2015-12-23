@@ -26,6 +26,7 @@ import android.util.Log;
 import com.rowland.movies.BuildConfig;
 import com.rowland.movies.data.broadcastrecievers.DataSetChangeBroadCastReceiver;
 import com.rowland.movies.data.broadcastrecievers.NetworkChangeBroadCastReceiver;
+import com.rowland.movies.data.interfaces.ILoader;
 import com.rowland.movies.utilities.Utilities;
 import com.uwetrottmann.androidutils.GenericSimpleLoader;
 
@@ -36,7 +37,7 @@ import java.io.IOException;
 * Major motivation from
 * <a>http://developer.android.com/reference/android/content/AsyncTaskLoader.html</>
 * */
-public abstract class BaseLoader<T> extends GenericSimpleLoader<T> {
+public abstract class BaseLoader<T> extends GenericSimpleLoader<T> implements ILoader {
 
     // The class Log identifier
     private static final String LOG_TAG = BaseLoader.class.getSimpleName();
