@@ -25,6 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rowland.movies.R;
+import com.rowland.movies.adapters.GridAdapter;
 import com.rowland.movies.data.loaders.MovieLoader;
 import com.rowland.movies.rest.enums.ESortOrder;
 import com.rowland.movies.rest.models.Movie;
