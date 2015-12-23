@@ -70,7 +70,6 @@ public class MovieRepository {
     public void saveAll(List<Movie> moviesList, ESortOrder sortOrder) {
 
         for (Movie movie : moviesList) {
-
             // Set any necessary details
             movie.setIsHighestRated(sortOrder.isHighestRated());
             movie.setIsFavourite(sortOrder.isFavourite());
@@ -86,7 +85,6 @@ public class MovieRepository {
                 Log.d(LOG_TAG, "Movie Favourite: " + movie.getIsFavourite());
                 Log.d(LOG_TAG, "Movie Popular: " + movie.getIsPopular());
             }
-
         }
     }
 }

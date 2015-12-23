@@ -1,3 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
 
+    <item
+        jar="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\incremental-classes\free\debug\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="5304cf8894d7f1daf7997bcf69fe9aeb3c51a0e1">
+        <dex dex="H:\StudioProjects\AndroidDeveloperNanodegree\MoviesOriginal\app\build\intermediates\pre-dexed\free\debug\classes_b216e096765df398fe5050b47682f5a372d0f241.jar" />
+    </item>
+
+</items>
