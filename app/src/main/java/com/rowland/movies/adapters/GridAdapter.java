@@ -25,6 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -91,7 +92,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
 
 
         String imageUrl = EBaseURlTypes.MOVIE_API_IMAGE_BASE_URL.getUrlType() + EBaseImageSize.IMAGE_SIZE_W154.getImageSize() + movie.getPosterPath();
-        final RelativeLayout container = holder.mMovieTitleContainer;
+        final LinearLayout container = holder.mMovieTitleContainer;
         // Use Picasso to load the images
         Picasso.with(holder.mMovieImageView.getContext())
                 .load(imageUrl)
@@ -135,7 +136,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
         ImageView mSortTypeIconImageView;
 
         @Bind(R.id.grid_title_container)
-        RelativeLayout mMovieTitleContainer;
+        LinearLayout mMovieTitleContainer;
 
         @Bind(R.id.container)
         FrameLayout mGridItemContainer;
