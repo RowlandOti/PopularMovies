@@ -33,6 +33,8 @@ import com.rowland.movies.R;
 import com.rowland.movies.rest.enums.EBaseImageSize;
 import com.rowland.movies.rest.enums.EBaseURlTypes;
 import com.rowland.movies.rest.models.Movie;
+import com.rowland.movies.utilities.Utilities;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -84,30 +86,33 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
             holder.mReleaseDateTextView.setText(String.valueOf(mCalendar.get(Calendar.YEAR)));
             holder.mReleaseDateTextView.setContentDescription(holder.mReleaseDateTextView.getContext().getString(R.string.movie_year, String.valueOf(mCalendar.get(Calendar.YEAR))));
         }
+        // Set the popularity
+        holder.mSortTypeValueTextView.setText(String.valueOf(Math.round(movie.getPopularity())));
+
 
         String imageUrl = EBaseURlTypes.MOVIE_API_IMAGE_BASE_URL.getUrlType() + EBaseImageSize.IMAGE_SIZE_W154.getImageSize() + movie.getPosterPath();
         final RelativeLayout container = holder.mMovieTitleContainer;
         // Use Picasso to load the images
         Picasso.with(holder.mMovieImageView.getContext())
                 .load(imageUrl)
-                //.networkPolicy(Utilities.NetworkUtility.isNetworkAvailable(mContext) ? NetworkPolicy.NO_CACHE : NetworkPolicy.OFFLINE)
+                .networkPolicy(Utilities.NetworkUtility.isNetworkAvailable(mContext) ? NetworkPolicy.NO_CACHE : NetworkPolicy.OFFLINE)
                 .placeholder(R.drawable.ic_movie_placeholder)
                 .into(holder.mMovieImageView);
 
         // Check wether we are in debug mode
         if (BuildConfig.IS_DEBUG_MODE) {
-            Log.d(LOG_TAG, "Image url: "+imageUrl);
+            Log.d(LOG_TAG, "Image url: " + imageUrl);
         }
     }
+
     // What's the size of the movie List
     @Override
     public int getItemCount() {
         // Check size of List first
-        if(mMovieList != null && !mMovieList.isEmpty())
-        {
+        if (mMovieList != null && !mMovieList.isEmpty()) {
             // Check wether we are in debug mode
             if (BuildConfig.IS_DEBUG_MODE) {
-                Log.d(LOG_TAG, "List Count: "+mMovieList.size());
+                Log.d(LOG_TAG, "List Count: " + mMovieList.size());
             }
             return mMovieList.size();
         }
@@ -140,6 +145,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
             ButterKnife.bind(this, itemView);
         }
     }
+
     // Handy method for passing the list to the adapter
     public void addMovies(List<Movie> movieList) {
         if (movieList == null) {

@@ -33,9 +33,11 @@ import com.rowland.movies.rest.enums.ESortOrder;
 import com.rowland.movies.rest.models.Movie;
 import com.rowland.movies.rest.services.IMoviesAPIService;
 
+import java.io.IOException;
 import java.util.List;
 
 import retrofit.Call;
+import retrofit.Response;
 
 /**
  * Created by Oti Rowland on 12/12/2015.
@@ -68,6 +70,18 @@ public class MovieLoader extends BaseLoader  {
                 IMoviesAPIService movieService = ApplicationController.getApplicationInstance().getMovieServiceOfApiType(EAPITypes.MOVIES_API);
                 // Get online movies and then update local database
                 getOnlineData(movieService);
+
+                /*// Retrieve the movies data
+                Call<MovieCollection> createdCall = movieService.loadMoviesData(mSortOrder.getSortOrder(), BuildConfig.IMDB_API_KEY);
+                // Synchronous
+                try {
+                    Response<MovieCollection> result = createdCall.execute();
+                    return result.body().getResults();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Log.e(LOG_TAG, "IOException occurred in loadInBackground()");
+                }*/
+
             }
             // Return the list of movies from local database
             return getLocalData();
