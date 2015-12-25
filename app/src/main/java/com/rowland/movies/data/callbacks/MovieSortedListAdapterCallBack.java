@@ -15,7 +15,7 @@
  *
  */
 
-package com.rowland.movies.adapters;
+package com.rowland.movies.data.callbacks;
 
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.util.SortedListAdapterCallback;

@@ -31,6 +31,7 @@ import android.widget.TextView;
 
 import com.rowland.movies.BuildConfig;
 import com.rowland.movies.R;
+import com.rowland.movies.data.callbacks.MovieSortedListAdapterCallBack;
 import com.rowland.movies.rest.enums.EBaseImageSize;
 import com.rowland.movies.rest.enums.EBaseURlTypes;
 import com.rowland.movies.rest.models.Movie;
