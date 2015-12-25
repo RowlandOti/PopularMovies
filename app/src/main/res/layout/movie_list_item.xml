@@ -29,14 +29,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="4dp"
+        android:clickable="true"
+        android:focusable="true"
         card_view:cardCornerRadius="6dp"
         card_view:cardUseCompatPadding="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:clickable="true">
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/poster_image_view"
