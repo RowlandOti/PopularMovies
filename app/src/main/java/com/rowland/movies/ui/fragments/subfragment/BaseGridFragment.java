@@ -110,7 +110,7 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
 
     public int getNumberOfColumns() {
         // The number of grid columns
-        int numberColumns = 3;
+        int numberColumns = 2;
         // Check if we are in landscape
         if(ScreenUtility.isInLandscapeOrientation(getContext())){
             numberColumns = 3;
