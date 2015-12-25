@@ -21,9 +21,9 @@
     <!-- Focused -->
     <item android:drawable="@color/apptheme_accent_teal" android:state_enabled="false" android:state_focused="true" />
     <!-- Pressed -->
-    <item android:drawable="@color/apptheme_accent_orange" android:state_focused="false" android:state_pressed="true" />
+    <item android:drawable="@color/apptheme_accent_teal" android:state_focused="false" android:state_pressed="true" />
     <!-- Selected -->
-    <item android:drawable="@color/apptheme_accent_orange" android:state_selected="true" />
+    <item android:drawable="@color/apptheme_accent_teal" android:state_selected="true" />
     <!-- Default -->
     <item android:drawable="@color/apptheme_background_window_grey" />
 </selector>
