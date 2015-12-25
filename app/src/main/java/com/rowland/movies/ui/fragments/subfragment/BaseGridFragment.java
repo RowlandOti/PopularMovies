@@ -108,7 +108,7 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
         ButterKnife.unbind(this);
     }
 
-    public int getNumberOfColumns() {
+    protected int getNumberOfColumns() {
         // The number of grid columns
         int numberColumns = 2;
         // Check if we are in landscape
