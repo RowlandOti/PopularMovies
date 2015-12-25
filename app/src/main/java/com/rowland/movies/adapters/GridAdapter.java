@@ -147,7 +147,6 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
             // Set Favourites
             if (movie.getIsFavourite()) {
                 mSortTypeIconImageView.setImageResource(R.drawable.ic_favourite_black_48dp);
-                mSortTypeValueTextView.setText(String.valueOf(Math.round(movie.getPopularity())));
             }
 
 
