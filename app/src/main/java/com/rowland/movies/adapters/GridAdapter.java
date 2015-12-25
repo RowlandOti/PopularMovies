@@ -18,7 +18,9 @@
 package com.rowland.movies.adapters;
 
 import android.content.Context;
+import android.support.v7.util.SortedList;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.util.SortedListAdapterCallback;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,16 +54,17 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
     // The class Log identifier
     private static final String LOG_TAG = GridAdapter.class.getSimpleName();
     // A list of the movie items
-    private List<Movie> mMovieList = new ArrayList<>();
+    private SortedList<Movie> mMovieList;
     // A Calendar object to help in formatting time
     private Calendar mCalendar;
     // Context instance
     private Context mContext;
 
-    public GridAdapter(List<Movie> mMovieLists, Context context) {
-        this.mMovieList = mMovieLists;
+    public GridAdapter(List<Movie> movieList, Context context) {
+        this.mMovieList = new SortedList<Movie>(Movie.class, new MovieSortedListAdapterCallBack(this));
         this.mContext = context;
         this.mCalendar = Calendar.getInstance();
+        addAllMovies(movieList);
     }
 
     // Called when RecyclerView needs a new CustomViewHolder of the given type to represent an item.
@@ -118,7 +121,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
     @Override
     public int getItemCount() {
         // Check size of List first
-        if (mMovieList != null && !mMovieList.isEmpty()) {
+        if (mMovieList != null) {
             // Check wether we are in debug mode
             if (BuildConfig.IS_DEBUG_MODE) {
                 Log.d(LOG_TAG, "List Count: " + mMovieList.size());
@@ -157,14 +160,14 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
             ButterKnife.bind(this, itemView);
         }
     }
-
     // Handy method for passing the list to the adapter
-    public void addMovies(List<Movie> movieList) {
-        if (movieList == null) {
-            movieList = new ArrayList<>();
+    public void addAllMovies(List<Movie> movieList){
+        // Add each movie to the sorted list
+        mMovieList.beginBatchedUpdates();
+        for (Movie movie : movieList) {
+            mMovieList.add(movie);
         }
-        mMovieList = movieList;
+        mMovieList.beginBatchedUpdates();
         // Notify others of the data changes
-        notifyDataSetChanged();
     }
 }

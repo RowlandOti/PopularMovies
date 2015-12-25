@@ -25,9 +25,9 @@ import com.rowland.movies.rest.models.Movie;
 /**
  * Created by Oti Rowland on 12/25/2015.
  */
-public class MoviesSortedListAdapterCallBack extends SortedListAdapterCallback<Movie> {
+public class MovieSortedListAdapterCallBack extends SortedListAdapterCallback<Movie> {
 
-    public MoviesSortedListAdapterCallBack(RecyclerView.Adapter adapter) {
+    public MovieSortedListAdapterCallBack(RecyclerView.Adapter adapter) {
         super(adapter);
     }
 
