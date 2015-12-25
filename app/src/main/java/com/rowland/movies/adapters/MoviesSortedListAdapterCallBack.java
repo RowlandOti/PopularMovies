@@ -1,0 +1,63 @@
+/*
+ * Copyright 2015 Oti Rowland
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+package com.rowland.movies.adapters;
+
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.util.SortedListAdapterCallback;
+
+import com.rowland.movies.rest.models.Movie;
+
+/**
+ * Created by Oti Rowland on 12/25/2015.
+ */
+public class MoviesSortedListAdapterCallBack extends SortedListAdapterCallback<Movie> {
+
+    public MoviesSortedListAdapterCallBack(RecyclerView.Adapter adapter) {
+        super(adapter);
+    }
+
+    @Override
+    public int compare(Movie o1, Movie o2) {
+        // Compare
+        if (o1.mIsDone != o2.mIsDone) {
+            return o1.mIsDone ? 1 : -1;
+        }
+        // Compare titles
+        int titleComp = o1.getTitle().compareTo(o2.getTitle());
+        if (titleComp != 0) {
+            return titleComp;
+        }
+        // compare ID's
+        if (o1.getId_() < o2.getId_()) {
+            return -1;
+        } else if (o1.getId_() > o2.getId_()) {
+            return 1;
+        }
+        return 0;
+    }
+
+    @Override
+    public boolean areContentsTheSame(Movie oldItem, Movie newItem) {
+        return oldItem.getTitle().equals(newItem.getTitle());
+    }
+
+    @Override
+    public boolean areItemsTheSame(Movie item1, Movie item2) {
+        return item1.getId_() == item2.getId_();
+    }
+}
