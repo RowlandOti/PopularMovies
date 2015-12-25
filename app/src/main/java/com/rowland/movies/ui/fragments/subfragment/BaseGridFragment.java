@@ -79,20 +79,21 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        // Configure the refreshlayout look
         mSwRefreshLayout.setColorSchemeResources(R.color.apptheme_accent_teal);
         mSwRefreshLayout.setProgressViewOffset(true, 100, 400);
-
+        // Create new instance of layout manager
         final StaggeredGridLayoutManager mStaggeredLayoutManger = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-
+        // Set the layout manger
         mGridRecycleView.setLayoutManager(mStaggeredLayoutManger);
         mGridRecycleView.setHasFixedSize(false);
         // Call is actually only necessary with custom ItemAnimators
         mGridRecycleView.setItemAnimator(new DefaultItemAnimator());
-
+        // Create new adapter
         mGridAdapter = new GridAdapter(mMovieList, getContext());
-
+        // Associate RecycleView with adapter
         mGridRecycleView.setAdapter(mGridAdapter);
+        // Set the refreshlayout's listener
         mSwRefreshLayout.setOnRefreshListener(this);
     }
 
