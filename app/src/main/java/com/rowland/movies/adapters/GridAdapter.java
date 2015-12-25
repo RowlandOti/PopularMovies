@@ -80,7 +80,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
         // Acquire Movie item at this position
         final Movie movie = mMovieList.get(position);
         // Bind the data to the view holder
-        holder.bind(movie);
+        holder.bindTo(movie);
     }
 
     // What's the size of the movie List
@@ -147,7 +147,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
             ButterKnife.bind(this, itemView);
         }
 
-        private void bind(Movie movie){
+        private void bindTo(Movie movie){
             mGridItemContainer.setContentDescription(mGridItemContainer.getContext().getString(R.string.movie_title, movie.getOriginalTitle()));
             mTitleTextView.setText(movie.getOriginalTitle());
             // Set the release date
