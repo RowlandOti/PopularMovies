@@ -38,18 +38,13 @@ public class MovieSortedListAdapterCallBack extends SortedListAdapterCallback<Mo
         if (titleComp != 0) {
             return titleComp;
         }
-        // compare ID's
-        if (o1.getId_() < o2.getId_()) {
-            return -1;
-        } else if (o1.getId_() > o2.getId_()) {
-            return 1;
-        }
+
         return 0;
     }
 
     @Override
     public boolean areContentsTheSame(Movie oldItem, Movie newItem) {
-        return oldItem.getOverview().equals(newItem.getOverview());
+        return oldItem.getTitle().equals(newItem.getTitle());
     }
 
     @Override
