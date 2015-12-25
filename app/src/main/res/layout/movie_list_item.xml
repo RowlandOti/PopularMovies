@@ -37,7 +37,7 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/grid_poster_image_view"
+                android:id="@+id/poster_image_view"
                 android:layout_width="match_parent"
                 android:layout_height="270dp"
                 android:scaleType="fitXY"
@@ -48,34 +48,35 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:background="@color/apptheme_background_window_grey"
-                android:orientation="horizontal"
-                android:paddingTop="3dp">
+                android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/grid_sort_type_image_view"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:visibility="visible" />
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_popular_black_48dp" />
 
                 <TextView
                     android:id="@+id/grid_sort_type_text_view"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:padding="8dp"
                     android:text="6.8"
                     android:textColor="@color/apptheme_primary_text_black"
-                    android:textSize="16sp" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/grid_release_date_text_view"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/grid_sort_type_text_view"
-                    android:paddingRight="16dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:padding="8dp"
                     android:text="2016"
                     android:textColor="@color/apptheme_primary_text_black"
-                    android:textSize="16sp" />
+                    android:textSize="20sp" />
 
             </LinearLayout>
         </LinearLayout>

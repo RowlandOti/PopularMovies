@@ -26,7 +26,6 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.rowland.movies.BuildConfig;
@@ -129,7 +128,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
         @Bind(R.id.grid_release_date_text_view)
         TextView mReleaseDateTextView;
 
-        @Bind(R.id.grid_poster_image_view)
+        @Bind(R.id.poster_image_view)
         ImageView mMovieImageView;
 
         @Bind(R.id.grid_sort_type_image_view)

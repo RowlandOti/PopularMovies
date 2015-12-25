@@ -60,7 +60,7 @@ public class MovieRepository {
         // Query ActiveAndroid for list of data
         List<Movie> queryResults = new Select()
                 .from(Movie.class).where(whereClause, true)
-                .orderBy("id_ ASC")
+                .orderBy("id ASC")
                 .limit(100).execute();
         // This is how you execute a query
         return queryResults;
