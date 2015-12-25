@@ -35,6 +35,7 @@ public class MovieRepository {
 
     // The class Log identifier
     private static final String LOG_TAG = MovieRepository.class.getSimpleName();
+
     //Default constructor
     public MovieRepository() {
 
@@ -74,17 +75,26 @@ public class MovieRepository {
             movie.setIsHighestRated(sortOrder.isHighestRated());
             movie.setIsFavourite(sortOrder.isFavourite());
             movie.setIsPopular(sortOrder.isPopular());
-            // Save movies in the database
-            movie.save();
-            // Check wether we are in debug mode
-            if (BuildConfig.IS_DEBUG_MODE) {
-                Log.d(LOG_TAG, "Movie: " + movie.getTitle());
-                Log.d(LOG_TAG, "Movie: " + movie.getReleaseDate());
-                Log.d(LOG_TAG, "Movie: " + movie.getId_());
-                Log.d(LOG_TAG, "Movie: " + movie.getId());
-                Log.d(LOG_TAG, "Movie HighestRated: " + movie.getIsHighestRated());
-                Log.d(LOG_TAG, "Movie Favourite: " + movie.getIsFavourite());
-                Log.d(LOG_TAG, "Movie Popular: " + movie.getIsPopular());
+            // Check if is duplicate
+            boolean iSExistingMovie = new Select()
+                    .from(Movie.class)
+                    .where("id_ = ?", movie.getId_()).exists();
+            // Save only new movies in the database
+            if (!iSExistingMovie) {
+                // Save movie
+                movie.save();
+
+                // Check wether we are in debug mode
+                if (BuildConfig.IS_DEBUG_MODE) {
+                    Log.d(LOG_TAG, "Movie: " + iSExistingMovie);
+                    Log.d(LOG_TAG, "Movie: " + movie.getTitle());
+                    Log.d(LOG_TAG, "Movie: " + movie.getReleaseDate());
+                    Log.d(LOG_TAG, "Movie: " + movie.getId_());
+                    Log.d(LOG_TAG, "Movie: " + movie.getId());
+                    Log.d(LOG_TAG, "Movie HighestRated: " + movie.getIsHighestRated());
+                    Log.d(LOG_TAG, "Movie Favourite: " + movie.getIsFavourite());
+                    Log.d(LOG_TAG, "Movie Popular: " + movie.getIsPopular());
+                }
             }
         }
     }
