@@ -79,11 +79,10 @@ public class MovieRepository {
             boolean iSExistingMovie = new Select()
                     .from(Movie.class)
                     .where("id_ = ?", movie.getId_()).exists();
-            // Save only new movies in the database
+            // Save only new movies to the database
             if (!iSExistingMovie) {
                 // Save movie
                 movie.save();
-
                 // Check wether we are in debug mode
                 if (BuildConfig.IS_DEBUG_MODE) {
                     Log.d(LOG_TAG, "Movie: " + iSExistingMovie);
