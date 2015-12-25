@@ -81,6 +81,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
         final Movie movie = mMovieList.get(position);
         // Bind the data to the view holder
         holder.bindTo(movie);
+        //ToDo: Implement selection - <a>http://stackoverflow.com/questions/27194044/how-to-properly-highlight-selected-item-on-recyclerview</a>
     }
 
     // What's the size of the movie List
