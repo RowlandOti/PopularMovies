@@ -9,8 +9,6 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.preference.PreferenceManager;
 
-import com.uwetrottmann.androidutils.AndroidUtils;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -78,13 +76,11 @@ public class Utilities {
     /**
      * Class is used to provide network availability information
      */
-    public static class NetworkUtility
-    {
+    public static class NetworkUtility {
         /**
          * Returns true if network is available or about to become available
-         * */
-        public static boolean isNetworkAvailable(Context context)
-        {
+         */
+        public static boolean isNetworkAvailable(Context context) {
             ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
             return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
@@ -100,16 +96,15 @@ public class Utilities {
             // This List will contain all Network information
             List<NetworkInfo> infoAvailableNetworks = new ArrayList<NetworkInfo>();
             // Should be Marshmarllow or higher
-            if(Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
                 // Put all available networks into an array
                 Network[] availableNetworks = cm.getAllNetworks();
                 // Now add each network information
                 for (Network availableNetwork : availableNetworks) {
                     infoAvailableNetworks.add(cm.getNetworkInfo(availableNetwork));
                 }
-            }
-            else{
-                infoAvailableNetworks =  Arrays.asList(cm.getAllNetworkInfo());
+            } else {
+                infoAvailableNetworks = Arrays.asList(cm.getAllNetworkInfo());
             }
 
             if (infoAvailableNetworks != null) {

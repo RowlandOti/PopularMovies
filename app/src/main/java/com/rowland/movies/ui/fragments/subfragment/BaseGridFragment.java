@@ -28,6 +28,7 @@ import android.view.View;
 import com.rowland.movies.R;
 import com.rowland.movies.adapters.GridAdapter;
 import com.rowland.movies.rest.models.Movie;
+import com.rowland.movies.utilities.ScreenUtility;
 
 import java.util.List;
 
@@ -83,7 +84,7 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
         mSwRefreshLayout.setColorSchemeResources(R.color.apptheme_accent_teal);
         mSwRefreshLayout.setProgressViewOffset(true, 100, 400);
         // Create new instance of layout manager
-        final StaggeredGridLayoutManager mStaggeredLayoutManger = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        final StaggeredGridLayoutManager mStaggeredLayoutManger = new StaggeredGridLayoutManager(getNumberOfColumns(), StaggeredGridLayoutManager.VERTICAL);
         // Set the layout manger
         mGridRecycleView.setLayoutManager(mStaggeredLayoutManger);
         mGridRecycleView.setHasFixedSize(false);
@@ -105,5 +106,16 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
     public void onDestroy() {
         super.onDestroy();
         ButterKnife.unbind(this);
+    }
+
+    public int getNumberOfColumns() {
+        // The number of grid columns
+        int numberColumns = 3;
+        // Check if we are in landscape
+        if(ScreenUtility.isInLandscapeOrientation(getContext())){
+            numberColumns = 3;
+        }
+        // Return the no. of columns
+        return numberColumns;
     }
 }
