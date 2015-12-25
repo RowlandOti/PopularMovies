@@ -96,6 +96,27 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
         return 0;
     }
 
+    // Handy method for passing the list to the adapter
+    public void addAll(List<Movie> movieList) {
+
+        if (movieList != null) {
+            // Check for null
+            if (mMovieList == null) {
+                // Create a new instance
+                mMovieList = new SortedList<>(Movie.class, new MovieSortedListAdapterCallBack(this));
+            }
+            // Begin
+            mMovieList.beginBatchedUpdates();
+            // Add each movie to the sorted list
+            for (Movie movie : movieList) {
+                mMovieList.add(movie);
+            }
+            // End
+            mMovieList.endBatchedUpdates();
+        }
+        // Notify others of the data changes
+    }
+
     // Takes care of the overhead of recycling and gives better performance and scrolling
     public class CustomViewHolder extends RecyclerView.ViewHolder {
 
@@ -159,26 +180,5 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
                     .placeholder(R.drawable.ic_movie_placeholder)
                     .into(mMovieImageView);
         }
-    }
-
-    // Handy method for passing the list to the adapter
-    public void addAll(List<Movie> movieList) {
-
-        if (movieList != null) {
-            // Check for null
-            if (mMovieList == null) {
-                // Create a new instance
-                mMovieList = new SortedList<>(Movie.class, new MovieSortedListAdapterCallBack(this));
-            }
-            // Begin
-            mMovieList.beginBatchedUpdates();
-            // Add each movie to the sorted list
-            for (Movie movie : movieList) {
-                mMovieList.add(movie);
-            }
-            // End
-            mMovieList.endBatchedUpdates();
-        }
-        // Notify others of the data changes
     }
 }
