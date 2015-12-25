@@ -59,7 +59,6 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
     private Context mContext;
 
     public GridAdapter(List<Movie> movieList, Context context) {
-        this.mMovieList = new SortedList<Movie>(Movie.class, new MovieSortedListAdapterCallBack(this));
         this.mContext = context;
         this.mCalendar = Calendar.getInstance();
         addAll(movieList);
@@ -79,40 +78,8 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
     public void onBindViewHolder(CustomViewHolder holder, int position) {
         // Acquire Movie item at this position
         final Movie movie = mMovieList.get(position);
-
-        holder.mGridItemContainer.setContentDescription(holder.mGridItemContainer.getContext().getString(R.string.movie_title, movie.getOriginalTitle()));
-        holder.mTitleTextView.setText(movie.getOriginalTitle());
-
-        if (movie.getReleaseDate() != null) {
-            mCalendar.setTime(movie.getReleaseDate());
-            holder.mReleaseDateTextView.setText(String.valueOf(mCalendar.get(Calendar.YEAR)));
-            holder.mReleaseDateTextView.setContentDescription(holder.mReleaseDateTextView.getContext().getString(R.string.movie_year, String.valueOf(mCalendar.get(Calendar.YEAR))));
-        }
-        // Set the popularity
-        if (movie.getIsPopular()) {
-            holder.mSortTypeIconImageView.setImageResource(R.drawable.ic_popular_black_48dp);
-            holder.mSortTypeValueTextView.setText(String.valueOf(Math.round(movie.getPopularity())) +" Votes");
-        }
-        // Set highest rated
-        if (movie.getIsHighestRated()) {
-            holder.mSortTypeIconImageView.setImageResource(R.drawable.ic_highest_rated_black_48dp);
-            holder.mSortTypeValueTextView.setText(String.valueOf(Math.round(movie.getVoteAverage())) +"/10");
-        }
-        // Set Favourites
-        if (movie.getIsFavourite()) {
-            holder.mSortTypeIconImageView.setImageResource(R.drawable.ic_favourite_black_48dp);
-            holder.mSortTypeValueTextView.setText(String.valueOf(Math.round(movie.getPopularity())));
-        }
-
-
-        String imageUrl = EBaseURlTypes.MOVIE_API_IMAGE_BASE_URL.getUrlType() + EBaseImageSize.IMAGE_SIZE_W154.getImageSize() + movie.getPosterPath();
-        final LinearLayout container = holder.mMovieTitleContainer;
-        // Use Picasso to load the images
-        Picasso.with(holder.mMovieImageView.getContext())
-                .load(imageUrl)
-                .networkPolicy(Utilities.NetworkUtility.isNetworkAvailable(mContext) ? NetworkPolicy.NO_CACHE : NetworkPolicy.OFFLINE)
-                .placeholder(R.drawable.ic_movie_placeholder)
-                .into(holder.mMovieImageView);
+        // Bind the data to the view holder
+        holder.bind(movie);
     }
 
     // What's the size of the movie List
@@ -157,15 +124,62 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
-    }
-    // Handy method for passing the list to the adapter
-    public void addAll(List<Movie> movieList){
-        // Add each movie to the sorted list
-        mMovieList.beginBatchedUpdates();
-        for (Movie movie : movieList) {
-            mMovieList.add(movie);
+
+        private void bind(Movie movie){
+            mGridItemContainer.setContentDescription(mGridItemContainer.getContext().getString(R.string.movie_title, movie.getOriginalTitle()));
+            mTitleTextView.setText(movie.getOriginalTitle());
+            // Set the release date
+            if (movie.getReleaseDate() != null) {
+                mCalendar.setTime(movie.getReleaseDate());
+                mReleaseDateTextView.setText(String.valueOf(mCalendar.get(Calendar.YEAR)));
+                mReleaseDateTextView.setContentDescription(mReleaseDateTextView.getContext().getString(R.string.movie_year, String.valueOf(mCalendar.get(Calendar.YEAR))));
+            }
+            // Set the popularity
+            if (movie.getIsPopular()) {
+                mSortTypeIconImageView.setImageResource(R.drawable.ic_popular_black_48dp);
+                mSortTypeValueTextView.setText(String.valueOf(Math.round(movie.getPopularity())) + " Votes");
+            }
+            // Set highest rated
+            if (movie.getIsHighestRated()) {
+                mSortTypeIconImageView.setImageResource(R.drawable.ic_highest_rated_black_48dp);
+                mSortTypeValueTextView.setText(String.valueOf(Math.round(movie.getVoteAverage())) + "/10");
+            }
+            // Set Favourites
+            if (movie.getIsFavourite()) {
+                mSortTypeIconImageView.setImageResource(R.drawable.ic_favourite_black_48dp);
+                mSortTypeValueTextView.setText(String.valueOf(Math.round(movie.getPopularity())));
+            }
+
+
+            String imageUrl = EBaseURlTypes.MOVIE_API_IMAGE_BASE_URL.getUrlType() + EBaseImageSize.IMAGE_SIZE_W154.getImageSize() + movie.getPosterPath();
+            final LinearLayout container = mMovieTitleContainer;
+            // Use Picasso to load the images
+            Picasso.with(mMovieImageView.getContext())
+                    .load(imageUrl)
+                    .networkPolicy(Utilities.NetworkUtility.isNetworkAvailable(mContext) ? NetworkPolicy.NO_CACHE : NetworkPolicy.OFFLINE)
+                    .placeholder(R.drawable.ic_movie_placeholder)
+                    .into(mMovieImageView);
         }
-        mMovieList.beginBatchedUpdates();
+    }
+
+    // Handy method for passing the list to the adapter
+    public void addAll(List<Movie> movieList) {
+
+        if (movieList != null) {
+            // Check for null
+            if (mMovieList == null) {
+                // Create a new instance
+                mMovieList = new SortedList<>(Movie.class, new MovieSortedListAdapterCallBack(this));
+            }
+            // Begin
+            mMovieList.beginBatchedUpdates();
+            // Add each movie to the sorted list
+            for (Movie movie : movieList) {
+                mMovieList.add(movie);
+            }
+            // End
+            mMovieList.endBatchedUpdates();
+        }
         // Notify others of the data changes
     }
 }
