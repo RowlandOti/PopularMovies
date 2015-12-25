@@ -96,7 +96,7 @@ public class HighestRatedFragment extends BaseGridFragment implements LoaderMana
         // Fill our movies list with data
         mMovieList = movieList;
         // Pass it on to our adapter
-        mGridAdapter.addAllMovies(movieList);
+        mGridAdapter.addAll(movieList);
     }
 
     @Override
@@ -104,7 +104,7 @@ public class HighestRatedFragment extends BaseGridFragment implements LoaderMana
         // Set refreshing off, when resetting
         mSwRefreshLayout.setRefreshing(false);
         // We reset the loader, nullify old data
-        mGridAdapter.addAllMovies(null);
+        mGridAdapter.addAll(null);
     }
 
     // When RefreshLayout is triggered reload the loader

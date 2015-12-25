@@ -20,7 +20,6 @@ package com.rowland.movies.adapters;
 import android.content.Context;
 import android.support.v7.util.SortedList;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.util.SortedListAdapterCallback;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,7 +38,6 @@ import com.rowland.movies.utilities.Utilities;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -64,7 +62,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
         this.mMovieList = new SortedList<Movie>(Movie.class, new MovieSortedListAdapterCallBack(this));
         this.mContext = context;
         this.mCalendar = Calendar.getInstance();
-        addAllMovies(movieList);
+        addAll(movieList);
     }
 
     // Called when RecyclerView needs a new CustomViewHolder of the given type to represent an item.
@@ -161,7 +159,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
         }
     }
     // Handy method for passing the list to the adapter
-    public void addAllMovies(List<Movie> movieList){
+    public void addAll(List<Movie> movieList){
         // Add each movie to the sorted list
         mMovieList.beginBatchedUpdates();
         for (Movie movie : movieList) {
