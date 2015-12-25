@@ -76,10 +76,11 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
     // Called by RecyclerView to display the data at the specified position.
     @Override
     public void onBindViewHolder(CustomViewHolder holder, int position) {
-        // Movie item at this position
+        // Acquire Movie item at this position
         final Movie movie = mMovieList.get(position);
 
         holder.mGridItemContainer.setContentDescription(holder.mGridItemContainer.getContext().getString(R.string.movie_title, movie.getOriginalTitle()));
+        holder.mTitleTextView.setText(movie.getOriginalTitle());
 
         if (movie.getReleaseDate() != null) {
             mCalendar.setTime(movie.getReleaseDate());
@@ -140,6 +141,9 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
 
         @Bind(R.id.grid_release_date_text_view)
         TextView mReleaseDateTextView;
+
+        @Bind(R.id.grid_title_text_view)
+        TextView mTitleTextView;
 
         @Bind(R.id.poster_image_view)
         ImageView mMovieImageView;
