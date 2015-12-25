@@ -112,11 +112,6 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
                 .networkPolicy(Utilities.NetworkUtility.isNetworkAvailable(mContext) ? NetworkPolicy.NO_CACHE : NetworkPolicy.OFFLINE)
                 .placeholder(R.drawable.ic_movie_placeholder)
                 .into(holder.mMovieImageView);
-
-        // Check wether we are in debug mode
-        if (BuildConfig.IS_DEBUG_MODE) {
-            Log.d(LOG_TAG, "Image url: " + imageUrl);
-        }
     }
 
     // What's the size of the movie List
