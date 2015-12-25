@@ -33,10 +33,6 @@ public class MoviesSortedListAdapterCallBack extends SortedListAdapterCallback<M
 
     @Override
     public int compare(Movie o1, Movie o2) {
-        // Compare
-        if (o1.mIsDone != o2.mIsDone) {
-            return o1.mIsDone ? 1 : -1;
-        }
         // Compare titles
         int titleComp = o1.getTitle().compareTo(o2.getTitle());
         if (titleComp != 0) {
@@ -53,7 +49,7 @@ public class MoviesSortedListAdapterCallBack extends SortedListAdapterCallback<M
 
     @Override
     public boolean areContentsTheSame(Movie oldItem, Movie newItem) {
-        return oldItem.getTitle().equals(newItem.getTitle());
+        return oldItem.getOverview().equals(newItem.getOverview());
     }
 
     @Override
