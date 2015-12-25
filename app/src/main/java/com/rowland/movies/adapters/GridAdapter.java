@@ -135,7 +135,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
     // Takes care of the overhead of recycling and gives better performance and scrolling
     public class CustomViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.grid_sort_type_text_view)
+        @Bind(R.id.grid_type_text_view)
         TextView mSortTypeValueTextView;
 
         @Bind(R.id.grid_release_date_text_view)
@@ -144,7 +144,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
         @Bind(R.id.poster_image_view)
         ImageView mMovieImageView;
 
-        @Bind(R.id.grid_sort_type_image_view)
+        @Bind(R.id.grid_type_image_view)
         ImageView mSortTypeIconImageView;
 
         @Bind(R.id.grid_title_container)
