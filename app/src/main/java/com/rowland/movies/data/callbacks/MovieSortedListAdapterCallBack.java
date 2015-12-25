@@ -34,11 +34,7 @@ public class MovieSortedListAdapterCallBack extends SortedListAdapterCallback<Mo
     // Should compare two objects and return how they should be ordered.
     @Override
     public int compare(Movie o1, Movie o2) {
-        // Compare titles
-        int txtComp = o1.getTitle().compareTo(o2.getTitle());
-        if (txtComp != 0) {
-            return txtComp;
-        }
+        // Compare local id
         if (o1.getId() < o2.getId()) {
             return -1;
         } else if (o1.getId() > o2.getId()) {
@@ -49,13 +45,13 @@ public class MovieSortedListAdapterCallBack extends SortedListAdapterCallback<Mo
     // Called by the SortedList when it wants to check whether two items have the same data or not.
     @Override
     public boolean areContentsTheSame(Movie oldItem, Movie newItem) {
-        // Equate titles
+        // Compare titles
         return oldItem.getTitle().equals(newItem.getTitle());
     }
     // Called by the SortedList to decide whether two object represent the same Item or not.
     @Override
     public boolean areItemsTheSame(Movie item1, Movie item2) {
-        // Equate id's
-        return item1.getId() == item2.getId();
+        // Compare remote id
+        return item1.getId_() == item2.getId_();
     }
 }
