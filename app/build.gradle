@@ -85,6 +85,8 @@ dependencies {
     compile 'com.squareup.okhttp:logging-interceptor:2.6.0'
     // Use - Database support
     compile 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
-    // Use - View Injection
+    // Use - View Injection support
     compile 'com.jakewharton:butterknife:7.0.1'
+    // Use - RecycleViewers ItemAnimation support
+    compile 'com.github.gabrielemariotti.recyclerview:recyclerview-animators:0.3.0-SNAPSHOT@aar'
 }
