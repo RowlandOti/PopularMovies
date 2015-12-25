@@ -95,7 +95,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
         // Set highest rated
         if (movie.getIsHighestRated()) {
             holder.mSortTypeIconImageView.setImageResource(R.drawable.ic_highest_rated_black_48dp);
-            holder.mSortTypeValueTextView.setText(String.valueOf(Math.round(movie.getVoteAverage())));
+            holder.mSortTypeValueTextView.setText(String.valueOf(Math.round(movie.getVoteAverage())) +"/10");
         }
         // Set Favourites
         if (movie.getIsFavourite()) {

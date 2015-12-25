@@ -27,8 +27,8 @@
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="16dp"
-        card_view:cardCornerRadius="8dp"
+        android:layout_marginBottom="4dp"
+        card_view:cardCornerRadius="6dp"
         card_view:cardUseCompatPadding="true">
 
         <LinearLayout
@@ -47,8 +47,7 @@
             <LinearLayout
                 android:id="@+id/grid_title_container"
                 android:layout_width="match_parent"
-                android:layout_height="64dp"
-                android:background="@color/apptheme_background_window_grey"
+                android:layout_height="48dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -56,8 +55,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="2"
-                    android:padding="4dp"
-                    android:text="The Hunger Games"
+                    android:padding="2dp"
+                    android:text="The Hunger Games : Mocking Jay"
                     android:textColor="@color/apptheme_primary_text_black"
                     android:textSize="16sp" />
 
@@ -68,30 +67,40 @@
                     android:layout_weight="2"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:id="@+id/grid_type_image_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:padding="4dp"
-                        android:src="@drawable/ic_popular_black_48dp" />
-
-                    <TextView
-                        android:id="@+id/grid_type_text_view"
+                    <LinearLayout
+                        android:id="@+id/grid_container_image_text"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
-                        android:padding="4dp"
-                        android:text="6.8"
-                        android:textColor="@color/apptheme_primary_text_black"
-                        android:textSize="16sp" />
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/grid_type_image_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:padding="2dp"
+                            android:src="@drawable/ic_popular_black_48dp" />
+
+                        <TextView
+                            android:id="@+id/grid_type_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="3"
+                            android:padding="2dp"
+                            android:text="6.8/10"
+                            android:textColor="@color/apptheme_primary_text_black"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
 
                     <TextView
                         android:id="@+id/grid_release_date_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
-                        android:padding="4dp"
+                        android:padding="2dp"
                         android:text="2016"
                         android:textColor="@color/apptheme_primary_text_black"
                         android:textSize="16sp" />
