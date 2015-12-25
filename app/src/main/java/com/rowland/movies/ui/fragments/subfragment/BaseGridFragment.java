@@ -20,6 +20,7 @@ package com.rowland.movies.ui.fragments.subfragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
@@ -86,6 +87,8 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
 
         mGridRecycleView.setLayoutManager(mStaggeredLayoutManger);
         mGridRecycleView.setHasFixedSize(false);
+        // Call is actually only necessary with custom ItemAnimators
+        mGridRecycleView.setItemAnimator(new DefaultItemAnimator());
 
         mGridAdapter = new GridAdapter(mMovieList, getContext());
 
