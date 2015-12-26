@@ -78,7 +78,7 @@ public class MovieLoader extends BaseLoader  {
         return getLocalData();
     }
 
-    // Get the list of movies from online
+/*    // Get the list of movies from online
     @Override
     public void getOnlineData(IMoviesAPIService movieService) {
         // Check wether we are in debug mode
@@ -89,7 +89,7 @@ public class MovieLoader extends BaseLoader  {
         Call<MovieCollection> createdCall = movieService.loadMoviesData(mSortOrder.getSortOrder(), BuildConfig.IMDB_API_KEY);
         // Asynchronous access
         createdCall.enqueue(new MovieCallBack(getContext(),mMovieRepository,mSortOrder));
-    }
+    }*/
 
     // Get the list of movies from local
     @Override

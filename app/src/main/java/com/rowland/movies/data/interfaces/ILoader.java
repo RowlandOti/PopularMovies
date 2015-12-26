@@ -31,7 +31,7 @@ import java.util.List;
 public interface ILoader<T> {
 
     // Implement to retrive data from online
-    void getOnlineData(IMoviesAPIService movieService);
+    //void getOnlineData(IMoviesAPIService movieService);
     // Implement to retrive data from local cache
     List<T> getLocalData();
     // Get online status

@@ -70,7 +70,6 @@ public class ReviewLoader extends BaseLoader {
     }
 
     // Get the list of reviews from online
-    @Override
     public void getOnlineData(IMoviesAPIService movieService) {
         // Retrieve the reviewsList data
         Call<ReviewCollection> createdCall = movieService.loadReviewsData(mTmdbMovieId, BuildConfig.IMDB_API_KEY);

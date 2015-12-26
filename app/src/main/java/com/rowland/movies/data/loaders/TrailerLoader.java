@@ -74,7 +74,7 @@ public class TrailerLoader extends BaseLoader {
 
     }
     // Get the list of reviews
-    @Override
+
     public void getOnlineData(IMoviesAPIService movieService) {
         // Retrieve the reviews data
         Call<TrailerCollection> createdCall = movieService.loadTrailersData(mTmdbMovieId, BuildConfig.IMDB_API_KEY);
