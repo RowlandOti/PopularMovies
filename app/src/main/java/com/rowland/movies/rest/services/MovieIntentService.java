@@ -43,8 +43,6 @@ public class MovieIntentService extends IntentService {
     private String requestString;
     // The sort order type
     private ESortOrder mSortOrder;
-    // MovieRepository instance
-    private MovieRepository mMovieRepository;
 
     // Default Constructor
     public MovieIntentService() {
@@ -65,8 +63,6 @@ public class MovieIntentService extends IntentService {
         requestString = intent.getStringExtra(REQUEST_STRING);
         // Set the sort type to use
         setSortType(requestString);
-        // Set the Movie Repository
-        setMovieRepository(new MovieRepository());
         // Go get some online data
         getOnlineData();
     }
@@ -82,7 +78,7 @@ public class MovieIntentService extends IntentService {
         // Retrieve the movies data
         Call<MovieCollection> createdCall = movieService.loadMoviesData(requestString, BuildConfig.IMDB_API_KEY);
         // Asynchronous access
-        createdCall.enqueue(new MovieCallBack(getApplicationContext(),mMovieRepository, mSortOrder));
+        createdCall.enqueue(new MovieCallBack(getApplicationContext(), mSortOrder));
     }
     // Set the sort type
     private void setSortType(String requestString) {
@@ -99,9 +95,4 @@ public class MovieIntentService extends IntentService {
                 break;
         }
     }
-    // Set the MovieRepository
-    public void setMovieRepository(MovieRepository movieRepository) {
-        this.mMovieRepository = movieRepository;
-    }
-
 }

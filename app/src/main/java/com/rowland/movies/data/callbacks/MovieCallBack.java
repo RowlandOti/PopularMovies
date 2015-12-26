@@ -53,10 +53,10 @@ public class MovieCallBack implements Callback<MovieCollection> {
     // Our sort order
     private ESortOrder mSortOrder;
 
-    public MovieCallBack(Context context,MovieRepository mMovieRepository, ESortOrder sortOrder) {
+    public MovieCallBack(Context context, ESortOrder sortOrder) {
         this.mSortOrder = sortOrder;
-        this.mMovieRepository = mMovieRepository;
         this.context = context;
+        this.mMovieRepository = new MovieRepository();
     }
 
     @Override

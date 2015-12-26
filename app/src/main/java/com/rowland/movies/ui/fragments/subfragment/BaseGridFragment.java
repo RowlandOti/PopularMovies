@@ -107,7 +107,7 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
     @Override
     public void onRefresh() {
         Intent i = new Intent(getActivity(), MovieIntentService.class);
-        i.putExtra(MovieIntentService.REQUEST_STRING, mSortOrder);
+        i.putExtra(MovieIntentService.REQUEST_STRING, mSortOrder.getSortOrder());
         getActivity().startService(i);
     }
 
