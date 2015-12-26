@@ -63,29 +63,17 @@ public class MovieLoader extends BaseLoader  {
     @Override
     public List<Movie> loadInBackground() {
         // If we are online query movies from API
-        if (getIsOnline()) {
+        /*if (getIsOnline()) {
             // For retrieving by favourites, we should check local database
             if (mSortOrder != ESortOrder.FAVOURITE_DESCENDING) {
                 // Get the MoviesAPIService and use it to retrieve a list of movies
                 IMoviesAPIService movieService = ApplicationController.getApplicationInstance().getMovieServiceOfApiType(EAPITypes.MOVIES_API);
                 // Get online movies and then update local database
                 getOnlineData(movieService);
-
-                /*// Retrieve the movies data
-                Call<MovieCollection> createdCall = movieService.loadMoviesData(mSortOrder.getSortOrder(), BuildConfig.IMDB_API_KEY);
-                // Synchronous
-                try {
-                    Response<MovieCollection> result = createdCall.execute();
-                    return result.body().getResults();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    Log.e(LOG_TAG, "IOException occurred in loadInBackground()");
-                }*/
-
             }
             // Return the list of movies from local database
             return getLocalData();
-        }
+        }*/
         // Return the list of movies from local database
         return getLocalData();
     }

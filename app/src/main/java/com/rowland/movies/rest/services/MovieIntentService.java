@@ -43,7 +43,6 @@ public class MovieIntentService extends IntentService {
     private String requestString;
     // The sort order type
     private ESortOrder mSortOrder;
-
     // MovieRepository instance
     private MovieRepository mMovieRepository;
 
@@ -85,7 +84,7 @@ public class MovieIntentService extends IntentService {
         // Asynchronous access
         createdCall.enqueue(new MovieCallBack(mMovieRepository, mSortOrder));
     }
-
+    // Set the sort type
     private void setSortType(String requestString) {
         // Set the sort type to use
         switch (requestString) {
