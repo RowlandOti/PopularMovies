@@ -44,8 +44,6 @@ public class MovieCallBack implements Callback<MovieCollection> {
 
     // The class Log identifier
     private static final String LOG_TAG = MovieCallBack.class.getSimpleName();
-    // MovieRepository instance
-    private MovieRepository mMovieRepository;
     // Context instance
     private Context context;
     // Our sort order
@@ -54,7 +52,6 @@ public class MovieCallBack implements Callback<MovieCollection> {
     public MovieCallBack(Context context, ESortOrder sortOrder) {
         this.mSortOrder = sortOrder;
         this.context = context;
-        this.mMovieRepository = new MovieRepository();
     }
 
     @Override
@@ -63,6 +60,8 @@ public class MovieCallBack implements Callback<MovieCollection> {
         if (response.isSuccess() && response.errorBody() == null) {
             // movies available
             List<Movie> moviesList = response.body().getResults();
+            // MovieRepository instance
+            MovieRepository mMovieRepository = new MovieRepository();
             // Save movies to data storage
             mMovieRepository.saveAll(moviesList, mSortOrder);
             // BroadCast the changes locally
