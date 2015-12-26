@@ -89,7 +89,7 @@ public class PopularFragment extends BaseGridFragment implements LoaderManager.L
     @Override
     public Loader<List<Movie>> onCreateLoader(int id, Bundle args) {
         // Create new loader
-        MovieLoader movieLoader =  new MovieLoader(getActivity(), ESortOrder.POPULAR_DESCENDING);
+        MovieLoader movieLoader =  new MovieLoader(getActivity(), mSortOrder);
         // Return new loader
         return movieLoader;
     }

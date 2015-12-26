@@ -151,10 +151,6 @@ public class Movie extends Model {
      */
     public void setIsHighestRated(boolean isHighestRated) {
         this.isHighestRated = isHighestRated;
-        // Check wether we are in debug mode
-        if (BuildConfig.IS_DEBUG_MODE) {
-            Log.d(LOG_TAG, "HighestRated: " + isHighestRated);
-        }
     }
 
     /**

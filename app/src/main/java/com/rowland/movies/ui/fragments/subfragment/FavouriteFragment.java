@@ -72,7 +72,6 @@ public class FavouriteFragment extends BaseGridFragment implements LoaderManager
         return rootView;
     }
 
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -87,7 +86,7 @@ public class FavouriteFragment extends BaseGridFragment implements LoaderManager
     @Override
     public Loader<List<Movie>> onCreateLoader(int id, Bundle args) {
         //Create new loader
-        MovieLoader movieLoader =  new MovieLoader(getActivity(), ESortOrder.FAVOURITE_DESCENDING);
+        MovieLoader movieLoader =  new MovieLoader(getActivity(), mSortOrder);
         // Return new loader
         return movieLoader;
     }

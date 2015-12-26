@@ -77,6 +77,8 @@ public class HighestRatedFragment extends BaseGridFragment implements LoaderMana
         super.onActivityCreated(savedInstanceState);
         // Initialize the list
         mMovieList = new ArrayList<>();
+        // Initialize the sort order
+        mSortOrder = ESortOrder.HIGHEST_RATED_DESCENDING;
         // Initialize the Loader
         getLoaderManager().initLoader(0, null, this);
     }
@@ -84,7 +86,7 @@ public class HighestRatedFragment extends BaseGridFragment implements LoaderMana
     @Override
     public Loader<List<Movie>> onCreateLoader(int id, Bundle args) {
         //Create new loader
-        MovieLoader movieLoader =  new MovieLoader(getActivity(), ESortOrder.HIGHEST_RATED_DESCENDING);
+        MovieLoader movieLoader =  new MovieLoader(getActivity(), mSortOrder);
         // Return new loader
         return movieLoader;
     }
