@@ -17,6 +17,7 @@
 
 package com.rowland.movies.ui.fragments.subfragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -28,6 +29,7 @@ import com.rowland.movies.R;
 import com.rowland.movies.data.loaders.MovieLoader;
 import com.rowland.movies.rest.enums.ESortOrder;
 import com.rowland.movies.rest.models.Movie;
+import com.rowland.movies.rest.services.MovieIntentService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,10 +48,11 @@ public class HighestRatedFragment extends BaseGridFragment implements LoaderMana
     public HighestRatedFragment() {
         super();
     }
+
     // Create fragment with arguments
-    public static HighestRatedFragment newInstance(Bundle args) {
+    public static PopularFragment newInstance(Bundle args) {
         // Create the new fragment instance
-        HighestRatedFragment fragmentInstance = (HighestRatedFragment) newInstance(new HighestRatedFragment(), args);
+        PopularFragment fragmentInstance = (PopularFragment) newInstance(new PopularFragment(), args);
         // Return the new fragment
         return fragmentInstance;
 
@@ -87,7 +90,7 @@ public class HighestRatedFragment extends BaseGridFragment implements LoaderMana
     @Override
     public Loader<List<Movie>> onCreateLoader(int id, Bundle args) {
         // Create new loader
-        MovieLoader movieLoader =  new MovieLoader(getActivity(), mSortOrder);
+        MovieLoader movieLoader = new MovieLoader(getActivity(), mSortOrder);
         // Return new loader
         return movieLoader;
     }
