@@ -43,6 +43,7 @@ public class MovieIntentService extends IntentService {
     private String requestString;
     // The sort order type
     private ESortOrder mSortOrder;
+
     // MovieRepository instance
     private MovieRepository mMovieRepository;
 
@@ -50,7 +51,6 @@ public class MovieIntentService extends IntentService {
     public MovieIntentService(String name) {
         // Name worker thread
         super(name);
-        this.mMovieRepository = new MovieRepository();
     }
 
     @Override
@@ -66,6 +66,9 @@ public class MovieIntentService extends IntentService {
         requestString = intent.getStringExtra(REQUEST_STRING);
         // Set the sort type to use
         setSortType(requestString);
+        // Set the Movie Repository
+        setMovieRepository(new MovieRepository());
+        // Go get some online data
         getOnlineData();
     }
 
@@ -96,6 +99,10 @@ public class MovieIntentService extends IntentService {
                 mSortOrder = ESortOrder.FAVOURITE_DESCENDING;
                 break;
         }
+    }
+    // Set the MovieRepository
+    public void setMovieRepository(MovieRepository movieRepository) {
+        this.mMovieRepository = movieRepository;
     }
 
 }
