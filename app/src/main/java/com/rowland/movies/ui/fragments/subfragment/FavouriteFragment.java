@@ -42,6 +42,7 @@ public class FavouriteFragment extends BaseGridFragment implements LoaderManager
     // Logging tracker for this class
     private final String LOG_TAG = FavouriteFragment.class.getSimpleName();
 
+    // Default constructor
     public FavouriteFragment() {
         super();
     }
@@ -85,7 +86,7 @@ public class FavouriteFragment extends BaseGridFragment implements LoaderManager
 
     @Override
     public Loader<List<Movie>> onCreateLoader(int id, Bundle args) {
-        //Create new loader
+        // Create new loader
         MovieLoader movieLoader =  new MovieLoader(getActivity(), mSortOrder);
         // Return new loader
         return movieLoader;

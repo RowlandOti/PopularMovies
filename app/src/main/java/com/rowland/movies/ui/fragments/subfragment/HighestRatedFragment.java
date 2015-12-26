@@ -42,10 +42,11 @@ public class HighestRatedFragment extends BaseGridFragment implements LoaderMana
     // Logging tracker for this class
     private final String LOG_TAG = HighestRatedFragment.class.getSimpleName();
 
+    // Default constructor
     public HighestRatedFragment() {
         super();
     }
-
+    // Create fragment with arguments
     public static HighestRatedFragment newInstance(Bundle args) {
         // Create the new fragment instance
         HighestRatedFragment fragmentInstance = (HighestRatedFragment) newInstance(new HighestRatedFragment(), args);
@@ -85,7 +86,7 @@ public class HighestRatedFragment extends BaseGridFragment implements LoaderMana
 
     @Override
     public Loader<List<Movie>> onCreateLoader(int id, Bundle args) {
-        //Create new loader
+        // Create new loader
         MovieLoader movieLoader =  new MovieLoader(getActivity(), mSortOrder);
         // Return new loader
         return movieLoader;
@@ -97,8 +98,6 @@ public class HighestRatedFragment extends BaseGridFragment implements LoaderMana
         mSwRefreshLayout.setRefreshing(false);
         // Fill our movies list with data
         mMovieList = movieList;
-        // Initialize the sort order
-        mSortOrder = ESortOrder.HIGHEST_RATED_DESCENDING;
         // Pass it on to our adapter
         mGridAdapter.addAll(movieList);
     }
