@@ -22,11 +22,14 @@ package com.rowland.movies.rest.models;
  * Created by Rowland on 12/11/2015.
  */
 
+import android.util.Log;
+
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.rowland.movies.BuildConfig;
 
 import java.util.Date;
 import java.util.List;
@@ -118,6 +121,10 @@ public class Movie extends Model {
     @Column(name = "isFavourite")
     private Boolean isFavourite;
 
+
+    // The class Log identifier
+    private static final String LOG_TAG = Movie.class.getSimpleName();
+
     public Movie() {
         // You have to call super in each constructor to create the table.
         super();
@@ -144,6 +151,10 @@ public class Movie extends Model {
      */
     public void setIsHighestRated(boolean isHighestRated) {
         this.isHighestRated = isHighestRated;
+        // Check wether we are in debug mode
+        if (BuildConfig.IS_DEBUG_MODE) {
+            Log.d(LOG_TAG, "Movie: " + iSExistingMovie);
+        }
     }
 
     /**
