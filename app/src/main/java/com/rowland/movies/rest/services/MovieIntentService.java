@@ -24,7 +24,6 @@ import android.util.Log;
 import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
 import com.rowland.movies.data.callbacks.MovieCallBack;
-import com.rowland.movies.data.repository.MovieRepository;
 import com.rowland.movies.rest.collections.MovieCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.enums.ESortOrder;
