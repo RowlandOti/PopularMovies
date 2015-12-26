@@ -42,7 +42,7 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> implements IL
     // The class Log identifier
     private static final String LOG_TAG = BaseLoader.class.getSimpleName();
     // An observer to listen for changes in data
-    //private DataSetChangeBroadCastReceiver mDataSetChangeObserver;
+    private DataSetChangeBroadCastReceiver mDataSetChangeObserver;
     // An observer to listen for network changes
     //private NetworkChangeBroadCastReceiver mNetworkChangeObserver;
     // Check if we are online
@@ -65,12 +65,12 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> implements IL
             deliverResult(mItems);
         }
         // Create dat set change Observer if it is not set yet
-        /*if (mDataSetChangeObserver == null) {
+        if (mDataSetChangeObserver == null) {
             // Custom filter to map data changes.
             IntentFilter mLFilter = new IntentFilter("RELOADER_DATA");
             // Register Observer - Start monitoring the underlying data source.
             mDataSetChangeObserver = new DataSetChangeBroadCastReceiver(this, mLFilter);
-        }*/
+        }
         // When the observer detects a change, it should call onContentChanged()
         // on the Loader, which will cause the next call to takeContentChanged() to return true.
         if (takeContentChanged() || mItems == null) {
@@ -112,7 +112,7 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> implements IL
         }*/
     }
 
-/*    // Get the data set change observer
+    // Get the data set change observer
     protected DataSetChangeBroadCastReceiver getDataSetChangeObserver() {
         return mDataSetChangeObserver;
     }
@@ -121,7 +121,7 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> implements IL
     protected void setDataSetChangeObserver(DataSetChangeBroadCastReceiver mDataSetChangeObserver) {
         this.mDataSetChangeObserver = mDataSetChangeObserver;
     }
-
+/*
     // Get the network change observer
     protected NetworkChangeBroadCastReceiver getNetworkChangeObserver() {
         return mNetworkChangeObserver;

@@ -18,9 +18,11 @@
 package com.rowland.movies.data.loaders;
 
 import android.content.Context;
+import android.content.IntentFilter;
 import android.util.Log;
 
 import com.rowland.movies.BuildConfig;
+import com.rowland.movies.data.broadcastrecievers.DataSetChangeBroadCastReceiver;
 import com.rowland.movies.data.repository.MovieRepository;
 import com.rowland.movies.rest.enums.ESortOrder;
 import com.rowland.movies.rest.models.Movie;
@@ -45,39 +47,14 @@ public class MovieLoader extends BaseLoader  {
         super(context);
         this.mSortOrder = mSortOrder;
         this.mMovieRepository = new MovieRepository();
-        //setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this, new IntentFilter("MOVIES_RELOADER_DATA")));
+        setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this, new IntentFilter("MOVIES_RELOADER_DATA")));
     }
 
     @Override
     public List<Movie> loadInBackground() {
-        // If we are online query movies from API
-        /*if (getIsOnline()) {
-            // For retrieving by favourites, we should check local database
-            if (mSortOrder != ESortOrder.FAVOURITE_DESCENDING) {
-                // Get the MoviesAPIService and use it to retrieve a list of movies
-                IMoviesAPIService movieService = ApplicationController.getApplicationInstance().getMovieServiceOfApiType(EAPITypes.MOVIES_API);
-                // Get online movies and then update local database
-                getOnlineData(movieService);
-            }
-            // Return the list of movies from local database
-            return getLocalData();
-        }*/
         // Return the list of movies from local database
         return getLocalData();
     }
-
-/*    // Get the list of movies from online
-    @Override
-    public void getOnlineData(IMoviesAPIService movieService) {
-        // Check wether we are in debug mode
-        if (BuildConfig.IS_DEBUG_MODE) {
-            Log.d(LOG_TAG, "Online data loaded ");
-        }
-        // Retrieve the movies data
-        Call<MovieCollection> createdCall = movieService.loadMoviesData(mSortOrder.getSortOrder(), BuildConfig.IMDB_API_KEY);
-        // Asynchronous access
-        createdCall.enqueue(new MovieCallBack(getContext(),mMovieRepository,mSortOrder));
-    }*/
 
     // Get the list of movies from local
     @Override
