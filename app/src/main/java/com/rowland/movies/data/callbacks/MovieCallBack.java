@@ -44,8 +44,6 @@ public class MovieCallBack implements Callback<MovieCollection> {
 
     // The class Log identifier
     private static final String LOG_TAG = MovieCallBack.class.getSimpleName();
-    // The list of movies our loader returns
-    private List<Movie> moviesList;
     // MovieRepository instance
     private MovieRepository mMovieRepository;
     // Context instance
@@ -64,7 +62,7 @@ public class MovieCallBack implements Callback<MovieCollection> {
         // Check status of response before proceeding
         if (response.isSuccess() && response.errorBody() == null) {
             // movies available
-            moviesList = response.body().getResults();
+            List<Movie> moviesList = response.body().getResults();
             // Save movies to data storage
             mMovieRepository.saveAll(moviesList, mSortOrder);
             // BroadCast the changes locally
