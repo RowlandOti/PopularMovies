@@ -106,6 +106,7 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
     // When RefreshLayout is triggered reload the loader
     @Override
     public void onRefresh() {
+        // ToDo: Do not query online if its favourites
         Intent i = new Intent(getActivity(), MovieIntentService.class);
         i.putExtra(MovieIntentService.REQUEST_STRING, mSortOrder.getSortOrder());
         getActivity().startService(i);
