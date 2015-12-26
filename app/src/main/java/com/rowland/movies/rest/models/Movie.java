@@ -153,7 +153,7 @@ public class Movie extends Model {
         this.isHighestRated = isHighestRated;
         // Check wether we are in debug mode
         if (BuildConfig.IS_DEBUG_MODE) {
-            Log.d(LOG_TAG, "Movie: " + iSExistingMovie);
+            Log.d(LOG_TAG, "HighestRated: " + isHighestRated);
         }
     }
 
