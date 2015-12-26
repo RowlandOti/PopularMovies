@@ -18,26 +18,14 @@
 package com.rowland.movies.data.loaders;
 
 import android.content.Context;
-import android.content.IntentFilter;
 import android.util.Log;
 
-import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
-import com.rowland.movies.data.broadcastrecievers.DataSetChangeBroadCastReceiver;
-import com.rowland.movies.data.callbacks.MovieCallBack;
-import com.rowland.movies.data.interfaces.ILoader;
 import com.rowland.movies.data.repository.MovieRepository;
-import com.rowland.movies.rest.collections.MovieCollection;
-import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.enums.ESortOrder;
 import com.rowland.movies.rest.models.Movie;
-import com.rowland.movies.rest.services.IMoviesAPIService;
 
-import java.io.IOException;
 import java.util.List;
-
-import retrofit.Call;
-import retrofit.Response;
 
 /**
  * Created by Oti Rowland on 12/12/2015.
