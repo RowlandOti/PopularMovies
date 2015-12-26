@@ -47,6 +47,8 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> implements IL
     //private NetworkChangeBroadCastReceiver mNetworkChangeObserver;
     // Check if we are online
     private boolean isOnline = false;
+    // DataChangeObserver Intent Receiver action
+    public static final String INTENT_ACTION = "com.rowland.movies.DATA_CHANGE";
 
     public BaseLoader(Context context) {
         super(context);
@@ -67,7 +69,7 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> implements IL
         // Create dat set change Observer if it is not set yet
         if (mDataSetChangeObserver == null) {
             // Custom filter to map data changes.
-            IntentFilter mLFilter = new IntentFilter("RELOADER_DATA");
+            IntentFilter mLFilter = new IntentFilter(INTENT_ACTION);
             // Register Observer - Start monitoring the underlying data source.
             mDataSetChangeObserver = new DataSetChangeBroadCastReceiver(this, mLFilter);
         }
@@ -96,7 +98,7 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> implements IL
             mItems = null;
         }
         // Unregister Observer - Stop monitoring the underlying data source.
-        /*if (mDataSetChangeObserver != null) {
+        if (mDataSetChangeObserver != null) {
             // Sometimes the Fragment onDestroy() unregisters the observer before calling below code
             // See <a>http://stackoverflow.com/questions/6165070/receiver-not-registered-exception-error</a>
             try  {
@@ -109,7 +111,7 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> implements IL
                     e.printStackTrace();
                 }
             }
-        }*/
+        }
     }
 
     // Get the data set change observer

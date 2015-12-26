@@ -36,6 +36,8 @@ public class MovieLoader extends BaseLoader  {
 
     // The class Log identifier
     private static final String LOG_TAG = MovieLoader.class.getSimpleName();
+    // DataChangeObserver Intent Receiver action
+    public static final String INTENT_ACTION = "com.rowland.movies.MOVIES_DATA_CHANGE";
     // MovieRepository instance
     private MovieRepository mMovieRepository;
     // The sort order type
@@ -48,7 +50,7 @@ public class MovieLoader extends BaseLoader  {
         // Movie repository in use
         this.mMovieRepository = new MovieRepository();
         // Set the data change observer
-        setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this, new IntentFilter("MOVIES_RELOADER_DATA")));
+        setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this, new IntentFilter(INTENT_ACTION)));
     }
 
     @Override
