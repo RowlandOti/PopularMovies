@@ -23,8 +23,9 @@ package com.rowland.movies.rest.enums;
 public enum ESortOrder {
     // The sort order for retrieving the movies
     POPULAR_DESCENDING("popularity.desc"), HIGHEST_RATED_DESCENDING("vote_average.desc"), FAVOURITE_DESCENDING("favourite.desc");
-
+    // Sort order string
     private String sortOrder;
+    // Is what type of sort
     private boolean isHighestRated = false;
     private boolean isPopular = false;
     private boolean isFavourite = false;
@@ -32,7 +33,7 @@ public enum ESortOrder {
     private ESortOrder(String s) {
         sortOrder = s;
     }
-    // Get the correspinding sort order
+    // Get the corresponding sort order
     private void setSortOrderType(ESortOrder sortOrderType) {
         // Find out which sort this is
         switch (sortOrderType) {
