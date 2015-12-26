@@ -50,9 +50,9 @@ public class HighestRatedFragment extends BaseGridFragment implements LoaderMana
     }
 
     // Create fragment with arguments
-    public static PopularFragment newInstance(Bundle args) {
+    public static HighestRatedFragment newInstance(Bundle args) {
         // Create the new fragment instance
-        PopularFragment fragmentInstance = (PopularFragment) newInstance(new PopularFragment(), args);
+        HighestRatedFragment fragmentInstance = (HighestRatedFragment) newInstance(new HighestRatedFragment(), args);
         // Return the new fragment
         return fragmentInstance;
 
