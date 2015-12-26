@@ -95,6 +95,8 @@ public class HighestRatedFragment extends BaseGridFragment implements LoaderMana
         mSwRefreshLayout.setRefreshing(false);
         // Fill our movies list with data
         mMovieList = movieList;
+        // Initialize the sort order
+        mSortOrder = ESortOrder.HIGHEST_RATED_DESCENDING;
         // Pass it on to our adapter
         mGridAdapter.addAll(movieList);
     }
@@ -105,11 +107,5 @@ public class HighestRatedFragment extends BaseGridFragment implements LoaderMana
         mSwRefreshLayout.setRefreshing(false);
         // We reset the loader, nullify old data
         mGridAdapter.addAll(null);
-    }
-
-    // When RefreshLayout is triggered reload the loader
-    @Override
-    public void onRefresh() {
-        getLoaderManager().restartLoader(0, null, this);
     }
 }

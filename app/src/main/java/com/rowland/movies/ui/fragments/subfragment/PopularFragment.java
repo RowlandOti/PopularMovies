@@ -63,9 +63,6 @@ public class PopularFragment extends BaseGridFragment implements LoaderManager.L
         if (getArguments() != null) {
 
         }
-        Intent i = new Intent(getActivity(), MovieIntentService.class);
-        i.putExtra(MovieIntentService.REQUEST_STRING, ESortOrder.POPULAR_DESCENDING.getSortOrder());
-        getActivity().startService(i);
     }
 
     @Override
@@ -83,6 +80,8 @@ public class PopularFragment extends BaseGridFragment implements LoaderManager.L
         super.onActivityCreated(savedInstanceState);
         // Initialize the list
         mMovieList = new ArrayList<>();
+        // Initialize the sort order
+        mSortOrder = ESortOrder.POPULAR_DESCENDING;
         // Initialize the Loader
         getLoaderManager().initLoader(0, null, this);
     }
@@ -111,11 +110,5 @@ public class PopularFragment extends BaseGridFragment implements LoaderManager.L
         mSwRefreshLayout.setRefreshing(false);
         // We reset the loader, nullify old data
         mGridAdapter.addAll(null);
-    }
-
-    // When RefreshLayout is triggered reload the loader
-    @Override
-    public void onRefresh() {
-        getLoaderManager().restartLoader(0, null, this);
     }
 }

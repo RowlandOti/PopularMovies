@@ -78,6 +78,8 @@ public class FavouriteFragment extends BaseGridFragment implements LoaderManager
         super.onActivityCreated(savedInstanceState);
         // Initialize the list
         mMovieList = new ArrayList<>();
+        // Initialize the sort order
+        mSortOrder = ESortOrder.FAVOURITE_DESCENDING;
         // Initialize the Loader
         getLoaderManager().initLoader(0, null, this);
     }
@@ -106,11 +108,5 @@ public class FavouriteFragment extends BaseGridFragment implements LoaderManager
         mSwRefreshLayout.setRefreshing(false);
         // We reset the loader, nullify old data
         mGridAdapter.addAll(null);
-    }
-
-    // When RefreshLayout is triggered reload the loader
-    @Override
-    public void onRefresh() {
-        getLoaderManager().restartLoader(0, null, this);
     }
 }

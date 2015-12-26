@@ -17,6 +17,7 @@
 
 package com.rowland.movies.ui.fragments.subfragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -27,7 +28,9 @@ import android.view.View;
 
 import com.rowland.movies.R;
 import com.rowland.movies.adapters.GridAdapter;
+import com.rowland.movies.rest.enums.ESortOrder;
 import com.rowland.movies.rest.models.Movie;
+import com.rowland.movies.rest.services.MovieIntentService;
 import com.rowland.movies.utilities.ScreenUtility;
 
 import java.util.List;
@@ -42,10 +45,12 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
 
     // Logging tracker for this class
     private final String LOG_TAG = BaseGridFragment.class.getSimpleName();
-    // AN arrayList of the movies
+    // An arrayList of the movies
     protected List<Movie> mMovieList;
     // The grid adapter
     protected GridAdapter mGridAdapter;
+    // Sort Order for thid fragment
+    protected ESortOrder mSortOrder;
 
     // ButterKnife injected Views
     @Bind(R.id.sw_refresh_layout)
@@ -98,8 +103,12 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
         mSwRefreshLayout.setOnRefreshListener(this);
     }
 
+    // When RefreshLayout is triggered reload the loader
     @Override
     public void onRefresh() {
+        Intent i = new Intent(getActivity(), MovieIntentService.class);
+        i.putExtra(MovieIntentService.REQUEST_STRING, mSortOrder);
+        getActivity().startService(i);
     }
 
     @Override
