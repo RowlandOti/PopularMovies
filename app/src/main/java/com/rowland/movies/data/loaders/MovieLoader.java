@@ -38,8 +38,6 @@ public class MovieLoader extends BaseLoader  {
     private static final String LOG_TAG = MovieLoader.class.getSimpleName();
     // DataChangeObserver Intent Receiver action
     public static final String INTENT_ACTION = "com.rowland.movies.MOVIES_DATA_CHANGE";
-    // MovieRepository instance
-    private MovieRepository mMovieRepository;
     // The sort order type
     private ESortOrder mSortOrder;
 
@@ -47,8 +45,6 @@ public class MovieLoader extends BaseLoader  {
         super(context);
         // Sort order in use
         this.mSortOrder = mSortOrder;
-        // Movie repository in use
-        this.mMovieRepository = new MovieRepository();
         // Set the data change observer
         setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this, new IntentFilter(INTENT_ACTION)));
     }
@@ -66,6 +62,8 @@ public class MovieLoader extends BaseLoader  {
         if (BuildConfig.IS_DEBUG_MODE) {
             Log.d(LOG_TAG, "Local data loaded ");
         }
+        // Movie repository in use
+        MovieRepository mMovieRepository = new MovieRepository();
         // Return local list
         return mMovieRepository.getAllWhere(mSortOrder);
     }
