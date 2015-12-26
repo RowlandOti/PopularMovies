@@ -17,6 +17,7 @@
 
 package com.rowland.movies.ui.fragments.subfragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -28,6 +29,7 @@ import com.rowland.movies.R;
 import com.rowland.movies.data.loaders.MovieLoader;
 import com.rowland.movies.rest.enums.ESortOrder;
 import com.rowland.movies.rest.models.Movie;
+import com.rowland.movies.rest.services.MovieIntentService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +63,9 @@ public class PopularFragment extends BaseGridFragment implements LoaderManager.L
         if (getArguments() != null) {
 
         }
+        Intent i = new Intent(getActivity(), MovieIntentService.class);
+        i.putExtra(MovieIntentService.REQUEST_STRING, ESortOrder.POPULAR_DESCENDING.getSortOrder());
+        getActivity().startService(i);
     }
 
     @Override

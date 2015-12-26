@@ -18,6 +18,8 @@
 package com.rowland.movies.data.callbacks;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.rowland.movies.BuildConfig;
@@ -46,11 +48,14 @@ public class MovieCallBack implements Callback<MovieCollection> {
     // MovieRepository instance
     private MovieRepository mMovieRepository;
     // Context instance
+    private Context context;
+    // Our sort order
     private ESortOrder mSortOrder;
 
-    public MovieCallBack(MovieRepository mMovieRepository, ESortOrder sortOrder) {
+    public MovieCallBack(Context context,MovieRepository mMovieRepository, ESortOrder sortOrder) {
         this.mSortOrder = sortOrder;
         this.mMovieRepository = mMovieRepository;
+        this.context = context;
     }
 
     @Override
@@ -62,7 +67,7 @@ public class MovieCallBack implements Callback<MovieCollection> {
             // Save movies to data storage
             mMovieRepository.saveAll(moviesList, mSortOrder);
             // BroadCast the changes locally
-            //LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent("MOVIES_RELOADER_DATA"));
+            LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent("MOVIES_RELOADER_DATA"));
         } else {
 
             try {
