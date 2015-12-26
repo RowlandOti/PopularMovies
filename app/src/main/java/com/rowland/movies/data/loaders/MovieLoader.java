@@ -40,13 +40,14 @@ public class MovieLoader extends BaseLoader  {
     private MovieRepository mMovieRepository;
     // The sort order type
     private ESortOrder mSortOrder;
-    // The list of movies our loader returns
-    private List<Movie> moviesList;
 
     public MovieLoader(Context context, ESortOrder mSortOrder) {
         super(context);
+        // Sort order in use
         this.mSortOrder = mSortOrder;
+        // Movie repository in use
         this.mMovieRepository = new MovieRepository();
+        // Set the data change observer
         setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this, new IntentFilter("MOVIES_RELOADER_DATA")));
     }
 
