@@ -48,9 +48,9 @@ public class MovieIntentService extends IntentService {
     private MovieRepository mMovieRepository;
 
     // Default Constructor
-    public MovieIntentService(String name) {
+    public MovieIntentService() {
         // Name worker thread
-        super(name);
+        super("movie-intent-service");
     }
 
     @Override
