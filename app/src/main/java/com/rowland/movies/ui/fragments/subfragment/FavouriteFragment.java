@@ -80,6 +80,11 @@ public class FavouriteFragment extends BaseGridFragment implements LoaderManager
         mMovieList = new ArrayList<>();
         // Initialize the sort order
         mSortOrder = ESortOrder.FAVOURITE_DESCENDING;
+        // Call service if first launch of fragment
+        if(isLaunch) {
+            startMovieIntentService();
+            isLaunch = false;
+        }
         // Initialize the Loader
         getLoaderManager().initLoader(0, null, this);
     }

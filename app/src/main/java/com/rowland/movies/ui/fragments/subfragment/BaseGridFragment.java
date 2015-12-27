@@ -19,6 +19,7 @@ package com.rowland.movies.ui.fragments.subfragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -53,6 +54,8 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
     protected GridAdapter mGridAdapter;
     // Sort Order for thid fragment
     protected ESortOrder mSortOrder;
+    // Is it first launch of fragment?
+    protected boolean isLaunch = true;
     // Page no. of request
     protected int mRequestPageNo = 1;
 
@@ -120,6 +123,22 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
             Snackbar.make(getView(), R.string.status_no_internet, Snackbar.LENGTH_LONG).show();
 
         }
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null) {
+            // Restore last state for checked position.
+            isLaunch = savedInstanceState.getBoolean("IS_LAUNCH", isLaunch);
+        }
+    }
+
+    //Here you Save your data
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("IS_LAUNCH", isLaunch);
     }
 
     @Override

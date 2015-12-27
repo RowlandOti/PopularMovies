@@ -82,6 +82,11 @@ public class PopularFragment extends BaseGridFragment implements LoaderManager.L
         mMovieList = new ArrayList<>();
         // Initialize the sort order
         mSortOrder = ESortOrder.POPULAR_DESCENDING;
+        // Call service if first launch of fragment
+        if(isLaunch) {
+            startMovieIntentService();
+            isLaunch = false;
+        }
         // Initialize the Loader
         getLoaderManager().initLoader(0, null, this);
     }
