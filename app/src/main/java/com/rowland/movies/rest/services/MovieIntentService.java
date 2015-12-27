@@ -78,6 +78,10 @@ public class MovieIntentService extends IntentService {
         Call<MovieCollection> createdCall = movieService.loadMoviesData(requestString, BuildConfig.IMDB_API_KEY);
         // Asynchronous access
         createdCall.enqueue(new MovieCallBack(getApplicationContext(), mSortOrder));
+        // Check whether we are in debug mode
+        if (BuildConfig.IS_DEBUG_MODE) {
+            Log.d(LOG_TAG, "SortOrder "+mSortOrder.getSortOrder());
+        }
     }
     // Set the sort type
     private void setSortType(String requestString) {

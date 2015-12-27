@@ -60,6 +60,10 @@ public class MovieCallBack implements Callback<MovieCollection> {
         if (response.isSuccess() && response.errorBody() == null) {
             // movies available
             List<Movie> moviesList = response.body().getResults();
+            if (BuildConfig.IS_DEBUG_MODE) {
+                Log.d(LOG_TAG, "IAM FAILING MY JOB IN " + mSortOrder.getSortOrder());
+                Log.d(LOG_TAG, "" + moviesList.size());
+            }
             // MovieRepository instance
             MovieRepository mMovieRepository = new MovieRepository();
             // Save movies to data storage
