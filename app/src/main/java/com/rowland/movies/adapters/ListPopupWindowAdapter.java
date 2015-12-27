@@ -32,6 +32,7 @@ import com.rowland.movies.objects.ListPopupMenu;
 import java.util.ArrayList;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * Created by Rowland on 7/13/2015.
@@ -41,29 +42,48 @@ public class ListPopupWindowAdapter extends BaseAdapter {
     private Context context;
     // The list of menu items
     private ArrayList<ListPopupMenu> mPopupMenuList;
-    // The icon
-    @Bind(R.id.icon_image_view)
-    ImageView icon;
-    @Bind(R.id.name_text_view)
-    TextView name;
 
     // Default constructor
     public ListPopupWindowAdapter(Context context, ArrayList<ListPopupMenu> popupMenuList) {
         this.context = context;
         this.mPopupMenuList = popupMenuList;
     }
+
     // Get the view at the position
     public View getView(int position, View convertView, ViewGroup parent) {
-        // Small List View , no need to recycle views
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        //Layout for the top row with profile picture /Avatar
-        convertView = inflater.inflate(R.layout.toolbar_overflow_item, parent, false);
+        // Don't operate on method parameter create new variable
+        View view = convertView;
+        // Get menu at position
+        ListPopupMenu menuItem = mPopupMenuList.get(position);
+        // Unique view tag
+        String tag = menuItem.getName();
+        // Check for null
+        if (view == null) {
+            // Acquire a context from parent
+            Context context = parent.getContext();
+            // Acquire the LayoutInflater
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            // Create new view
+            view = inflater.inflate(R.layout.toolbar_overflow_item, parent, false);
+        } else {
+            // Get tag from given view
+            String viewTag = (String) view.getTag();
+            // Check if tag matches our code
+            if (viewTag != null && viewTag.equals(tag)) {
+                // Return View
+                return view;
+            }
+        }
+        //Otherwise the view is newly inflated
+        ViewHolder viewholder = new ViewHolder(view);
         // Set the row icons
-        icon.setImageResource(mPopupMenuList.get(position).getProfilePic());
+        viewholder.icon.setImageResource(mPopupMenuList.get(position).getProfilePic());
         // Set the row texts
-        name.setText(mPopupMenuList.get(position).getName());
+        viewholder.name.setText(mPopupMenuList.get(position).getName());
+        // Set tag to new view
+        view.setTag(tag);
         // Return the view
-        return convertView;
+        return view;
     }
 
 
@@ -83,6 +103,19 @@ public class ListPopupWindowAdapter extends BaseAdapter {
     @Override
     public int getCount() {
         return mPopupMenuList.size();
+    }
+
+    static class ViewHolder {
+        // The icon
+        @Bind(R.id.icon_image_view)
+        ImageView icon;
+        @Bind(R.id.name_text_view)
+        TextView name;
+
+        public ViewHolder(View itemView) {
+            // Instantiate all the views
+            ButterKnife.bind(this, itemView);
+        }
     }
 
 }
