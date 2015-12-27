@@ -52,6 +52,9 @@ public class MovieCallBack implements Callback<MovieCollection> {
     public MovieCallBack(Context context, ESortOrder sortOrder) {
         this.mSortOrder = sortOrder;
         this.context = context;
+        if (BuildConfig.IS_DEBUG_MODE) {
+            Log.d(LOG_TAG, "I WAS LOADED " + this.getClass());
+        }
     }
 
     @Override
@@ -78,11 +81,10 @@ public class MovieCallBack implements Callback<MovieCollection> {
                         .convert(response.errorBody());
                 if (BuildConfig.IS_DEBUG_MODE) {
                     // we got an error message - Do error handling here
-                    //Log.d(LOG_TAG, restError.getErrorMesage());
+                    Log.d(LOG_TAG, restError.getErrorMesage());
                     Log.d(LOG_TAG, response.errorBody().toString());
-
                     //For getting error code. Code is integer value like 200,404 etc
-                    //Log.d(LOG_TAG, String.valueOf(restError.getCode()));
+                    Log.d(LOG_TAG, String.valueOf(restError.getCode()));
                 }
 
             } catch (IOException e) {
