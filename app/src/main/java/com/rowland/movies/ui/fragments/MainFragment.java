@@ -51,7 +51,7 @@ public class MainFragment extends Fragment {
     SlidingTabStripLayout slidingTabStrips;
     @Bind(R.id.viewPager)
     ViewPager pager;
-    private String[] TITLES = {"Popular", "Highest Rated", "Favorite"};
+    private String[] TITLES = {"Popular", "Highest Rated", "Favourite"};
     private SmartNestedViewPagerAdapter pagerAdapter;
     private float mPopupMaxWidth;
 
