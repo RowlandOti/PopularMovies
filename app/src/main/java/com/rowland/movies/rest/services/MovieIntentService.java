@@ -36,10 +36,14 @@ import retrofit.Call;
 public class MovieIntentService extends IntentService {
     // The class Log identifier
     private static final String LOG_TAG = MovieIntentService.class.getSimpleName();
-    // The string identifier
-    public static final String REQUEST_STRING = "SORT_TYPE";
-    // The request string value
-    private String requestString;
+    // The sort type string identifier
+    public static final String REQUEST_SORT_TYPE_STRING = "SORT_TYPE";
+    // The page no. string identifier
+    public static final String REQUEST_PAGE_NO_STRING = "PAGE_NO";
+    // The request sort type
+    private String requestSortType;
+    // The request page  no.
+    private int requestPageNo;
     // The sort order type
     private ESortOrder mSortOrder;
 
@@ -59,9 +63,13 @@ public class MovieIntentService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         //Acquire the sort type string
-        requestString = intent.getStringExtra(REQUEST_STRING);
+        requestSortType = intent.getStringExtra(REQUEST_SORT_TYPE_STRING);
+        //Acquire the page no.
+        requestPageNo = intent.getIntExtra(REQUEST_SORT_TYPE_STRING, 1);
         // Set the sort type to use
-        setSortType(requestString);
+        setSortType(requestSortType);
+        // Set the sort type to use
+        setPageNo(requestPageNo);
         // Go get some online data
         getOnlineData();
     }
@@ -75,10 +83,11 @@ public class MovieIntentService extends IntentService {
         // Get the MoviesAPIService and use it to retrieve a list of movies
         IMoviesAPIService movieService = ApplicationController.getApplicationInstance().getMovieServiceOfApiType(EAPITypes.MOVIES_API);
         // Retrieve the movies data
-        Call<MovieCollection> createdCall = movieService.loadMoviesData(requestString, BuildConfig.IMDB_API_KEY);
+        Call<MovieCollection> createdCall = movieService.loadMoviesData(requestSortType, requestPageNo, BuildConfig.IMDB_API_KEY);
         // Asynchronous access
         createdCall.enqueue(new MovieCallBack(getApplicationContext(), mSortOrder));
     }
+
     // Set the sort type
     private void setSortType(String requestString) {
         // Set the sort type to use
@@ -93,5 +102,10 @@ public class MovieIntentService extends IntentService {
                 mSortOrder = ESortOrder.FAVOURITE_DESCENDING;
                 break;
         }
+    }
+
+    // Set the page no.
+    private void setPageNo(int pageNo) {
+        requestPageNo = pageNo;
     }
 }

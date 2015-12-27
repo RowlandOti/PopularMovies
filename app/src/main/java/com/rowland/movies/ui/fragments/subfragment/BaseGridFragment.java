@@ -112,7 +112,7 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
         if (Utilities.NetworkUtility.isNetworkAvailable(getContext())) {
             // ToDo: Do not query online if its favourites -- override this method in FavouriteFragment
             Intent i = new Intent(getActivity(), MovieIntentService.class);
-            i.putExtra(MovieIntentService.REQUEST_STRING, mSortOrder.getSortOrder());
+            i.putExtra(MovieIntentService.REQUEST_SORT_TYPE_STRING, mSortOrder.getSortOrder());
             getActivity().startService(i);
         } else {
             // Set refreshing
