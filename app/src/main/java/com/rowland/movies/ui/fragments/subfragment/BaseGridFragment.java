@@ -53,6 +53,8 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
     protected GridAdapter mGridAdapter;
     // Sort Order for thid fragment
     protected ESortOrder mSortOrder;
+    // Page no. of request
+    protected int mRequestPageNo = 2;
 
     // ButterKnife injected Views
     @Bind(R.id.sw_refresh_layout)
@@ -113,7 +115,10 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
             // ToDo: Do not query online if its favourites -- override this method in FavouriteFragment
             Intent i = new Intent(getActivity(), MovieIntentService.class);
             i.putExtra(MovieIntentService.REQUEST_SORT_TYPE_STRING, mSortOrder.getSortOrder());
+            i.putExtra(MovieIntentService.REQUEST_PAGE_NO_INT, mRequestPageNo);
             getActivity().startService(i);
+            // Increment requestPage no.
+            mRequestPageNo++;
         } else {
             // Set refreshing
             mSwRefreshLayout.setRefreshing(false);
