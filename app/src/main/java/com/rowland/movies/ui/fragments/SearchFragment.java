@@ -87,12 +87,31 @@ public class SearchFragment extends BaseGridFragment implements LoaderManager.Lo
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        // Restore any previous states
+        if (savedInstanceState != null) {
+            // Restore query string
+            mQuery = savedInstanceState.getString(SearchManager.QUERY, mQuery);
+        }
         // Initialize the list
         mMovieList = new ArrayList<>();
         // Initialize the sort order
         mSortOrder = ESortOrder.POPULAR_DESCENDING;
-        // Initialize the Loader
-        getLoaderManager().initLoader(0, null, this);
+        // Check if we a value the query string
+        if (mQuery != null)
+        {
+            // Create a Bundle object
+            Bundle data = new Bundle();
+            // Assign the query string as argument
+            data.putString(SearchManager.QUERY, mQuery);
+            // Initialize the Loader
+            getLoaderManager().initLoader(0, data, this);
+        }
+    }
+    //Here you Save your data
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(SearchManager.QUERY, mQuery);
     }
 
     @Override
