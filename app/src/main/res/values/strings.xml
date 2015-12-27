@@ -10,7 +10,7 @@
 
     <string name="movie_title">Title: </string>
     <string name="movie_year">Year of release: </string>
-    <string name="status_no_internet">No Internet Connectivity Is Available At The Moment</string>
+    <string name="status_no_internet">No Internet Connectivity Is Available Yet</string>
 
 
 </resources>
