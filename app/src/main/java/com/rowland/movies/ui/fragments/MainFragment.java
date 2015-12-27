@@ -142,22 +142,18 @@ public class MainFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 // The overflow menu selected
                 String menuName = ((ListPopupMenu) adapterView.getItemAtPosition(position)).getName();
-
+                // Switch to the right ViewPager element at given position
                 switch (menuName) {
                     case "Popular":
-                        slidingTabStrips.setScrollPosition(0, 0.0F, true);
                         pager.setCurrentItem(0, true);
                         break;
                     case "Highest Rated":
-                        slidingTabStrips.setScrollPosition(1, 0.0F, true);
                         pager.setCurrentItem(1, true);
                         break;
                     case "Favourite":
-                        slidingTabStrips.setScrollPosition(2, 0.0F, true);
                         pager.setCurrentItem(2, true);
                         break;
                     default:
-                        slidingTabStrips.setScrollPosition(0, 0.0F, true);
                         pager.setCurrentItem(0, true);
                         break;
                 }
