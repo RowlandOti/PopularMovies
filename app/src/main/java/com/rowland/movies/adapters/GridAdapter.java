@@ -69,7 +69,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
     @Override
     public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // Layout to inflate for CustomViewHolder
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_list_item, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.grid_item, parent, false);
         // Return new new CustomViewHolder
         return new CustomViewHolder(v);
     }
