@@ -57,7 +57,7 @@ public class MainFragment extends Fragment {
 
     // Default constructor
     public MainFragment() {
-        //Don't destroy fragment across orientation change
+        // Don't destroy fragment across configuration change
         setRetainInstance(true);
     }
     // Create a new Instance for this fragment

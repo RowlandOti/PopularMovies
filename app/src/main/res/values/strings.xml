@@ -12,7 +12,8 @@
     <string name="movie_year">Year of release: </string>
     <string name="status_no_internet">No Internet Connectivity Is Available Yet</string>
     <string name="empty_movies_list">No Movies Could Be Found</string>
-    <string name="title_activity_search">SearchActivity</string>
+    <string name="title_activity_search">Search Movies</string>
+    <string name="search_hint">God\'s of Egypt</string>
 
 
 </resources>

@@ -18,21 +18,81 @@
 package com.rowland.movies.ui.activities;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 
 import com.rowland.movies.R;
+import com.rowland.movies.ui.fragments.DetailsFragment;
+import com.rowland.movies.ui.fragments.SearchFragment;
+
+import butterknife.ButterKnife;
 
 public class SearchActivity extends BaseToolBarActivity {
+
+    // Class Variables
+    private final String LOG_TAG = SearchActivity.class.getSimpleName();
+    // The SearchFragment
+    private SearchFragment searchFragment;
+    // The DetailFragment
+    private DetailsFragment detailFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        // Inject all the views
+        ButterKnife.bind(this);
+        // Setup the toolbar
+        setToolbar(false, false, R.drawable.ic_logo_48px);
 
+        if (findViewById(R.id.detail_container) != null) {
+            // The detail container view will be present only in the large-screen layouts
+            // (res/layout-sw600dp). If this view is present, then the activity should be
+            // in two-pane mode.
+            toggleShowTwoPane(true);
+            // If we're being restored from a previous state, don't need to do anything
+            // and should return or else we could end up with overlapping fragments.
+            if (savedInstanceState != null) {
+                return;
+            } else {
+                // Get Facebook Stetho doing its job
+                initStetho();
+                // In two-pane mode, show the detail view in this activity by
+                // adding or replacing the detail fragment using a fragment transaction.
+                showDetailFragment(null);
+            }
+        } else {
+            toggleShowTwoPane(false);
+        }
+        // Show the SearchFragment
+        showSearchFragment(null);
+    }
+
+    // Insert the DetailFragment
+    private void showDetailFragment(Bundle args) {
+        FragmentManager fm = getSupportFragmentManager();
+
+        FragmentTransaction ft = fm.beginTransaction();
+
+        if (detailFragment == null) {
+            detailFragment = DetailsFragment.newInstance(args);
+
+            ft.replace(R.id.detail_container, detailFragment);
+            ft.commit();
+        }
+    }
+
+    // Insert the MainFragment
+    private void showSearchFragment(Bundle args) {
+        FragmentManager fm = getSupportFragmentManager();
+
+        FragmentTransaction ft = fm.beginTransaction();
+        if (searchFragment == null) {
+            searchFragment = SearchFragment.newInstance(args);
+            // Prefer replace() over add() see <a>https://github.com/RowlandOti/PopularMovies/issues/1</a>
+            ft.replace(R.id.fragment_container, searchFragment);
+            ft.commit();
+        }
     }
 
 }
