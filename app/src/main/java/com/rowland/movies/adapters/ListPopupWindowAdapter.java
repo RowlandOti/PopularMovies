@@ -30,6 +30,7 @@ import com.rowland.movies.R;
 import com.rowland.movies.objects.ListPopupMenu;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -41,10 +42,10 @@ public class ListPopupWindowAdapter extends BaseAdapter {
     // A Context instance
     private Context context;
     // The list of menu items
-    private ArrayList<ListPopupMenu> mPopupMenuList;
+    private List<ListPopupMenu> mPopupMenuList;
 
     // Default constructor
-    public ListPopupWindowAdapter(Context context, ArrayList<ListPopupMenu> popupMenuList) {
+    public ListPopupWindowAdapter(Context context, List<ListPopupMenu> popupMenuList) {
         this.context = context;
         this.mPopupMenuList = popupMenuList;
     }

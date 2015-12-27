@@ -36,6 +36,7 @@ import com.rowland.movies.adapters.SmartNestedViewPagerAdapter;
 import com.rowland.movies.objects.ListPopupMenu;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -117,11 +118,10 @@ public class MainFragment extends Fragment {
 
     public void onListPopUp(View anchor) {
         // This a sample dat to fill our ListView
-        ArrayList<ListPopupMenu> menuItem = new ArrayList<>();
+        List<ListPopupMenu> menuItem = new ArrayList<>();
         menuItem.add(new ListPopupMenu(R.drawable.ic_popular_black_48dp, "Popular"));
         menuItem.add(new ListPopupMenu(R.drawable.ic_highest_rated_black_48dp, "Highest Rated"));
         menuItem.add(new ListPopupMenu(R.drawable.ic_favourite_black_48dp, "Favourite"));
-
         // Initialise our adapter
         ListPopupWindowAdapter mListPopUpAdapter = new ListPopupWindowAdapter(getActivity().getApplicationContext(), menuItem);
         // Initialise our ListPopupWindow instance
@@ -167,7 +167,6 @@ public class MainFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         // Set up the fragments adapter
         this.pagerAdapter = new SmartNestedViewPagerAdapter(getActivity().getSupportFragmentManager());
         this.pager.setAdapter(pagerAdapter);
@@ -178,18 +177,4 @@ public class MainFragment extends Fragment {
     public String[] getTITLES() {
         return TITLES;
     }
-
-    /**
-     * A callback interface that all activities containing this fragment must
-     * implement. This mechanism allows activities to be notified of item
-     * selections.
-     */
-    public interface onMainFragmentMovieSelectedCallback {
-        /**
-         * MovieItemFragmentCallback for when an item has been selected.
-         */
-        void onMainFragmentMovieSelected(String arg);
-    }
-
-
 }
