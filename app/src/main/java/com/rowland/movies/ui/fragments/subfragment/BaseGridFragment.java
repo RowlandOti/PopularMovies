@@ -19,6 +19,7 @@ package com.rowland.movies.ui.fragments.subfragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -115,7 +116,11 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
             getActivity().startService(i);
         }
         else {
+            // Set refreshing
             mSwRefreshLayout.setRefreshing(false);
+            // Tell user of no connectivity
+            Snackbar.make(getView(), R.string.status_no_internet, Snackbar.LENGTH_LONG).show();
+
         }
     }
 
