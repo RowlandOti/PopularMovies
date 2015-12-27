@@ -31,53 +31,38 @@ import com.rowland.movies.objects.ListPopupMenu;
 
 import java.util.ArrayList;
 
+import butterknife.Bind;
+
 /**
  * Created by Rowland on 7/13/2015.
  */
 public class ListPopupWindowAdapter extends BaseAdapter {
-
-    // ----------------------------------------
-    // Variables
-    // ----------------------------------------
+    // A Context instance
     private Context context;
-    private ArrayList<ListPopupMenu> mItem;
-    // ----------------------------------------
-    // Methods
-    // ----------------------------------------
+    // The list of menu items
+    private ArrayList<ListPopupMenu> mPopupMenuList;
+    // The icon
+    @Bind(R.id.icon_image_view)
+    ImageView icon;
+    @Bind(R.id.name_text_view)
+    TextView name;
 
-    public ListPopupWindowAdapter(Context context, ArrayList<ListPopupMenu> iTem) {
+    // Default constructor
+    public ListPopupWindowAdapter(Context context, ArrayList<ListPopupMenu> popupMenuList) {
         this.context = context;
-        this.mItem = iTem;
+        this.mPopupMenuList = popupMenuList;
     }
-
-    // ----------------------------------------
-
+    // Get the view at the position
     public View getView(int position, View convertView, ViewGroup parent) {
-
-        ImageView icon;
-        TextView name;
-        boolean isWithPicture = (mItem.get(position).getProfilePic() != 0);
-
         // Small List View , no need to recycle views
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        // Is this the row with the p.picture
-        if (isWithPicture) {
-            //Layout for the top row with profile picture /Avatar
-            convertView = inflater.inflate(R.layout.toolbar_overflow_item_row, parent, false);
-
-            icon = (ImageView) convertView.findViewById(R.id.imageProfilePic);
-            icon.setImageResource(mItem.get(position).getProfilePic());
-        } else {
-            //Layout for the other layout without an images
-            convertView = inflater.inflate(R.layout.toolbar_overflow_item, parent, false);
-        }
-
-
-        name = (TextView) convertView.findViewById(R.id.textViewName);
-        name.setText(mItem.get(position).getName());
-
-
+        //Layout for the top row with profile picture /Avatar
+        convertView = inflater.inflate(R.layout.toolbar_overflow_item, parent, false);
+        // Set the row icons
+        icon.setImageResource(mPopupMenuList.get(position).getProfilePic());
+        // Set the row texts
+        name.setText(mPopupMenuList.get(position).getName());
+        // Return the view
         return convertView;
     }
 
@@ -87,7 +72,7 @@ public class ListPopupWindowAdapter extends BaseAdapter {
     // ----------------------------------------
     @Override
     public Object getItem(int index) {
-        return mItem.get(index);
+        return mPopupMenuList.get(index);
     }
 
     @Override
@@ -97,7 +82,7 @@ public class ListPopupWindowAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return mItem.size();
+        return mPopupMenuList.size();
     }
 
 }

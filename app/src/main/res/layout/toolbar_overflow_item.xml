@@ -19,21 +19,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:padding="14dp">
+    android:padding="6dp">
+
+    <ImageView
+        android:id="@+id/icon_image_view"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@color/apptheme_accent_teal"
+        android:visibility="visible" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingLeft="16dp">
 
         <TextView
-            android:id="@+id/textViewName"
+            android:id="@+id/name_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Mamluki"
             android:textColor="@android:color/black"
             android:textSize="16sp" />
 
+        <TextView
+            android:id="@+id/textUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="6dp"
+            android:text="\@DigitalSurgeonR"
+
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="13sp"
+            android:visibility="visible" />
 
     </LinearLayout>
 </LinearLayout>

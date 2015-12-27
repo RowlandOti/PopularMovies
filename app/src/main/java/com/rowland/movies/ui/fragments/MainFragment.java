@@ -124,7 +124,6 @@ public class MainFragment extends Fragment {
 
         // Initialise our adapter
         ListPopupWindowAdapter mListPopUpAdapter = new ListPopupWindowAdapter(getActivity().getApplicationContext(), menuItem);
-
         // Initialise our ListPopupWindow instance
         final ListPopupWindow pop = new ListPopupWindow(getActivity().getApplicationContext());
         // Configure ListPopupWindow properties
@@ -141,27 +140,28 @@ public class MainFragment extends Fragment {
         pop.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                // Dismiss the LisPopupWindow when a list item is clicked
-
-                String sortType;
+                // The overflow menu selected
                 String menuName = ((ListPopupMenu) adapterView.getItemAtPosition(position)).getName();
 
                 switch (menuName) {
                     case "Popular":
                         slidingTabStrips.setScrollPosition(0, 0.0F, true);
+                        pager.setCurrentItem(0, true);
                         break;
                     case "Highest Rated":
                         slidingTabStrips.setScrollPosition(1, 0.0F, true);
+                        pager.setCurrentItem(1, true);
                         break;
                     case "Favourite":
                         slidingTabStrips.setScrollPosition(2, 0.0F, true);
+                        pager.setCurrentItem(2, true);
                         break;
                     default:
                         slidingTabStrips.setScrollPosition(0, 0.0F, true);
+                        pager.setCurrentItem(0, true);
                         break;
                 }
-
-
+                // Dismiss the LisPopupWindow when a list item is clicked
                 pop.dismiss();
             }
         });
