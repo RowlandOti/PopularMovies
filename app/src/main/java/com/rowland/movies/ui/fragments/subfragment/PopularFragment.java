@@ -60,6 +60,7 @@ public class PopularFragment extends BaseGridFragment implements LoaderManager.L
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Check if we have arguments
         if (getArguments() != null) {
 
         }

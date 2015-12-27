@@ -17,6 +17,7 @@
 
 package com.rowland.movies.ui.fragments;
 
+import android.app.SearchManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
@@ -47,6 +48,8 @@ public class SearchFragment extends BaseGridFragment implements LoaderManager.Lo
 
     // Logging tracker for this class
     private final String LOG_TAG = SearchFragment.class.getSimpleName();
+    // Search Query String
+    private String mQuery;
 
     // Default constructor
     public SearchFragment() {
@@ -64,8 +67,10 @@ public class SearchFragment extends BaseGridFragment implements LoaderManager.Lo
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-
+        // Check if we have arguments
+        if (getArguments() != null)
+        {
+            mQuery = getArguments().getString(SearchManager.QUERY);
         }
     }
 

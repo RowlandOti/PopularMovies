@@ -61,6 +61,7 @@ public class HighestRatedFragment extends BaseGridFragment implements LoaderMana
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Check if we have arguments
         if (getArguments() != null) {
 
         }

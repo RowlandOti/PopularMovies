@@ -58,6 +58,7 @@ public class FavouriteFragment extends BaseGridFragment implements LoaderManager
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Check if we have arguments
         if (getArguments() != null) {
 
         }
