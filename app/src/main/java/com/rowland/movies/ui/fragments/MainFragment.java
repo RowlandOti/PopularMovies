@@ -47,14 +47,22 @@ import butterknife.ButterKnife;
  */
 public class MainFragment extends Fragment {
 
+    // The class Log identifier
     private final String LOG_TAG = MainFragment.class.getSimpleName();
+    // The Subfragment titles
+    private String[] TITLES = {"Popular", "Highest Rated", "Favourite"};
+    // The adapter that manages the subfragments
+    private SmartNestedViewPagerAdapter pagerAdapter;
+    // ListPopup max width
+    private float mPopupMaxWidth;
+    // The currently selected tab strip
+    private int selectedTabStrip;
+
+    // ButterKnife injected views
     @Bind(R.id.slidingTabStrips)
     SlidingTabStripLayout slidingTabStrips;
     @Bind(R.id.viewPager)
-    ViewPager pager;
-    private String[] TITLES = {"Popular", "Highest Rated", "Favourite"};
-    private SmartNestedViewPagerAdapter pagerAdapter;
-    private float mPopupMaxWidth;
+    ViewPager mViewPager;
 
     // Default constructor
     public MainFragment() {
@@ -91,6 +99,34 @@ public class MainFragment extends Fragment {
         ButterKnife.bind(this, rootView);
         // Return the view for this fragment
         return rootView;
+    }
+
+    // Here you Save your data
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        // Acquire the currently selected tab
+        selectedTabStrip =  mViewPager.getCurrentItem();
+        // Save the currently selected tab position
+        outState.putInt("SELECTED_TAB", selectedTabStrip);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        // Initialize the fragments adapter
+        pagerAdapter = new SmartNestedViewPagerAdapter(getActivity().getSupportFragmentManager());
+        // Set up the adapter
+        mViewPager.setAdapter(pagerAdapter);
+        // Set up the viewPager
+        slidingTabStrips.setupWithViewPager(mViewPager);
+        // Restore states
+        if (savedInstanceState != null) {
+            // Acquire previously selected tab.
+            selectedTabStrip = savedInstanceState.getInt("SELECTED_TAB", selectedTabStrip);
+            // Restore previously selected tab
+            mViewPager.setCurrentItem(selectedTabStrip, true);
+        }
     }
 
     @Override
@@ -145,16 +181,16 @@ public class MainFragment extends Fragment {
                 // Switch to the right ViewPager element at given position
                 switch (menuName) {
                     case "Popular":
-                        pager.setCurrentItem(0, true);
+                        mViewPager.setCurrentItem(0, true);
                         break;
                     case "Highest Rated":
-                        pager.setCurrentItem(1, true);
+                        mViewPager.setCurrentItem(1, true);
                         break;
                     case "Favourite":
-                        pager.setCurrentItem(2, true);
+                        mViewPager.setCurrentItem(2, true);
                         break;
                     default:
-                        pager.setCurrentItem(0, true);
+                        mViewPager.setCurrentItem(0, true);
                         break;
                 }
                 // Dismiss the LisPopupWindow when a list item is clicked
@@ -162,16 +198,6 @@ public class MainFragment extends Fragment {
             }
         });
         pop.show();
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        // Set up the fragments adapter
-        this.pagerAdapter = new SmartNestedViewPagerAdapter(getActivity().getSupportFragmentManager());
-        this.pager.setAdapter(pagerAdapter);
-        // Set up the viewPager
-        this.slidingTabStrips.setupWithViewPager(pager);
     }
 
     public String[] getTITLES() {

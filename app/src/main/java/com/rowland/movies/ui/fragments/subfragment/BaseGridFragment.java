@@ -137,7 +137,7 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
         }
     }
 
-    //Here you Save your data
+    // Here you Save your data
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
