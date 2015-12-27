@@ -32,6 +32,7 @@ import com.rowland.movies.rest.enums.ESortOrder;
 import com.rowland.movies.rest.models.Movie;
 import com.rowland.movies.rest.services.MovieIntentService;
 import com.rowland.movies.utilities.ScreenUtility;
+import com.rowland.movies.utilities.Utilities;
 
 import java.util.List;
 
@@ -106,10 +107,16 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
     // When RefreshLayout is triggered reload the loader
     @Override
     public void onRefresh() {
-        // ToDo: Do not query online if its favourites
-        Intent i = new Intent(getActivity(), MovieIntentService.class);
-        i.putExtra(MovieIntentService.REQUEST_STRING, mSortOrder.getSortOrder());
-        getActivity().startService(i);
+        // Check if we are online
+        if(Utilities.NetworkUtility.isNetworkAvailable(getContext())){
+            // ToDo: Do not query online if its favourites -- override this method in FavouriteFragment
+            Intent i = new Intent(getActivity(), MovieIntentService.class);
+            i.putExtra(MovieIntentService.REQUEST_STRING, mSortOrder.getSortOrder());
+            getActivity().startService(i);
+        }
+        else {
+            mSwRefreshLayout.setRefreshing(false);
+        }
     }
 
     @Override
