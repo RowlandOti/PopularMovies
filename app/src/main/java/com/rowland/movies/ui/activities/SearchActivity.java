@@ -17,6 +17,8 @@
 
 package com.rowland.movies.ui.activities;
 
+import android.app.SearchManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -64,8 +66,12 @@ public class SearchActivity extends BaseToolBarActivity {
         } else {
             toggleShowTwoPane(false);
         }
+        // Use this Bundle object
+        Bundle args = new Bundle();
+        // to set arguments for this fragment
+        args.putString(SearchManager.QUERY, getSearchQuery());
         // Show the SearchFragment
-        showSearchFragment(null);
+        showSearchFragment(args);
     }
 
     // Insert the DetailFragment
@@ -93,6 +99,19 @@ public class SearchActivity extends BaseToolBarActivity {
             ft.replace(R.id.fragment_container, searchFragment);
             ft.commit();
         }
+    }
+    // Get Search query from Intent
+    private String getSearchQuery() {
+        // The search query
+        String searchQuery = "";
+        // Filter the relevant Intent
+        if (Intent.ACTION_SEARCH.equals(getIntent().getAction()))
+        {
+            // Acquire the search query
+            searchQuery = getIntent().getStringExtra(SearchManager.QUERY);
+        }
+        // Return the search string
+        return  searchQuery;
     }
 
 }
