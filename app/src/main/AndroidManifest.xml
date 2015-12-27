@@ -38,10 +38,9 @@
 
         <activity
             android:name="com.rowland.movies.ui.activities.SearchActivity"
-            android:label="@string/title_activity_search"
             android:configChanges="orientation"
-            android:parentActivityName="com.rowland.movies.ui.activities.MainActivity"
-            android:theme="@style/AppTheme.Dark">
+            android:label="@string/title_activity_search"
+            android:parentActivityName="com.rowland.movies.ui.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
