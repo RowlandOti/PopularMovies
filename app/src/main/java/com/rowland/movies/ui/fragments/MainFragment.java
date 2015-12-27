@@ -94,8 +94,6 @@ public class MainFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        // Clear old menu.
-        menu.clear();
         // Inflate new menu.
         inflater.inflate(R.menu.menu_main_fragment, menu);
     }
