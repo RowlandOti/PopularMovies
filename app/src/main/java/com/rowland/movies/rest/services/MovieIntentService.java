@@ -39,7 +39,7 @@ public class MovieIntentService extends IntentService {
     // The sort type string identifier
     public static final String REQUEST_SORT_TYPE_STRING = "SORT_TYPE";
     // The page no. string identifier
-    public static final String REQUEST_PAGE_NO_STRING = "PAGE_NO";
+    public static final String REQUEST_PAGE_NO_INT = "PAGE_NO";
     // The request sort type
     private String requestSortType;
     // The request page  no.
@@ -65,7 +65,7 @@ public class MovieIntentService extends IntentService {
         //Acquire the sort type string
         requestSortType = intent.getStringExtra(REQUEST_SORT_TYPE_STRING);
         //Acquire the page no.
-        requestPageNo = intent.getIntExtra(REQUEST_SORT_TYPE_STRING, 1);
+        requestPageNo = intent.getIntExtra(REQUEST_PAGE_NO_INT, 1);
         // Set the sort type to use
         setSortType(requestSortType);
         // Set the sort type to use
