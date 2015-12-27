@@ -53,7 +53,6 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
     protected GridAdapter mGridAdapter;
     // Sort Order for thid fragment
     protected ESortOrder mSortOrder;
-    protected boolean isLaunch = true;
     // Page no. of request
     protected int mRequestPageNo = 1;
 
@@ -85,10 +84,6 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
         super.onCreate(savedInstanceState);
         //Don't destroy fragment across orientation change
         setRetainInstance(true);
-        if(isLaunch){
-            startMovieIntentService();
-            isLaunch = false;
-        }
     }
 
     @Override
