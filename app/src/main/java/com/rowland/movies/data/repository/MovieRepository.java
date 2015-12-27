@@ -57,6 +57,7 @@ public class MovieRepository {
                 break;
             default:
                 whereClause = "";
+                break;
         }
 
         // ToDo: Move this logic to the Movie model where it belongs
