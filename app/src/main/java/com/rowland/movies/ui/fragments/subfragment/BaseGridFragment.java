@@ -27,6 +27,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
+import android.widget.TextView;
 
 import com.rowland.movies.R;
 import com.rowland.movies.adapters.GridAdapter;
@@ -64,6 +65,8 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
     protected SwipeRefreshLayout mSwRefreshLayout;
     @Bind(R.id.grid_recycle_view)
     protected RecyclerView mGridRecycleView;
+    @Bind(R.id.empty_text_view)
+    protected TextView mEmptyTextView;
 
     // Default constructor
     public BaseGridFragment() {
@@ -146,6 +149,7 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
         super.onDestroy();
         ButterKnife.unbind(this);
     }
+
     // Start the service
     protected void startMovieIntentService() {
         // ToDo: Do not query online if its favourites -- override this method in FavouriteFragment
@@ -156,6 +160,7 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
         // Increment requestPage no.
         mRequestPageNo++;
     }
+
     // Get the no. of grid columns to use
     protected int getNumberOfColumns() {
         // The number of grid columns
@@ -166,5 +171,18 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
         }
         // Return the no. of columns
         return numberColumns;
+    }
+
+    // Update the empty view
+    public void updateEmptyView() {
+        if (mGridAdapter.getItemCount() == 0) {
+            // Show Empty TextView
+            mGridRecycleView.setVisibility(View.GONE);
+            mEmptyTextView.setVisibility(View.VISIBLE);
+        } else {
+            // Show RecycleView filled with movies
+            mGridRecycleView.setVisibility(View.VISIBLE);
+            mEmptyTextView.setVisibility(View.GONE);
+        }
     }
 }

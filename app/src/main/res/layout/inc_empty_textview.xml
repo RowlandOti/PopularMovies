@@ -22,7 +22,7 @@
 
     <!-- Empty ListView-->
     <TextView
-        android:id="@+id/listview_tweet_empty"
+        android:id="@+id/empty_text_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
