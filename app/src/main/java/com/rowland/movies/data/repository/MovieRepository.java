@@ -55,6 +55,8 @@ public class MovieRepository {
             case FAVOURITE_DESCENDING:
                 whereClause = "isFavourite = ?";
                 break;
+            default:
+                whereClause = "";
         }
 
         // ToDo: Move this logic to the Movie model where it belongs

@@ -19,40 +19,54 @@ package com.rowland.movies.ui.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.rowland.movies.R;
+import com.rowland.movies.data.loaders.MovieLoader;
+import com.rowland.movies.rest.enums.ESortOrder;
+import com.rowland.movies.rest.models.Movie;
+import com.rowland.movies.ui.fragments.subfragment.BaseGridFragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class SearchFragment extends Fragment {
+public class SearchFragment extends BaseGridFragment implements LoaderManager.LoaderCallbacks<List<Movie>>{
+
+    // Logging tracker for this class
+    private final String LOG_TAG = SearchFragment.class.getSimpleName();
 
     // Default constructor
     public SearchFragment() {
-        // Don't destroy fragment across configuration change
-        setRetainInstance(true);
+        super();
     }
-    // Create a new Instance for this fragment
+    // Create fragment with arguments
     public static SearchFragment newInstance(Bundle args) {
         // Create the new fragment instance
-        SearchFragment fragmentInstance = new SearchFragment();
-        // Set arguments if it is not null
-        if (args != null) {
-            fragmentInstance.setArguments(args);
-        }
+        SearchFragment fragmentInstance = (SearchFragment) newInstance(new SearchFragment(), args);
         // Return the new fragment
         return fragmentInstance;
+
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
+        if (getArguments() != null) {
+
+        }
     }
 
     @Override
@@ -63,5 +77,49 @@ public class SearchFragment extends Fragment {
         ButterKnife.bind(this, rootView);
         // Return the view for this fragment
         return rootView;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        // Initialize the list
+        mMovieList = new ArrayList<>();
+        // Initialize the sort order
+        mSortOrder = ESortOrder.POPULAR_DESCENDING;
+        // Call service if first launch of fragment
+        if(isLaunch) {
+            startMovieIntentService();
+            isLaunch = false;
+        }
+        // Initialize the Loader
+        getLoaderManager().initLoader(0, null, this);
+    }
+
+    @Override
+    public Loader<List<Movie>> onCreateLoader(int id, Bundle args) {
+        // Create new loader
+        MovieLoader movieLoader =  new MovieLoader(getActivity(), mSortOrder);
+        // Return new loader
+        return movieLoader;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<List<Movie>> loader, List<Movie> movieList) {
+        // Set refreshing off, when done loading
+        mSwRefreshLayout.setRefreshing(false);
+        // Fill our movies list with data
+        mMovieList = movieList;
+        // Pass it on to our adapter
+        mGridAdapter.addAll(movieList);
+        // Update the Empty View
+        updateEmptyView();
+    }
+
+    @Override
+    public void onLoaderReset(Loader<List<Movie>> loader) {
+        // Set refreshing off, when resetting
+        mSwRefreshLayout.setRefreshing(false);
+        // We reset the loader, nullify old data
+        mGridAdapter.addAll(null);
     }
 }
