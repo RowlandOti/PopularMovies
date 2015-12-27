@@ -60,6 +60,7 @@ public class MainFragment extends Fragment {
         // Don't destroy fragment across configuration change
         setRetainInstance(true);
     }
+
     // Create a new Instance for this fragment
     public static MainFragment newInstance(Bundle args) {
         // Create the new fragment instance
@@ -116,7 +117,7 @@ public class MainFragment extends Fragment {
 
     public void onListPopUp(View anchor) {
         // This a sample dat to fill our ListView
-        ArrayList<ListPopupMenu> menuItem = new ArrayList<ListPopupMenu>();
+        ArrayList<ListPopupMenu> menuItem = new ArrayList<>();
         menuItem.add(new ListPopupMenu(R.drawable.ic_popular_black_48dp, "Popular"));
         menuItem.add(new ListPopupMenu(R.drawable.ic_highest_rated_black_48dp, "Highest Rated"));
         menuItem.add(new ListPopupMenu(R.drawable.ic_favourite_black_48dp, "Favourite"));
