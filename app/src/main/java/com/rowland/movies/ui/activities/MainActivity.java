@@ -17,9 +17,16 @@
 
 package com.rowland.movies.ui.activities;
 
+import android.app.SearchManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.SearchView;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.rowland.movies.R;
 import com.rowland.movies.ui.fragments.DetailsFragment;
@@ -94,5 +101,24 @@ public class MainActivity extends BaseToolBarActivity {
             ft.replace(R.id.fragment_container, mainFragment);
             ft.commit();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        // Acquire the search manager
+        SearchManager SManager =  (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        // Acquire the relevant search menu item
+        MenuItem searchMenuItem = menu.findItem(R.id.action_search);
+        // Acquire the search view
+        SearchView mSearchView = (SearchView) MenuItemCompat.getActionView(searchMenuItem);
+        // Set the Search activity class
+        mSearchView.setSearchableInfo(SManager.getSearchableInfo(new ComponentName(getApplicationContext(), SearchActivity.class)));
+        // Set if should use an icon
+        mSearchView.setIconifiedByDefault(true);
+        // return whether menu was succesfully created
+        return super.onCreateOptionsMenu(menu);
     }
 }
