@@ -4,4 +4,5 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="tab_padding_horizontal">12dp</dimen>
     <dimen name="config_prefListPopupWindowWidth">150dp</dimen>
+    <dimen name="empty_text_viewPadding">16dp</dimen>
 </resources>
