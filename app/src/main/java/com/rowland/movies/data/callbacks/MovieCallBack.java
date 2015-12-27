@@ -60,13 +60,10 @@ public class MovieCallBack implements Callback<MovieCollection> {
     @Override
     public void onResponse(Response<MovieCollection> response, Retrofit retrofit) {
         // Check status of response before proceeding
-        if (response.isSuccess() && response.errorBody() == null) {
+        //if (response.isSuccess() && response.errorBody() == null) {
+        if (response.isSuccess()) {
             // movies available
             List<Movie> moviesList = response.body().getResults();
-            if (BuildConfig.IS_DEBUG_MODE) {
-                Log.d(LOG_TAG, "IAM FAILING MY JOB IN " + mSortOrder.getSortOrder());
-                Log.d(LOG_TAG, "" + moviesList.size());
-            }
             // MovieRepository instance
             MovieRepository mMovieRepository = new MovieRepository();
             // Save movies to data storage
