@@ -45,7 +45,7 @@ public class SearchActivity extends BaseToolBarActivity {
         // Inject all the views
         ButterKnife.bind(this);
         // Setup the toolbar
-        setToolbar(false, false, R.drawable.ic_logo_48px);
+        setToolbar(true, false, R.drawable.ic_logo_48px);
 
         if (findViewById(R.id.detail_container) != null) {
             // The detail container view will be present only in the large-screen layouts
