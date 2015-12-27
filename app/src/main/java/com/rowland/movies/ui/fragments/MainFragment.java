@@ -22,6 +22,7 @@ import android.support.design.widget.SlidingTabStripLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.ListPopupWindow;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,6 +31,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
+import com.rowland.movies.BuildConfig;
 import com.rowland.movies.R;
 import com.rowland.movies.adapters.ListPopupWindowAdapter;
 import com.rowland.movies.adapters.SmartNestedViewPagerAdapter;
@@ -49,6 +51,8 @@ public class MainFragment extends Fragment {
 
     // The class Log identifier
     private final String LOG_TAG = MainFragment.class.getSimpleName();
+    // Selected tab key
+    public static final String SELECTED_TAB_KEY = "SELECTED_TAB";
     // The Subfragment titles
     private String[] TITLES = {"Popular", "Highest Rated", "Favourite"};
     // The adapter that manages the subfragments
@@ -56,11 +60,11 @@ public class MainFragment extends Fragment {
     // ListPopup max width
     private float mPopupMaxWidth;
     // The currently selected tab strip
-    private int selectedTabStrip;
+    private int selectedTabStrip = 0;
 
     // ButterKnife injected views
     @Bind(R.id.slidingTabStrips)
-    SlidingTabStripLayout slidingTabStrips;
+    SlidingTabStripLayout mSlidingTabStrips;
     @Bind(R.id.viewPager)
     ViewPager mViewPager;
 
@@ -106,27 +110,31 @@ public class MainFragment extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         // Acquire the currently selected tab
-        selectedTabStrip =  mViewPager.getCurrentItem();
+        selectedTabStrip = mViewPager.getCurrentItem();
         // Save the currently selected tab position
-        outState.putInt("SELECTED_TAB", selectedTabStrip);
+        outState.putInt(SELECTED_TAB_KEY , selectedTabStrip);
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        // Restore states
+        if (savedInstanceState != null) {
+            // Acquire previously selected tab.
+            selectedTabStrip = savedInstanceState.getInt(SELECTED_TAB_KEY , selectedTabStrip);
+            // Restore previously selected tab
+            mViewPager.setCurrentItem(selectedTabStrip, true);
+        }
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         // Initialize the fragments adapter
         pagerAdapter = new SmartNestedViewPagerAdapter(getActivity().getSupportFragmentManager());
         // Set up the adapter
         mViewPager.setAdapter(pagerAdapter);
         // Set up the viewPager
-        slidingTabStrips.setupWithViewPager(mViewPager);
-        // Restore states
-        if (savedInstanceState != null) {
-            // Acquire previously selected tab.
-            selectedTabStrip = savedInstanceState.getInt("SELECTED_TAB", selectedTabStrip);
-            // Restore previously selected tab
-            mViewPager.setCurrentItem(selectedTabStrip, true);
-        }
+        mSlidingTabStrips.setupWithViewPager(mViewPager);
     }
 
     @Override
