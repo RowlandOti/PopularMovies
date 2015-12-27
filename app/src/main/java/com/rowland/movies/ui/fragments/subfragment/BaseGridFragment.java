@@ -109,13 +109,12 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
     @Override
     public void onRefresh() {
         // Check if we are online
-        if(Utilities.NetworkUtility.isNetworkAvailable(getContext())){
+        if (Utilities.NetworkUtility.isNetworkAvailable(getContext())) {
             // ToDo: Do not query online if its favourites -- override this method in FavouriteFragment
             Intent i = new Intent(getActivity(), MovieIntentService.class);
             i.putExtra(MovieIntentService.REQUEST_STRING, mSortOrder.getSortOrder());
             getActivity().startService(i);
-        }
-        else {
+        } else {
             // Set refreshing
             mSwRefreshLayout.setRefreshing(false);
             // Tell user of no connectivity
@@ -134,7 +133,7 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
         // The number of grid columns
         int numberColumns = 2;
         // Check if we are in landscape
-        if(ScreenUtility.isInLandscapeOrientation(getContext())){
+        if (ScreenUtility.isInLandscapeOrientation(getContext())) {
             numberColumns = 3;
         }
         // Return the no. of columns
