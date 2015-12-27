@@ -70,7 +70,7 @@ public class ListPopupWindowAdapter extends BaseAdapter {
             icon.setImageResource(mItem.get(position).getProfilePic());
         } else {
             //Layout for the other layout without an images
-            convertView = inflater.inflate(R.layout.toolbar_overflow_item_row_text, parent, false);
+            convertView = inflater.inflate(R.layout.toolbar_overflow_item, parent, false);
         }
 
 
