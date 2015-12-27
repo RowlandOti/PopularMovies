@@ -53,8 +53,9 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
     protected GridAdapter mGridAdapter;
     // Sort Order for thid fragment
     protected ESortOrder mSortOrder;
+    protected boolean isLaunch = true;
     // Page no. of request
-    protected int mRequestPageNo = 2;
+    protected int mRequestPageNo = 1;
 
     // ButterKnife injected Views
     @Bind(R.id.sw_refresh_layout)
@@ -84,6 +85,10 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
         super.onCreate(savedInstanceState);
         //Don't destroy fragment across orientation change
         setRetainInstance(true);
+        if(isLaunch){
+            startMovieIntentService();
+            isLaunch = false;
+        }
     }
 
     @Override
@@ -112,13 +117,7 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
     public void onRefresh() {
         // Check if we are online
         if (Utilities.NetworkUtility.isNetworkAvailable(getContext())) {
-            // ToDo: Do not query online if its favourites -- override this method in FavouriteFragment
-            Intent i = new Intent(getActivity(), MovieIntentService.class);
-            i.putExtra(MovieIntentService.REQUEST_SORT_TYPE_STRING, mSortOrder.getSortOrder());
-            i.putExtra(MovieIntentService.REQUEST_PAGE_NO_INT, mRequestPageNo);
-            getActivity().startService(i);
-            // Increment requestPage no.
-            mRequestPageNo++;
+            startMovieIntentService();
         } else {
             // Set refreshing
             mSwRefreshLayout.setRefreshing(false);
@@ -133,7 +132,17 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
         super.onDestroy();
         ButterKnife.unbind(this);
     }
-
+    // Start the service
+    protected void startMovieIntentService() {
+        // ToDo: Do not query online if its favourites -- override this method in FavouriteFragment
+        Intent i = new Intent(getActivity(), MovieIntentService.class);
+        i.putExtra(MovieIntentService.REQUEST_SORT_TYPE_STRING, mSortOrder.getSortOrder());
+        i.putExtra(MovieIntentService.REQUEST_PAGE_NO_INT, mRequestPageNo);
+        getActivity().startService(i);
+        // Increment requestPage no.
+        mRequestPageNo++;
+    }
+    // Get the no. of grid columns to use
     protected int getNumberOfColumns() {
         // The number of grid columns
         int numberColumns = 2;
