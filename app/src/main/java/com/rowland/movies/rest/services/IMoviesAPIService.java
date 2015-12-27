@@ -45,7 +45,7 @@ public interface IMoviesAPIService {
 
     // Load our movies
     @GET(MOVIES_ENDPOINT)
-    Call<MovieCollection> loadMoviesData(@Query("sort_by") String sortBy, @Query("api_key") String apiKey);
+    Call<MovieCollection> loadMoviesData(@Query("sort_by") String sortBy, @Query("api_key") String apiKey, @Query("page") String pageNo);
 
     // Load the movie's trailer videos
     @GET(MOVIES_TRAILERS_ENDPOINT)
