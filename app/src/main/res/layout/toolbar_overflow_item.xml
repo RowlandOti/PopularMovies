@@ -38,7 +38,6 @@
             android:id="@+id/name_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mamluki"
             android:textColor="@android:color/black"
             android:textSize="16sp" />
 
@@ -47,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="6dp"
-            android:text="\@DigitalSurgeonR"
+            android:text="Movies"
 
             android:textColor="?android:attr/textColorSecondary"
             android:textSize="13sp"
