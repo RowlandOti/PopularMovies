@@ -26,12 +26,19 @@ import android.view.View;
 
 import com.rowland.movies.R;
 
+import butterknife.ButterKnife;
+
 public class DetailActivity extends BaseToolBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Inflate the layout
         setContentView(R.layout.activity_detail);
+        // Inject all the views
+        ButterKnife.bind(this);
+        // Setup the inc_toolbar
+        setToolbar(true, false, R.drawable.ic_logo_48px);
 
     }
 
