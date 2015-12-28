@@ -50,7 +50,7 @@ public class MainActivity extends BaseToolBarActivity {
         setContentView(R.layout.activity_main);
         // Inject all the views
         ButterKnife.bind(this);
-        // Setup the toolbar
+        // Setup the inc_toolbar
         setToolbar(false, false, R.drawable.ic_logo_48px);
 
         if (findViewById(R.id.detail_container) != null) {

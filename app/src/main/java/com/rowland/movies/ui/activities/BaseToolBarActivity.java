@@ -35,7 +35,7 @@ public class BaseToolBarActivity extends AppCompatActivity {
     // Class Variables
     private final String LOG_TAG = BaseToolBarActivity.class.getSimpleName();
     // ButterKnife injected Views
-    // The toolbar
+    // The inc_toolbar
     @Nullable
     @Bind(R.id.toolbar)
     protected Toolbar mToolbar;
@@ -54,14 +54,14 @@ public class BaseToolBarActivity extends AppCompatActivity {
 
     // Derived methods have no direct access to this class
     private void setToolbar(Toolbar mToolbar, boolean isShowHomeUp, boolean isShowTitle, int iconResource) {
-        // Does the toolbar exist?
+        // Does the inc_toolbar exist?
         if (mToolbar != null) {
             setSupportActionBar(mToolbar);
             // Should we set up home-up button navigation?
             getSupportActionBar().setDisplayHomeAsUpEnabled(isShowHomeUp);
-            // Should we display the title on the toolbar?
+            // Should we display the title on the inc_toolbar?
             getSupportActionBar().setDisplayShowTitleEnabled(isShowTitle);
-            // Should we set logo to appear in toolbar?
+            // Should we set logo to appear in inc_toolbar?
             getSupportActionBar().setIcon(iconResource);
             //this.mToolbar.setLogo(R.drawable.ic_logo_48px);
         }

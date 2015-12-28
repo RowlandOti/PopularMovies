@@ -23,7 +23,7 @@
     android:orientation="vertical"
     tools:context="com.rowland.movies.ui.activities.MainActivity">
 
-    <include layout="@layout/toolbar" />
+    <include layout="@layout/inc_toolbar" />
 
     <LinearLayout
         android:layout_width="match_parent"

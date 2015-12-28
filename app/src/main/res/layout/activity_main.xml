@@ -25,7 +25,7 @@ This layout is a one-pane layout for the Items master/detail flow.
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <include layout="@layout/toolbar" />
+    <include layout="@layout/inc_toolbar" />
 
     <!--
             This layout is a one-pane layout for the master flow.
