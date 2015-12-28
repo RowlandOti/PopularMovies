@@ -21,9 +21,6 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="40dp"
-    app:layout_anchor="@id/appbar"
-    app:layout_anchorGravity="bottom|right|end"
     android:clickable="true"
     android:src="@drawable/ic_favourite_black_48dp"
-
     app:elevation="4dp" />
