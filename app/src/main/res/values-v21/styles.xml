@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<!--
   ~ Copyright 2015 Oti Rowland
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,15 +15,4 @@
   ~
   -->
 
-<android.support.design.widget.FloatingActionButton xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res/android"
-    android:id="@+id/favorite_fab"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_margin="40dp"
-    app:layout_anchor="@id/appbar"
-    app:layout_anchorGravity="bottom|right|end"
-    android:clickable="true"
-    android:src="@drawable/ic_favourite_black_48dp"
-
-    app:elevation="4dp" />
+<resources></resources>
