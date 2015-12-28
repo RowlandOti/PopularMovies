@@ -47,6 +47,7 @@ public class MainActivity extends BaseToolBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Inflate the layout
         setContentView(R.layout.activity_main);
         // Inject all the views
         ButterKnife.bind(this);
