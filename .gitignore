@@ -3,6 +3,7 @@
 .idea
 /.idea/workspace.xml
 /.idea/libraries
+/build
 .signing
 # Crashlytics configuations
 com_crashlytics_export_strings.xml
