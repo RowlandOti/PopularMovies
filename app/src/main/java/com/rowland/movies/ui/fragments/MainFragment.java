@@ -17,6 +17,7 @@
 
 package com.rowland.movies.ui.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.SlidingTabStripLayout;
 import android.support.v4.app.Fragment;
@@ -55,6 +56,8 @@ public class MainFragment extends Fragment {
     private String[] TITLES = {"Popular", "Highest Rated", "Favourite"};
     // The adapter that manages the subfragments
     private SmartNestedViewPagerAdapter pagerAdapter;
+    // The class selction callback
+    private IMovieSelectionCallBack mMovieSelectionCallBack;
     // ListPopup max width
     private float mPopupMaxWidth;
     // The currently selected tab strip
@@ -83,11 +86,23 @@ public class MainFragment extends Fragment {
         // Return the new fragment
         return fragmentInstance;
     }
-    
+
     // A callback interface that all containing activities implement
-    public interface onMovieSelectionCallback {
+    public interface IMovieSelectionCallBack {
         // Call this when movie is selected.
         void onMovieSelected(int id);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        // Ensure containing activity has implemented the callback interface.
+        try {
+            mMovieSelectionCallBack = (IMovieSelectionCallBack) context;
+        } catch (ClassCastException e) {
+            // If not, it throws an exception
+            throw new ClassCastException(context.toString() + " must implement IMovieSelectionCallBack");
+        }
     }
 
     @Override

@@ -36,7 +36,7 @@ import com.rowland.movies.ui.fragments.MainFragment;
 import butterknife.ButterKnife;
 
 
-public class MainActivity extends BaseToolBarActivity implements MainFragment.onMovieSelectionCallback{
+public class MainActivity extends BaseToolBarActivity implements MainFragment.IMovieSelectionCallBack {
 
     // Logging Identifier for class
     private final String LOG_TAG = MainActivity.class.getSimpleName();
