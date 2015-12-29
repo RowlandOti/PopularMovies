@@ -26,9 +26,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.rowland.movies.BuildConfig;
 import com.rowland.movies.R;
 import com.rowland.movies.ui.fragments.DetailFragment;
 import com.rowland.movies.ui.fragments.MainFragment;
@@ -148,6 +150,11 @@ public class MainActivity extends BaseToolBarActivity implements MainFragment.IM
             intent.putExtra(DetailFragment.MOVIE_ID_KEY, idKey);
             // Start the DetailActivity
             startActivity(intent);
+        }
+
+        // Check wether we are in debug mode
+        if (BuildConfig.IS_DEBUG_MODE) {
+            Log.d(LOG_TAG, "MOVIE SELECTED KEY: " + idKey);
         }
     }
 }

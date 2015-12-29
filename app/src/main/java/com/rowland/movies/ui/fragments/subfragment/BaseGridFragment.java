@@ -107,7 +107,7 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
         // Call is actually only necessary with custom ItemAnimators
         mGridRecycleView.setItemAnimator(new DefaultItemAnimator());
         // Create new adapter
-        mGridAdapter = new GridAdapter(mMovieList, getContext(), (MainActivity) getActivity());
+        mGridAdapter = new GridAdapter(mMovieList, getContext());
         // Associate RecycleView with adapter
         mGridRecycleView.setAdapter(mGridAdapter);
         // Set the refreshlayout's listener

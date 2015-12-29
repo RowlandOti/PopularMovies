@@ -62,13 +62,11 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
     // The MainFragment Callback
     private MainFragment.IMovieSelectionCallBack mMovieSelectionCallBack;
 
-    public GridAdapter(List<Movie> movieList, Context context, MainFragment.IMovieSelectionCallBack movieSelectionCallBack) {
+    public GridAdapter(List<Movie> movieList, Context context) {
         // Acquire the context
         this.mContext = context;
         // Acquire a Calendar object
         this.mCalendar = Calendar.getInstance();
-        // Acquire MainFragment Callback
-        this.mMovieSelectionCallBack = movieSelectionCallBack;
         // Initially add local movies to list
         addAll(movieList);
     }
