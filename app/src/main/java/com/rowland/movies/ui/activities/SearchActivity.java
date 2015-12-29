@@ -24,7 +24,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 import com.rowland.movies.R;
-import com.rowland.movies.ui.fragments.DetailsFragment;
+import com.rowland.movies.ui.fragments.DetailFragment;
 import com.rowland.movies.ui.fragments.SearchFragment;
 
 import butterknife.ButterKnife;
@@ -36,7 +36,7 @@ public class SearchActivity extends BaseToolBarActivity {
     // The SearchFragment
     private SearchFragment searchFragment;
     // The DetailFragment
-    private DetailsFragment detailFragment;
+    private DetailFragment detailFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +81,7 @@ public class SearchActivity extends BaseToolBarActivity {
         FragmentTransaction ft = fm.beginTransaction();
 
         if (detailFragment == null) {
-            detailFragment = DetailsFragment.newInstance(args);
+            detailFragment = DetailFragment.newInstance(args);
 
             ft.replace(R.id.detail_container, detailFragment);
             ft.commit();
