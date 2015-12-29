@@ -23,9 +23,7 @@ import android.content.IntentFilter;
 import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
 import com.rowland.movies.data.broadcastrecievers.DataSetChangeBroadCastReceiver;
-import com.rowland.movies.data.broadcastrecievers.NetworkChangeBroadCastReceiver;
 import com.rowland.movies.data.callbacks.ReviewCallBack;
-import com.rowland.movies.data.interfaces.ILoader;
 import com.rowland.movies.rest.collections.ReviewCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.models.Review;
@@ -49,7 +47,7 @@ public class ReviewLoader extends BaseLoader {
     public ReviewLoader(Context context, int mTmdbMovieId) {
         super(context);
         this.mTmdbMovieId = mTmdbMovieId;
-        //setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this, new IntentFilter("REVIEWS_RELOADER_DATA")));
+        setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this, new IntentFilter("REVIEWS_RELOADER_DATA")));
     }
 
     @Override
@@ -71,7 +69,7 @@ public class ReviewLoader extends BaseLoader {
     // Get the list of reviews from online
     public void getOnlineData(IMoviesAPIService movieService) {
         // Retrieve the reviewsList data
-        Call<ReviewCollection> createdCall = movieService.loadReviewsData(mTmdbMovieId, BuildConfig.IMDB_API_KEY);
+        Call<ReviewCollection> createdCall = movieService.loadReviewData(mTmdbMovieId, BuildConfig.IMDB_API_KEY);
         // Asynchronous access
         createdCall.enqueue(new ReviewCallBack(getContext()) {
             // Gain access to the Review List

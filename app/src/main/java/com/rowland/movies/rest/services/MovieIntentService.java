@@ -83,7 +83,7 @@ public class MovieIntentService extends IntentService {
         // Get the MoviesAPIService and use it to retrieve a list of movies
         IMoviesAPIService movieService = ApplicationController.getApplicationInstance().getMovieServiceOfApiType(EAPITypes.MOVIES_API);
         // Retrieve the movies data
-        Call<MovieCollection> createdCall = movieService.loadMoviesData(requestSortType, requestPageNo, BuildConfig.IMDB_API_KEY);
+        Call<MovieCollection> createdCall = movieService.loadMovieData(requestSortType, requestPageNo, BuildConfig.IMDB_API_KEY);
         // Asynchronous access
         createdCall.enqueue(new MovieCallBack(getApplicationContext(), mSortOrder));
     }

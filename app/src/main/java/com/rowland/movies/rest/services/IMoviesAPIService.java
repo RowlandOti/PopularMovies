@@ -38,19 +38,19 @@ public interface IMoviesAPIService {
      **/
 
     // Define all our endpoints
-    static final String MOVIES_ENDPOINT = "/3/discover/movie";
-    static final String MOVIES_TRAILERS_ENDPOINT = "/3/movie/{id}/videos";
-    static final String MOVIES_REVIEWS_ENDPOINT = "/3/movie/{id}/reviews";
+    String MOVIE_ENDPOINT = "/3/discover/movie";
+    String MOVIE_TRAILERS_ENDPOINT = "/3/movie/{id}/videos";
+    String MOVIE_REVIEWS_ENDPOINT = "/3/movie/{id}/reviews";
 
     // Load our movies
-    @GET(MOVIES_ENDPOINT)
-    Call<MovieCollection> loadMoviesData(@Query("sort_by") String sortBy, @Query("page") int pageNo, @Query("api_key") String apiKey);
+    @GET(MOVIE_ENDPOINT)
+    Call<MovieCollection> loadMovieData(@Query("sort_by") String sortBy, @Query("page") int pageNo, @Query("api_key") String apiKey);
 
     // Load the movie's trailer videos
-    @GET(MOVIES_TRAILERS_ENDPOINT)
-    Call<TrailerCollection> loadTrailersData(@Path("id") int mTmdbMovieId, @Query("api_key") String apiKey);
+    @GET(MOVIE_TRAILERS_ENDPOINT)
+    Call<TrailerCollection> loadTrailerData(@Path("id") int mTmdbMovieId, @Query("page") int pageNo, @Query("api_key") String apiKey);
 
     // Load the movie's trailers
-    @GET(MOVIES_REVIEWS_ENDPOINT)
-    Call<ReviewCollection> loadReviewsData(@Path("id") int mTmdbMovieId, @Query("api_key") String apiKey);
+    @GET(MOVIE_REVIEWS_ENDPOINT)
+    Call<ReviewCollection> loadReviewData(@Path("id") int mTmdbMovieId, @Query("page") int pageNo, @Query("api_key") String apiKey);
 }

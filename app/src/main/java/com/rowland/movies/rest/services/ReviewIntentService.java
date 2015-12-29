@@ -33,10 +33,15 @@ import retrofit.Call;
  * Created by Oti Rowland on 12/29/2015.
  */
 public class ReviewIntentService extends IntentService {
-    // The page no. string identifier
-    public static final String REQUEST_PAGE_NO_INT = "PAGE_NO";
+
     // The class Log identifier
     private static final String LOG_TAG = MovieIntentService.class.getSimpleName();
+    // The page no. string identifier
+    public static final String REQUEST_PAGE_NO_INT = "PAGE_NO";
+    // The movie remote id identifier
+    public static final String REQUEST_MOVIE_REMOTE_ID = "MOVIE_REMOTE_ID";
+    // The movie's remote id.
+    private int requestMovieRemoteId;
     // The request page  no.
     private int requestPageNo;
 
@@ -57,8 +62,12 @@ public class ReviewIntentService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         //Acquire the page no.
         requestPageNo = intent.getIntExtra(REQUEST_PAGE_NO_INT, 1);
+        //Acquire the movie's remote id
+        requestMovieRemoteId = intent.getIntExtra(REQUEST_MOVIE_REMOTE_ID, 1);
         // Set the sort type to use
         setPageNo(requestPageNo);
+        // Set the movie's remote id
+        setMovieRemoteId(requestMovieRemoteId);
         // Go get some online data
         getOnlineData();
     }
@@ -72,7 +81,7 @@ public class ReviewIntentService extends IntentService {
         // Get the MoviesAPIService and use it to retrieve a list of movies
         IMoviesAPIService movieService = ApplicationController.getApplicationInstance().getMovieServiceOfApiType(EAPITypes.MOVIES_API);
         // Retrieve the movies data
-        Call<ReviewCollection> createdCall = movieService.loadReviewsData(requestPageNo, BuildConfig.IMDB_API_KEY);
+        Call<ReviewCollection> createdCall = movieService.loadReviewData(requestMovieRemoteId, requestPageNo, BuildConfig.IMDB_API_KEY);
         // Asynchronous access
         createdCall.enqueue(new ReviewCallBack(getApplicationContext()));
     }
@@ -82,5 +91,8 @@ public class ReviewIntentService extends IntentService {
     private void setPageNo(int pageNo) {
         requestPageNo = pageNo;
     }
-}
 
+    public void setMovieRemoteId(int movieRemoteId) {
+        this.requestMovieRemoteId = movieRemoteId;
+    }
+}

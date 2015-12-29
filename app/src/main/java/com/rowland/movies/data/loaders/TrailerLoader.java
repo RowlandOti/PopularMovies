@@ -18,15 +18,11 @@
 package com.rowland.movies.data.loaders;
 
 import android.content.Context;
-import android.content.IntentFilter;
 import android.text.TextUtils;
 
 import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
-import com.rowland.movies.data.broadcastrecievers.DataSetChangeBroadCastReceiver;
-import com.rowland.movies.data.broadcastrecievers.NetworkChangeBroadCastReceiver;
 import com.rowland.movies.data.callbacks.TrailerCallBack;
-import com.rowland.movies.data.interfaces.ILoader;
 import com.rowland.movies.rest.collections.TrailerCollection;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.models.Trailer;
@@ -77,7 +73,7 @@ public class TrailerLoader extends BaseLoader {
 
     public void getOnlineData(IMoviesAPIService movieService) {
         // Retrieve the reviews data
-        Call<TrailerCollection> createdCall = movieService.loadTrailersData(mTmdbMovieId, BuildConfig.IMDB_API_KEY);
+        Call<TrailerCollection> createdCall = movieService.loadTrailerData(mTmdbMovieId, BuildConfig.IMDB_API_KEY);
         // Asynchronous access
         createdCall.enqueue(new TrailerCallBack(getContext()){
             // Gain access to the TrailersList
