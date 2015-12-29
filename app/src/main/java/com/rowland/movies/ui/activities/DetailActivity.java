@@ -53,11 +53,11 @@ public class DetailActivity extends BaseToolBarActivity {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
             else {
-                long idKey = getIntent().getLongExtra(DetailFragment.MOVIE_ID_KEY, 0);
+                long idKey = getIntent().getLongExtra(DetailFragment.MOVIE_KEY, 0);
                 // Create a Bundle object
                 Bundle args = new Bundle();
                 // Set arguments on Bundle
-                args.putLong(DetailFragment.MOVIE_ID_KEY, idKey);
+                args.putLong(DetailFragment.MOVIE_KEY, idKey);
                 // Pass bundle to the fragment
                 showDetailFragment(args);
             }

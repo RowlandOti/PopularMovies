@@ -26,11 +26,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.rowland.movies.BuildConfig;
 import com.rowland.movies.R;
 import com.rowland.movies.rest.models.Movie;
 import com.rowland.movies.ui.fragments.DetailFragment;
@@ -139,7 +137,7 @@ public class MainActivity extends BaseToolBarActivity implements MainFragment.IM
             // Create a Bundle object
             Bundle args = new Bundle();
             // Set the arguments
-            args.putSerializable(DetailFragment.MOVIE_ID_KEY, movie);
+            args.putSerializable(DetailFragment.MOVIE_KEY, movie);
             // Show the DetailFragment
             showDetailFragment(args);
         }
@@ -147,8 +145,8 @@ public class MainActivity extends BaseToolBarActivity implements MainFragment.IM
         {
             // Create an Intent object
             Intent intent = new Intent(this, DetailActivity.class);
-            // Set extras - pass MOVIE_ID_KEY
-            intent.putExtra(DetailFragment.MOVIE_ID_KEY, movie);
+            // Set extras - pass MOVIE_KEY
+            intent.putExtra(DetailFragment.MOVIE_KEY, movie);
             // Start the DetailActivity
             startActivity(intent);
         }

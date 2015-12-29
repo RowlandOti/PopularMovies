@@ -21,6 +21,8 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -29,6 +31,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.rowland.movies.R;
+import com.rowland.movies.rest.models.Movie;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -38,9 +41,9 @@ public class DetailFragment extends Fragment {
     // Logging Identifier for class
     private final String LOG_TAG = DetailFragment.class.getSimpleName();
     // The Movie ID Identifier Key
-    public static final String MOVIE_ID_KEY = "_id";
-    // The Movie ID Identifier Value
-    private long mMovieIdKey;
+    public static final String MOVIE_KEY = "movie_key";
+    // The Movie model
+    private Movie mMovie;
 
     // ButterKnife injected views
     @Bind(R.id.movie_rate_image_view)
@@ -104,7 +107,7 @@ public class DetailFragment extends Fragment {
         // Check if we have any arguments
         if (getArguments() != null) {
             // Acquire the selected movie identifier
-            mMovieIdKey = getArguments().getLong(DetailFragment.MOVIE_ID_KEY, 0);
+            mMovie = getArguments().getParcelable(DetailFragment.MOVIE_KEY);
         }
     }
 
@@ -116,6 +119,11 @@ public class DetailFragment extends Fragment {
         ButterKnife.bind(this, rootView);
         // Return the view for this fragment
         return rootView;
+    }
+    // Create menun item
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_detail, menu);
     }
 
 }
