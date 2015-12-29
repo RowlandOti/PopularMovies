@@ -59,12 +59,12 @@ public class MovieCallBack implements Callback<MovieCollection> {
         // Check status of response before proceeding
         //if (response.isSuccess() && response.errorBody() == null) {
         if (response.isSuccess()) {
-            // movies available
-            List<Movie> moviesList = response.body().getResults();
+            // Collection available
+            MovieCollection reviewCollection = response.body();
             // MovieRepository instance
             MovieRepository mMovieRepository = new MovieRepository();
             // Save movies to data storage
-            mMovieRepository.saveAll(moviesList, mSortOrder);
+            mMovieRepository.saveAll(reviewCollection, mSortOrder);
             // BroadCast the changes locally
             LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent(MovieLoader.INTENT_ACTION));
         } else {

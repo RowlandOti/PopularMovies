@@ -21,6 +21,7 @@ import android.util.Log;
 
 import com.activeandroid.query.Select;
 import com.rowland.movies.BuildConfig;
+import com.rowland.movies.rest.collections.MovieCollection;
 import com.rowland.movies.rest.enums.ESortOrder;
 import com.rowland.movies.rest.models.Movie;
 
@@ -71,9 +72,9 @@ public class MovieRepository {
     }
 
     // Save the movie list
-    public void saveAll(List<Movie> movieList, ESortOrder sortOrder) {
+    public void saveAll(MovieCollection reviewCollection, ESortOrder sortOrder) {
 
-        for (Movie movie : movieList) {
+        for (Movie movie : reviewCollection.getResults()) {
             // Set any necessary details
             movie.setIsHighestRated(sortOrder.isHighestRated());
             movie.setIsFavourite(sortOrder.isFavourite());

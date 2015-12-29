@@ -56,12 +56,12 @@ public class TrailerCallBack implements Callback<TrailerCollection> {
         // Check status of response before proceeding
         //if (response.isSuccess() && response.errorBody() == null) {
         if (response.isSuccess()) {
-            // movies available
-            List<Trailer> moviesList = response.body().getResults();
+            // Collection available
+            TrailerCollection trailerCollection = response.body();
             // TrailerRepository instance
             TrailerRepository mTrailerRepository = new TrailerRepository();
             // Save movies to data storage
-            mTrailerRepository.saveAll(moviesList);
+            mTrailerRepository.saveAll(trailerCollection);
             // BroadCast the changes locally
             LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent(TrailerLoader.INTENT_ACTION));
         } else {

@@ -21,6 +21,7 @@ import android.util.Log;
 
 import com.activeandroid.query.Select;
 import com.rowland.movies.BuildConfig;
+import com.rowland.movies.rest.collections.TrailerCollection;
 import com.rowland.movies.rest.models.Movie;
 import com.rowland.movies.rest.models.Trailer;
 
@@ -52,11 +53,15 @@ public class TrailerRepository {
     }
 
     // Save the movie list
-    public void saveAll(List<Trailer> trailerList) {
+    public void saveAll(TrailerCollection trailerCollection) {
+        // Acquire the related movie model
+        Movie movie = new Select()
+                .from(Movie.class)
+                .where("id_ = ?", trailerCollection.getId()).executeSingle();
 
-        for (Trailer trailer : trailerList) {
+        for (Trailer trailer : trailerCollection.getResults()) {
             // Set any necessary details
-
+            trailer.setMovie(movie);
             // Check if is duplicate
             boolean iSExistingTrailer = new Select()
                     .from(Trailer.class)

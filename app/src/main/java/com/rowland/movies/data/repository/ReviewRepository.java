@@ -21,6 +21,7 @@ import android.util.Log;
 
 import com.activeandroid.query.Select;
 import com.rowland.movies.BuildConfig;
+import com.rowland.movies.rest.collections.ReviewCollection;
 import com.rowland.movies.rest.models.Movie;
 import com.rowland.movies.rest.models.Review;
 
@@ -52,11 +53,16 @@ public class ReviewRepository {
     }
 
     // Save the movie list
-    public void saveAll(List<Review> reviewList) {
+    public void saveAll(ReviewCollection reviewCollection) {
+        // Acquire the related movie model
+        Movie movie = new Select()
+                .from(Movie.class)
+                .where("id_ = ?", reviewCollection.getId()).executeSingle();
 
-        for (Review review : reviewList) {
+        // Save the reviews
+        for (Review review : reviewCollection.getResults()) {
             // Set any necessary details
-
+            review.setMovie(movie);
             // Check if is duplicate
             boolean iSExistingReview = new Select()
                     .from(Review.class)

@@ -56,12 +56,12 @@ public class ReviewCallBack implements Callback<ReviewCollection> {
         // Check status of response before proceeding
         //if (response.isSuccess() && response.errorBody() == null) {
         if (response.isSuccess()) {
-            // movies available
-            List<Review> moviesList = response.body().getResults();
+            // Collection available
+            ReviewCollection reviewCollection = response.body();
             // ReviewRepository instance
             ReviewRepository mReviewRepository = new ReviewRepository();
             // Save movies to data storage
-            mReviewRepository.saveAll(moviesList);
+            mReviewRepository.saveAll(reviewCollection);
             // BroadCast the changes locally
             LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent(ReviewLoader.INTENT_ACTION));
         } else {
