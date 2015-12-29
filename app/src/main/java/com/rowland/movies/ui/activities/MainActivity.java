@@ -79,11 +79,13 @@ public class MainActivity extends BaseToolBarActivity {
 
     // Insert the DetailFragment
     private void showDetailFragment(Bundle args) {
+        // Acquire the Fragment manger
         FragmentManager fm = getSupportFragmentManager();
-
+        // Begin the transaction
         FragmentTransaction ft = fm.beginTransaction();
-
+        // Check if we already have a fragment
         if (detailFragment == null) {
+            // Create new fragment
             detailFragment = DetailFragment.newInstance(args);
             // Prefer replace() over add() see <a>https://github.com/RowlandOti/PopularMovies/issues/1</a>
             ft.replace(R.id.detail_container, detailFragment);
@@ -93,10 +95,13 @@ public class MainActivity extends BaseToolBarActivity {
 
     // Insert the MainFragment
     private void showMainFragment(Bundle args) {
+        // Acquire the Fragment manger
         FragmentManager fm = getSupportFragmentManager();
-
+        // Begin the transaction
         FragmentTransaction ft = fm.beginTransaction();
+        // Check if we already have a fragment
         if (mainFragment == null) {
+            // Create new fragment
             mainFragment = MainFragment.newInstance(args);
             // Prefer replace() over add() see <a>https://github.com/RowlandOti/PopularMovies/issues/1</a>
             ft.replace(R.id.fragment_container, mainFragment);
