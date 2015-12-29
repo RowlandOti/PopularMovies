@@ -20,6 +20,7 @@ package com.rowland.movies.adapters;
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.util.SortedList;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -149,8 +150,11 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
         @Bind(R.id.grid_title_container)
         LinearLayout mMovieTitleContainer;
 
-        @Bind(R.id.container_detail)
+        @Bind(R.id.container_item)
         FrameLayout mGridItemContainer;
+
+        @Bind(R.id.card_view)
+        CardView mGridCardView;
 
         public CustomViewHolder(View itemView) {
             super(itemView);
@@ -158,13 +162,14 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
         }
 
         private void bindTo(final Movie movie) {
-            mGridItemContainer.setOnClickListener(new View.OnClickListener() {
+            // Set click listener on card
+            mGridCardView.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     // Execute Callback
                     mActivity.onMovieSelected(movie.getId());
                 }
             });
-            mGridItemContainer.setContentDescription(mGridItemContainer.getContext().getString(R.string.movie_title, movie.getOriginalTitle()));
+            // Set movie title
             mTitleTextView.setText(movie.getOriginalTitle());
             // Set the release date
             if (movie.getReleaseDate() != null) {
