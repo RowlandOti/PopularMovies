@@ -90,7 +90,7 @@ public class MainFragment extends Fragment {
     // A callback interface that all containing activities implement
     public interface IMovieSelectionCallBack {
         // Call this when movie is selected.
-        void onMovieSelected(int id);
+        void onMovieSelected(int idKey);
     }
     // Called after fragment is attached to activity
     @Override
@@ -98,7 +98,7 @@ public class MainFragment extends Fragment {
         super.onAttach(context);
         // Ensure attached activity has implemented the callback interface.
         try {
-            // Acquire the implmented callback
+            // Acquire the implemented callback
             mMovieSelectionCallBack = (IMovieSelectionCallBack) context;
         } catch (ClassCastException e) {
             // If not, it throws an exception
