@@ -32,10 +32,6 @@ public class MovieCollection {
     @Expose
     private Integer page;
     // Gson annotations
-    @SerializedName("results")
-    @Expose
-    private List<Movie> results;
-    // Gson annotations
     @SerializedName("total_results")
     @Expose
     private Integer totalResults;
@@ -43,6 +39,10 @@ public class MovieCollection {
     @SerializedName("total_pages")
     @Expose
     private Integer totalPages;
+    // Gson annotations
+    @SerializedName("results")
+    @Expose
+    private List<Movie> results;
 
     /**
      *
