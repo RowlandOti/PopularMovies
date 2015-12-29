@@ -148,7 +148,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
         @Bind(R.id.grid_title_container)
         LinearLayout mMovieTitleContainer;
 
-        @Bind(R.id.container)
+        @Bind(R.id.container_detail)
         FrameLayout mGridItemContainer;
 
         public CustomViewHolder(View itemView) {
