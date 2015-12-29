@@ -29,7 +29,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.rowland.movies.R;
-import com.rowland.movies.ui.fragments.DetailsFragment;
+import com.rowland.movies.ui.fragments.DetailFragment;
 import com.rowland.movies.ui.fragments.MainFragment;
 
 import butterknife.ButterKnife;
@@ -37,12 +37,12 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends BaseToolBarActivity {
 
-    // Class Variables
+    // Logging Identifier for class
     private final String LOG_TAG = MainActivity.class.getSimpleName();
     // The MainFragment
     private MainFragment mainFragment;
     // The DetailFragment
-    private DetailsFragment detailFragment;
+    private DetailFragment detailFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class MainActivity extends BaseToolBarActivity {
         ButterKnife.bind(this);
         // Setup the inc_toolbar
         setToolbar(false, false, R.drawable.ic_logo_48px);
-
+        // Check that the activity is using the layout with the fragment_container id
         if (findViewById(R.id.detail_container) != null) {
             // The detail container view will be present only in the large-screen layouts
             // (res/layout-sw600dp). If this view is present, then the activity should be
@@ -84,8 +84,8 @@ public class MainActivity extends BaseToolBarActivity {
         FragmentTransaction ft = fm.beginTransaction();
 
         if (detailFragment == null) {
-            detailFragment = DetailsFragment.newInstance(args);
-
+            detailFragment = DetailFragment.newInstance(args);
+            // Prefer replace() over add() see <a>https://github.com/RowlandOti/PopularMovies/issues/1</a>
             ft.replace(R.id.detail_container, detailFragment);
             ft.commit();
         }
@@ -105,12 +105,11 @@ public class MainActivity extends BaseToolBarActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         // Acquire the search manager
-        SearchManager SManager =  (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchManager SManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         // Acquire the relevant search menu item
         MenuItem searchMenuItem = menu.findItem(R.id.action_search);
         // Acquire the search view
