@@ -17,6 +17,7 @@
 
 package com.rowland.movies.ui.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -38,6 +39,8 @@ import com.rowland.movies.data.loaders.TrailerLoader;
 import com.rowland.movies.rest.models.Movie;
 import com.rowland.movies.rest.models.Review;
 import com.rowland.movies.rest.models.Trailer;
+import com.rowland.movies.rest.services.ReviewIntentService;
+import com.rowland.movies.rest.services.TrailerIntentService;
 
 import java.util.List;
 
@@ -53,9 +56,9 @@ public class DetailFragment extends Fragment {
     // The Movie model
     private Movie mMovie;
     // Reviews LoaderCallBack
-    private LoaderManager.LoaderCallbacks mReviewCallBack;
+    private LoaderManager.LoaderCallbacks mReviewLoaderCallBack;
     // Trailers LoaderCallBack
-    private LoaderManager.LoaderCallbacks mTrailerCallBack;
+    private LoaderManager.LoaderCallbacks mTrailerLoaderCallBack;
 
     // ButterKnife injected views
     @Bind(R.id.movie_rate_image_view)
@@ -120,9 +123,26 @@ public class DetailFragment extends Fragment {
         if (getArguments() != null) {
             // Acquire the selected movie identifier
             mMovie = getArguments().getParcelable(DetailFragment.MOVIE_KEY);
+            startReviewIntentService();
+            startTrailerIntentService();
         }
+    }
+    // Called to create the fragment's view
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
+        // Inflate all views
+        ButterKnife.bind(this, rootView);
+        // Return the view for this fragment
+        return rootView;
+    }
+    // Called after the fragment's view has been created
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         // Review LoaderCallBack implementation
-        mReviewCallBack = new LoaderManager.LoaderCallbacks<List<Trailer>>() {
+        mReviewLoaderCallBack = new LoaderManager.LoaderCallbacks<List<Trailer>>() {
             @Override
             public Loader<List<Trailer>> onCreateLoader(int id, Bundle args) {
                 // Create new loader
@@ -142,7 +162,7 @@ public class DetailFragment extends Fragment {
             }
         };
         // Trailer LoaderCallBack implementation
-        mTrailerCallBack = new LoaderManager.LoaderCallbacks<List<Review>>() {
+        mTrailerLoaderCallBack = new LoaderManager.LoaderCallbacks<List<Review>>() {
             @Override
             public Loader<List<Review>> onCreateLoader(int id, Bundle args) {
                 // Create new loader
@@ -162,20 +182,37 @@ public class DetailFragment extends Fragment {
             }
         };
     }
-
+    // Called to destroy this fragment
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
-        // Inflate all views
-        ButterKnife.bind(this, rootView);
-        // Return the view for this fragment
-        return rootView;
+    public void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
     }
 
     // Create menu item
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_detail, menu);
+    }
+
+    // Start the review service
+    private void startReviewIntentService() {
+        // Create an Intent object
+        Intent i = new Intent(getActivity(), ReviewIntentService.class);
+        // Set any extras to pass over
+        i.putExtra(ReviewIntentService.REQUEST_MOVIE_REMOTE_ID, mMovie.getId_());
+        i.putExtra(ReviewIntentService.REQUEST_PAGE_NO_INT, 1);
+        // Start the service
+        getActivity().startService(i);
+    }
+    // Start the trailer service
+    private void startTrailerIntentService() {
+        // Create an Intent object
+        Intent i = new Intent(getActivity(), TrailerIntentService.class);
+        // Set any extras to pass over
+        i.putExtra(TrailerIntentService.REQUEST_MOVIE_REMOTE_ID, mMovie.getId_());
+        i.putExtra(TrailerIntentService.REQUEST_PAGE_NO_INT, 1);
+        // Start the service
+        getActivity().startService(i);
     }
 }

@@ -35,7 +35,7 @@ import retrofit.Call;
 public class ReviewIntentService extends IntentService {
 
     // The class Log identifier
-    private static final String LOG_TAG = MovieIntentService.class.getSimpleName();
+    private static final String LOG_TAG = ReviewIntentService.class.getSimpleName();
     // The page no. string identifier
     public static final String REQUEST_PAGE_NO_INT = "PAGE_NO";
     // The movie remote id identifier
