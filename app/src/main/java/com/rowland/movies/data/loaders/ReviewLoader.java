@@ -35,15 +35,15 @@ import java.util.List;
 public class ReviewLoader extends BaseLoader {
     // The class Log identifier
     private static final String LOG_TAG = ReviewLoader.class.getSimpleName();
+    // DataChangeObserver Intent Receiver action
+    public static final String INTENT_ACTION = "com.rowland.movies.REVIEW_DATA_CHANGE";
     // The movie id whose reviewsList are retrieved
     private Movie mMovie;
-    // The list of movies our loader returns
-    private List<Review> reviewsList;
 
     public ReviewLoader(Context context, Movie movie) {
         super(context);
         this.mMovie = movie;
-        setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this, new IntentFilter("REVIEWS_RELOADER_DATA")));
+        setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this, new IntentFilter(INTENT_ACTION)));
     }
 
     @Override

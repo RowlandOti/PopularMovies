@@ -37,6 +37,8 @@ import java.util.List;
 public class TrailerLoader extends BaseLoader {
     // The class Log identifier
     private static final String LOG_TAG = TrailerLoader.class.getSimpleName();
+    // DataChangeObserver Intent Receiver action
+    public static final String INTENT_ACTION = "com.rowland.movies.TRAILER_DATA_CHANGE";
     // The movie id whose trailersList are retrieved
     private Movie mMovie;
 
@@ -44,7 +46,7 @@ public class TrailerLoader extends BaseLoader {
         super(context);
         this.mMovie = movie;
         // Set the data set change observer
-        setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this, new IntentFilter("TRAILERS_RELOADER_DATA")));
+        setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this, new IntentFilter(INTENT_ACTION)));
     }
 
     @Override

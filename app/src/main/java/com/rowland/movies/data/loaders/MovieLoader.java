@@ -37,7 +37,7 @@ public class MovieLoader extends BaseLoader {
     // The class Log identifier
     private static final String LOG_TAG = MovieLoader.class.getSimpleName();
     // DataChangeObserver Intent Receiver action
-    public static final String INTENT_ACTION = "com.rowland.movies.MOVIES_DATA_CHANGE";
+    public static final String INTENT_ACTION = "com.rowland.movies.MOVIE_DATA_CHANGE";
     // The sort order type
     private ESortOrder mSortOrder;
 
