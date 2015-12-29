@@ -35,6 +35,7 @@ import com.rowland.movies.data.callbacks.MovieSortedListAdapterCallBack;
 import com.rowland.movies.rest.enums.EBaseImageSize;
 import com.rowland.movies.rest.enums.EBaseURlTypes;
 import com.rowland.movies.rest.models.Movie;
+import com.rowland.movies.ui.fragments.MainFragment;
 import com.rowland.movies.utilities.Utilities;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -58,10 +59,17 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
     private Calendar mCalendar;
     // Context instance
     private Context mContext;
+    // The MainFragment Callback
+    private MainFragment.IMovieSelectionCallBack mMovieSelectionCallBack;
 
-    public GridAdapter(List<Movie> movieList, Context context) {
+    public GridAdapter(List<Movie> movieList, Context context, MainFragment.IMovieSelectionCallBack movieSelectionCallBack) {
+        // Acquire the context
         this.mContext = context;
+        // Acquire a Calendar object
         this.mCalendar = Calendar.getInstance();
+        // Acquire MainFragment Callback
+        this.mMovieSelectionCallBack = movieSelectionCallBack;
+        // Initially add local movies to list
         addAll(movieList);
     }
 
