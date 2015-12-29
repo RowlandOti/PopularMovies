@@ -20,6 +20,8 @@ package com.rowland.movies.ui.fragments;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -31,7 +33,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.rowland.movies.R;
+import com.rowland.movies.data.loaders.ReviewLoader;
+import com.rowland.movies.data.loaders.TrailerLoader;
 import com.rowland.movies.rest.models.Movie;
+import com.rowland.movies.rest.models.Review;
+import com.rowland.movies.rest.models.Trailer;
+
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -44,6 +52,10 @@ public class DetailFragment extends Fragment {
     public static final String MOVIE_KEY = "movie_key";
     // The Movie model
     private Movie mMovie;
+    // Reviews LoaderCallBack
+    private LoaderManager.LoaderCallbacks mReviewCallBack;
+    // Trailers LoaderCallBack
+    private LoaderManager.LoaderCallbacks mTrailerCallBack;
 
     // ButterKnife injected views
     @Bind(R.id.movie_rate_image_view)
@@ -109,6 +121,46 @@ public class DetailFragment extends Fragment {
             // Acquire the selected movie identifier
             mMovie = getArguments().getParcelable(DetailFragment.MOVIE_KEY);
         }
+        // Review LoaderCallBack implementation
+        mReviewCallBack = new LoaderManager.LoaderCallbacks<List<Trailer>>() {
+            @Override
+            public Loader<List<Trailer>> onCreateLoader(int id, Bundle args) {
+                // Create new loader
+                ReviewLoader movieLoader =  new ReviewLoader(getActivity(), mSortOrder);
+                // Return new loader
+                return movieLoader;
+            }
+
+            @Override
+            public void onLoadFinished(Loader<List<Trailer>> loader, List<Trailer> data) {
+
+            }
+
+            @Override
+            public void onLoaderReset(Loader<List<Trailer>> loader) {
+
+            }
+        };
+        // Trailer LoaderCallBack implementation
+        mTrailerCallBack = new LoaderManager.LoaderCallbacks<List<Review>>() {
+            @Override
+            public Loader<List<Review>> onCreateLoader(int id, Bundle args) {
+                // Create new loader
+                TrailerLoader movieLoader =  new TrailerLoader(getActivity(), mSortOrder);
+                // Return new loader
+                return movieLoader;
+            }
+
+            @Override
+            public void onLoadFinished(Loader<List<Review>> loader, List<Review> data) {
+
+            }
+
+            @Override
+            public void onLoaderReset(Loader<List<Review>> loader) {
+
+            }
+        };
     }
 
     @Override
@@ -120,10 +172,10 @@ public class DetailFragment extends Fragment {
         // Return the view for this fragment
         return rootView;
     }
-    // Create menun item
+
+    // Create menu item
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_detail, menu);
     }
-
 }
