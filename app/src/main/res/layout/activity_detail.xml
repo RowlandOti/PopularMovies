@@ -15,23 +15,16 @@
   ~
   -->
 
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/container_detail"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.Dark.AppBarOverlay">
-
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/inc_toolbar" />
-
-    </android.support.design.widget.AppBarLayout>
-
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/inc_toolbar" />
+    
 
     <!--
             This layout is a one-pane layout for the master flow.
@@ -41,4 +34,4 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-</android.support.design.widget.CoordinatorLayout>
+</LinearLayout>
