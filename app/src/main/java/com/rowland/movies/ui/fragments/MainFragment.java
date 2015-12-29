@@ -56,7 +56,7 @@ public class MainFragment extends Fragment {
     private String[] TITLES = {"Popular", "Highest Rated", "Favourite"};
     // The adapter that manages the subfragments
     private SmartNestedViewPagerAdapter pagerAdapter;
-    // The class selction callback
+    // The class selection callback
     private IMovieSelectionCallBack mMovieSelectionCallBack;
     // ListPopup max width
     private float mPopupMaxWidth;
@@ -90,7 +90,11 @@ public class MainFragment extends Fragment {
     // A callback interface that all containing activities implement
     public interface IMovieSelectionCallBack {
         // Call this when movie is selected.
-        void onMovieSelected(int idKey);
+        void onMovieSelected(Long idKey);
+    }
+    // Set the mMovieSelectionCallBack
+    public void setMovieSelectionCallBack(IMovieSelectionCallBack mMovieSelectionCallBack) {
+        this.mMovieSelectionCallBack = mMovieSelectionCallBack;
     }
     // Called after fragment is attached to activity
     @Override

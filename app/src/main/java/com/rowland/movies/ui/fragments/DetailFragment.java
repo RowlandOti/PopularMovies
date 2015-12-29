@@ -40,7 +40,7 @@ public class DetailFragment extends Fragment {
     // The Movie ID Identifier Key
     public static final String MOVIE_ID_KEY = "_id";
     // The Movie ID Identifier Value
-    private int mMovieIdKey;
+    private long mMovieIdKey;
 
     // ButterKnife injected views
     @Bind(R.id.movie_rate_image_view)
@@ -104,7 +104,7 @@ public class DetailFragment extends Fragment {
         // Check if we have any arguments
         if (getArguments() != null) {
             // Acquire the selected movie identifier
-            mMovieIdKey = getArguments().getInt(DetailFragment.MOVIE_ID_KEY, 0);
+            mMovieIdKey = getArguments().getLong(DetailFragment.MOVIE_ID_KEY, 0);
         }
     }
 

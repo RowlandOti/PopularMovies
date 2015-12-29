@@ -129,14 +129,14 @@ public class MainActivity extends BaseToolBarActivity implements MainFragment.IM
     }
 
     @Override
-    public void onMovieSelected(int idKey) {
+    public void onMovieSelected(Long idKey) {
         // Check for two-pane
         if (mIsTwoPane)
         {
             // Create a Bundle object
             Bundle args = new Bundle();
             // Set the arguments
-            args.putInt(DetailFragment.MOVIE_ID_KEY, idKey);
+            args.putLong(DetailFragment.MOVIE_ID_KEY, idKey);
             // Show the DetailFragment
             showDetailFragment(args);
         }
@@ -149,6 +149,5 @@ public class MainActivity extends BaseToolBarActivity implements MainFragment.IM
             // Start the DetailActivity
             startActivity(intent);
         }
-
     }
 }

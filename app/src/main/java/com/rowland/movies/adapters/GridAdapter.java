@@ -156,7 +156,13 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
             ButterKnife.bind(this, itemView);
         }
 
-        private void bindTo(Movie movie){
+        private void bindTo(final Movie movie){
+            mGridItemContainer.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+
+                   mMovieSelectionCallBack.onMovieSelected(movie.getId());
+                }
+            });
             mGridItemContainer.setContentDescription(mGridItemContainer.getContext().getString(R.string.movie_title, movie.getOriginalTitle()));
             mTitleTextView.setText(movie.getOriginalTitle());
             // Set the release date
