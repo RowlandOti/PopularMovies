@@ -15,15 +15,10 @@
   ~
   -->
 
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/container"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
-
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/inc_toolbar" />
+    android:orientation="vertical">
 
     <include
         android:id="@+id/detail"
@@ -33,4 +28,5 @@
         android:id="@+id/favorite_fab"
         layout="@layout/inc_fav_floating_button" />
 
-</android.support.design.widget.CoordinatorLayout>
+
+</RelativeLayout>
