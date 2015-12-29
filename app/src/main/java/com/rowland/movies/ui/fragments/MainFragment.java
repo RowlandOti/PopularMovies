@@ -86,15 +86,10 @@ public class MainFragment extends Fragment {
         // Return the new fragment
         return fragmentInstance;
     }
-
     // A callback interface that all containing activities implement
     public interface IMovieSelectionCallBack {
         // Call this when movie is selected.
         void onMovieSelected(Long idKey);
-    }
-    // Set the mMovieSelectionCallBack
-    public void setMovieSelectionCallBack(IMovieSelectionCallBack mMovieSelectionCallBack) {
-        this.mMovieSelectionCallBack = mMovieSelectionCallBack;
     }
     // Called after fragment is attached to activity
     @Override
@@ -116,7 +111,7 @@ public class MainFragment extends Fragment {
         mMovieSelectionCallBack = null;
         super.onDetach();
     }
-
+    //
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,7 +120,7 @@ public class MainFragment extends Fragment {
         this.mPopupMaxWidth = Math.max(this.getResources().getDisplayMetrics().widthPixels / 2,
                 this.getResources().getDimensionPixelSize(R.dimen.config_prefListPopupWindowWidth));
     }
-
+    // Create the view for this fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -135,8 +130,7 @@ public class MainFragment extends Fragment {
         // Return the view for this fragment
         return rootView;
     }
-
-    // Here you Save your data
+    // Save data for this fragment
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -145,7 +139,7 @@ public class MainFragment extends Fragment {
         // Save the currently selected tab position
         outState.putInt(SELECTED_TAB_KEY, selectedTabStrip);
     }
-
+    // Called after the containing activity is created
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -157,7 +151,7 @@ public class MainFragment extends Fragment {
             mViewPager.setCurrentItem(selectedTabStrip, true);
         }
     }
-
+    // Called after fragmnet's view is created by onCreateView()
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         // Initialize the fragments adapter
@@ -167,14 +161,14 @@ public class MainFragment extends Fragment {
         // Set up the viewPager
         mSlidingTabStrips.setupWithViewPager(mViewPager);
     }
-
+    // Create  the menu items for fragment
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         // Inflate new menu.
         inflater.inflate(R.menu.menu_main_fragment, menu);
     }
-
+    // Do actions based on selected menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
