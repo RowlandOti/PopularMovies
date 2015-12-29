@@ -16,12 +16,22 @@
             android:name=".rest.services.MovieIntentService"
             android:exported="false" />
 
+        <service
+            android:name=".rest.services.ReviewIntentService"
+            android:exported="false" />
+
+        <service
+            android:name=".rest.services.TrailerIntentService"
+            android:exported="false" />
+
         <meta-data
             android:name="AA_DB_NAME"
             android:value="popmovies.db" />
+
         <meta-data
             android:name="AA_DB_VERSION"
             android:value="1" />
+
         <meta-data
             android:name="AA_MODELS"
             android:value="com.rowland.rest.pojos.Movies,com.rowland.pojos.Reviews, com.rowland.pojos.Trailers" />
@@ -49,6 +59,7 @@
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
+
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.rowland.movies.ui.activities.MainActivity" />
