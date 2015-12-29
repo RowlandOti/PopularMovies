@@ -121,6 +121,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
             mMovieList.beginBatchedUpdates();
             // Add each movie to the sorted list
             for (Movie movie : movieList) {
+                // Add movies
                 mMovieList.add(movie);
             }
             // End
@@ -153,17 +154,14 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
         @Bind(R.id.container_item)
         FrameLayout mGridItemContainer;
 
-        @Bind(R.id.card_view)
-        CardView mGridCardView;
-
         public CustomViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
         private void bindTo(final Movie movie) {
-            // Set click listener on card
-            mGridCardView.setOnClickListener(new View.OnClickListener() {
+            // Set click listener on card view
+            mGridItemContainer.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     // Execute Callback
                     mActivity.onMovieSelected(movie.getId());
@@ -191,10 +189,8 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
             if (movie.getIsFavourite()) {
                 mSortTypeIconImageView.setImageResource(R.drawable.ic_favourite_black_48dp);
             }
-
-
+            // Build the image url
             String imageUrl = EBaseURlTypes.MOVIE_API_IMAGE_BASE_URL.getUrlType() + EBaseImageSize.IMAGE_SIZE_W154.getImageSize() + movie.getPosterPath();
-            final LinearLayout container = mMovieTitleContainer;
             // Use Picasso to load the images
             Picasso.with(mMovieImageView.getContext())
                     .load(imageUrl)
