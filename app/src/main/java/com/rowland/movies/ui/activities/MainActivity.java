@@ -133,9 +133,9 @@ public class MainActivity extends BaseToolBarActivity implements MainFragment.IM
         // Check for two-pane
         if (mIsTwoPane)
         {
-            // Show the DetailFragment
+            // Create a Bundle object
             Bundle args = new Bundle();
-            //args.putString(DetailsFragment.ID_KEY, date);
+            // Set the arguments
             args.putInt(DetailFragment.MOVIE_ID_KEY, idKey);
             // Show the DetailFragment
             showDetailFragment(args);

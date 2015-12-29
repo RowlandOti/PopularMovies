@@ -92,17 +92,25 @@ public class MainFragment extends Fragment {
         // Call this when movie is selected.
         void onMovieSelected(int id);
     }
-
+    // Called after fragment is attached to activity
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        // Ensure containing activity has implemented the callback interface.
+        // Ensure attached activity has implemented the callback interface.
         try {
+            // Acquire the implmented callback
             mMovieSelectionCallBack = (IMovieSelectionCallBack) context;
         } catch (ClassCastException e) {
             // If not, it throws an exception
             throw new ClassCastException(context.toString() + " must implement IMovieSelectionCallBack");
         }
+    }
+    // Called after fragment is detached from activity
+    @Override
+    public void onDetach() {
+        // Avoid leaking,
+        mMovieSelectionCallBack = null;
+        super.onDetach();
     }
 
     @Override
