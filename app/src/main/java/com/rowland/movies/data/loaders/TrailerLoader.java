@@ -19,13 +19,11 @@ package com.rowland.movies.data.loaders;
 
 import android.content.Context;
 import android.content.IntentFilter;
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.rowland.movies.BuildConfig;
 import com.rowland.movies.data.broadcastrecievers.DataSetChangeBroadCastReceiver;
 import com.rowland.movies.data.repository.TrailerRepository;
-import com.rowland.movies.rest.collections.TrailerCollection;
 import com.rowland.movies.rest.models.Movie;
 import com.rowland.movies.rest.models.Trailer;
 
@@ -66,21 +64,5 @@ public class TrailerLoader extends BaseLoader {
         TrailerRepository mTrailerRepository = new TrailerRepository();
         // Return local list
         return mTrailerRepository.getAllWhere(mMovie);
-    }
-
-    // Extract the individual trailers from List
-    private Trailer extractTrailer(TrailerCollection videos) {
-        // If no trailer videos are found return
-        if (videos == null || videos.results == null || videos.results.size() == 0) {
-            return null;
-        }
-        // Pop out the lead YouTube trailer
-        for (Trailer video : videos.results) {
-            if ("Trailer".equals(video.getType()) && "YouTube".equals(video.getSite()) && !TextUtils.isEmpty(video.getKey())) {
-                return video;
-            }
-        }
-        return null;
-
     }
 }
