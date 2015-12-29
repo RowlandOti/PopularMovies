@@ -148,9 +148,6 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
         @Bind(R.id.grid_type_image_view)
         ImageView mSortTypeIconImageView;
 
-        @Bind(R.id.grid_title_container)
-        LinearLayout mMovieTitleContainer;
-
         @Bind(R.id.container_item)
         FrameLayout mGridItemContainer;
 
