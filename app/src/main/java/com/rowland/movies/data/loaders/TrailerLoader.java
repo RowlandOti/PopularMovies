@@ -26,6 +26,7 @@ import com.rowland.movies.BuildConfig;
 import com.rowland.movies.data.broadcastrecievers.DataSetChangeBroadCastReceiver;
 import com.rowland.movies.data.repository.TrailerRepository;
 import com.rowland.movies.rest.collections.TrailerCollection;
+import com.rowland.movies.rest.models.Movie;
 import com.rowland.movies.rest.models.Trailer;
 
 import java.util.List;
@@ -37,11 +38,11 @@ public class TrailerLoader extends BaseLoader {
     // The class Log identifier
     private static final String LOG_TAG = TrailerLoader.class.getSimpleName();
     // The movie id whose trailersList are retrieved
-    private int mTmdbMovieId;
+    private Movie mMovie;
 
-    public TrailerLoader(Context context, int mTmdbMovieId) {
+    public TrailerLoader(Context context, Movie movie) {
         super(context);
-        this.mTmdbMovieId = mTmdbMovieId;
+        this.mMovie = movie;
         // Set the data set change observer
         setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this, new IntentFilter("TRAILERS_RELOADER_DATA")));
     }
@@ -62,7 +63,7 @@ public class TrailerLoader extends BaseLoader {
         // Movie repository in use
         TrailerRepository mTrailerRepository = new TrailerRepository();
         // Return local list
-        return mTrailerRepository.getAllWhere(mSortOrder);
+        return mTrailerRepository.getAllWhere(mMovie);
     }
 
     // Extract the individual trailers from List

@@ -24,6 +24,7 @@ import android.util.Log;
 import com.rowland.movies.BuildConfig;
 import com.rowland.movies.data.broadcastrecievers.DataSetChangeBroadCastReceiver;
 import com.rowland.movies.data.repository.ReviewRepository;
+import com.rowland.movies.rest.models.Movie;
 import com.rowland.movies.rest.models.Review;
 
 import java.util.List;
@@ -35,13 +36,13 @@ public class ReviewLoader extends BaseLoader {
     // The class Log identifier
     private static final String LOG_TAG = ReviewLoader.class.getSimpleName();
     // The movie id whose reviewsList are retrieved
-    private int mTmdbMovieId;
+    private Movie mMovie;
     // The list of movies our loader returns
     private List<Review> reviewsList;
 
-    public ReviewLoader(Context context, int mTmdbMovieId) {
+    public ReviewLoader(Context context, Movie movie) {
         super(context);
-        this.mTmdbMovieId = mTmdbMovieId;
+        this.mMovie = movie;
         setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this, new IntentFilter("REVIEWS_RELOADER_DATA")));
     }
 
@@ -61,6 +62,6 @@ public class ReviewLoader extends BaseLoader {
         // Movie repository in use
         ReviewRepository mReviewRepository = new ReviewRepository();
         // Return local list
-        return mReviewRepository.getAllWhere(mSortOrder);
+        return mReviewRepository.getAllWhere(mMovie);
     }
 }
