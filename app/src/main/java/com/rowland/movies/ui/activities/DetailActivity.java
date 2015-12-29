@@ -43,19 +43,16 @@ public class DetailActivity extends BaseToolBarActivity {
         // Setup the inc_toolbar
         setToolbar(false, false, R.drawable.ic_logo_48px);
         // Check that the activity is using the layout with the fragment_container id
-        if (findViewById(R.id.fragment_container) != null)
-        {
+        if (findViewById(R.id.fragment_container) != null) {
             // However, if we're being restored from a previous state,
             // then we don't need to do anything and should return or else
             // we could end up with overlapping fragments.
-            if (savedInstanceState != null)
-            {
+            if (savedInstanceState != null) {
                 return;
             }
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
-            else
-            {
+            else {
                 int idKey = getIntent().getIntExtra(DetailFragment.MOVIE_ID_KEY, 0);
                 // Create a Bundle object
                 Bundle args = new Bundle();
@@ -67,6 +64,7 @@ public class DetailActivity extends BaseToolBarActivity {
         }
 
     }
+
     // Insert the DetailFragment
     private void showDetailFragment(Bundle args) {
         FragmentManager fm = getSupportFragmentManager();
