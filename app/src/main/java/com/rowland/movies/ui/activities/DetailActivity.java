@@ -25,6 +25,8 @@ import com.rowland.movies.R;
 import com.rowland.movies.rest.models.Movie;
 import com.rowland.movies.ui.fragments.DetailFragment;
 
+import java.io.Serializable;
+
 import butterknife.ButterKnife;
 
 public class DetailActivity extends BaseToolBarActivity {
@@ -54,7 +56,7 @@ public class DetailActivity extends BaseToolBarActivity {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
             else {
-                Movie movie = getIntent().getParcelableExtra(DetailFragment.MOVIE_KEY);
+                Serializable movie = getIntent().getSerializableExtra(DetailFragment.MOVIE_KEY);
                 // Create a Bundle object
                 Bundle args = new Bundle();
                 // Set arguments on Bundle

@@ -44,6 +44,7 @@ import com.rowland.movies.rest.models.Trailer;
 import com.rowland.movies.rest.services.ReviewIntentService;
 import com.rowland.movies.rest.services.TrailerIntentService;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,7 +61,7 @@ public class DetailFragment extends Fragment {
     // The Movie ID Identifier Key
     public static final String MOVIE_KEY = "movie_key";
     // The Movie model
-    private Movie mMovie;
+    private Serializable mMovie;
     // Reviews LoaderCallBack
     private LoaderManager.LoaderCallbacks mReviewLoaderCallBack;
     // Trailers LoaderCallBack
@@ -135,7 +136,7 @@ public class DetailFragment extends Fragment {
         // Check if we have any arguments
         if (getArguments() != null) {
             // Acquire the selected movie identifier
-            mMovie = getArguments().getParcelable(DetailFragment.MOVIE_KEY);
+            mMovie = getArguments().getSerializable(DetailFragment.MOVIE_KEY);
             startReviewIntentService();
             startTrailerIntentService();
         }
@@ -159,7 +160,7 @@ public class DetailFragment extends Fragment {
             @Override
             public Loader<List<Trailer>> onCreateLoader(int id, Bundle args) {
                 // Create new loader
-                ReviewLoader movieLoader =  new ReviewLoader(getActivity(), mMovie);
+                ReviewLoader movieLoader =  new ReviewLoader(getActivity(),(Movie) mMovie);
                 // Return new loader
                 return movieLoader;
             }
@@ -179,7 +180,7 @@ public class DetailFragment extends Fragment {
             @Override
             public Loader<List<Review>> onCreateLoader(int id, Bundle args) {
                 // Create new loader
-                TrailerLoader movieLoader =  new TrailerLoader(getActivity(), mMovie);
+                TrailerLoader movieLoader =  new TrailerLoader(getActivity(), (Movie) mMovie);
                 // Return new loader
                 return movieLoader;
             }
@@ -216,6 +217,7 @@ public class DetailFragment extends Fragment {
     // Create menu item
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_detail, menu);
     }
 
@@ -224,7 +226,7 @@ public class DetailFragment extends Fragment {
         // Create an Intent object
         Intent i = new Intent(getActivity(), ReviewIntentService.class);
         // Set any extras to pass over
-        i.putExtra(ReviewIntentService.REQUEST_MOVIE_REMOTE_ID, mMovie.getId_());
+        i.putExtra(ReviewIntentService.REQUEST_MOVIE_REMOTE_ID,((Movie) mMovie).getId_());
         i.putExtra(ReviewIntentService.REQUEST_PAGE_NO_INT, 1);
         // Start the service
         getActivity().startService(i);
@@ -238,7 +240,7 @@ public class DetailFragment extends Fragment {
         // Create an Intent object
         Intent i = new Intent(getActivity(), TrailerIntentService.class);
         // Set any extras to pass over
-        i.putExtra(TrailerIntentService.REQUEST_MOVIE_REMOTE_ID, mMovie.getId_());
+        i.putExtra(TrailerIntentService.REQUEST_MOVIE_REMOTE_ID, ((Movie) mMovie).getId_());
         i.putExtra(TrailerIntentService.REQUEST_PAGE_NO_INT, 1);
         // Start the service
         getActivity().startService(i);
