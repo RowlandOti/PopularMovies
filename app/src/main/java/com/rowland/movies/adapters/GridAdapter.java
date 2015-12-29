@@ -161,7 +161,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
             mGridItemContainer.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     // Execute Callback
-                    mActivity.onMovieSelected(movie.getId());
+                    mActivity.onMovieSelected(movie);
                 }
             });
             // Set movie title
