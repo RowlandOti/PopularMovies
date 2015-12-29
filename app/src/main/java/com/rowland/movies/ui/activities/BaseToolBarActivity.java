@@ -40,7 +40,7 @@ public class BaseToolBarActivity extends AppCompatActivity {
     @Bind(R.id.toolbar)
     protected Toolbar mToolbar;
     // Should we show master-detail layout?
-    private boolean mTwoPane;
+    protected boolean mIsTwoPane;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +79,7 @@ public class BaseToolBarActivity extends AppCompatActivity {
 
     // Should we show master-detail layout?
     protected void toggleShowTwoPane(boolean isShowTwoPane) {
-        mTwoPane = isShowTwoPane;
+        mIsTwoPane = isShowTwoPane;
     }
 
 }

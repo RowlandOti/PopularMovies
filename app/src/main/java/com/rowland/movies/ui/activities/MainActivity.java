@@ -20,6 +20,7 @@ package com.rowland.movies.ui.activities;
 import android.app.SearchManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -35,7 +36,7 @@ import com.rowland.movies.ui.fragments.MainFragment;
 import butterknife.ButterKnife;
 
 
-public class MainActivity extends BaseToolBarActivity {
+public class MainActivity extends BaseToolBarActivity implements MainFragment.onMovieSelectionCallback{
 
     // Logging Identifier for class
     private final String LOG_TAG = MainActivity.class.getSimpleName();
@@ -125,5 +126,29 @@ public class MainActivity extends BaseToolBarActivity {
         mSearchView.setIconifiedByDefault(true);
         // return whether menu was succesfully created
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public void onMovieSelected(int idKey) {
+        // Check for two-pane
+        if (mIsTwoPane)
+        {
+            // Show the DetailFragment
+            Bundle args = new Bundle();
+            //args.putString(DetailsFragment.ID_KEY, date);
+            args.putInt(DetailFragment.MOVIE_ID_KEY, idKey);
+            // Show the DetailFragment
+            showDetailFragment(args);
+        }
+        else
+        {
+            // Create an Intent object
+            Intent intent = new Intent(this, DetailActivity.class);
+            // Set extras - pass MOVIE_ID_KEY
+            intent.putExtra(DetailFragment.MOVIE_ID_KEY, idKey);
+            // Start the DetailActivity
+            startActivity(intent);
+        }
+
     }
 }

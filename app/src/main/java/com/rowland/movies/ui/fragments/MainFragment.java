@@ -22,7 +22,6 @@ import android.support.design.widget.SlidingTabStripLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.ListPopupWindow;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -31,7 +30,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
-import com.rowland.movies.BuildConfig;
 import com.rowland.movies.R;
 import com.rowland.movies.adapters.ListPopupWindowAdapter;
 import com.rowland.movies.adapters.SmartNestedViewPagerAdapter;
@@ -85,6 +83,12 @@ public class MainFragment extends Fragment {
         // Return the new fragment
         return fragmentInstance;
     }
+    
+    // A callback interface that all containing activities implement
+    public interface onMovieSelectionCallback {
+        // Call this when movie is selected.
+        void onMovieSelected(int id);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -112,7 +116,7 @@ public class MainFragment extends Fragment {
         // Acquire the currently selected tab
         selectedTabStrip = mViewPager.getCurrentItem();
         // Save the currently selected tab position
-        outState.putInt(SELECTED_TAB_KEY , selectedTabStrip);
+        outState.putInt(SELECTED_TAB_KEY, selectedTabStrip);
     }
 
     @Override
@@ -121,7 +125,7 @@ public class MainFragment extends Fragment {
         // Restore states
         if (savedInstanceState != null) {
             // Acquire previously selected tab.
-            selectedTabStrip = savedInstanceState.getInt(SELECTED_TAB_KEY , selectedTabStrip);
+            selectedTabStrip = savedInstanceState.getInt(SELECTED_TAB_KEY, selectedTabStrip);
             // Restore previously selected tab
             mViewPager.setCurrentItem(selectedTabStrip, true);
         }
