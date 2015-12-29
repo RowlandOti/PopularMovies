@@ -126,7 +126,7 @@ public class DetailFragment extends Fragment {
             @Override
             public Loader<List<Trailer>> onCreateLoader(int id, Bundle args) {
                 // Create new loader
-                ReviewLoader movieLoader =  new ReviewLoader(getActivity(), mSortOrder);
+                ReviewLoader movieLoader =  new ReviewLoader(getActivity(), mMovie.getId_());
                 // Return new loader
                 return movieLoader;
             }
@@ -146,7 +146,7 @@ public class DetailFragment extends Fragment {
             @Override
             public Loader<List<Review>> onCreateLoader(int id, Bundle args) {
                 // Create new loader
-                TrailerLoader movieLoader =  new TrailerLoader(getActivity(), mSortOrder);
+                TrailerLoader movieLoader =  new TrailerLoader(getActivity(), mMovie.getId_());
                 // Return new loader
                 return movieLoader;
             }

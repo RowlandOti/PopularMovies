@@ -23,6 +23,8 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.rowland.movies.BuildConfig;
+import com.rowland.movies.data.loaders.ReviewLoader;
+import com.rowland.movies.data.repository.ReviewRepository;
 import com.rowland.movies.rest.collections.ReviewCollection;
 import com.rowland.movies.rest.models.RestError;
 import com.rowland.movies.rest.models.Review;
@@ -37,12 +39,10 @@ import retrofit.Retrofit;
 /**
  * Created by Oti Rowland on 12/21/2015.
  */
-public abstract class ReviewCallBack implements Callback<ReviewCollection> {
+public class ReviewCallBack implements Callback<ReviewCollection> {
 
     // The class Log identifier
-    private static final String LOG_TAG = ReviewCallBack.class.getSimpleName();
-    // The list of reviews our loader returns
-    private List<Review> reviewsList;
+    private static final String LOG_TAG = TrailerCallBack.class.getSimpleName();
     // Context instance
     private Context context;
 
@@ -53,21 +53,17 @@ public abstract class ReviewCallBack implements Callback<ReviewCollection> {
     @Override
     public void onResponse(Response<ReviewCollection> response, Retrofit retrofit) {
 
-        if (response.isSuccess() && response.errorBody() == null) {
+        // Check status of response before proceeding
+        //if (response.isSuccess() && response.errorBody() == null) {
+        if (response.isSuccess()) {
             // movies available
-            reviewsList = response.body().getResults();
-
-            for (Review review : reviewsList) {
-                // Save reviews in the database
-                review.save();
-                // Check wether we are in debug mode
-                if (BuildConfig.IS_DEBUG_MODE) {
-                    Log.d(LOG_TAG, "Review " + review.getAuthor());
-                    Log.d(LOG_TAG, "Review " + review.getContent());
-                }
-                // BroadCast the changes locally
-                LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent("REVIEWS_RELOADER_DATA"));
-            }
+            List<Review> moviesList = response.body().getResults();
+            // ReviewRepository instance
+            ReviewRepository mReviewRepository = new ReviewRepository();
+            // Save movies to data storage
+            mReviewRepository.saveAll(moviesList);
+            // BroadCast the changes locally
+            LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent(ReviewLoader.INTENT_ACTION));
         } else {
 
             try {
@@ -77,6 +73,7 @@ public abstract class ReviewCallBack implements Callback<ReviewCollection> {
                 if (BuildConfig.IS_DEBUG_MODE) {
                     // we got an error message - Do error handling here
                     Log.d(LOG_TAG, restError.getErrorMesage());
+                    Log.d(LOG_TAG, response.errorBody().toString());
                     //For getting error code. Code is integer value like 200,404 etc
                     Log.d(LOG_TAG, String.valueOf(restError.getCode()));
                 }
@@ -92,12 +89,4 @@ public abstract class ReviewCallBack implements Callback<ReviewCollection> {
         // Inform user of failure due to no network e.t.c
         Log.d(LOG_TAG, t.getMessage());
     }
-    // Getter method for moviesCollection
-    public List<Review> getReviewsList() {
-
-        return this.reviewsList;
-    }
-    // A handy method to retrieve the collection from the callback
-    // Implement this method to gain access
-    public abstract void retrieveReviewsList();
 }

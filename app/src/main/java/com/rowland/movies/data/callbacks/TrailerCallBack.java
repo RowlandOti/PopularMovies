@@ -23,6 +23,8 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.rowland.movies.BuildConfig;
+import com.rowland.movies.data.loaders.TrailerLoader;
+import com.rowland.movies.data.repository.TrailerRepository;
 import com.rowland.movies.rest.collections.TrailerCollection;
 import com.rowland.movies.rest.models.RestError;
 import com.rowland.movies.rest.models.Trailer;
@@ -37,12 +39,10 @@ import retrofit.Retrofit;
 /**
  * Created by Oti Rowland on 12/21/2015.
  */
-public abstract class TrailerCallBack implements Callback<TrailerCollection> {
+public class TrailerCallBack implements Callback<TrailerCollection> {
 
     // The class Log identifier
     private static final String LOG_TAG = TrailerCallBack.class.getSimpleName();
-    // The list of movies our loader returns
-    private List<Trailer> trailersList;
     // Context instance
     private Context context;
 
@@ -53,19 +53,17 @@ public abstract class TrailerCallBack implements Callback<TrailerCollection> {
     @Override
     public void onResponse(Response<TrailerCollection> response, Retrofit retrofit) {
 
-        if (response.isSuccess() && response.errorBody() == null) {
+        // Check status of response before proceeding
+        //if (response.isSuccess() && response.errorBody() == null) {
+        if (response.isSuccess()) {
             // movies available
-            trailersList = response.body().getResults();
-
-            for (Trailer trailer : trailersList) {
-                // Save movies in the database
-                trailer.save();
-                // Check wether we are in debug mode
-                if (BuildConfig.IS_DEBUG_MODE) {
-                    Log.d(LOG_TAG, "Trailer " + trailer.getName());
-                    Log.d(LOG_TAG, "Trailer " + trailer.getSite());
-                }
-            }
+            List<Trailer> moviesList = response.body().getResults();
+            // TrailerRepository instance
+            TrailerRepository mTrailerRepository = new TrailerRepository();
+            // Save movies to data storage
+            mTrailerRepository.saveAll(moviesList);
+            // BroadCast the changes locally
+            LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent(TrailerLoader.INTENT_ACTION));
         } else {
 
             try {
@@ -75,11 +73,10 @@ public abstract class TrailerCallBack implements Callback<TrailerCollection> {
                 if (BuildConfig.IS_DEBUG_MODE) {
                     // we got an error message - Do error handling here
                     Log.d(LOG_TAG, restError.getErrorMesage());
+                    Log.d(LOG_TAG, response.errorBody().toString());
                     //For getting error code. Code is integer value like 200,404 etc
                     Log.d(LOG_TAG, String.valueOf(restError.getCode()));
                 }
-                // BroadCast the changes locally
-                LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent("TRAILERS_RELOADER_DATA"));
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -92,12 +89,4 @@ public abstract class TrailerCallBack implements Callback<TrailerCollection> {
         // Inform user of failure due to no network e.t.c
         Log.d(LOG_TAG, t.getMessage());
     }
-    // Getter method for moviesList
-    public List<Trailer> getTrailersList() {
-
-        return this.trailersList;
-    }
-    // A handy method to retrieve the list from the callback
-    // Implement this method to gain access
-    public abstract void retrieveTrailersList();
 }

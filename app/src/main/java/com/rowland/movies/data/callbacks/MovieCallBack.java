@@ -50,11 +50,8 @@ public class MovieCallBack implements Callback<MovieCollection> {
     private ESortOrder mSortOrder;
 
     public MovieCallBack(Context context, ESortOrder sortOrder) {
-        this.mSortOrder = sortOrder;
         this.context = context;
-        if (BuildConfig.IS_DEBUG_MODE) {
-            Log.d(LOG_TAG, "I WAS LOADED " + this.getClass());
-        }
+        this.mSortOrder = sortOrder;
     }
 
     @Override
