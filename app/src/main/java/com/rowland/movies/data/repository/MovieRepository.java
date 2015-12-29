@@ -83,7 +83,7 @@ public class MovieRepository {
             boolean iSExistingMovie = new Select()
                     .from(Movie.class)
                     .where("id_ = ?", movie.getId_()).exists();
-            // Check wether we are in debug mode
+            // Check whether we are in debug mode
             if (BuildConfig.IS_DEBUG_MODE) {
                 Log.d(LOG_TAG, "Movie: " + iSExistingMovie);
             }
