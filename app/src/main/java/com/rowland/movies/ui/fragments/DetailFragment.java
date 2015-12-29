@@ -23,6 +23,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -33,6 +34,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.rowland.movies.BuildConfig;
 import com.rowland.movies.R;
 import com.rowland.movies.data.loaders.ReviewLoader;
 import com.rowland.movies.data.loaders.TrailerLoader;
@@ -42,11 +44,15 @@ import com.rowland.movies.rest.models.Trailer;
 import com.rowland.movies.rest.services.ReviewIntentService;
 import com.rowland.movies.rest.services.TrailerIntentService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+/**
+ * Display Movie Detail
+ */
 public class DetailFragment extends Fragment {
 
     // Logging Identifier for class
@@ -59,6 +65,10 @@ public class DetailFragment extends Fragment {
     private LoaderManager.LoaderCallbacks mReviewLoaderCallBack;
     // Trailers LoaderCallBack
     private LoaderManager.LoaderCallbacks mTrailerLoaderCallBack;
+    // A List of the reviews
+    protected List<Review> mReviewList;
+    // A List of the trailers
+    protected List<Trailer> mTrailerList;
 
     // ButterKnife injected views
     @Bind(R.id.movie_rate_image_view)
@@ -99,8 +109,7 @@ public class DetailFragment extends Fragment {
 
     // Default constructor
     public DetailFragment() {
-        // Don't destroy fragment across configuration change
-        setRetainInstance(true);
+
     }
 
     // Create a new Instance for this fragment
@@ -119,6 +128,10 @@ public class DetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Let the fragment handle its menu items
+        setHasOptionsMenu(true);
+        // Don't destroy fragment across orientation change
+        setRetainInstance(true);
         // Check if we have any arguments
         if (getArguments() != null) {
             // Acquire the selected movie identifier
@@ -182,6 +195,17 @@ public class DetailFragment extends Fragment {
             }
         };
     }
+    // Called when the containing activity is created
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        // Initialize the lists
+        mReviewList = new ArrayList<>();
+        mTrailerList = new ArrayList<>();
+        // Initialize the Loader
+        getLoaderManager().initLoader(0, null, mReviewLoaderCallBack);
+        getLoaderManager().initLoader(1, null, mTrailerLoaderCallBack);
+    }
     // Called to destroy this fragment
     @Override
     public void onDestroy() {
@@ -204,6 +228,10 @@ public class DetailFragment extends Fragment {
         i.putExtra(ReviewIntentService.REQUEST_PAGE_NO_INT, 1);
         // Start the service
         getActivity().startService(i);
+        // Check whether we are in debug mode
+        if (BuildConfig.IS_DEBUG_MODE) {
+            Log.d(LOG_TAG, "REVIEW SERVICE STARTED");
+        }
     }
     // Start the trailer service
     private void startTrailerIntentService() {
@@ -214,5 +242,9 @@ public class DetailFragment extends Fragment {
         i.putExtra(TrailerIntentService.REQUEST_PAGE_NO_INT, 1);
         // Start the service
         getActivity().startService(i);
+        // Check whether we are in debug mode
+        if (BuildConfig.IS_DEBUG_MODE) {
+            Log.d(LOG_TAG, "TRAILER SERVICE STARTED");
+        }
     }
 }

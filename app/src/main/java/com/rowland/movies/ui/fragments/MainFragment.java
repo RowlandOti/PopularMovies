@@ -72,8 +72,7 @@ public class MainFragment extends Fragment {
 
     // Default constructor
     public MainFragment() {
-        // Don't destroy fragment across configuration change
-        setRetainInstance(true);
+
     }
 
     // Create a new Instance for this fragment
@@ -92,31 +91,14 @@ public class MainFragment extends Fragment {
         // Call this when movie is selected.
         void onMovieSelected(Movie movie);
     }
-    // Called after fragment is attached to activity
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        // Ensure attached activity has implemented the callback interface.
-        try {
-            // Acquire the implemented callback
-            mMovieSelectionCallBack = (IMovieSelectionCallBack) context;
-        } catch (ClassCastException e) {
-            // If not, it throws an exception
-            throw new ClassCastException(context.toString() + " must implement IMovieSelectionCallBack");
-        }
-    }
-    // Called after fragment is detached from activity
-    @Override
-    public void onDetach() {
-        // Avoid leaking,
-        mMovieSelectionCallBack = null;
-        super.onDetach();
-    }
     //
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Let the fragment handle its menu items
         setHasOptionsMenu(true);
+        // Don't destroy fragment across orientation change
+        setRetainInstance(true);
         //Get the maximum width of our ListPopupWindow
         this.mPopupMaxWidth = Math.max(this.getResources().getDisplayMetrics().widthPixels / 2,
                 this.getResources().getDimensionPixelSize(R.dimen.config_prefListPopupWindowWidth));
@@ -161,6 +143,26 @@ public class MainFragment extends Fragment {
         mViewPager.setAdapter(pagerAdapter);
         // Set up the viewPager
         mSlidingTabStrips.setupWithViewPager(mViewPager);
+    }
+    // Called after fragment is attached to activity
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        // Ensure attached activity has implemented the callback interface.
+        try {
+            // Acquire the implemented callback
+            mMovieSelectionCallBack = (IMovieSelectionCallBack) context;
+        } catch (ClassCastException e) {
+            // If not, it throws an exception
+            throw new ClassCastException(context.toString() + " must implement IMovieSelectionCallBack");
+        }
+    }
+    // Called after fragment is detached from activity
+    @Override
+    public void onDetach() {
+        // Avoid leaking,
+        mMovieSelectionCallBack = null;
+        super.onDetach();
     }
     // Create  the menu items for fragment
     @Override
