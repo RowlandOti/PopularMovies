@@ -34,7 +34,7 @@
 
         <meta-data
             android:name="AA_MODELS"
-            android:value="com.rowland.rest.pojos.Movies,com.rowland.pojos.Reviews, com.rowland.pojos.Trailers" />
+            android:value="com.rowland.movies.rest.models.Movie, com.rowland.movies.rest.models.Review, com.rowland.movies.rest.models.Trailer" />
 
         <activity
             android:name=".ui.activities.MainActivity"

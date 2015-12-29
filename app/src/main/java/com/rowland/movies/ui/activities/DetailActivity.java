@@ -46,7 +46,7 @@ public class DetailActivity extends BaseToolBarActivity {
         // Setup the inc_toolbar
         setToolbar(true, false, R.drawable.ic_logo_48px);
         // Check that the activity is using the layout with the fragment_container id
-        if (findViewById(R.id.fragment_container) != null) {
+        if (findViewById(R.id.detail_container) != null) {
             // However, if we're being restored from a previous state,
             // then we don't need to do anything and should return or else
             // we could end up with overlapping fragments.
