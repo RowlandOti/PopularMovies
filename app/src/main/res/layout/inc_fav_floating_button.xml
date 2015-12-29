@@ -15,14 +15,14 @@
   ~
   -->
 
+
 <android.support.design.widget.FloatingActionButton xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res/android"
     android:id="@+id/favorite_fab"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="40dp"
+    android:layout_gravity="bottom|end"
+    android:layout_margin="@dimen/fab_margin"
     android:clickable="true"
-    android:src="@drawable/ic_favourite_black_48dp"
-    app:elevation="4dp" />
+    android:src="@drawable/ic_favourite_black_48dp" />
 
 
