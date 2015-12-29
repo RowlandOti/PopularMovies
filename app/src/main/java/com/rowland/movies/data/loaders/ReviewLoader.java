@@ -19,19 +19,14 @@ package com.rowland.movies.data.loaders;
 
 import android.content.Context;
 import android.content.IntentFilter;
+import android.util.Log;
 
-import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
 import com.rowland.movies.data.broadcastrecievers.DataSetChangeBroadCastReceiver;
-import com.rowland.movies.data.callbacks.ReviewCallBack;
-import com.rowland.movies.rest.collections.ReviewCollection;
-import com.rowland.movies.rest.enums.EAPITypes;
+import com.rowland.movies.data.repository.ReviewRepository;
 import com.rowland.movies.rest.models.Review;
-import com.rowland.movies.rest.services.IMoviesAPIService;
 
 import java.util.List;
-
-import retrofit.Call;
 
 /**
  * Created by Oti Rowland on 12/12/2015.
@@ -52,38 +47,20 @@ public class ReviewLoader extends BaseLoader {
 
     @Override
     public List<Review> loadInBackground() {
-        // If we are online query movies from API
-        if (getIsOnline()) {
-            // Get the MoviesAPIService and use it to retrieve a list of reviewsList
-            IMoviesAPIService movieService = ApplicationController.getApplicationInstance().getMovieServiceOfApiType(EAPITypes.MOVIES_API);
-            // Get online movies and then update local database
-            getOnlineData(movieService);
-            // Return the list of movies from local database
-            return getLocalData();
-        }
         // Return the list of movies from local database
         return getLocalData();
-
     }
 
-    // Get the list of reviews from online
-    public void getOnlineData(IMoviesAPIService movieService) {
-        // Retrieve the reviewsList data
-        Call<ReviewCollection> createdCall = movieService.loadReviewData(mTmdbMovieId, BuildConfig.IMDB_API_KEY);
-        // Asynchronous access
-        createdCall.enqueue(new ReviewCallBack(getContext()) {
-            // Gain access to the Review List
-            @Override
-            public void retrieveReviewsList() {
-                reviewsList = super.getReviewsList();
-            }
-        });
-    }
-
-    // Get the list of reviews from local
+    // Get the list of movies from local
     @Override
     public List<Review> getLocalData() {
+        // Check whether we are in debug mode
+        if (BuildConfig.IS_DEBUG_MODE) {
+            Log.d(LOG_TAG, "Local data loaded ");
+        }
+        // Movie repository in use
+        ReviewRepository mReviewRepository = new ReviewRepository();
         // Return local list
-        return reviewsList;
+        return mReviewRepository.getAllWhere(mSortOrder);
     }
 }

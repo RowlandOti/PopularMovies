@@ -32,7 +32,7 @@ import java.util.List;
 /**
  * Created by Oti Rowland on 12/12/2015.
  */
-public class MovieLoader extends BaseLoader  {
+public class MovieLoader extends BaseLoader {
 
     // The class Log identifier
     private static final String LOG_TAG = MovieLoader.class.getSimpleName();

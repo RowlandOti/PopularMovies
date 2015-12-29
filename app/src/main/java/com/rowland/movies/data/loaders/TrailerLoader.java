@@ -18,19 +18,17 @@
 package com.rowland.movies.data.loaders;
 
 import android.content.Context;
+import android.content.IntentFilter;
 import android.text.TextUtils;
+import android.util.Log;
 
-import com.rowland.movies.ApplicationController;
 import com.rowland.movies.BuildConfig;
-import com.rowland.movies.data.callbacks.TrailerCallBack;
+import com.rowland.movies.data.broadcastrecievers.DataSetChangeBroadCastReceiver;
+import com.rowland.movies.data.repository.TrailerRepository;
 import com.rowland.movies.rest.collections.TrailerCollection;
-import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.models.Trailer;
-import com.rowland.movies.rest.services.IMoviesAPIService;
 
 import java.util.List;
-
-import retrofit.Call;
 
 /**
  * Created by Oti Rowland on 12/12/2015.
@@ -40,58 +38,34 @@ public class TrailerLoader extends BaseLoader {
     private static final String LOG_TAG = TrailerLoader.class.getSimpleName();
     // The movie id whose trailersList are retrieved
     private int mTmdbMovieId;
-    // The list of trailersList our loader returns
-    private List<Trailer> trailersList;
-    // Check if we are online
-    private boolean isOnline;
 
     public TrailerLoader(Context context, int mTmdbMovieId) {
         super(context);
         this.mTmdbMovieId = mTmdbMovieId;
         // Set the data set change observer
-        //setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this,new IntentFilter("TRAILERS_RELOADER_DATA")));
-        // Set the network change observer
-        //setNetworkChangeObserver(new NetworkChangeBroadCastReceiver(this));
+        setDataSetChangeObserver(new DataSetChangeBroadCastReceiver(this, new IntentFilter("TRAILERS_RELOADER_DATA")));
     }
 
     @Override
     public List<Trailer> loadInBackground() {
-        // If we are online query movies from API
-        if(getIsOnline()) {
-            // Get the MoviesAPIService and use it to retrieve a list of trailersList
-            IMoviesAPIService movieService = ApplicationController.getApplicationInstance().getMovieServiceOfApiType(EAPITypes.MOVIES_API);
-            // Get online trailers and then update local database
-            getOnlineData(movieService);
-            // Return the list of trailers from local database
-            return getLocalData();
-        }
         // Return the list of movies from local database
         return getLocalData();
-
     }
-    // Get the list of reviews
 
-    public void getOnlineData(IMoviesAPIService movieService) {
-        // Retrieve the reviews data
-        Call<TrailerCollection> createdCall = movieService.loadTrailerData(mTmdbMovieId, BuildConfig.IMDB_API_KEY);
-        // Asynchronous access
-        createdCall.enqueue(new TrailerCallBack(getContext()){
-            // Gain access to the TrailersList
-            @Override
-            public void retrieveTrailersList() {
-                trailersList = super.getTrailersList();
-            }
-        });
-
-    }
-    // Get the list of reviews from local
+    // Get the list of movies from local
     @Override
     public List<Trailer> getLocalData() {
+        // Check whether we are in debug mode
+        if (BuildConfig.IS_DEBUG_MODE) {
+            Log.d(LOG_TAG, "Local data loaded ");
+        }
+        // Movie repository in use
+        TrailerRepository mTrailerRepository = new TrailerRepository();
         // Return local list
-        return trailersList;
+        return mTrailerRepository.getAllWhere(mSortOrder);
     }
-    // Extract the individual movie trailersList
-    // Handy method, might help in future
+
+    // Extract the individual trailers from List
     private Trailer extractTrailer(TrailerCollection videos) {
         // If no trailer videos are found return
         if (videos == null || videos.results == null || videos.results.size() == 0) {
