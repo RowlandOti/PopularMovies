@@ -71,9 +71,9 @@ public class MovieRepository {
     }
 
     // Save the movie list
-    public void saveAll(List<Movie> moviesList, ESortOrder sortOrder) {
+    public void saveAll(List<Movie> movieList, ESortOrder sortOrder) {
 
-        for (Movie movie : moviesList) {
+        for (Movie movie : movieList) {
             // Set any necessary details
             movie.setIsHighestRated(sortOrder.isHighestRated());
             movie.setIsFavourite(sortOrder.isFavourite());
@@ -90,7 +90,7 @@ public class MovieRepository {
             if (!iSExistingMovie) {
                 // Save movie
                 movie.save();
-                // Check wether we are in debug mode
+                // Check whether we are in debug mode
                 if (BuildConfig.IS_DEBUG_MODE) {
                     Log.d(LOG_TAG, "Movie: " + movie.getTitle());
                     Log.d(LOG_TAG, "Movie: " + movie.getReleaseDate());

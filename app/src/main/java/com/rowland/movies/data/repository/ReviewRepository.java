@@ -17,7 +17,11 @@
 
 package com.rowland.movies.data.repository;
 
+import android.util.Log;
+
 import com.activeandroid.query.Select;
+import com.rowland.movies.BuildConfig;
+import com.rowland.movies.rest.models.Movie;
 import com.rowland.movies.rest.models.Review;
 
 import java.util.List;
@@ -26,17 +30,51 @@ import java.util.List;
  * Created by Oti Rowland on 12/22/2015.
  */
 public class ReviewRepository {
+
+    // The class Log identifier
+    private static final String LOG_TAG = ReviewRepository.class.getSimpleName();
+
+    // The default constructor
     public ReviewRepository() {
     }
 
-    public List<Review> getAll() {
-
+    public List<Review> getAllWhere(Movie movie) {
+        // Holds the where clause
+        String whereClause = "movie = ?";
+        // ToDo: Move this logic to the Movie model where it belongs
         // Query ActiveAndroid for list of data
         List<Review> queryResults = new Select()
-                .from(Review.class)
-                .orderBy("id_ ASC")
-                .limit(100).execute();
+                .from(Review.class).where(whereClause, movie)
+                .orderBy("id ASC")
+                .limit(50).execute();
         // This is how you execute a query
         return queryResults;
     }
+
+    // Save the movie list
+    public void saveAll(List<Review> reviewList) {
+
+        for (Review review : reviewList) {
+            // Set any necessary details
+
+            // Check if is duplicate
+            boolean iSExistingReview = new Select()
+                    .from(Review.class)
+                    .where("id_ = ?", review.getId_()).exists();
+            // Check whether we are in debug mode
+            if (BuildConfig.IS_DEBUG_MODE) {
+                Log.d(LOG_TAG, "Movie: " + iSExistingReview);
+            }
+            // Save only new movies to the database
+            if (!iSExistingReview) {
+                // Save movie
+                review.save();
+                // Check wether we are in debug mode
+                if (BuildConfig.IS_DEBUG_MODE) {
+                    Log.d(LOG_TAG, "Movie: " + review.getAuthor());
+                }
+            }
+        }
+    }
+
 }

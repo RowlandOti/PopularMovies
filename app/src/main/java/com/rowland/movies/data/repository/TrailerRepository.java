@@ -17,7 +17,11 @@
 
 package com.rowland.movies.data.repository;
 
+import android.util.Log;
+
 import com.activeandroid.query.Select;
+import com.rowland.movies.BuildConfig;
+import com.rowland.movies.rest.models.Movie;
 import com.rowland.movies.rest.models.Trailer;
 
 import java.util.List;
@@ -26,17 +30,50 @@ import java.util.List;
  * Created by Oti Rowland on 12/22/2015.
  */
 public class TrailerRepository {
+
+    // The class Log identifier
+    private static final String LOG_TAG = TrailerRepository.class.getSimpleName();
+
+    // The default constructor
     public TrailerRepository() {
     }
 
-    public List<Trailer> getAll() {
-
+    public List<Trailer> getAllWhere(Movie movie) {
+        // Holds the where clause
+        String whereClause = "movie = ?";
+        // ToDo: Move this logic to the Movie model where it belongs
         // Query ActiveAndroid for list of data
         List<Trailer> queryResults = new Select()
-                .from(Trailer.class)
-                .orderBy("id_ ASC")
-                .limit(100).execute();
+                .from(Trailer.class).where(whereClause, movie)
+                .orderBy("id ASC")
+                .limit(50).execute();
         // This is how you execute a query
         return queryResults;
+    }
+
+    // Save the movie list
+    public void saveAll(List<Trailer> trailerList) {
+
+        for (Trailer trailer : trailerList) {
+            // Set any necessary details
+
+            // Check if is duplicate
+            boolean iSExistingTrailer = new Select()
+                    .from(Trailer.class)
+                    .where("id_ = ?", trailer.getId_()).exists();
+            // Check whether we are in debug mode
+            if (BuildConfig.IS_DEBUG_MODE) {
+                Log.d(LOG_TAG, "Movie: " + iSExistingTrailer);
+            }
+            // Save only new movies to the database
+            if (!iSExistingTrailer) {
+                // Save movie
+                trailer.save();
+                // Check wether we are in debug mode
+                if (BuildConfig.IS_DEBUG_MODE) {
+                    Log.d(LOG_TAG, "Movie: " + trailer.getName());
+                }
+            }
+        }
     }
 }
