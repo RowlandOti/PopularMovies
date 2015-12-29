@@ -41,7 +41,7 @@ public class DetailActivity extends BaseToolBarActivity {
         // Inject all the views
         ButterKnife.bind(this);
         // Setup the inc_toolbar
-        setToolbar(false, false, R.drawable.ic_logo_48px);
+        setToolbar(true, false, R.drawable.ic_logo_48px);
         // Check that the activity is using the layout with the fragment_container id
         if (findViewById(R.id.fragment_container) != null) {
             // However, if we're being restored from a previous state,

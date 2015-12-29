@@ -34,7 +34,6 @@ import com.rowland.movies.adapters.GridAdapter;
 import com.rowland.movies.rest.enums.ESortOrder;
 import com.rowland.movies.rest.models.Movie;
 import com.rowland.movies.rest.services.MovieIntentService;
-import com.rowland.movies.ui.activities.MainActivity;
 import com.rowland.movies.utilities.ScreenUtility;
 import com.rowland.movies.utilities.Utilities;
 
@@ -107,7 +106,7 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
         // Call is actually only necessary with custom ItemAnimators
         mGridRecycleView.setItemAnimator(new DefaultItemAnimator());
         // Create new adapter
-        mGridAdapter = new GridAdapter(mMovieList, getContext());
+        mGridAdapter = new GridAdapter(mMovieList, getContext(), getActivity());
         // Associate RecycleView with adapter
         mGridRecycleView.setAdapter(mGridAdapter);
         // Set the refreshlayout's listener

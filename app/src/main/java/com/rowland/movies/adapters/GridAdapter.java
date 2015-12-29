@@ -18,6 +18,7 @@
 package com.rowland.movies.adapters;
 
 import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.util.SortedList;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -35,7 +36,7 @@ import com.rowland.movies.data.callbacks.MovieSortedListAdapterCallBack;
 import com.rowland.movies.rest.enums.EBaseImageSize;
 import com.rowland.movies.rest.enums.EBaseURlTypes;
 import com.rowland.movies.rest.models.Movie;
-import com.rowland.movies.ui.fragments.MainFragment;
+import com.rowland.movies.ui.activities.MainActivity;
 import com.rowland.movies.utilities.Utilities;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -59,14 +60,16 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
     private Calendar mCalendar;
     // Context instance
     private Context mContext;
-    // The MainFragment Callback
-    private MainFragment.IMovieSelectionCallBack mMovieSelectionCallBack;
+    // The container Activity
+    private MainActivity mActivity;
 
-    public GridAdapter(List<Movie> movieList, Context context) {
+    public GridAdapter(List<Movie> movieList, Context context, FragmentActivity activity) {
         // Acquire the context
         this.mContext = context;
         // Acquire a Calendar object
         this.mCalendar = Calendar.getInstance();
+        // Acquire the containing activity
+        this.mActivity = (MainActivity) activity;
         // Initially add local movies to list
         addAll(movieList);
     }
@@ -154,11 +157,11 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
             ButterKnife.bind(this, itemView);
         }
 
-        private void bindTo(final Movie movie){
+        private void bindTo(final Movie movie) {
             mGridItemContainer.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-
-                   mMovieSelectionCallBack.onMovieSelected(movie.getId());
+                    // Execute Callback
+                    mActivity.onMovieSelected(movie.getId());
                 }
             });
             mGridItemContainer.setContentDescription(mGridItemContainer.getContext().getString(R.string.movie_title, movie.getOriginalTitle()));
