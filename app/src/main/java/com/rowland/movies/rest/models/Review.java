@@ -27,6 +27,7 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
 @Table(name = "reviews")
 public class Review extends Model {
 
@@ -119,6 +120,20 @@ public class Review extends Model {
      */
     public void setId(String id_) {
         this.id_ = id_;
+    }
+
+    /**
+     * @return The movie
+     */
+    public Movie getMovie() {
+        return movie;
+    }
+
+    /**
+     * @param movie The movie
+     */
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 
 }

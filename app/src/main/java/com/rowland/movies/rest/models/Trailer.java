@@ -161,4 +161,18 @@ public class Trailer extends Model {
         this.size = size;
     }
 
+    /**
+     * @return The movie
+     */
+    public Movie getMovie() {
+        return movie;
+    }
+
+    /**
+     * @param movie The movie
+     */
+    public void setMovie(Movie movie) {
+        this.movie = movie;
+    }
+
 }
