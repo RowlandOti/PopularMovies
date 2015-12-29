@@ -35,6 +35,7 @@ import com.rowland.movies.R;
 import com.rowland.movies.adapters.ListPopupWindowAdapter;
 import com.rowland.movies.adapters.SmartNestedViewPagerAdapter;
 import com.rowland.movies.objects.ListPopupMenu;
+import com.rowland.movies.rest.models.Movie;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,7 +90,7 @@ public class MainFragment extends Fragment {
     // A callback interface that all containing activities implement
     public interface IMovieSelectionCallBack {
         // Call this when movie is selected.
-        void onMovieSelected(Long idKey);
+        void onMovieSelected(Movie movie);
     }
     // Called after fragment is attached to activity
     @Override

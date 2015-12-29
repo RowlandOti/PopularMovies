@@ -31,11 +31,12 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.rowland.movies.BuildConfig;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Table(name = "movies")
-public class Movie extends Model {
+public class Movie extends Model implements Serializable{
 
     // Gson annotations
     @SerializedName("release_date")

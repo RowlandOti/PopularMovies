@@ -32,6 +32,7 @@ import android.view.MenuItem;
 
 import com.rowland.movies.BuildConfig;
 import com.rowland.movies.R;
+import com.rowland.movies.rest.models.Movie;
 import com.rowland.movies.ui.fragments.DetailFragment;
 import com.rowland.movies.ui.fragments.MainFragment;
 
@@ -131,14 +132,14 @@ public class MainActivity extends BaseToolBarActivity implements MainFragment.IM
     }
 
     @Override
-    public void onMovieSelected(Long idKey) {
+    public void onMovieSelected(Movie movie) {
         // Check for two-pane
         if (mIsTwoPane)
         {
             // Create a Bundle object
             Bundle args = new Bundle();
             // Set the arguments
-            args.putLong(DetailFragment.MOVIE_ID_KEY, idKey);
+            args.putSerializable(DetailFragment.MOVIE_ID_KEY, movie);
             // Show the DetailFragment
             showDetailFragment(args);
         }
@@ -147,14 +148,9 @@ public class MainActivity extends BaseToolBarActivity implements MainFragment.IM
             // Create an Intent object
             Intent intent = new Intent(this, DetailActivity.class);
             // Set extras - pass MOVIE_ID_KEY
-            intent.putExtra(DetailFragment.MOVIE_ID_KEY, idKey);
+            intent.putExtra(DetailFragment.MOVIE_ID_KEY, movie);
             // Start the DetailActivity
             startActivity(intent);
-        }
-
-        // Check wether we are in debug mode
-        if (BuildConfig.IS_DEBUG_MODE) {
-            Log.d(LOG_TAG, "MOVIE SELECTED KEY: " + idKey);
         }
     }
 }
