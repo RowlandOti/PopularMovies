@@ -36,6 +36,8 @@ import android.widget.TextView;
 
 import com.rowland.movies.BuildConfig;
 import com.rowland.movies.R;
+import com.rowland.movies.adapters.ReviewAdapter;
+import com.rowland.movies.adapters.TrailerAdapter;
 import com.rowland.movies.data.loaders.ReviewLoader;
 import com.rowland.movies.data.loaders.TrailerLoader;
 import com.rowland.movies.rest.models.Movie;
@@ -67,9 +69,13 @@ public class DetailFragment extends Fragment {
     // Trailers LoaderCallBack
     private LoaderManager.LoaderCallbacks mTrailerLoaderCallBack;
     // A List of the reviews
-    protected List<Review> mReviewList;
+    private List<Review> mReviewList;
     // A List of the trailers
-    protected List<Trailer> mTrailerList;
+    private List<Trailer> mTrailerList;
+    // The Review adapter
+    private ReviewAdapter mReviewAdapter;
+    // The Trailer adapter
+    private TrailerAdapter mTrailerAdapter;
 
     // ButterKnife injected views
     @Bind(R.id.movie_rate_image_view)
@@ -155,10 +161,13 @@ public class DetailFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        // Initialize the adapters
+        mTrailerAdapter = new TrailerAdapter(getContext(), mTrailerList);
+        mReviewAdapter = new ReviewAdapter(getContext(), mReviewList);
         // Review LoaderCallBack implementation
-        mReviewLoaderCallBack = new LoaderManager.LoaderCallbacks<List<Trailer>>() {
+        mReviewLoaderCallBack = new LoaderManager.LoaderCallbacks<List<Review>>() {
             @Override
-            public Loader<List<Trailer>> onCreateLoader(int id, Bundle args) {
+            public Loader<List<Review>> onCreateLoader(int id, Bundle args) {
                 // Set ProgressBar refresh on
                 mReviewProgressBar.setVisibility(View.VISIBLE);
                 // Create new loader
@@ -168,21 +177,27 @@ public class DetailFragment extends Fragment {
             }
 
             @Override
-            public void onLoadFinished(Loader<List<Trailer>> loader, List<Trailer> data) {
+            public void onLoadFinished(Loader<List<Review>> loader, List<Review> reviewList) {
                 // Set ProgressBar refresh off
                 mReviewProgressBar.setVisibility(View.GONE);
+                // Set mReviewList
+                mReviewList = reviewList;
+                // Pass reviews list to our adapter
+                mReviewAdapter.addAll(mReviewList);
             }
 
             @Override
-            public void onLoaderReset(Loader<List<Trailer>> loader) {
+            public void onLoaderReset(Loader<List<Review>> loader) {
                 // Set ProgressBar refresh off
                 mReviewProgressBar.setVisibility(View.GONE);
+                // We reset the loader, nullify old data
+                mReviewAdapter.addAll(null);
             }
         };
         // Trailer LoaderCallBack implementation
-        mTrailerLoaderCallBack = new LoaderManager.LoaderCallbacks<List<Review>>() {
+        mTrailerLoaderCallBack = new LoaderManager.LoaderCallbacks<List<Trailer>>() {
             @Override
-            public Loader<List<Review>> onCreateLoader(int id, Bundle args) {
+            public Loader<List<Trailer>> onCreateLoader(int id, Bundle args) {
                 // Set ProgressBar refresh on
                 mTrailerProgressBar.setVisibility(View.VISIBLE);
                 // Create new loader
@@ -192,15 +207,21 @@ public class DetailFragment extends Fragment {
             }
 
             @Override
-            public void onLoadFinished(Loader<List<Review>> loader, List<Review> data) {
+            public void onLoadFinished(Loader<List<Trailer>> loader, List<Trailer> trailerList) {
                 // Set ProgressBar refresh off
                 mTrailerProgressBar.setVisibility(View.GONE);
+                // Set mTrailerList
+                mTrailerList = trailerList;
+                // Add trailers
+                mTrailerAdapter.addAll(mTrailerList);
             }
 
             @Override
-            public void onLoaderReset(Loader<List<Review>> loader) {
+            public void onLoaderReset(Loader<List<Trailer>> loader) {
                 // Set ProgressBar refresh off
                 mTrailerProgressBar.setVisibility(View.GONE);
+                // We reset the loader, nullify old data
+                mTrailerAdapter.addAll(null);
             }
         };
     }
