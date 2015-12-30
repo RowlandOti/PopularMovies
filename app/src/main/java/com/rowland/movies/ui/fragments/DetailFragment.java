@@ -97,10 +97,10 @@ public class DetailFragment extends Fragment {
     FloatingActionButton mFavoriteFab;
 
     @Bind(R.id.trailer_progress_bar)
-    ProgressBar mTrailersProgressBar;
+    ProgressBar mTrailerProgressBar;
 
     @Bind(R.id.review_progress_bar)
-    ProgressBar mReviewsProgressBar;
+    ProgressBar mReviewProgressBar;
 
     @Bind(R.id.trailer_container)
     LinearLayout mTrailerLinearLayout;
@@ -141,6 +141,7 @@ public class DetailFragment extends Fragment {
             startTrailerIntentService();
         }
     }
+
     // Called to create the fragment's view
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -151,6 +152,7 @@ public class DetailFragment extends Fragment {
         // Return the view for this fragment
         return rootView;
     }
+
     // Called after the fragment's view has been created
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -160,19 +162,21 @@ public class DetailFragment extends Fragment {
             @Override
             public Loader<List<Trailer>> onCreateLoader(int id, Bundle args) {
                 // Create new loader
-                ReviewLoader movieLoader =  new ReviewLoader(getActivity(),(Movie) mMovie);
+                ReviewLoader movieLoader = new ReviewLoader(getActivity(), (Movie) mMovie);
                 // Return new loader
                 return movieLoader;
             }
 
             @Override
             public void onLoadFinished(Loader<List<Trailer>> loader, List<Trailer> data) {
-
+                // Set ProgressBar refresh off
+                mReviewProgressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onLoaderReset(Loader<List<Trailer>> loader) {
-
+                // Set ProgressBar refresh off
+                mReviewProgressBar.setVisibility(View.GONE);
             }
         };
         // Trailer LoaderCallBack implementation
@@ -180,22 +184,25 @@ public class DetailFragment extends Fragment {
             @Override
             public Loader<List<Review>> onCreateLoader(int id, Bundle args) {
                 // Create new loader
-                TrailerLoader movieLoader =  new TrailerLoader(getActivity(), (Movie) mMovie);
+                TrailerLoader movieLoader = new TrailerLoader(getActivity(), (Movie) mMovie);
                 // Return new loader
                 return movieLoader;
             }
 
             @Override
             public void onLoadFinished(Loader<List<Review>> loader, List<Review> data) {
-
+                // Set ProgressBar refresh off
+                mTrailerProgressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onLoaderReset(Loader<List<Review>> loader) {
-
+                // Set ProgressBar refresh off
+                mTrailerProgressBar.setVisibility(View.GONE);
             }
         };
     }
+
     // Called when the containing activity is created
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -207,6 +214,7 @@ public class DetailFragment extends Fragment {
         getLoaderManager().initLoader(0, null, mReviewLoaderCallBack);
         getLoaderManager().initLoader(1, null, mTrailerLoaderCallBack);
     }
+
     // Called to destroy this fragment
     @Override
     public void onDestroy() {
@@ -223,10 +231,12 @@ public class DetailFragment extends Fragment {
 
     // Start the review service
     private void startReviewIntentService() {
+        // Set ProgressBar refresh on
+        mReviewProgressBar.setVisibility(View.VISIBLE);
         // Create an Intent object
         Intent i = new Intent(getActivity(), ReviewIntentService.class);
         // Set any extras to pass over
-        i.putExtra(ReviewIntentService.REQUEST_MOVIE_REMOTE_ID,((Movie) mMovie).getId_());
+        i.putExtra(ReviewIntentService.REQUEST_MOVIE_REMOTE_ID, ((Movie) mMovie).getId_());
         i.putExtra(ReviewIntentService.REQUEST_PAGE_NO_INT, 1);
         // Start the service
         getActivity().startService(i);
@@ -235,8 +245,11 @@ public class DetailFragment extends Fragment {
             Log.d(LOG_TAG, "REVIEW SERVICE STARTED");
         }
     }
+
     // Start the trailer service
     private void startTrailerIntentService() {
+        // Set ProgressBar refresh on
+        mTrailerProgressBar.setVisibility(View.VISIBLE);
         // Create an Intent object
         Intent i = new Intent(getActivity(), TrailerIntentService.class);
         // Set any extras to pass over

@@ -92,7 +92,7 @@
                         android:layout_weight="1"
                         android:padding="8dp"
                         android:text="Overview"
-                        android:textColor="@color/apptheme_primary_text_white" />
+                        android:textColor="@color/apptheme_primary_text_black" />
 
                     <TextView
                         android:id="@+id/movie_rate_text_view"
@@ -100,7 +100,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:padding="8dp"
-                        android:textColor="@color/apptheme_primary_text_black"
+                        android:textColor="@color/apptheme_secondary_text_grey"
                         tools:text="9/10" />
 
                     <ImageView
@@ -119,7 +119,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
-                    android:textColor="@color/apptheme_primary_text_black"
+                    android:textColor="@color/apptheme_secondary_text_grey"
                     tools:text="Test" />
 
             </LinearLayout>
@@ -146,7 +146,7 @@
                     android:layout_height="wrap_content"
                     android:padding="8dp"
                     android:text="Trailers"
-                    android:textColor="@color/apptheme_primary_text_white" />
+                    android:textColor="@color/apptheme_primary_text_black" />
 
                 <include layout="@layout/divider" />
 
@@ -207,7 +207,7 @@
                     android:layout_height="wrap_content"
                     android:padding="8dp"
                     android:text="Reviews"
-                    android:textColor="@color/apptheme_primary_text_white" />
+                    android:textColor="@color/apptheme_primary_text_black" />
 
                 <include layout="@layout/divider" />
 
