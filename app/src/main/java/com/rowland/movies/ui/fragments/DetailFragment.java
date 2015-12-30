@@ -201,7 +201,7 @@ public class DetailFragment extends Fragment {
                 mReviewAdapter.addAll(mReviewList);
                 // Check whether we are in debug mode
                 if (BuildConfig.IS_DEBUG_MODE) {
-                    Log.d(LOG_TAG, "Movie: " + reviewList.size());
+                    Log.d(LOG_TAG, "Review: " + reviewList.size());
                 }
             }
 
@@ -250,7 +250,7 @@ public class DetailFragment extends Fragment {
                 mTrailerAdapter.addAll(mTrailerList);
                 // Check whether we are in debug mode
                 if (BuildConfig.IS_DEBUG_MODE) {
-                    Log.d(LOG_TAG, "Movie: " + trailerList.size());
+                    Log.d(LOG_TAG, "Trailer: " + trailerList.size());
                 }
             }
 
