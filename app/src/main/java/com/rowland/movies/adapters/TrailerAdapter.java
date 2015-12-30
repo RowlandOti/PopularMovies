@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.rowland.movies.R;
 import com.rowland.movies.rest.enums.EBaseURlTypes;
@@ -46,46 +47,51 @@ public class TrailerAdapter extends BaseAdapter {
     private Context context;
     // The list of menu items
     private List<Trailer> mTrailerList;
+    // The parent layout
+    private LinearLayout mTrainerLinearLayout;
 
     // Default constructor
-    public TrailerAdapter(Context context, List<Trailer> trailerList) {
+    public TrailerAdapter(Context context, List<Trailer> trailerList, LinearLayout trailerLinearLayout) {
         this.context = context;
         this.mTrailerList = trailerList;
+        this.mTrainerLinearLayout = trailerLinearLayout;
     }
 
     // Get the view at the position
     public View getView(int position, View convertView, ViewGroup parent) {
         // Don't operate on method parameter create new variable
-        View view = convertView;
+        View trailerView = convertView;
         // Get menu at position
         Trailer trailer = mTrailerList.get(position);
         // Unique view tag
         String tag = trailer.getKey();
         // Check for null
-        if (view == null) {
+        if (trailerView == null) {
             // Acquire a context from parent
             Context context = parent.getContext();
             // Acquire the LayoutInflater
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             // Create new view
-            view = inflater.inflate(R.layout.inc_trailer_detail, parent, false);
+            trailerView = inflater.inflate(R.layout.inc_trailer_detail, mTrainerLinearLayout, false);
         } else {
             // Get tag from given view
-            String viewTag = (String) view.getTag();
+            String viewTag = (String) trailerView.getTag();
             // Check if tag matches our code
             if (viewTag != null && viewTag.equals(tag)) {
                 // Return View
-                return view;
+                return trailerView;
             }
         }
         //Otherwise the view is newly inflated
-        ViewHolder viewHolder = new ViewHolder(view);
+        ViewHolder viewHolder = new ViewHolder(trailerView);
         // Bind the data to the view holder
         viewHolder.bindTo(trailer);
+        // Add the view to parent
+        mTrainerLinearLayout.addView(trailerView);
         // Set tag to new view
-        view.setTag(tag);
+        trailerView.setTag(tag);
         // Return the view
-        return view;
+        return trailerView;
     }
 
 
@@ -144,6 +150,13 @@ public class TrailerAdapter extends BaseAdapter {
                     .networkPolicy(Utilities.NetworkUtility.isNetworkAvailable(mTrailerThumbnailImageView.getContext()) ? NetworkPolicy.NO_CACHE : NetworkPolicy.OFFLINE)
                     .placeholder(R.drawable.ic_movie_placeholder)
                     .into(mTrailerThumbnailImageView);
+            // Set a click listener
+            mTrailerThumbnailImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Use Intents to play trailer
+                }
+            });
         }
     }
 }

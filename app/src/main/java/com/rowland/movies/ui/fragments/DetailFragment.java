@@ -162,7 +162,7 @@ public class DetailFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // Initialize the adapters
-        mTrailerAdapter = new TrailerAdapter(getContext(), mTrailerList);
+        mTrailerAdapter = new TrailerAdapter(getContext(), mTrailerList, mTrailerLinearLayout);
         mReviewAdapter = new ReviewAdapter(getContext(), mReviewList);
         // Review LoaderCallBack implementation
         mReviewLoaderCallBack = new LoaderManager.LoaderCallbacks<List<Review>>() {
