@@ -45,10 +45,10 @@ import butterknife.ButterKnife;
 /**
  * Created by Oti Rowland on 12/18/2015.
  */
-public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class BaseMovieFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     // Logging tracker for this class
-    private final String LOG_TAG = BaseGridFragment.class.getSimpleName();
+    private final String LOG_TAG = BaseMovieFragment.class.getSimpleName();
     // An arrayList of the movies
     protected List<Movie> mMovieList;
     // The grid adapter
@@ -69,13 +69,13 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
     protected TextView mEmptyTextView;
 
     // Default constructor
-    public BaseGridFragment() {
+    public BaseMovieFragment() {
 
     }
 
-    protected static BaseGridFragment newInstance(BaseGridFragment fragment, Bundle args) {
+    protected static BaseMovieFragment newInstance(BaseMovieFragment fragment, Bundle args) {
         // Create the new fragment instance
-        BaseGridFragment fragmentInstance = fragment;
+        BaseMovieFragment fragmentInstance = fragment;
         // Set arguments if it is not null
         if (args != null) {
             fragmentInstance.setArguments(args);

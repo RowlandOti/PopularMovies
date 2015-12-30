@@ -29,7 +29,7 @@ import com.rowland.movies.R;
 import com.rowland.movies.data.loaders.MovieLoader;
 import com.rowland.movies.rest.enums.ESortOrder;
 import com.rowland.movies.rest.models.Movie;
-import com.rowland.movies.ui.fragments.subfragment.BaseGridFragment;
+import com.rowland.movies.ui.fragments.subfragment.BaseMovieFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +39,7 @@ import butterknife.ButterKnife;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class SearchFragment extends BaseGridFragment implements LoaderManager.LoaderCallbacks<List<Movie>>{
+public class SearchFragment extends BaseMovieFragment implements LoaderManager.LoaderCallbacks<List<Movie>>{
 
     // Logging tracker for this class
     private final String LOG_TAG = SearchFragment.class.getSimpleName();

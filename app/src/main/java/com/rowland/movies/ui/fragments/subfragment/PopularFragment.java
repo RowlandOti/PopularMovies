@@ -37,7 +37,7 @@ import butterknife.ButterKnife;
 /**
  * Display Popular Movie
  */
-public class PopularFragment extends BaseGridFragment implements LoaderManager.LoaderCallbacks<List<Movie>> {
+public class PopularFragment extends BaseMovieFragment implements LoaderManager.LoaderCallbacks<List<Movie>> {
 
     // Logging tracker for this class
     private final String LOG_TAG = PopularFragment.class.getSimpleName();

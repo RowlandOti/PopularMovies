@@ -37,7 +37,7 @@ import butterknife.ButterKnife;
 /**
  * Display Highest Rated Movie
  */
-public class HighestRatedFragment extends BaseGridFragment implements LoaderManager.LoaderCallbacks<List<Movie>> {
+public class HighestRatedFragment extends BaseMovieFragment implements LoaderManager.LoaderCallbacks<List<Movie>> {
 
     // Logging tracker for this class
     private final String LOG_TAG = HighestRatedFragment.class.getSimpleName();
