@@ -34,7 +34,6 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -63,39 +62,48 @@ import butterknife.ButterKnife;
  */
 public class DetailFragment extends Fragment {
 
-    // The Movie ID Identifier Key
-    public static final String MOVIE_KEY = "movie_key";
     // Logging Identifier for class
     private final String LOG_TAG = DetailFragment.class.getSimpleName();
+    // The Movie ID Identifier Key
+    public static final String MOVIE_KEY = "movie_key";
+
     // ButterKnife injected views
     @Bind(R.id.movie_rate_image_view)
     ImageView mDetailRateImageView;
+
     @Bind(R.id.movie_rate_text_view)
     TextView mDetailRateTextView;
+
     @Bind(R.id.movie_title_text_view)
     TextView mDetailMovieTitle;
+
     @Bind(R.id.movie_release_year_text_view)
     TextView mDetailMovieReleaseDate;
+
     @Bind(R.id.movie_overview_text_view)
     TextView mDetailMovieOverview;
-    @Bind(R.id.trailer_empty_text_view)
-    TextView mDetailMovieEmptyTrailers;
-    @Bind(R.id.review_empty_text_view)
-    TextView mDetailMovieEmptyReviews;
+
     @Bind(R.id.favorite_fab)
     FloatingActionButton mFavoriteFab;
+
+    @Bind(R.id.trailer_empty_text_view)
+    TextView mDetailMovieEmptyTrailers;
+
+    @Bind(R.id.review_empty_text_view)
+    TextView mDetailMovieEmptyReviews;
+
     @Bind(R.id.trailer_progress_bar)
     ProgressBar mTrailerProgressBar;
+
     @Bind(R.id.review_progress_bar)
     ProgressBar mReviewProgressBar;
-    @Bind(R.id.trailer_container)
-    LinearLayout mTrailerLinearLayout;
+
     @Bind(R.id.trailer_recycle_view)
     RecyclerView mTrailerRecycleView;
-    @Bind(R.id.reviews_container)
-    LinearLayout mReviewLinearLayout;
+
     @Bind(R.id.review_recycle_view)
     RecyclerView mReviewRecycleView;
+
     // The Movie model
     private Serializable mMovie;
     // Reviews LoaderCallBack
