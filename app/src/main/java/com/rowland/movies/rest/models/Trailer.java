@@ -58,7 +58,7 @@ public class Trailer extends Model {
     @Expose
     //ActiveAndroid Annotations
     @Column(name = "id_", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
-    private Double id_;
+    private String id_;
     // Gson annotations
     @SerializedName("key")
     @Expose
@@ -122,14 +122,14 @@ public class Trailer extends Model {
     /**
      * @return The id_
      */
-    public Double getId_() {
+    public String getId_() {
         return id_;
     }
 
     /**
-     * @param id The id
+     * @param id_ The id_
      */
-    public void setId(Double id) {
+    public void setId(String id_) {
         this.id_ = id_;
     }
 
