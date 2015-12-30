@@ -17,7 +17,6 @@
 
 package com.rowland.movies.ui.fragments.subfragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -29,7 +28,6 @@ import com.rowland.movies.R;
 import com.rowland.movies.data.loaders.MovieLoader;
 import com.rowland.movies.rest.enums.ESortOrder;
 import com.rowland.movies.rest.models.Movie;
-import com.rowland.movies.rest.services.MovieIntentService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,7 +106,7 @@ public class HighestRatedFragment extends BaseGridFragment implements LoaderMana
         // Fill our movies list with data
         mMovieList = movieList;
         // Pass it on to our adapter
-        mGridAdapter.addAll(movieList);
+        mMovieAdapter.addAll(movieList);
         // Update the Empty View
         updateEmptyView();
     }
@@ -118,6 +116,6 @@ public class HighestRatedFragment extends BaseGridFragment implements LoaderMana
         // Set refreshing off, when resetting
         mSwRefreshLayout.setRefreshing(false);
         // We reset the loader, nullify old data
-        mGridAdapter.addAll(null);
+        mMovieAdapter.addAll(null);
     }
 }

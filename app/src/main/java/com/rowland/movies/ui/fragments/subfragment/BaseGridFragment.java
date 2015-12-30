@@ -30,7 +30,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.rowland.movies.R;
-import com.rowland.movies.adapters.GridAdapter;
+import com.rowland.movies.adapters.MovieAdapter;
 import com.rowland.movies.rest.enums.ESortOrder;
 import com.rowland.movies.rest.models.Movie;
 import com.rowland.movies.rest.services.MovieIntentService;
@@ -52,7 +52,7 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
     // An arrayList of the movies
     protected List<Movie> mMovieList;
     // The grid adapter
-    protected GridAdapter mGridAdapter;
+    protected MovieAdapter mMovieAdapter;
     // Sort Order for thid fragment
     protected ESortOrder mSortOrder;
     // Is it first launch of fragment?
@@ -63,8 +63,8 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
     // ButterKnife injected Views
     @Bind(R.id.sw_refresh_layout)
     protected SwipeRefreshLayout mSwRefreshLayout;
-    @Bind(R.id.grid_recycle_view)
-    protected RecyclerView mGridRecycleView;
+    @Bind(R.id.movie_recycle_view)
+    protected RecyclerView mMovieRecycleView;
     @Bind(R.id.empty_text_view)
     protected TextView mEmptyTextView;
 
@@ -100,14 +100,14 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
         // Create new instance of layout manager
         final StaggeredGridLayoutManager mStaggeredLayoutManger = new StaggeredGridLayoutManager(getNumberOfColumns(), StaggeredGridLayoutManager.VERTICAL);
         // Set the layout manger
-        mGridRecycleView.setLayoutManager(mStaggeredLayoutManger);
-        mGridRecycleView.setHasFixedSize(false);
+        mMovieRecycleView.setLayoutManager(mStaggeredLayoutManger);
+        mMovieRecycleView.setHasFixedSize(false);
         // Call is actually only necessary with custom ItemAnimators
-        mGridRecycleView.setItemAnimator(new DefaultItemAnimator());
+        mMovieRecycleView.setItemAnimator(new DefaultItemAnimator());
         // Create new adapter
-        mGridAdapter = new GridAdapter(mMovieList, getContext(), getActivity());
+        mMovieAdapter = new MovieAdapter(mMovieList, getContext(), getActivity());
         // Associate RecycleView with adapter
-        mGridRecycleView.setAdapter(mGridAdapter);
+        mMovieRecycleView.setAdapter(mMovieAdapter);
         // Set the refreshlayout's listener
         mSwRefreshLayout.setOnRefreshListener(this);
     }
@@ -174,13 +174,13 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
 
     // Update the empty view
     public void updateEmptyView() {
-        if (mGridAdapter.getItemCount() == 0) {
+        if (mMovieAdapter.getItemCount() == 0) {
             // Show Empty TextView
-            mGridRecycleView.setVisibility(View.GONE);
+            mMovieRecycleView.setVisibility(View.GONE);
             mEmptyTextView.setVisibility(View.VISIBLE);
         } else {
             // Show RecycleView filled with movies
-            mGridRecycleView.setVisibility(View.VISIBLE);
+            mMovieRecycleView.setVisibility(View.VISIBLE);
             mEmptyTextView.setVisibility(View.GONE);
         }
     }

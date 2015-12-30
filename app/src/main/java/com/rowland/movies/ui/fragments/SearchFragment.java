@@ -19,15 +19,11 @@ package com.rowland.movies.ui.fragments;
 
 import android.app.SearchManager;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.rowland.movies.R;
 import com.rowland.movies.data.loaders.MovieLoader;
@@ -38,7 +34,6 @@ import com.rowland.movies.ui.fragments.subfragment.BaseGridFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
@@ -129,7 +124,7 @@ public class SearchFragment extends BaseGridFragment implements LoaderManager.Lo
         // Fill our movies list with data
         mMovieList = movieList;
         // Pass it on to our adapter
-        mGridAdapter.addAll(movieList);
+        mMovieAdapter.addAll(movieList);
         // Update the Empty View
         updateEmptyView();
     }
@@ -139,6 +134,6 @@ public class SearchFragment extends BaseGridFragment implements LoaderManager.Lo
         // Set refreshing off, when resetting
         mSwRefreshLayout.setRefreshing(false);
         // We reset the loader, nullify old data
-        mGridAdapter.addAll(null);
+        mMovieAdapter.addAll(null);
     }
 }

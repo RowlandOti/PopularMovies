@@ -105,7 +105,7 @@ public class FavouriteFragment extends BaseGridFragment implements LoaderManager
         // Fill our movies list with data
         mMovieList = movieList;
         // Pass it on to our adapter
-        mGridAdapter.addAll(movieList);
+        mMovieAdapter.addAll(movieList);
         // Update the Empty View
         updateEmptyView();
     }
@@ -115,6 +115,6 @@ public class FavouriteFragment extends BaseGridFragment implements LoaderManager
         // Set refreshing off, when resetting
         mSwRefreshLayout.setRefreshing(false);
         // We reset the loader, nullify old data
-        mGridAdapter.addAll(null);
+        mMovieAdapter.addAll(null);
     }
 }

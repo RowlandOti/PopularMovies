@@ -20,7 +20,6 @@ package com.rowland.movies.adapters;
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.util.SortedList;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,7 +27,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.rowland.movies.BuildConfig;
@@ -51,10 +49,10 @@ import butterknife.ButterKnife;
 /**
  * Created by Oti Rowland on 12/18/2015.
  */
-public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHolder> {
+public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.CustomViewHolder> {
 
     // The class Log identifier
-    private static final String LOG_TAG = GridAdapter.class.getSimpleName();
+    private static final String LOG_TAG = MovieAdapter.class.getSimpleName();
     // A list of the movie items
     private SortedList<Movie> mMovieList;
     // A Calendar object to help in formatting time
@@ -64,7 +62,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
     // The container Activity
     private MainActivity mActivity;
 
-    public GridAdapter(List<Movie> movieList, Context context, FragmentActivity activity) {
+    public MovieAdapter(List<Movie> movieList, Context context, FragmentActivity activity) {
         // Acquire the context
         this.mContext = context;
         // Acquire a Calendar object
@@ -91,7 +89,6 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
         final Movie movie = mMovieList.get(position);
         // Bind the data to the view holder
         holder.bindTo(movie);
-        //ToDo: Implement selection - <a>http://stackoverflow.com/questions/27194044/how-to-properly-highlight-selected-item-on-recyclerview</a>
     }
 
     // What's the size of the movie List
