@@ -15,10 +15,11 @@
   ~
   -->
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/movie_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:fitsSystemWindows="true">
 
     <include
         android:id="@+id/detail"
@@ -29,4 +30,4 @@
         layout="@layout/inc_fav_floating_button" />
 
 
-</RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>
