@@ -163,6 +163,13 @@
                         android:paddingBottom="10dp"
                         android:paddingTop="10dp">
 
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/trailer_recycle_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:clipToPadding="false"
+                            android:visibility="visible" />
+
                         <ProgressBar
                             android:id="@+id/trailer_progress_bar"
                             style="?android:attr/progressBarStyleSmall"
