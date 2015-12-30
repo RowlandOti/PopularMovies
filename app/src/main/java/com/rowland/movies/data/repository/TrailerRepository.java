@@ -41,15 +41,21 @@ public class TrailerRepository {
 
     public List<Trailer> getAllWhere(Movie movie) {
         // Holds the where clause
-        String whereClause = "movie = ?";
-        // ToDo: Move this logic to the Movie model where it belongs
-        // Query ActiveAndroid for list of data
-        List<Trailer> queryResults = new Select()
-                .from(Trailer.class).where(whereClause, movie)
-                .orderBy("id ASC")
-                .limit(50).execute();
-        // This is how you execute a query
-        return queryResults;
+        String whereClause = "trailers.movie = ?";
+        if(movie != null) {
+            // ToDo: Move this logic to the Movie model where it belongs
+            // Query ActiveAndroid for list of data
+            List<Trailer> queryResults = new Select()
+                    .from(Trailer.class)
+                    //.innerJoin(Movie.class)
+                    //.on("trailers.movie = movies.id")
+                    //.where(whereClause, movie.getId())
+                    .orderBy("id ASC")
+                    .limit(50).execute();
+            // This is how you execute a query
+            return queryResults;
+        }
+        return  null;
     }
 
     // Save the movie list

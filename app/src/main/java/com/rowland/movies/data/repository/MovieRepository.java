@@ -57,7 +57,7 @@ public class MovieRepository {
                 whereClause = "isFavourite = ?";
                 break;
         }
-        if(whereClause != null) {
+        if(sortOrder != null) {
             // ToDo: Move this logic to the Movie model where it belongs
             // Query ActiveAndroid for list of data
             List<Movie> queryResults = new Select()

@@ -62,7 +62,12 @@ public class TrailerLoader extends BaseLoader {
         }
         // Movie repository in use
         TrailerRepository mTrailerRepository = new TrailerRepository();
-        // Return local list
-        return mTrailerRepository.getAllWhere(mMovie);
+        // Check for null
+        if(mMovie != null) {
+            // Return local list
+            return mTrailerRepository.getAllWhere(mMovie);
+        }
+        // null
+        return null;
     }
 }

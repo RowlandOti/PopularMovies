@@ -127,10 +127,10 @@ public class TrailerAdapter extends BaseAdapter {
                 mTrailerList = new ArrayList<>();
             }
             // Add each trailer to the initial list
-            for (Trailer trailer : trailerList) {
+            //for (Trailer trailer : trailerList) {
                 // Add movies
-                mTrailerList.add(trailer);
-            }
+                mTrailerList = trailerList;
+            //}
         }
         // Check whether we are in debug mode
         if (BuildConfig.IS_DEBUG_MODE) {

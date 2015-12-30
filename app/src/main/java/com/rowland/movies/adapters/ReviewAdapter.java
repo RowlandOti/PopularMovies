@@ -124,10 +124,10 @@ public class ReviewAdapter extends BaseAdapter {
                 mReviewList = new ArrayList<>();
             }
             // Add each movie to the initial list
-            for (Review review : reviewList) {
+            //for (Review review : reviewList) {
                 // Add movies
-                mReviewList.add(review);
-            }
+                mReviewList = reviewList;
+            //}
         }
         // Check whether we are in debug mode
         if (BuildConfig.IS_DEBUG_MODE) {

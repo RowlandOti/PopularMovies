@@ -41,15 +41,21 @@ public class ReviewRepository {
 
     public List<Review> getAllWhere(Movie movie) {
         // Holds the where clause
-        String whereClause = "movie = ?";
-        // ToDo: Move this logic to the Movie model where it belongs
-        // Query ActiveAndroid for list of data
-        List<Review> queryResults = new Select()
-                .from(Review.class).where(whereClause, movie)
-                .orderBy("id ASC")
-                .limit(50).execute();
-        // This is how you execute a query
-        return queryResults;
+        String whereClause = "reviews.movie = ?";
+        if(movie != null) {
+            // ToDo: Move this logic to the Movie model where it belongs
+            // Query ActiveAndroid for list of data
+            List<Review> queryResults = new Select()
+                    .from(Review.class)
+                    //.innerJoin(Movie.class)
+                    //.on("reviews.movie = movies.id")
+                    //.where(whereClause, movie.getId())
+                    .orderBy("id ASC")
+                    .limit(50).execute();
+            // This is how you execute a query
+            return queryResults;
+        }
+        return  null;
     }
 
     // Save the movie list
@@ -58,7 +64,6 @@ public class ReviewRepository {
         Movie movie = new Select()
                 .from(Movie.class)
                 .where("id_ = ?", reviewCollection.getId()).executeSingle();
-
         // Save the reviews
         for (Review review : reviewCollection.getResults()) {
             // Does a review exist

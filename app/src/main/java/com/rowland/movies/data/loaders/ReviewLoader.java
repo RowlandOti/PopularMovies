@@ -61,7 +61,12 @@ public class ReviewLoader extends BaseLoader {
         }
         // Movie repository in use
         ReviewRepository mReviewRepository = new ReviewRepository();
-        // Return local list
-        return mReviewRepository.getAllWhere(mMovie);
+        // Check for null
+        if(mMovie != null) {
+            // Return local list
+            return mReviewRepository.getAllWhere(mMovie);
+        }
+        // Null
+        return null;
     }
 }

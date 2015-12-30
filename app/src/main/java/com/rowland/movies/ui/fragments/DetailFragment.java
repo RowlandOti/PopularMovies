@@ -137,7 +137,8 @@ public class DetailFragment extends Fragment {
         // Return the fragment
         return fragmentInstance;
     }
-
+    // Called to do initial creation of fragment
+    // Initialize and set up the fragment's non-view hierarchy
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -149,10 +150,17 @@ public class DetailFragment extends Fragment {
         if (getArguments() != null) {
             // Acquire the selected movie identifier
             mMovie = getArguments().getSerializable(DetailFragment.MOVIE_KEY);
+            // Start services
+            startReviewIntentService();
+            startTrailerIntentService();
         }
+        // Initialize the review list
+        mReviewList = new ArrayList<>();
+        // Initialize the trailer list
+        mTrailerList = new ArrayList<>();
     }
 
-    // Called to create the fragment's view
+    // Called to instantiate the fragment's view hierarchy
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -163,13 +171,10 @@ public class DetailFragment extends Fragment {
         return rootView;
     }
 
-    // Called after the fragment's view has been created
+    // Called after onCreateView() is done i.e the fragment's view has been created
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // Initialize the adapters
-        mTrailerAdapter = new TrailerAdapter(getContext(), mTrailerList, mTrailerLinearLayout);
-        mReviewAdapter = new ReviewAdapter(getContext(), mReviewList, mReviewLinearLayout);
         // Review LoaderCallBack implementation
         mReviewLoaderCallBack = new LoaderManager.LoaderCallbacks<List<Review>>() {
             @Override
@@ -188,6 +193,8 @@ public class DetailFragment extends Fragment {
                 mReviewProgressBar.setVisibility(View.GONE);
                 // Set mReviewList
                 mReviewList = reviewList;
+                // Initialize the review adapter
+                mReviewAdapter = new ReviewAdapter(getContext(), mReviewList, mReviewLinearLayout);
                 // Pass reviews list to our adapter
                 mReviewAdapter.addAll(mReviewList);
                 // Check whether we are in debug mode
@@ -222,6 +229,8 @@ public class DetailFragment extends Fragment {
                 mTrailerProgressBar.setVisibility(View.GONE);
                 // Set mTrailerList
                 mTrailerList = trailerList;
+                // Initialize the trailer adapter
+                mTrailerAdapter = new TrailerAdapter(getContext(), mTrailerList, mTrailerLinearLayout);
                 // Add trailers
                 mTrailerAdapter.addAll(mTrailerList);
                 // Check whether we are in debug mode
@@ -242,16 +251,11 @@ public class DetailFragment extends Fragment {
         bindTo();;
     }
 
-    // Called when the containing activity is created
+    // Called when the containing activity onCreate() is done, and after onCreateView() of fragment
+    // Do final modification on the hierarchy e.g modify view elements and restore previous state
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        // Initialize the lists
-        mReviewList = new ArrayList<>();
-        mTrailerList = new ArrayList<>();
-        // Start services
-        startReviewIntentService();
-        startTrailerIntentService();
         // Initialize the Loader
         getLoaderManager().initLoader(0, null, mReviewLoaderCallBack);
         getLoaderManager().initLoader(1, null, mTrailerLoaderCallBack);
@@ -264,7 +268,7 @@ public class DetailFragment extends Fragment {
         ButterKnife.unbind(this);
     }
 
-    // Create menu item
+    // Called to create menu item
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
