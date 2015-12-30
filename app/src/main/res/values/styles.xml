@@ -75,7 +75,7 @@
         <item name="tabTextAppearance">@style/MyCustomTabTextAppearance</item>
         <item name="android:textAppearance">@style/MyCustomTabTextAppearance</item>
         <item name="tabSelectedTextAppearance">@style/MyCustomTabTextAppearance.Bold</item>
-        <item name="tabSelectedTextColor">@color/apptheme_primary_purple</item>
+        <item name="tabSelectedTextColor">@color/apptheme_primary_text_white</item>
         <item name="tabIsSelectedTextBold">true</item>
         <item name="tabGravity">fill</item>
         <item name="tabMode">fixed</item>
