@@ -48,13 +48,13 @@ public class TrailerAdapter extends BaseAdapter {
     // The list of menu items
     private List<Trailer> mTrailerList;
     // The parent layout
-    private LinearLayout mTrainerLinearLayout;
+    private LinearLayout mTrailerLinearLayout;
 
     // Default constructor
     public TrailerAdapter(Context context, List<Trailer> trailerList, LinearLayout trailerLinearLayout) {
         this.context = context;
         this.mTrailerList = trailerList;
-        this.mTrainerLinearLayout = trailerLinearLayout;
+        this.mTrailerLinearLayout = trailerLinearLayout;
     }
 
     // Get the view at the position
@@ -72,7 +72,7 @@ public class TrailerAdapter extends BaseAdapter {
             // Acquire the LayoutInflater
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             // Create new view
-            trailerView = inflater.inflate(R.layout.inc_trailer_detail, mTrainerLinearLayout, false);
+            trailerView = inflater.inflate(R.layout.inc_trailer_detail, mTrailerLinearLayout, false);
         } else {
             // Get tag from given view
             String viewTag = (String) trailerView.getTag();
@@ -87,7 +87,7 @@ public class TrailerAdapter extends BaseAdapter {
         // Bind the data to the view holder
         viewHolder.bindTo(trailer);
         // Add the view to parent
-        mTrainerLinearLayout.addView(trailerView);
+        mTrailerLinearLayout.addView(trailerView);
         // Set tag to new view
         trailerView.setTag(tag);
         // Return the view

@@ -169,7 +169,7 @@ public class DetailFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         // Initialize the adapters
         mTrailerAdapter = new TrailerAdapter(getContext(), mTrailerList, mTrailerLinearLayout);
-        mReviewAdapter = new ReviewAdapter(getContext(), mReviewList);
+        mReviewAdapter = new ReviewAdapter(getContext(), mReviewList, mReviewLinearLayout);
         // Review LoaderCallBack implementation
         mReviewLoaderCallBack = new LoaderManager.LoaderCallbacks<List<Review>>() {
             @Override
@@ -271,7 +271,6 @@ public class DetailFragment extends Fragment {
         mDetailRateTextView.setText(String.format("%d/10", Math.round(((Movie) mMovie).getVoteAverage())));
         // Set the overview
         mDetailMovieOverview.setText(((Movie) mMovie).getOverview());
-
         // Set the release date
         if (((Movie) mMovie).getReleaseDate() != null) {
             Calendar mCalendar = Calendar.getInstance();

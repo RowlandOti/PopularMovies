@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.rowland.movies.R;
@@ -43,46 +44,51 @@ public class ReviewAdapter extends BaseAdapter {
     private Context context;
     // The list of menu items
     private List<Review> mReviewList;
+    // The parent layout
+    private LinearLayout mReviewLinearLayout;
 
     // Default constructor
-    public ReviewAdapter(Context context, List<Review> reviewList) {
+    public ReviewAdapter(Context context, List<Review> reviewList, LinearLayout reviewLinearLayout) {
         this.context = context;
         this.mReviewList = reviewList;
+        this.mReviewLinearLayout = reviewLinearLayout;
     }
 
     // Get the view at the position
     public View getView(int position, View convertView, ViewGroup parent) {
         // Don't operate on method parameter create new variable
-        View view = convertView;
+        View reviewView = convertView;
         // Get menu at position
         Review review = mReviewList.get(position);
         // Unique view tag
         String tag = review.getAuthor();
         // Check for null
-        if (view == null) {
+        if (reviewView == null) {
             // Acquire a context from parent
             Context context = parent.getContext();
             // Acquire the LayoutInflater
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             // Create new view
-            view = inflater.inflate(R.layout.inc_review_detail, parent, false);
+            reviewView = inflater.inflate(R.layout.inc_review_detail, mReviewLinearLayout, false);
         } else {
             // Get tag from given view
-            String viewTag = (String) view.getTag();
+            String viewTag = (String) reviewView.getTag();
             // Check if tag matches our code
             if (viewTag != null && viewTag.equals(tag)) {
                 // Return View
-                return view;
+                return reviewView;
             }
         }
         //Otherwise the view is newly inflated
-        ViewHolder viewHolder = new ViewHolder(view);
+        ViewHolder viewHolder = new ViewHolder(reviewView);
         // Bind the data to the view holder
         viewHolder.bindTo(review);
+        // Add the view to parent
+        mReviewLinearLayout.addView(reviewView);
         // Set tag to new view
-        view.setTag(tag);
+        reviewView.setTag(tag);
         // Return the view
-        return view;
+        return reviewView;
     }
 
 
