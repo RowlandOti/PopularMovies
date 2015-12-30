@@ -44,7 +44,7 @@ public class MovieRepository {
 
     public List<Movie> getAllWhere(ESortOrder sortOrder) {
         // Holds the where clause
-        String whereClause = "";
+        String whereClause = null;
         // Find out which where clause to use
         switch (sortOrder) {
             case POPULAR_DESCENDING:
@@ -56,19 +56,18 @@ public class MovieRepository {
             case FAVOURITE_DESCENDING:
                 whereClause = "isFavourite = ?";
                 break;
-            default:
-                whereClause = "";
-                break;
         }
-
-        // ToDo: Move this logic to the Movie model where it belongs
-        // Query ActiveAndroid for list of data
-        List<Movie> queryResults = new Select()
-                .from(Movie.class).where(whereClause, true)
-                .orderBy("id ASC")
-                .limit(100).execute();
-        // This is how you execute a query
-        return queryResults;
+        if(whereClause != null) {
+            // ToDo: Move this logic to the Movie model where it belongs
+            // Query ActiveAndroid for list of data
+            List<Movie> queryResults = new Select()
+                    .from(Movie.class).where(whereClause, true)
+                    .orderBy("id ASC")
+                    .limit(100).execute();
+            // This is how you execute a query
+            return queryResults;
+        }
+        return  null;
     }
 
     // Save the movie list
