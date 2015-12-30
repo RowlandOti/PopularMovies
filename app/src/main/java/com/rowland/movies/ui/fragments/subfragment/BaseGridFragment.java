@@ -30,7 +30,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.rowland.movies.R;
-import com.rowland.movies.adapters.MovieAdapter;
+import com.rowland.movies.ui.adapters.MovieAdapter;
 import com.rowland.movies.rest.enums.ESortOrder;
 import com.rowland.movies.rest.models.Movie;
 import com.rowland.movies.rest.services.MovieIntentService;

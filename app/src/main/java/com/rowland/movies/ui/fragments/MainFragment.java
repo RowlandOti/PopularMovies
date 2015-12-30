@@ -32,8 +32,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 
 import com.rowland.movies.R;
-import com.rowland.movies.adapters.ListPopupWindowAdapter;
-import com.rowland.movies.adapters.SmartNestedViewPagerAdapter;
+import com.rowland.movies.ui.adapters.ListPopupWindowAdapter;
+import com.rowland.movies.ui.adapters.SmartNestedViewPagerAdapter;
 import com.rowland.movies.objects.ListPopupMenu;
 import com.rowland.movies.rest.models.Movie;
 
