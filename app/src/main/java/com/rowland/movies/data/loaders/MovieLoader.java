@@ -64,7 +64,11 @@ public class MovieLoader extends BaseLoader {
         }
         // Movie repository in use
         MovieRepository mMovieRepository = new MovieRepository();
-        // Return local list
-        return mMovieRepository.getAllWhere(mSortOrder);
+        if(mSortOrder != null) {
+            // Return local list
+            return mMovieRepository.getAllWhere(mSortOrder);
+        }
+
+        return null;
     }
 }
