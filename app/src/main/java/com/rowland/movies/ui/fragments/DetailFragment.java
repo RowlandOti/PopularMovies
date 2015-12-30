@@ -40,14 +40,20 @@ import com.rowland.movies.adapters.ReviewAdapter;
 import com.rowland.movies.adapters.TrailerAdapter;
 import com.rowland.movies.data.loaders.ReviewLoader;
 import com.rowland.movies.data.loaders.TrailerLoader;
+import com.rowland.movies.rest.enums.EBaseImageSize;
+import com.rowland.movies.rest.enums.EBaseURlTypes;
 import com.rowland.movies.rest.models.Movie;
 import com.rowland.movies.rest.models.Review;
 import com.rowland.movies.rest.models.Trailer;
 import com.rowland.movies.rest.services.ReviewIntentService;
 import com.rowland.movies.rest.services.TrailerIntentService;
+import com.rowland.movies.utilities.Utilities;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import butterknife.Bind;
@@ -88,10 +94,10 @@ public class DetailFragment extends Fragment {
     TextView mDetailMovieTitle;
 
     @Bind(R.id.movie_release_year_text_view)
-    TextView mDetailMovieYear;
+    TextView mDetailReleaseDateYear;
 
     @Bind(R.id.movie_overview_text_view)
-    TextView mDetailMovieSynopsis;
+    TextView mDetailMovieOverview;
 
     @Bind(R.id.trailer_empty_text_view)
     TextView mDetailMovieEmptyTrailers;
@@ -224,6 +230,8 @@ public class DetailFragment extends Fragment {
                 mTrailerAdapter.addAll(null);
             }
         };
+        // Bind data to views
+        bindTo();;
     }
 
     // Called when the containing activity is created
@@ -253,6 +261,23 @@ public class DetailFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_detail, menu);
+    }
+
+    // Bind data to the views
+    private void bindTo() {
+        // Set the title
+        mDetailMovieTitle.setText(((Movie) mMovie).getOriginalTitle());
+        // Set the rating
+        mDetailRateTextView.setText(String.format("%d/10", Math.round(((Movie) mMovie).getVoteAverage())));
+        // Set the overview
+        mDetailMovieOverview.setText(((Movie) mMovie).getOverview());
+
+        // Set the release date
+        if (((Movie) mMovie).getReleaseDate() != null) {
+            Calendar mCalendar = Calendar.getInstance();
+            mCalendar.setTime(((Movie) mMovie).getReleaseDate());
+            mDetailReleaseDateYear.setText(String.valueOf(mCalendar.get(Calendar.YEAR)));
+        }
     }
 
     // Start the review service
