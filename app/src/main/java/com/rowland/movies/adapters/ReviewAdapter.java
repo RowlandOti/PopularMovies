@@ -18,6 +18,7 @@
 package com.rowland.movies.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.rowland.movies.BuildConfig;
 import com.rowland.movies.R;
 import com.rowland.movies.rest.models.Review;
 
@@ -40,6 +42,8 @@ import butterknife.ButterKnife;
  */
 public class ReviewAdapter extends BaseAdapter {
 
+    // Logging Identifier for class
+    private final String LOG_TAG = ReviewAdapter.class.getSimpleName();
     // A Context instance
     private Context context;
     // The list of menu items
@@ -124,9 +128,11 @@ public class ReviewAdapter extends BaseAdapter {
                 // Add movies
                 mReviewList.add(review);
             }
-
         }
-        // Notify others of the data changes
+        // Check whether we are in debug mode
+        if (BuildConfig.IS_DEBUG_MODE) {
+            Log.d(LOG_TAG, "Movie: " +mReviewList.size() );
+        }
     }
 
     static class ViewHolder {

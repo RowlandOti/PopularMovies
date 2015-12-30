@@ -190,6 +190,10 @@ public class DetailFragment extends Fragment {
                 mReviewList = reviewList;
                 // Pass reviews list to our adapter
                 mReviewAdapter.addAll(mReviewList);
+                // Check whether we are in debug mode
+                if (BuildConfig.IS_DEBUG_MODE) {
+                    Log.d(LOG_TAG, "Movie: " +reviewList.size() );
+                }
             }
 
             @Override
@@ -220,6 +224,10 @@ public class DetailFragment extends Fragment {
                 mTrailerList = trailerList;
                 // Add trailers
                 mTrailerAdapter.addAll(mTrailerList);
+                // Check whether we are in debug mode
+                if (BuildConfig.IS_DEBUG_MODE) {
+                    Log.d(LOG_TAG, "Movie: " +trailerList.size() );
+                }
             }
 
             @Override
