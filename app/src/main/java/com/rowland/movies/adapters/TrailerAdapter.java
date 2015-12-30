@@ -131,7 +131,7 @@ public class TrailerAdapter extends BaseAdapter {
         }
         // Check whether we are in debug mode
         if (BuildConfig.IS_DEBUG_MODE) {
-            Log.d(LOG_TAG, "Movie: " + mTrailerList.size());
+            Log.d(LOG_TAG, "Trailer: " + mTrailerList.size());
         }
     }
 
