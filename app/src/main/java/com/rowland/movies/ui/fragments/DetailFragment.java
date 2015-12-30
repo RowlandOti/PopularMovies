@@ -75,7 +75,7 @@ public class DetailFragment extends Fragment {
     @Bind(R.id.movie_title_text_view)
     TextView mDetailMovieTitle;
     @Bind(R.id.movie_release_year_text_view)
-    TextView mDetailReleaseDateYear;
+    TextView mDetailMovieReleaseDate;
     @Bind(R.id.movie_overview_text_view)
     TextView mDetailMovieOverview;
     @Bind(R.id.trailer_empty_text_view)
@@ -199,6 +199,8 @@ public class DetailFragment extends Fragment {
                 mReviewList = reviewList;
                 // Pass reviews list to our adapter
                 mReviewAdapter.addAll(mReviewList);
+                // Update the Empty View
+                updateReviewsEmptyView();
                 // Check whether we are in debug mode
                 if (BuildConfig.IS_DEBUG_MODE) {
                     Log.d(LOG_TAG, "Review: " + reviewList.size());
@@ -247,6 +249,8 @@ public class DetailFragment extends Fragment {
                 mTrailerList = trailerList;
                 // Add trailers
                 mTrailerAdapter.addAll(mTrailerList);
+                // Update the Empty View
+                updateTrailersEmptyView();
                 // Check whether we are in debug mode
                 if (BuildConfig.IS_DEBUG_MODE) {
                     Log.d(LOG_TAG, "Trailer: " + trailerList.size());
@@ -303,7 +307,7 @@ public class DetailFragment extends Fragment {
         if (((Movie) mMovie).getReleaseDate() != null) {
             Calendar mCalendar = Calendar.getInstance();
             mCalendar.setTime(((Movie) mMovie).getReleaseDate());
-            mDetailReleaseDateYear.setText(String.valueOf(mCalendar.get(Calendar.YEAR)));
+            mDetailMovieReleaseDate.setText(String.valueOf(mCalendar.get(Calendar.YEAR)));
         }
     }
 
@@ -334,6 +338,34 @@ public class DetailFragment extends Fragment {
         // Check whether we are in debug mode
         if (BuildConfig.IS_DEBUG_MODE) {
             Log.d(LOG_TAG, "TRAILER SERVICE STARTED");
+        }
+    }
+
+    // Update the Review's empty view
+    private void updateReviewsEmptyView() {
+        // Update Reviews
+        if (mReviewAdapter.getItemCount() == 0) {
+            // Show Empty TextView
+            mReviewRecycleView.setVisibility(View.GONE);
+            mDetailMovieEmptyTrailers.setVisibility(View.VISIBLE);
+        } else {
+            // Show RecycleView filled with movies
+            mReviewRecycleView.setVisibility(View.VISIBLE);
+            mDetailMovieEmptyReviews.setVisibility(View.GONE);
+        }
+    }
+
+    // Update the Trailer's empty view
+    private void updateTrailersEmptyView() {
+        // Update Trailers
+        if (mTrailerAdapter.getItemCount() == 0) {
+            // Show Empty TextView
+            mTrailerRecycleView.setVisibility(View.GONE);
+            mDetailMovieEmptyTrailers.setVisibility(View.VISIBLE);
+        } else {
+            // Show RecycleView filled with movies
+            mTrailerRecycleView.setVisibility(View.VISIBLE);
+            mDetailMovieEmptyTrailers.setVisibility(View.GONE);
         }
     }
 }
