@@ -61,23 +61,26 @@ public class ReviewRepository {
 
         // Save the reviews
         for (Review review : reviewCollection.getResults()) {
-            // Set any necessary details
-            review.setMovie(movie);
-            // Check if is duplicate
-            boolean iSExistingReview = new Select()
-                    .from(Review.class)
-                    .where("id_ = ?", review.getId_()).exists();
-            // Check whether we are in debug mode
-            if (BuildConfig.IS_DEBUG_MODE) {
-                Log.d(LOG_TAG, "Movie: " + iSExistingReview);
-            }
-            // Save only new movies to the database
-            if (!iSExistingReview) {
-                // Save movie
-                review.save();
-                // Check wether we are in debug mode
+            // Does a review exist
+            if (review.getId_() != null) {
+                // Set any necessary details
+                review.setMovie(movie);
+                // Check if is duplicate
+                boolean iSExistingReview = new Select()
+                        .from(Review.class)
+                        .where("id_ = ?", review.getId_()).exists();
+                // Check whether we are in debug mode
                 if (BuildConfig.IS_DEBUG_MODE) {
-                    Log.d(LOG_TAG, "Movie: " + review.getAuthor());
+                    Log.d(LOG_TAG, "Movie: " + iSExistingReview);
+                }
+                // Save only new movies to the database
+                if (!iSExistingReview) {
+                    // Save movie
+                    review.save();
+                    // Check wether we are in debug mode
+                    if (BuildConfig.IS_DEBUG_MODE) {
+                        Log.d(LOG_TAG, "Movie: " + review.getAuthor());
+                    }
                 }
             }
         }

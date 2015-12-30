@@ -23,4 +23,5 @@
     <color name="apptheme_primary_text_white">#ffffff</color>
     <color name="apptheme_secondary_text_whitegrey">#d3d6db</color>
     <color name="apptheme_accent_teal">#00796b</color>
+    <color name="apptheme_accent_maroon">#d32f2f</color>
 </resources>

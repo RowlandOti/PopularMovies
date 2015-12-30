@@ -60,23 +60,26 @@ public class TrailerRepository {
                 .where("id_ = ?", trailerCollection.getId()).executeSingle();
 
         for (Trailer trailer : trailerCollection.getResults()) {
-            // Set any necessary details
-            trailer.setMovie(movie);
-            // Check if is duplicate
-            boolean iSExistingTrailer = new Select()
-                    .from(Trailer.class)
-                    .where("id_ = ?", trailer.getId_()).exists();
-            // Check whether we are in debug mode
-            if (BuildConfig.IS_DEBUG_MODE) {
-                Log.d(LOG_TAG, "Movie: " + iSExistingTrailer);
-            }
-            // Save only new movies to the database
-            if (!iSExistingTrailer) {
-                // Save movie
-                trailer.save();
-                // Check wether we are in debug mode
+            // Does a trailer exist
+            if (trailer.getId_() != null) {
+                // Set any necessary details
+                trailer.setMovie(movie);
+                // Check if is duplicate
+                boolean iSExistingTrailer = new Select()
+                        .from(Trailer.class)
+                        .where("id_ = ?", trailer.getId_()).exists();
+                // Check whether we are in debug mode
                 if (BuildConfig.IS_DEBUG_MODE) {
-                    Log.d(LOG_TAG, "Movie: " + trailer.getName());
+                    Log.d(LOG_TAG, "Movie: " + iSExistingTrailer);
+                }
+                // Save only new movies to the database
+                if (!iSExistingTrailer) {
+                    // Save movie
+                    trailer.save();
+                    // Check wether we are in debug mode
+                    if (BuildConfig.IS_DEBUG_MODE) {
+                        Log.d(LOG_TAG, "Movie: " + trailer.getName());
+                    }
                 }
             }
         }

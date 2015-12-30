@@ -34,7 +34,7 @@
             android:id="@+id/movie_title_container"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="@color/apptheme_accent_orange">
+            android:background="@color/apptheme_accent_maroon">
 
             <TextView
                 android:id="@+id/movie_title_text_view"
