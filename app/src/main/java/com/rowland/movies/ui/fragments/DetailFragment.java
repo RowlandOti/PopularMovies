@@ -23,6 +23,10 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -36,20 +40,15 @@ import android.widget.TextView;
 
 import com.rowland.movies.BuildConfig;
 import com.rowland.movies.R;
-import com.rowland.movies.adapters.ReviewAdapter;
-import com.rowland.movies.adapters.TrailerAdapter;
 import com.rowland.movies.data.loaders.ReviewLoader;
 import com.rowland.movies.data.loaders.TrailerLoader;
-import com.rowland.movies.rest.enums.EBaseImageSize;
-import com.rowland.movies.rest.enums.EBaseURlTypes;
 import com.rowland.movies.rest.models.Movie;
 import com.rowland.movies.rest.models.Review;
 import com.rowland.movies.rest.models.Trailer;
 import com.rowland.movies.rest.services.ReviewIntentService;
 import com.rowland.movies.rest.services.TrailerIntentService;
-import com.rowland.movies.utilities.Utilities;
-import com.squareup.picasso.NetworkPolicy;
-import com.squareup.picasso.Picasso;
+import com.rowland.movies.ui.adapters.ReviewAdapter;
+import com.rowland.movies.ui.adapters.TrailerAdapter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -64,10 +63,39 @@ import butterknife.ButterKnife;
  */
 public class DetailFragment extends Fragment {
 
-    // Logging Identifier for class
-    private final String LOG_TAG = DetailFragment.class.getSimpleName();
     // The Movie ID Identifier Key
     public static final String MOVIE_KEY = "movie_key";
+    // Logging Identifier for class
+    private final String LOG_TAG = DetailFragment.class.getSimpleName();
+    // ButterKnife injected views
+    @Bind(R.id.movie_rate_image_view)
+    ImageView mDetailRateImageView;
+    @Bind(R.id.movie_rate_text_view)
+    TextView mDetailRateTextView;
+    @Bind(R.id.movie_title_text_view)
+    TextView mDetailMovieTitle;
+    @Bind(R.id.movie_release_year_text_view)
+    TextView mDetailReleaseDateYear;
+    @Bind(R.id.movie_overview_text_view)
+    TextView mDetailMovieOverview;
+    @Bind(R.id.trailer_empty_text_view)
+    TextView mDetailMovieEmptyTrailers;
+    @Bind(R.id.review_empty_text_view)
+    TextView mDetailMovieEmptyReviews;
+    @Bind(R.id.favorite_fab)
+    FloatingActionButton mFavoriteFab;
+    @Bind(R.id.trailer_progress_bar)
+    ProgressBar mTrailerProgressBar;
+    @Bind(R.id.review_progress_bar)
+    ProgressBar mReviewProgressBar;
+    @Bind(R.id.trailer_container)
+    LinearLayout mTrailerLinearLayout;
+    @Bind(R.id.trailer_recycle_view)
+    RecyclerView mTrailerRecycleView;
+    @Bind(R.id.reviews_container)
+    LinearLayout mReviewLinearLayout;
+    @Bind(R.id.review_recycle_view)
+    RecyclerView mReviewRecycleView;
     // The Movie model
     private Serializable mMovie;
     // Reviews LoaderCallBack
@@ -82,43 +110,6 @@ public class DetailFragment extends Fragment {
     private ReviewAdapter mReviewAdapter;
     // The Trailer adapter
     private TrailerAdapter mTrailerAdapter;
-
-    // ButterKnife injected views
-    @Bind(R.id.movie_rate_image_view)
-    ImageView mDetailRateImageView;
-
-    @Bind(R.id.movie_rate_text_view)
-    TextView mDetailRateTextView;
-
-    @Bind(R.id.movie_title_text_view)
-    TextView mDetailMovieTitle;
-
-    @Bind(R.id.movie_release_year_text_view)
-    TextView mDetailReleaseDateYear;
-
-    @Bind(R.id.movie_overview_text_view)
-    TextView mDetailMovieOverview;
-
-    @Bind(R.id.trailer_empty_text_view)
-    TextView mDetailMovieEmptyTrailers;
-
-    @Bind(R.id.review_empty_text_view)
-    TextView mDetailMovieEmptyReviews;
-
-    @Bind(R.id.favorite_fab)
-    FloatingActionButton mFavoriteFab;
-
-    @Bind(R.id.trailer_progress_bar)
-    ProgressBar mTrailerProgressBar;
-
-    @Bind(R.id.review_progress_bar)
-    ProgressBar mReviewProgressBar;
-
-    @Bind(R.id.trailer_container)
-    LinearLayout mTrailerLinearLayout;
-
-    @Bind(R.id.reviews_container)
-    LinearLayout mReviewLinearLayout;
 
     // Default constructor
     public DetailFragment() {
@@ -137,6 +128,7 @@ public class DetailFragment extends Fragment {
         // Return the fragment
         return fragmentInstance;
     }
+
     // Called to do initial creation of fragment
     // Initialize and set up the fragment's non-view hierarchy
     @Override
@@ -175,6 +167,18 @@ public class DetailFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        // Initialize layout manager
+        final LinearLayoutManager mLinearLayoutManger = new LinearLayoutManager(getContext());
+        // Set the RecycleView's layout manager
+        mReviewRecycleView.setLayoutManager(mLinearLayoutManger);
+        // Set the RecycleView's size fixing
+        mReviewRecycleView.setHasFixedSize(false);
+        // Set the RecycleView's ItemAnimators
+        mReviewRecycleView.setItemAnimator(new DefaultItemAnimator());
+        // Initialize new Review adapter
+        mReviewAdapter = new ReviewAdapter(mReviewList);
+        // Set RecycleView's adapter
+        mReviewRecycleView.setAdapter(mReviewAdapter);
         // Review LoaderCallBack implementation
         mReviewLoaderCallBack = new LoaderManager.LoaderCallbacks<List<Review>>() {
             @Override
@@ -193,13 +197,11 @@ public class DetailFragment extends Fragment {
                 mReviewProgressBar.setVisibility(View.GONE);
                 // Set mReviewList
                 mReviewList = reviewList;
-                // Initialize the review adapter
-                mReviewAdapter = new ReviewAdapter(getContext(), mReviewList, mReviewLinearLayout);
                 // Pass reviews list to our adapter
                 mReviewAdapter.addAll(mReviewList);
                 // Check whether we are in debug mode
                 if (BuildConfig.IS_DEBUG_MODE) {
-                    Log.d(LOG_TAG, "Movie: " +reviewList.size() );
+                    Log.d(LOG_TAG, "Movie: " + reviewList.size());
                 }
             }
 
@@ -211,6 +213,19 @@ public class DetailFragment extends Fragment {
                 mReviewAdapter.addAll(null);
             }
         };
+
+        // Initialize layout manager
+        final StaggeredGridLayoutManager mStaggeredLayoutManger = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL);
+        // Set the RecycleView's layout manager
+        mTrailerRecycleView.setLayoutManager(mStaggeredLayoutManger);
+        // Set the RecycleView's size fixing
+        mTrailerRecycleView.setHasFixedSize(false);
+        // Set the RecycleView's ItemAnimators
+        mTrailerRecycleView.setItemAnimator(new DefaultItemAnimator());
+        // Initialize new Trailer adapter
+        mTrailerAdapter = new TrailerAdapter(mTrailerList);
+        // Set RecycleView's adapter
+        mTrailerRecycleView.setAdapter(mTrailerAdapter);
         // Trailer LoaderCallBack implementation
         mTrailerLoaderCallBack = new LoaderManager.LoaderCallbacks<List<Trailer>>() {
             @Override
@@ -230,12 +245,12 @@ public class DetailFragment extends Fragment {
                 // Set mTrailerList
                 mTrailerList = trailerList;
                 // Initialize the trailer adapter
-                mTrailerAdapter = new TrailerAdapter(getContext(), mTrailerList, mTrailerLinearLayout);
+                mTrailerAdapter = new TrailerAdapter(mTrailerList);
                 // Add trailers
                 mTrailerAdapter.addAll(mTrailerList);
                 // Check whether we are in debug mode
                 if (BuildConfig.IS_DEBUG_MODE) {
-                    Log.d(LOG_TAG, "Movie: " +trailerList.size() );
+                    Log.d(LOG_TAG, "Movie: " + trailerList.size());
                 }
             }
 
@@ -248,7 +263,8 @@ public class DetailFragment extends Fragment {
             }
         };
         // Bind data to views
-        bindTo();;
+        bindTo();
+        ;
     }
 
     // Called when the containing activity onCreate() is done, and after onCreateView() of fragment
