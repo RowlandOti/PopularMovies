@@ -23,14 +23,14 @@
     android:padding="6dp">
 
     <TextView
-        android:id="@+id/list_item_review_author_text_view"
+        android:id="@+id/review_author_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         tools:text="Jonathan Doe" />
 
     <TextView
-        android:id="@+id/list_item_review_content_text_view"
+        android:id="@+id/review_content_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="16dp"

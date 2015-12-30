@@ -23,10 +23,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.rowland.movies.R;
+import com.rowland.movies.rest.enums.EBaseURlTypes;
 import com.rowland.movies.rest.models.Trailer;
+import com.rowland.movies.utilities.Utilities;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +60,7 @@ public class TrailerAdapter extends BaseAdapter {
         // Get menu at position
         Trailer trailer = mTrailerList.get(position);
         // Unique view tag
-        String tag = trailer.getName();
+        String tag = trailer.getKey();
         // Check for null
         if (view == null) {
             // Acquire a context from parent
@@ -65,7 +68,7 @@ public class TrailerAdapter extends BaseAdapter {
             // Acquire the LayoutInflater
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             // Create new view
-            view = inflater.inflate(R.layout.toolbar_overflow_item, parent, false);
+            view = inflater.inflate(R.layout.inc_trailer_detail, parent, false);
         } else {
             // Get tag from given view
             String viewTag = (String) view.getTag();
@@ -76,11 +79,9 @@ public class TrailerAdapter extends BaseAdapter {
             }
         }
         //Otherwise the view is newly inflated
-        ViewHolder viewholder = new ViewHolder(view);
-        // Set the row icons
-        viewholder.icon.setImageResource(mTrailerList.get(position).getProfilePic());
-        // Set the row texts
-        viewholder.name.setText(mTrailerList.get(position).getName());
+        ViewHolder viewHolder = new ViewHolder(view);
+        // Bind the data to the view holder
+        viewHolder.bindTo(trailer);
         // Set tag to new view
         view.setTag(tag);
         // Return the view
@@ -115,26 +116,34 @@ public class TrailerAdapter extends BaseAdapter {
                 // Create a new instance
                 mTrailerList = new ArrayList<>();
             }
-            // Add each movie to the initial list
+            // Add each trailer to the initial list
             for (Trailer trailer : trailerList) {
                 // Add movies
                 mTrailerList.add(trailer);
             }
-
         }
-        // Notify others of the data changes
     }
 
     static class ViewHolder {
-        // The icon
-        @Bind(R.id.icon_image_view)
-        ImageView icon;
-        @Bind(R.id.name_text_view)
-        TextView name;
+        // The trailer thumbnail
+        @Bind(R.id.trailer_thumbnail_image_view)
+        ImageView mTrailerThumbnailImageView;
 
         public ViewHolder(View itemView) {
             // Instantiate all the views
             ButterKnife.bind(this, itemView);
+        }
+
+        // Bind the data to the holder views
+        private void bindTo(final Trailer trailer) {
+            // Build the image url
+            String imageUrl = String.format(EBaseURlTypes.YOUTUBE_THUMNAIL_URL.getUrlType(), trailer.getKey());
+            // Use Picasso to load the trailer thumbnail
+            Picasso.with(mTrailerThumbnailImageView.getContext())
+                    .load(imageUrl)
+                    .networkPolicy(Utilities.NetworkUtility.isNetworkAvailable(mTrailerThumbnailImageView.getContext()) ? NetworkPolicy.NO_CACHE : NetworkPolicy.OFFLINE)
+                    .placeholder(R.drawable.ic_movie_placeholder)
+                    .into(mTrailerThumbnailImageView);
         }
     }
 }

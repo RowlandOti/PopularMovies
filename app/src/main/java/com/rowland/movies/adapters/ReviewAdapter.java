@@ -57,7 +57,7 @@ public class ReviewAdapter extends BaseAdapter {
         // Get menu at position
         Review review = mReviewList.get(position);
         // Unique view tag
-        String tag = review.getName();
+        String tag = review.getAuthor();
         // Check for null
         if (view == null) {
             // Acquire a context from parent
@@ -65,7 +65,7 @@ public class ReviewAdapter extends BaseAdapter {
             // Acquire the LayoutInflater
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             // Create new view
-            view = inflater.inflate(R.layout.toolbar_overflow_item, parent, false);
+            view = inflater.inflate(R.layout.inc_review_detail, parent, false);
         } else {
             // Get tag from given view
             String viewTag = (String) view.getTag();
@@ -76,11 +76,9 @@ public class ReviewAdapter extends BaseAdapter {
             }
         }
         //Otherwise the view is newly inflated
-        ViewHolder viewholder = new ViewHolder(view);
-        // Set the row icons
-        viewholder.icon.setImageResource(mReviewList.get(position).getProfilePic());
-        // Set the row texts
-        viewholder.name.setText(mReviewList.get(position).getName());
+        ViewHolder viewHolder = new ViewHolder(view);
+        // Bind the data to the view holder
+        viewHolder.bindTo(review);
         // Set tag to new view
         view.setTag(tag);
         // Return the view
@@ -127,14 +125,20 @@ public class ReviewAdapter extends BaseAdapter {
 
     static class ViewHolder {
         // The icon
-        @Bind(R.id.icon_image_view)
-        ImageView icon;
-        @Bind(R.id.name_text_view)
-        TextView name;
+        @Bind(R.id.review_author_text_view)
+        TextView mAuthorTextView;
+        @Bind(R.id.review_content_text_view)
+        TextView mContentTextView;
 
         public ViewHolder(View itemView) {
             // Instantiate all the views
             ButterKnife.bind(this, itemView);
+        }
+        // Bind the data to the holder views
+        private void bindTo(final Review review) {
+            // Set the row icons
+            mAuthorTextView.setText(review.getAuthor());
+            mContentTextView.setText(review.getContent());
         }
     }
 }

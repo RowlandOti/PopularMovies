@@ -17,12 +17,12 @@
 
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/trailer_tumbnail_width"
-    android:layout_height="@dimen/trailer_tumbnail_height"
+    android:layout_width="140sp"
+    android:layout_height="100sp"
     android:padding="1dp">
 
     <ImageView
-        android:id="@+id/trailer_poster_image_view"
+        android:id="@+id/trailer_thumbnail_image_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"

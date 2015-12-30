@@ -155,7 +155,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.CustomViewHold
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
-
+        // Bind the data to the holder views
         private void bindTo(final Movie movie) {
             // Set click listener on card view
             mGridItemContainer.setOnClickListener(new View.OnClickListener() {
