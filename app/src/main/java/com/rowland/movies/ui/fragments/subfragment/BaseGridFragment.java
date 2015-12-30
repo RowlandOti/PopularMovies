@@ -94,7 +94,7 @@ public class BaseGridFragment extends Fragment implements SwipeRefreshLayout.OnR
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // Configure the refreshlayout look
+        // Configure the refresh layout look
         mSwRefreshLayout.setColorSchemeResources(R.color.apptheme_accent_teal);
         mSwRefreshLayout.setProgressViewOffset(true, 100, 400);
         // Create new instance of layout manager
