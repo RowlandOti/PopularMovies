@@ -202,6 +202,7 @@ public class DetailFragment extends Fragment {
                 // Check whether we are in debug mode
                 if (BuildConfig.IS_DEBUG_MODE) {
                     Log.d(LOG_TAG, "Review: " + reviewList.size());
+                    Log.d(LOG_TAG, "Review: " + mReviewList.size());
                 }
             }
 
@@ -244,13 +245,12 @@ public class DetailFragment extends Fragment {
                 mTrailerProgressBar.setVisibility(View.GONE);
                 // Set mTrailerList
                 mTrailerList = trailerList;
-                // Initialize the trailer adapter
-                mTrailerAdapter = new TrailerAdapter(mTrailerList);
                 // Add trailers
                 mTrailerAdapter.addAll(mTrailerList);
                 // Check whether we are in debug mode
                 if (BuildConfig.IS_DEBUG_MODE) {
                     Log.d(LOG_TAG, "Trailer: " + trailerList.size());
+                    Log.d(LOG_TAG, "Trailer: " + mTrailerList.size());
                 }
             }
 
