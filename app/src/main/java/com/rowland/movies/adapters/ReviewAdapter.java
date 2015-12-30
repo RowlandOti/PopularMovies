@@ -23,7 +23,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -123,15 +122,12 @@ public class ReviewAdapter extends BaseAdapter {
                 // Create a new instance
                 mReviewList = new ArrayList<>();
             }
-            // Add each movie to the initial list
-            //for (Review review : reviewList) {
-                // Add movies
-                mReviewList = reviewList;
-            //}
+            // Add movies
+            mReviewList = reviewList;
         }
         // Check whether we are in debug mode
         if (BuildConfig.IS_DEBUG_MODE) {
-            Log.d(LOG_TAG, "Movie: " +mReviewList.size() );
+            Log.d(LOG_TAG, "Movie: " + mReviewList.size());
         }
     }
 
@@ -146,6 +142,7 @@ public class ReviewAdapter extends BaseAdapter {
             // Instantiate all the views
             ButterKnife.bind(this, itemView);
         }
+
         // Bind the data to the holder views
         private void bindTo(final Review review) {
             // Set the row icons
