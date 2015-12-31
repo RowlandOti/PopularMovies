@@ -21,11 +21,6 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/inc_toolbar" />
-
-
     <!--
             This layout is a one-pane layout for the master flow.
             -->
