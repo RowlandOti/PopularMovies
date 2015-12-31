@@ -308,9 +308,9 @@ public class DetailFragment extends Fragment {
         getLoaderManager().initLoader(0, null, mReviewLoaderCallBack);
         getLoaderManager().initLoader(1, null, mTrailerLoaderCallBack);
         // Create an Animation
-        Animation animation = AnimationUtils.loadAnimation(mFavoriteFab.getContext(), R.anim.grow_simple);
+        Animation simpleGrowAnimation = AnimationUtils.loadAnimation(mFavoriteFab.getContext(), R.anim.simple_grow);
         // Animate the Floating action button
-        mFavoriteFab.startAnimation(animation);
+        mFavoriteFab.startAnimation(simpleGrowAnimation);
     }
 
     // Called to destroy this fragment
