@@ -426,21 +426,25 @@ public class DetailFragment extends Fragment {
     // Attack click listener to FAB
     @OnClick(R.id.favorite_fab)
     public void onToggleFavouriteMovie() {
+        // The response Animation
+        Animation simpleRotateAnimation;
         if (!isFavourite) {
             // Set movie isFavourite to true
             ((Movie) mMovie).setIsFavourite(true);
             isFavourite = true;
+            // Create an Animation
+            simpleRotateAnimation = AnimationUtils.loadAnimation(mFavoriteFab.getContext(), R.anim.rotate_clockwise);
         } else {
             // Set movie isFavourite to false
             ((Movie) mMovie).setIsFavourite(false);
             isFavourite = false;
+            // Create an Animation
+            simpleRotateAnimation = AnimationUtils.loadAnimation(mFavoriteFab.getContext(), R.anim.rotate_anticlockwise);
         }
         // Save changes made on movie
         ((Movie) mMovie).save();
         // Update the drawable
         updateFabDrawable();
-        // Create an Animation
-        Animation simpleRotateAnimation = AnimationUtils.loadAnimation(mFavoriteFab.getContext(), R.anim.rotate_backward);
         // Animate the Floating action button
         mFavoriteFab.startAnimation(simpleRotateAnimation);
     }
