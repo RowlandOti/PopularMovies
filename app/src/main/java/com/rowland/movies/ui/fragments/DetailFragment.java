@@ -73,10 +73,13 @@ import butterknife.OnClick;
  */
 public class DetailFragment extends Fragment {
 
-    // The Movie ID Identifier Key
-    public static final String MOVIE_KEY = "movie_key";
     // Logging Identifier for class
     private final String LOG_TAG = DetailFragment.class.getSimpleName();
+    // The Movie ID Identifier Key
+    public static final String MOVIE_KEY = "movie_key";
+    // Is movie Favourite
+    boolean isFavourite;
+
     // ButterKnife injected views
     @Nullable
     @Bind(R.id.toolbar)
@@ -170,6 +173,8 @@ public class DetailFragment extends Fragment {
         if (getArguments() != null) {
             // Acquire the selected movie identifier
             mMovie = getArguments().getSerializable(DetailFragment.MOVIE_KEY);
+            // Is movie Favourite
+            isFavourite = ((Movie) mMovie).getIsFavourite();
             // Start services
             startReviewIntentService();
             startTrailerIntentService();
@@ -195,8 +200,6 @@ public class DetailFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // Update FAB icon drawable
-        updateFabDrawable();
         // Initialize layout manager
         final LinearLayoutManager mLinearLayoutManger = new LinearLayoutManager(getContext());
         // Set the RecycleView's layout manager
@@ -352,6 +355,8 @@ public class DetailFragment extends Fragment {
             mCalendar.setTime(((Movie) mMovie).getReleaseDate());
             mDetailMovieReleaseDate.setText(String.valueOf(mCalendar.get(Calendar.YEAR)));
         }
+        // Update FAB icon drawable
+        updateFabDrawable();
     }
 
     // Start the review service
@@ -414,17 +419,24 @@ public class DetailFragment extends Fragment {
 
     // Update the Fab icon drawable
     private void updateFabDrawable() {
-        // Is movie Favourite
-        boolean isFavourite = ((Movie)mMovie).getIsFavourite();
         // Toggle drawable
         mFavoriteFab.setImageResource(isFavourite ? R.drawable.ic_heart_full_red_48dp : R.drawable.ic_heart_full_white_48dp);
     }
 
     // Attack click listener to FAB
     @OnClick(R.id.favorite_fab)
-    public void onFavoriteMovie() {
-        // Set movie as a favourite
-        ((Movie)mMovie).setIsFavourite(true);
+    public void onToggleFavouriteMovie() {
+        if (!isFavourite) {
+            // Set movie isFavourite to true
+            ((Movie) mMovie).setIsFavourite(true);
+            isFavourite = true;
+        } else {
+            // Set movie isFavourite to false
+            ((Movie) mMovie).setIsFavourite(false);
+            isFavourite = false;
+        }
+        // Save changes made on movie
+        ((Movie) mMovie).save();
         // Update the drawable
         updateFabDrawable();
         // Create an Animation
