@@ -16,6 +16,7 @@
   -->
 
 <android.support.design.widget.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/Widget.App.AppBarLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -27,7 +28,8 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_scrollFlags="scroll|enterAlways" />
 
     <android.support.design.widget.SlidingTabStripLayout
         android:id="@+id/slidingTabStrips"
