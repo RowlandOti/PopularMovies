@@ -35,6 +35,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -293,7 +295,6 @@ public class DetailFragment extends Fragment {
         };
         // Bind data to views
         bindTo();
-        ;
     }
 
     // Called when the containing activity onCreate() is done, and after onCreateView() of fragment
@@ -306,6 +307,10 @@ public class DetailFragment extends Fragment {
         // Initialize the Loader
         getLoaderManager().initLoader(0, null, mReviewLoaderCallBack);
         getLoaderManager().initLoader(1, null, mTrailerLoaderCallBack);
+        // Create an Animation
+        Animation animation = AnimationUtils.loadAnimation(mFavoriteFab.getContext(), R.anim.grow_simple);
+        // Animate the Floating action button
+        mFavoriteFab.startAnimation(animation);
     }
 
     // Called to destroy this fragment
