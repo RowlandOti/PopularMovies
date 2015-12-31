@@ -19,6 +19,7 @@ package com.rowland.movies.ui.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
@@ -27,6 +28,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -41,6 +43,8 @@ import com.rowland.movies.BuildConfig;
 import com.rowland.movies.R;
 import com.rowland.movies.data.loaders.ReviewLoader;
 import com.rowland.movies.data.loaders.TrailerLoader;
+import com.rowland.movies.rest.enums.EBaseImageSize;
+import com.rowland.movies.rest.enums.EBaseURlTypes;
 import com.rowland.movies.rest.models.Movie;
 import com.rowland.movies.rest.models.Review;
 import com.rowland.movies.rest.models.Trailer;
@@ -48,6 +52,9 @@ import com.rowland.movies.rest.services.ReviewIntentService;
 import com.rowland.movies.rest.services.TrailerIntentService;
 import com.rowland.movies.ui.adapters.ReviewAdapter;
 import com.rowland.movies.ui.adapters.TrailerAdapter;
+import com.rowland.movies.utilities.Utilities;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -68,6 +75,16 @@ public class DetailFragment extends Fragment {
     public static final String MOVIE_KEY = "movie_key";
 
     // ButterKnife injected views
+    @Nullable
+    @Bind(R.id.toolbar)
+    Toolbar mToolbar;
+
+    @Bind(R.id.movie_detail_poster_image_view)
+    ImageView mPosterMovie;
+
+    @Bind(R.id.movie_detail_backdrop_image_view)
+    ImageView mBackdropMovie;
+
     @Bind(R.id.movie_rate_image_view)
     ImageView mDetailRateImageView;
 
@@ -305,6 +322,14 @@ public class DetailFragment extends Fragment {
 
     // Bind data to the views
     private void bindTo() {
+        // Build the image url
+        String imageUrl = EBaseURlTypes.MOVIE_API_IMAGE_BASE_URL.getUrlType() + EBaseImageSize.IMAGE_SIZE_W500.getImageSize() + ((Movie) mMovie).getBackdropPath();
+        // Use Picasso to load the images
+        Picasso.with(mBackdropMovie.getContext())
+                .load(imageUrl)
+                .networkPolicy(Utilities.NetworkUtility.isNetworkAvailable(mBackdropMovie.getContext()) ? NetworkPolicy.NO_CACHE : NetworkPolicy.OFFLINE)
+                .placeholder(R.drawable.ic_movie_placeholder)
+                .into(mBackdropMovie);
         // Set the title
         mDetailMovieTitle.setText(((Movie) mMovie).getOriginalTitle());
         // Set the rating
