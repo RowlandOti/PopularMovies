@@ -135,7 +135,7 @@ public class MainFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         // Set the ToolBar
-        ((MainActivity) getActivity()).setToolbar(mToolbar, true, false, R.drawable.ic_logo_48px);
+        ((MainActivity) getActivity()).setToolbar(mToolbar, false, false, R.drawable.ic_logo_48px);
         // Restore states
         if (savedInstanceState != null) {
             // Acquire previously selected tab.
