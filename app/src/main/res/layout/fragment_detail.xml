@@ -22,6 +22,10 @@
     android:fitsSystemWindows="true">
 
     <include
+        android:id="@+id/movie_detail_appbar"
+        layout="@layout/inc_movie_detail_toolbar" />
+
+    <include
         android:id="@+id/detail"
         layout="@layout/inc_movie_detail" />
 
