@@ -23,6 +23,6 @@
     android:layout_gravity="bottom|end"
     android:layout_margin="@dimen/fab_margin"
     android:clickable="true"
-    android:src="@drawable/ic_favourite_black_48dp" />
+    android:src="@drawable/ic_heart_full_grey_48dp" />
 
 

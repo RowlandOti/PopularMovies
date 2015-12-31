@@ -13,7 +13,7 @@
         app:showAsAction="always"/> -->
     <item
         android:id="@+id/action_overflow"
-        android:icon="@drawable/ic_more_vert_white_48dp"
+        android:icon="@drawable/ic_overflow_white_48dp"
         android:title="@string/action_drawflow"
         app:showAsAction="always" />
 </menu>

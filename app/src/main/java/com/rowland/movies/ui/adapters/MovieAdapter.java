@@ -176,7 +176,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.CustomViewHo
             }
             // Set highest rated
             if (movie.getIsHighestRated()) {
-                mSortTypeIconImageView.setImageResource(R.drawable.ic_highest_rated_black_48dp);
+                mSortTypeIconImageView.setImageResource(R.drawable.ic_rated_black_48dp);
                 mSortTypeValueTextView.setText(String.format("%d/10", Math.round(movie.getVoteAverage())));
             }
             // Set Favourites

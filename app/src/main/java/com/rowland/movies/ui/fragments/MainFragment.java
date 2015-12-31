@@ -192,7 +192,7 @@ public class MainFragment extends Fragment {
         // This a sample dat to fill our ListView
         List<ListPopupMenu> menuItem = new ArrayList<>();
         menuItem.add(new ListPopupMenu(R.drawable.ic_popular_black_48dp, "Popular"));
-        menuItem.add(new ListPopupMenu(R.drawable.ic_highest_rated_black_48dp, "Highest Rated"));
+        menuItem.add(new ListPopupMenu(R.drawable.ic_rated_black_48dp, "Highest Rated"));
         menuItem.add(new ListPopupMenu(R.drawable.ic_favourite_black_48dp, "Favourite"));
         // Initialise our adapter
         ListPopupWindowAdapter mListPopUpAdapter = new ListPopupWindowAdapter(getActivity().getApplicationContext(), menuItem);

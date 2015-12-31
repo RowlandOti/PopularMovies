@@ -8,7 +8,7 @@
     <!-- Widget styles -->
 
     <style name="MyCustomActionBarOverflowButton" parent="android:Widget.ActionButton.Overflow">
-        <item name="android:src">@drawable/ic_more_vert_white_48dp</item>
+        <item name="android:src">@drawable/ic_overflow_white_48dp</item>
     </style>
 
 </resources>
