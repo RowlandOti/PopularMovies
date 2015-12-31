@@ -67,15 +67,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.rowland.movies.ui.activities.MainActivity" />
         </activity>
-        <activity
-            android:name=".ui.activities.Hoax"
-            android:label="@string/title_activity_hoax"
-            android:parentActivityName=".ui.activities.MainActivity"
-            android:theme="@style/AppTheme.Dark">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.rowland.movies.ui.activities.MainActivity" />
-        </activity>
     </application>
 
 </manifest>
