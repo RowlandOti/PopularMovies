@@ -66,6 +66,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Display Movie Detail
@@ -194,6 +195,8 @@ public class DetailFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        // Update FAB icon drawable
+        updateFabDrawable();
         // Initialize layout manager
         final LinearLayoutManager mLinearLayoutManger = new LinearLayoutManager(getContext());
         // Set the RecycleView's layout manager
@@ -308,7 +311,7 @@ public class DetailFragment extends Fragment {
         getLoaderManager().initLoader(0, null, mReviewLoaderCallBack);
         getLoaderManager().initLoader(1, null, mTrailerLoaderCallBack);
         // Create an Animation
-        Animation simpleGrowAnimation = AnimationUtils.loadAnimation(mFavoriteFab.getContext(), R.anim.simple_grow);
+        Animation simpleGrowAnimation = AnimationUtils.loadAnimation(mFavoriteFab.getContext(), R.anim.grow_bigger);
         // Animate the Floating action button
         mFavoriteFab.startAnimation(simpleGrowAnimation);
     }
@@ -408,4 +411,26 @@ public class DetailFragment extends Fragment {
             mDetailMovieEmptyTrailers.setVisibility(View.GONE);
         }
     }
+
+    // Update the Fab icon drawable
+    private void updateFabDrawable() {
+        // Is movie Favourite
+        boolean isFavourite = ((Movie)mMovie).getIsFavourite();
+        // Toggle drawable
+        mFavoriteFab.setImageResource(isFavourite ? R.drawable.ic_heart_full_red_48dp : R.drawable.ic_heart_full_white_48dp);
+    }
+
+    // Attack click listener to FAB
+    @OnClick(R.id.favorite_fab)
+    public void onFavoriteMovie() {
+        // Set movie as a favourite
+        ((Movie)mMovie).setIsFavourite(true);
+        // Update the drawable
+        updateFabDrawable();
+        // Create an Animation
+        Animation simpleRotateAnimation = AnimationUtils.loadAnimation(mFavoriteFab.getContext(), R.anim.rotate_backward);
+        // Animate the Floating action button
+        mFavoriteFab.startAnimation(simpleRotateAnimation);
+    }
+
 }
