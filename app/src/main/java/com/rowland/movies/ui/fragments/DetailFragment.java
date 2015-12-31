@@ -70,11 +70,10 @@ import butterknife.ButterKnife;
  */
 public class DetailFragment extends Fragment {
 
-    // Logging Identifier for class
-    private final String LOG_TAG = DetailFragment.class.getSimpleName();
     // The Movie ID Identifier Key
     public static final String MOVIE_KEY = "movie_key";
-
+    // Logging Identifier for class
+    private final String LOG_TAG = DetailFragment.class.getSimpleName();
     // ButterKnife injected views
     @Nullable
     @Bind(R.id.toolbar)
@@ -193,8 +192,6 @@ public class DetailFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // Set the ToolBar
-        ((DetailActivity) getActivity()).setToolbar(mToolbar, true, false, R.drawable.ic_logo_48px);
         // Initialize layout manager
         final LinearLayoutManager mLinearLayoutManger = new LinearLayoutManager(getContext());
         // Set the RecycleView's layout manager
@@ -304,6 +301,8 @@ public class DetailFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        // Set the ToolBar
+        ((DetailActivity) getActivity()).setToolbar(mToolbar, true, false, R.drawable.ic_logo_48px);
         // Initialize the Loader
         getLoaderManager().initLoader(0, null, mReviewLoaderCallBack);
         getLoaderManager().initLoader(1, null, mTrailerLoaderCallBack);
