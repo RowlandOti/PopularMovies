@@ -17,6 +17,8 @@
 
 package com.rowland.movies.ui.adapters;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -127,7 +129,14 @@ public class TrailerAdapter extends RecyclerView.Adapter<TrailerAdapter.CustomVi
             mTrailerThumbnailImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    // Acquire the video url
+                    String trailerUrl = String.format(EBaseURlTypes.YOUTUBE_VIDEO_URL.getUrlType(), trailer.getKey());
+                    // Create a View Intent object
+                    Intent youTubeIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(trailerUrl));
+                    // Set any data to send
+                    youTubeIntent.putExtra("force_fullscreen", true);
                     // Use Intents to play trailer
+                    //mActivity(youTubeIntent);
                 }
             });
 

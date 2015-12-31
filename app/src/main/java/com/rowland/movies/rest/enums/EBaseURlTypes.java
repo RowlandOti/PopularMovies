@@ -25,7 +25,7 @@ public enum EBaseURlTypes {
     // All the url that the application will query
     MOVIE_API_BASE_URL("http://api.themoviedb.org"),
     MOVIE_API_IMAGE_BASE_URL("http://image.tmdb.org/t/p/"),
-    YOUTUBE_VIDEO_URL("http://www.youtube.com/watch?v="),
+    YOUTUBE_VIDEO_URL("http://www.youtube.com/watch?v=%s"),
     YOUTUBE_THUMNAIL_URL("http://img.youtube.com/vi/%s/default.jpg");
 
     private String URLType;
