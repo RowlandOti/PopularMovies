@@ -50,6 +50,7 @@ import com.rowland.movies.rest.models.Review;
 import com.rowland.movies.rest.models.Trailer;
 import com.rowland.movies.rest.services.ReviewIntentService;
 import com.rowland.movies.rest.services.TrailerIntentService;
+import com.rowland.movies.ui.activities.DetailActivity;
 import com.rowland.movies.ui.adapters.ReviewAdapter;
 import com.rowland.movies.ui.adapters.TrailerAdapter;
 import com.rowland.movies.utilities.Utilities;
@@ -192,6 +193,8 @@ public class DetailFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        // Set the ToolBar
+        ((DetailActivity) getActivity()).setToolbar(mToolbar, true, false, R.drawable.ic_logo_48px);
         // Initialize layout manager
         final LinearLayoutManager mLinearLayoutManger = new LinearLayoutManager(getContext());
         // Set the RecycleView's layout manager

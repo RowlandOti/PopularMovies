@@ -47,13 +47,13 @@ public class BaseToolBarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
     }
 
-    // Derived classes have acess to this method
+    // Derived classes have access to this method
     protected void setToolbar(boolean showHomeUp, boolean showTitle, int iconResource) {
         setToolbar(mToolbar, showHomeUp, showTitle, iconResource);
     }
 
     // Derived methods have no direct access to this class
-    private void setToolbar(Toolbar mToolbar, boolean isShowHomeUp, boolean isShowTitle, int iconResource) {
+    public void setToolbar(Toolbar mToolbar, boolean isShowHomeUp, boolean isShowTitle, int iconResource) {
         // Does the inc_toolbar exist?
         if (mToolbar != null) {
             setSupportActionBar(mToolbar);
