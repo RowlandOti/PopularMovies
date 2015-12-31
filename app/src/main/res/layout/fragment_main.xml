@@ -1,20 +1,47 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Widget.App.CoordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:fitsSystemWindows="true">
 
-    <android.support.design.widget.SlidingTabStripLayout
-        android:id="@+id/slidingTabStrips"
-        style="@style/Widget.App.SlidingTabStripLayout"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@color/apptheme_accent_red" />
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewPager"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/slidingTabStrips" />
+        android:orientation="vertical">
 
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/main_appbar"
+            style="@style/Widget.App.AppBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.Dark.AppBarOverlay">
 
-</RelativeLayout>
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorPrimary"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+                app:layout_scrollFlags="scroll|enterAlways">
+
+            </android.support.v7.widget.Toolbar>
+
+            <android.support.design.widget.SlidingTabStripLayout
+                android:id="@+id/slidingTabStrips"
+                style="@style/Widget.App.SlidingTabStripLayout"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@+id/toolbar"
+                android:background="@color/apptheme_accent_red" />
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/main_appbar" />
+
+    </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

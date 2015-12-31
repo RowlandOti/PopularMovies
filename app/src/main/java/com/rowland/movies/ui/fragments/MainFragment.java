@@ -19,10 +19,12 @@ package com.rowland.movies.ui.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.SlidingTabStripLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.ListPopupWindow;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -32,6 +34,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 
 import com.rowland.movies.R;
+import com.rowland.movies.ui.activities.MainActivity;
 import com.rowland.movies.ui.adapters.ListPopupWindowAdapter;
 import com.rowland.movies.ui.adapters.SmartNestedViewPagerAdapter;
 import com.rowland.movies.objects.ListPopupMenu;
@@ -65,8 +68,13 @@ public class MainFragment extends Fragment {
     private int selectedTabStrip = 0;
 
     // ButterKnife injected views
+    @Nullable
+    @Bind(R.id.toolbar)
+    Toolbar mToolbar;
+
     @Bind(R.id.slidingTabStrips)
     SlidingTabStripLayout mSlidingTabStrips;
+
     @Bind(R.id.viewPager)
     ViewPager mViewPager;
 
@@ -126,6 +134,8 @@ public class MainFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        // Set the ToolBar
+        ((MainActivity) getActivity()).setToolbar(mToolbar, true, false, R.drawable.ic_logo_48px);
         // Restore states
         if (savedInstanceState != null) {
             // Acquire previously selected tab.

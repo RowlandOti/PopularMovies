@@ -53,8 +53,6 @@ public class MainActivity extends BaseToolBarActivity implements MainFragment.IM
         setContentView(R.layout.activity_main);
         // Inject all the views
         ButterKnife.bind(this);
-        // Setup the inc_toolbar
-        setToolbar(false, false, R.drawable.ic_logo_48px);
         // Check that the activity is using the layout with the fragment_container id
         if (findViewById(R.id.detail_container) != null) {
             // The detail container view will be present only in the large-screen layouts

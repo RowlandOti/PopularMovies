@@ -83,13 +83,17 @@
 
     <!-- Widget CoordinatorLayout styles -->
     <style name="Widget.App.CoordinatorLayout" parent="Widget.Design.CoordinatorLayout"></style>
-
     <!-- Widget FloatingActionButton styles -->
     <style name="Widget.App.FloatingActionButton" parent="Widget.Design.FloatingActionButton"></style>
+    <!-- Widget AppBarLayout styles -->
+    <style name="Widget.App.AppBarLayout" parent="Widget.Design.AppBarLayout"></style>
 
     <style name="AppTheme.Dark.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.Dark.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+
 
 
 </resources>
