@@ -92,16 +92,7 @@
                         android:layout_weight="1"
                         android:padding="8dp"
                         android:text="Overview"
-                        android:textColor="@color/apptheme_primary_text_black" />
-
-                    <TextView
-                        android:id="@+id/movie_rate_text_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:padding="8dp"
-                        android:textColor="@color/apptheme_secondary_text_grey"
-                        tools:text="9/10" />
+                        android:textColor="@color/apptheme_accent_red" />
 
                     <ImageView
                         android:id="@+id/movie_rate_image_view"
@@ -110,6 +101,16 @@
                         android:layout_gravity="center"
                         android:paddingRight="8dp"
                         android:src="@drawable/ic_star_half_grey_48dp" />
+
+                    <TextView
+                        android:id="@+id/movie_rate_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:padding="8dp"
+                        android:textColor="@color/apptheme_primary_text_black"
+                        tools:text="9/10" />
+
 
                 </LinearLayout>
 
@@ -147,7 +148,7 @@
                     android:layout_height="wrap_content"
                     android:padding="8dp"
                     android:text="Trailers"
-                    android:textColor="@color/apptheme_primary_text_black" />
+                    android:textColor="@color/apptheme_accent_red" />
 
                 <include layout="@layout/divider" />
 
@@ -215,7 +216,7 @@
                     android:layout_height="wrap_content"
                     android:padding="8dp"
                     android:text="Reviews"
-                    android:textColor="@color/apptheme_primary_text_black" />
+                    android:textColor="@color/apptheme_accent_red" />
 
                 <include layout="@layout/divider" />
 
@@ -247,6 +248,69 @@
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/movie_statistic_card_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical"
+            android:paddingRight="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/movie_statistic_title_text_view"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="8dp"
+                        android:text="Statistics"
+                        android:textColor="@color/apptheme_accent_red" />
+
+                    <ImageView
+                        android:id="@+id/movie_statistic_image_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:paddingRight="8dp"
+                        android:src="@drawable/ic_star_half_grey_48dp" />
+
+                    <TextView
+                        android:id="@+id/movie_statistic_image_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:padding="8dp"
+                        android:textColor="@color/apptheme_primary_text_black"
+                        tools:text="9/10" />
+
+
+                </LinearLayout>
+
+                <include layout="@layout/divider" />
+
+                <TextView
+                    android:id="@+id/movie_statistic_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:textColor="@color/apptheme_secondary_text_grey"
+                    tools:text="Test" />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
 
     </LinearLayout>
 
