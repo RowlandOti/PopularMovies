@@ -102,15 +102,6 @@
                         android:paddingRight="8dp"
                         android:src="@drawable/ic_star_half_grey_48dp" />
 
-                    <TextView
-                        android:id="@+id/movie_rate_text_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:padding="8dp"
-                        android:textColor="@color/apptheme_primary_text_black"
-                        tools:text="9/10" />
-
 
                 </LinearLayout>
 
@@ -285,27 +276,87 @@
                         android:paddingRight="8dp"
                         android:src="@drawable/ic_star_half_grey_48dp" />
 
-                    <TextView
-                        android:id="@+id/movie_statistic_image_text_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:padding="8dp"
-                        android:textColor="@color/apptheme_primary_text_black"
-                        tools:text="9/10" />
-
-
                 </LinearLayout>
 
                 <include layout="@layout/divider" />
 
-                <TextView
-                    android:id="@+id/movie_statistic_text_view"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:textColor="@color/apptheme_secondary_text_grey"
-                    tools:text="Test" />
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="2dp">
+
+                        <TextView
+                            android:id="@+id/statistic_rating_text_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:padding="4dp"
+                            android:textColor="@color/apptheme_primary_text_black"
+                            tools:text="Rating :" />
+
+                        <TextView
+                            android:id="@+id/statistic_rate_text_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:padding="4dp"
+                            android:textColor="@color/apptheme_secondary_text_grey"
+                            tools:text="8/10" />
+
+                        <TextView
+                            android:id="@+id/movie_statistic_popularity_text_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:padding="4dp"
+                            android:textColor="@color/apptheme_primary_text_black"
+                            tools:text="Popularity :" />
+
+                        <TextView
+                            android:id="@+id/movie_statistic_popular_text_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:padding="4dp"
+                            android:textColor="@color/apptheme_secondary_text_grey"
+                            tools:text="8/10" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="2dp">
+
+                        <TextView
+                            android:id="@+id/statistic_releasing_text_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:padding="4dp"
+                            android:textColor="@color/apptheme_primary_text_black"
+                            tools:text="Year :" />
+
+                        <TextView
+                            android:id="@+id/statistic_release_text_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:padding="4dp"
+                            android:textColor="@color/apptheme_secondary_text_grey"
+                            tools:text="2016" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
 
