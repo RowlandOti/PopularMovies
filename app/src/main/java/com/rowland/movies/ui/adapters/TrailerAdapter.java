@@ -142,7 +142,7 @@ public class TrailerAdapter extends RecyclerView.Adapter<TrailerAdapter.CustomVi
 
             // Check wether we are in debug mode
             if (BuildConfig.IS_DEBUG_MODE) {
-                Log.d(LOG_TAG, "Current Trailer: " + trailer.getName());
+                Log.d(LOG_TAG, "Current Trailer: " + mTrailerThumbnailImageView.getScaleType());
             }
         }
     }
