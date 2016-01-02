@@ -91,17 +91,20 @@ public class DetailFragment extends Fragment {
     @Bind(R.id.movie_detail_backdrop_image_view)
     ImageView mBackdropMovie;
 
-    @Bind(R.id.movie_rate_image_view)
-    ImageView mDetailRateImageView;
-
-    @Bind(R.id.movie_rate_text_view)
-    TextView mDetailRateTextView;
+    @Bind(R.id.movie_statistic_favourite_text_view)
+    TextView mDetailFavouriteTextView;
 
     @Bind(R.id.movie_title_text_view)
     TextView mDetailMovieTitle;
 
-    @Bind(R.id.movie_release_year_text_view)
-    TextView mDetailMovieReleaseDate;
+    @Bind(R.id.movie_statistic_year_text_view)
+    TextView mDetailMovieYear;
+
+    @Bind(R.id.movie_statistic_rate_text_view)
+    TextView mDetailMovieRate;
+
+    @Bind(R.id.movie_statistic_popular_text_view)
+    TextView mDetailMoviePopularity;
 
     @Bind(R.id.movie_overview_text_view)
     TextView mDetailMovieOverview;
@@ -345,15 +348,17 @@ public class DetailFragment extends Fragment {
                 .into(mBackdropMovie);
         // Set the title
         mDetailMovieTitle.setText(((Movie) mMovie).getOriginalTitle());
-        // Set the rating
-        mDetailRateTextView.setText(String.format("%d/10", Math.round(((Movie) mMovie).getVoteAverage())));
         // Set the overview
         mDetailMovieOverview.setText(((Movie) mMovie).getOverview());
+        // Set the rating
+        mDetailMovieRate.setText(String.format("%d/10", Math.round(((Movie) mMovie).getVoteAverage())));
+        // Set popularity
+        mDetailMoviePopularity.setText(String.format("%d votes", Math.round(((Movie) mMovie).getPopularity())));
         // Set the release date
         if (((Movie) mMovie).getReleaseDate() != null) {
             Calendar mCalendar = Calendar.getInstance();
             mCalendar.setTime(((Movie) mMovie).getReleaseDate());
-            mDetailMovieReleaseDate.setText(String.valueOf(mCalendar.get(Calendar.YEAR)));
+            mDetailMovieYear.setText(String.valueOf(mCalendar.get(Calendar.YEAR)));
         }
         // Update FAB icon drawable
         updateFabDrawable();
@@ -421,6 +426,8 @@ public class DetailFragment extends Fragment {
     private void updateFabDrawable() {
         // Toggle drawable
         mFavoriteFab.setImageResource(isFavourite ? R.drawable.ic_heart_full_red_48dp : R.drawable.ic_heart_full_white_48dp);
+        // Toggle favourite text
+        mDetailFavouriteTextView.setText(isFavourite ? "Yes" : "No");
     }
 
     // Attack click listener to FAB

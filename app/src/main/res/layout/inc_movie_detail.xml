@@ -50,19 +50,6 @@
                 android:textSize="16sp"
                 tools:text="Movie Title" />
 
-            <TextView
-                android:id="@+id/movie_release_year_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/movie_title_text_view"
-                android:layout_gravity="center"
-                android:layout_toEndOf="@+id/movie_title_text_view"
-                android:layout_toRightOf="@+id/movie_title_text_view"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:textColor="@color/apptheme_primary_text_white"
-                android:textSize="16sp"
-                tools:text="2015"></TextView>
 
         </RelativeLayout>
 
@@ -292,16 +279,16 @@
                         android:padding="2dp">
 
                         <TextView
-                            android:id="@+id/statistic_rating_text_view"
+                            android:id="@+id/movie_statistic_rating_text_view"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="2"
                             android:padding="4dp"
                             android:textColor="@color/apptheme_primary_text_black"
-                            tools:text="Rating :" />
+                            android:text="Rating" />
 
                         <TextView
-                            android:id="@+id/statistic_rate_text_view"
+                            android:id="@+id/movie_statistic_rate_text_view"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="2"
@@ -316,7 +303,7 @@
                             android:layout_weight="2"
                             android:padding="4dp"
                             android:textColor="@color/apptheme_primary_text_black"
-                            tools:text="Popularity :" />
+                            android:text="Popularity" />
 
                         <TextView
                             android:id="@+id/movie_statistic_popular_text_view"
@@ -336,16 +323,36 @@
                         android:padding="2dp">
 
                         <TextView
-                            android:id="@+id/statistic_releasing_text_view"
+                            android:id="@+id/movie_statistic_releasing_text_view"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="2"
                             android:padding="4dp"
                             android:textColor="@color/apptheme_primary_text_black"
-                            tools:text="Year :" />
+                            android:text="Year"
+                             />
 
                         <TextView
-                            android:id="@+id/statistic_release_text_view"
+                            android:id="@+id/movie_statistic_year_text_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:padding="4dp"
+                            android:textColor="@color/apptheme_secondary_text_grey"
+                            tools:text="2016" />
+
+                        <TextView
+                            android:id="@+id/movie_statistic_favouriting_text_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:padding="4dp"
+                            android:textColor="@color/apptheme_primary_text_black"
+                            android:text="Favourite"
+                            />
+
+                        <TextView
+                            android:id="@+id/movie_statistic_favourite_text_view"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="2"
