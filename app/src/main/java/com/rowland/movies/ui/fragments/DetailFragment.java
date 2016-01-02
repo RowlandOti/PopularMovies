@@ -73,10 +73,10 @@ import butterknife.OnClick;
  */
 public class DetailFragment extends Fragment {
 
-    // Logging Identifier for class
-    private final String LOG_TAG = DetailFragment.class.getSimpleName();
     // The Movie ID Identifier Key
     public static final String MOVIE_KEY = "movie_key";
+    // Logging Identifier for class
+    private final String LOG_TAG = DetailFragment.class.getSimpleName();
     // Is movie Favourite
     boolean isFavourite;
 
