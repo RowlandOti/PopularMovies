@@ -87,7 +87,7 @@
                         android:layout_height="20dp"
                         android:layout_gravity="center"
                         android:paddingRight="8dp"
-                        android:src="@drawable/ic_star_half_grey_48dp" />
+                        android:src="@drawable/ic_overview_grey_48dp" />
 
 
                 </LinearLayout>
@@ -120,15 +120,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:padding="8dp"
                     android:text="Trailers"
                     android:textColor="@color/apptheme_accent_red" />
 
-                <include layout="@layout/divider" />
+                <ImageView
+                    android:id="@+id/movie_trailer_image_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:paddingRight="8dp"
+                    android:src="@drawable/ic_trailer_grey_48dp" />
+            </LinearLayout>
+
+
+        <include layout="@layout/divider" />
 
                 <HorizontalScrollView
                     android:layout_width="match_parent"
@@ -189,12 +203,26 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:padding="8dp"
                     android:text="Reviews"
                     android:textColor="@color/apptheme_accent_red" />
+
+                <ImageView
+                    android:id="@+id/movie_review_image_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:paddingRight="8dp"
+                    android:src="@drawable/ic_review_grey_48dp" />
+                </LinearLayout>
 
                 <include layout="@layout/divider" />
 
@@ -261,7 +289,7 @@
                         android:layout_height="20dp"
                         android:layout_gravity="center"
                         android:paddingRight="8dp"
-                        android:src="@drawable/ic_star_half_grey_48dp" />
+                        android:src="@drawable/ic_statistic_grey_48dp" />
 
                 </LinearLayout>
 
