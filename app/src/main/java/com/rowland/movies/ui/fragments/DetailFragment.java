@@ -239,8 +239,7 @@ public class DetailFragment extends Fragment {
                 updateReviewsEmptyView();
                 // Check whether we are in debug mode
                 if (BuildConfig.IS_DEBUG_MODE) {
-                    Log.d(LOG_TAG, "Review: " + reviewList.size());
-                    Log.d(LOG_TAG, "Review: " + mReviewList.size());
+                    Log.d(LOG_TAG, "Review: " + mReviewAdapter.getItemCount());
                 }
             }
 
@@ -289,8 +288,7 @@ public class DetailFragment extends Fragment {
                 updateTrailersEmptyView();
                 // Check whether we are in debug mode
                 if (BuildConfig.IS_DEBUG_MODE) {
-                    Log.d(LOG_TAG, "Trailer: " + trailerList.size());
-                    Log.d(LOG_TAG, "Trailer: " + mTrailerList.size());
+                    Log.d(LOG_TAG, "Trailer: " + mTrailerAdapter.getItemCount());
                 }
             }
 
