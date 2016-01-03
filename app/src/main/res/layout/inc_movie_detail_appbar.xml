@@ -54,7 +54,7 @@
             tools:src="@drawable/ic_movie_placeholder" />
 
         <ImageView
-            android:id="@+id/movie_detail_play_trailer_image_view"
+            android:id="@+id/movie_detail_backdrop_play_image_view"
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:layout_gravity="center"

@@ -58,6 +58,7 @@ import com.rowland.movies.ui.adapters.TrailerAdapter;
 import com.rowland.movies.ui.widgets.WrappedGridLayoutManager;
 import com.rowland.movies.ui.widgets.WrappingLinearLayoutManager;
 import com.rowland.movies.utilities.Utilities;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
@@ -86,6 +87,8 @@ public class DetailFragment extends Fragment {
     Toolbar mToolbar;
     @Bind(R.id.movie_detail_backdrop_image_view)
     ImageView mBackdropMovie;
+    @Bind(R.id.movie_detail_backdrop_play_image_view)
+    ImageView mBackdropMoviePlay;
     @Bind(R.id.movie_statistic_favourite_text_view)
     TextView mDetailFavouriteTextView;
     @Bind(R.id.movie_title_text_view)
@@ -128,6 +131,8 @@ public class DetailFragment extends Fragment {
     private ReviewAdapter mReviewAdapter;
     // The Trailer adapter
     private TrailerAdapter mTrailerAdapter;
+    // Simple growth Animation
+    private Animation simpleGrowAnimation;
 
     // Default constructor
     public DetailFragment() {
@@ -172,6 +177,8 @@ public class DetailFragment extends Fragment {
         mReviewList = new ArrayList<>();
         // Initialize the trailer list
         mTrailerList = new ArrayList<>();
+        // Create an Animation
+       simpleGrowAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.grow_bigger);
     }
 
     // Called to instantiate the fragment's view hierarchy
@@ -358,7 +365,22 @@ public class DetailFragment extends Fragment {
                 .load(imageUrl)
                 .networkPolicy(Utilities.NetworkUtility.isNetworkAvailable(mBackdropMovie.getContext()) ? NetworkPolicy.NO_CACHE : NetworkPolicy.OFFLINE)
                 .placeholder(R.drawable.ic_movie_placeholder)
-                .into(mBackdropMovie);
+                .into(mBackdropMovie, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        // Do some Animation on play button
+                        mBackdropMoviePlay.startAnimation(simpleGrowAnimation);
+                    }
+
+                    @Override
+                    public void onError() {
+                        // Hide play button
+                        mBackdropMoviePlay.setVisibility(View.GONE);
+                    }
+
+                });
+
+
         // Set the title
         mDetailMovieTitle.setText(mMovie.getOriginalTitle());
         // Set the overview
