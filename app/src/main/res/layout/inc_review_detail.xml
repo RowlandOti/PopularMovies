@@ -32,12 +32,11 @@
 
     <TextView
         android:id="@+id/review_content_text_view"
-        android:background="@color/apptheme_background_window_grey"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
+        android:paddingBottom="6dp"
+        android:paddingTop="6dp"
         android:maxLength="400"
         android:textColor="@color/apptheme_secondary_text_grey"
-        tools:text="Maybe Sam Mendes and screenwriter John Logan did succeed at creating a perfect homage to the Roger Moore era Bond films? Because in reality, none of those films standout as great movies. From start to finish, Spectre feels like someone filling out a madlibs of Bond scenes, and praying that when they read it back, it makes some" />
+        tools:text="Max (Max Records) is a young boy who feels misunderstood and wants to have fun all the time. He makes an igloo out of snow, but his sister's friends gang up on him and smash it. After making a scene in front of his mother's boyfriend, Max bites his mother and runs away. He keeps running until he stumbles upon a small boat; he climbs aboard and sets sail." />
 </LinearLayout>
