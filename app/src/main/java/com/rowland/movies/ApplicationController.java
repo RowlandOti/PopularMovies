@@ -17,7 +17,10 @@
 
 package com.rowland.movies;
 
-import com.activeandroid.app.Application;
+import android.app.Application;
+
+import com.activeandroid.ActiveAndroid;
+import com.activeandroid.Configuration;
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp.StethoInterceptor;
 import com.google.gson.Gson;
@@ -25,6 +28,9 @@ import com.google.gson.GsonBuilder;
 import com.rowland.movies.rest.enums.EBaseURlTypes;
 import com.rowland.movies.rest.enums.EAPITypes;
 import com.rowland.movies.rest.interceptors.SessionRequestInterceptor;
+import com.rowland.movies.rest.models.Movie;
+import com.rowland.movies.rest.models.Review;
+import com.rowland.movies.rest.models.Trailer;
 import com.rowland.movies.rest.services.IMoviesAPIService;
 import com.rowland.movies.rest.services.IRetrofitAPI;
 import com.squareup.okhttp.OkHttpClient;
@@ -69,9 +75,23 @@ public class ApplicationController extends Application {
          *  between your emulator or device in real-time!
          */
         super.onCreate();
+        // Acquire a configuration object
+        Configuration.Builder cfg = new Configuration.Builder(this);
+        // Declare our models in it
+        cfg.addModelClass(Movie.class);
+        cfg.addModelClass(Trailer.class);
+        cfg.addModelClass(Review.class);
+        // Initialize ActiveAndroid
+        ActiveAndroid.initialize(cfg.create());
+        //ActiveAndroid.initialize(this);
         instance = this;
-
+        // Initialize Facebook Stetho
         Stetho.initializeWithDefaults(this);
+    }
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+        ActiveAndroid.dispose();
     }
     // Needed for factory pattern we’ll implement later in our singleton
     // Returns the single Retrofit instance

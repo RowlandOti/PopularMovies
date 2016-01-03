@@ -26,18 +26,18 @@
         android:id="@+id/review_author_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:textColor="@color/apptheme_primary_text_black"
         tools:text="Jonathan Doe" />
 
     <TextView
         android:id="@+id/review_content_text_view"
+        android:background="@color/apptheme_background_window_grey"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="16dp"
-        android:paddingTop="16dp"
-        android:maxLines = "10"
-        android:minLines="1"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:maxLength="400"
         android:textColor="@color/apptheme_secondary_text_grey"
         tools:text="Maybe Sam Mendes and screenwriter John Logan did succeed at creating a perfect homage to the Roger Moore era Bond films? Because in reality, none of those films standout as great movies. From start to finish, Spectre feels like someone filling out a madlibs of Bond scenes, and praying that when they read it back, it makes some" />
 </LinearLayout>
