@@ -43,6 +43,8 @@ import android.widget.TextView;
 
 import com.rowland.movies.BuildConfig;
 import com.rowland.movies.R;
+import com.rowland.movies.WrappedGridLayoutManager;
+import com.rowland.movies.WrappingLinearLayoutManager;
 import com.rowland.movies.data.loaders.ReviewLoader;
 import com.rowland.movies.data.loaders.TrailerLoader;
 import com.rowland.movies.rest.enums.EBaseImageSize;
@@ -204,7 +206,7 @@ public class DetailFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // Initialize layout manager
-        final LinearLayoutManager mLinearLayoutManger = new LinearLayoutManager(getContext());
+        final WrappingLinearLayoutManager mLinearLayoutManger = new WrappingLinearLayoutManager(getContext());
         // Set the RecycleView's layout manager
         mReviewRecycleView.setLayoutManager(mLinearLayoutManger);
         // Set the RecycleView's size fixing
@@ -253,7 +255,7 @@ public class DetailFragment extends Fragment {
         };
 
         // Initialize layout manager
-        final StaggeredGridLayoutManager mStaggeredLayoutManger = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL);
+        final WrappedGridLayoutManager mStaggeredLayoutManger = new WrappedGridLayoutManager(getContext(), 2);
         // Set the RecycleView's layout manager
         mTrailerRecycleView.setLayoutManager(mStaggeredLayoutManger);
         // Set the RecycleView's size fixing

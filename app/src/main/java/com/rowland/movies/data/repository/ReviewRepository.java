@@ -51,7 +51,7 @@ public class ReviewRepository {
                     //.on("reviews.movie = movies.id")
                     //.where(whereClause, movie.getId())
                     .orderBy("id ASC")
-                    .limit(50).execute();
+                    .limit(4).execute();
             // This is how you execute a query
             return queryResults;
         }
