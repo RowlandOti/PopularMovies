@@ -25,6 +25,8 @@ import android.view.ViewGroup;
 
 /**
  * Created by Oti Rowland on 1/2/2016.
+ *
+ * see <a href="http://stackoverflow.com/a/32736113">How to use RecyclerView inside NestedScrollView</a>
  */
 public class WrappingLinearLayoutManager extends LinearLayoutManager {
 
