@@ -84,8 +84,6 @@ public class DetailFragment extends Fragment {
     @Nullable
     @Bind(R.id.toolbar)
     Toolbar mToolbar;
-    @Bind(R.id.movie_detail_poster_image_view)
-    ImageView mPosterMovie;
     @Bind(R.id.movie_detail_backdrop_image_view)
     ImageView mBackdropMovie;
     @Bind(R.id.movie_statistic_favourite_text_view)
