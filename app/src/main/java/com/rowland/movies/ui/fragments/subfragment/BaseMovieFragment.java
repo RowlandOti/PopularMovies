@@ -151,13 +151,15 @@ public class BaseMovieFragment extends Fragment implements SwipeRefreshLayout.On
 
     // Start the service
     protected void startMovieIntentService() {
-        // ToDo: Do not query online if its favourites -- override this method in FavouriteFragment
-        Intent i = new Intent(getActivity(), MovieIntentService.class);
-        i.putExtra(MovieIntentService.REQUEST_SORT_TYPE_STRING, mSortOrder.getSortOrder());
-        i.putExtra(MovieIntentService.REQUEST_PAGE_NO_INT, mRequestPageNo);
-        getActivity().startService(i);
-        // Increment requestPage no.
-        mRequestPageNo++;
+        // Don't query internet for locally favoured movies
+        if(mSortOrder != ESortOrder.FAVOURITE_DESCENDING) {
+            Intent i = new Intent(getActivity(), MovieIntentService.class);
+            i.putExtra(MovieIntentService.REQUEST_SORT_TYPE_STRING, mSortOrder.getSortOrder());
+            i.putExtra(MovieIntentService.REQUEST_PAGE_NO_INT, mRequestPageNo);
+            getActivity().startService(i);
+            // Increment requestPage no.
+            mRequestPageNo++;
+        }
     }
 
     // Get the no. of grid columns to use

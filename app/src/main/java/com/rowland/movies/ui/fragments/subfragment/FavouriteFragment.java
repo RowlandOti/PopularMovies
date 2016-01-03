@@ -117,4 +117,13 @@ public class FavouriteFragment extends BaseMovieFragment implements LoaderManage
         // We reset the loader, nullify old data
         mMovieAdapter.addAll(null);
     }
+
+    // When RefreshLayout is triggered reload the loader
+    @Override
+    public void onRefresh() {
+        // Refresh the Loader
+        getLoaderManager().restartLoader(0, null, this);
+        // Set refreshing to false
+        mSwRefreshLayout.setRefreshing(false);
+    }
 }
