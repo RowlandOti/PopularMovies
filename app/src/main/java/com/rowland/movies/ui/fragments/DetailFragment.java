@@ -249,7 +249,7 @@ public class DetailFragment extends Fragment {
         // Set the RecycleView's ItemAnimators
         mTrailerRecycleView.setItemAnimator(new DefaultItemAnimator());
         // Initialize new Trailer adapter
-        mTrailerAdapter = new TrailerAdapter(mTrailerList);
+        mTrailerAdapter = new TrailerAdapter(mTrailerList, getActivity());
         // Set RecycleView's adapter
         mTrailerRecycleView.setAdapter(mTrailerAdapter);
         // Trailer LoaderCallBack implementation

@@ -19,6 +19,7 @@ package com.rowland.movies.ui.adapters;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,6 +31,7 @@ import com.rowland.movies.BuildConfig;
 import com.rowland.movies.R;
 import com.rowland.movies.rest.enums.EBaseURlTypes;
 import com.rowland.movies.rest.models.Trailer;
+import com.rowland.movies.ui.activities.DetailActivity;
 import com.rowland.movies.utilities.Utilities;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -49,10 +51,15 @@ public class TrailerAdapter extends RecyclerView.Adapter<TrailerAdapter.CustomVi
     private static final String LOG_TAG = TrailerAdapter.class.getSimpleName();
     // A list of the movie items
     private List<Trailer> mTrailerList;
+    // The container Activity
+    private DetailActivity mActivity;
 
     // Default constructor
-    public TrailerAdapter(List<Trailer> trailerList) {
+    public TrailerAdapter(List<Trailer> trailerList, FragmentActivity activity) {
+        // The list of trailers
         this.mTrailerList = trailerList;
+        // Acquire the containing activity
+        this.mActivity = (DetailActivity) activity;
     }
 
     // Called when RecyclerView needs a new CustomViewHolder of the given type to represent an item.
@@ -136,7 +143,7 @@ public class TrailerAdapter extends RecyclerView.Adapter<TrailerAdapter.CustomVi
                     // Set any data to send
                     youTubeIntent.putExtra("force_fullscreen", true);
                     // Use Intents to play trailer
-                    //mActivity(youTubeIntent);
+                    mActivity.startActivity(youTubeIntent);
                 }
             });
 

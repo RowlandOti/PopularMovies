@@ -180,10 +180,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.CustomViewHo
                 mSortTypeIconImageView.setImageResource(R.drawable.ic_rated_black_48dp);
                 mSortTypeValueTextView.setText(String.format("%d/10", Math.round(movie.getVoteAverage())));
             }
-            // Set Favourites
-            if (movie.getIsFavourite()) {
-                mSortTypeIconImageView.setImageResource(R.drawable.ic_favourite_black_48dp);
-            }
+
             // Build the image url
             String imageUrl = EBaseURlTypes.MOVIE_API_IMAGE_BASE_URL.getUrlType() + EBaseImageSize.IMAGE_SIZE_W154.getImageSize() + movie.getPosterPath();
             // Use Picasso to load the images
