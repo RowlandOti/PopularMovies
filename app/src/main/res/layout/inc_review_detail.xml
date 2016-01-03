@@ -36,6 +36,8 @@
         android:layout_height="wrap_content"
         android:paddingBottom="16dp"
         android:paddingTop="16dp"
+        android:maxLines = "10"
+        android:minLines="1"
         android:textColor="@color/apptheme_secondary_text_grey"
         tools:text="Maybe Sam Mendes and screenwriter John Logan did succeed at creating a perfect homage to the Roger Moore era Bond films? Because in reality, none of those films standout as great movies. From start to finish, Spectre feels like someone filling out a madlibs of Bond scenes, and praying that when they read it back, it makes some" />
 </LinearLayout>
