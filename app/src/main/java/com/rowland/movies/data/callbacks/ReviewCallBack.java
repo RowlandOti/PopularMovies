@@ -48,7 +48,6 @@ public class ReviewCallBack implements Callback<ReviewCollection> {
     @Override
     public void onResponse(Response<ReviewCollection> response, Retrofit retrofit) {
 
-        // Check status of response before proceeding
         //if (response.isSuccess() && response.errorBody() == null) {
         if (response.isSuccess()) {
             // Collection available
@@ -60,7 +59,7 @@ public class ReviewCallBack implements Callback<ReviewCollection> {
             // BroadCast the changes locally
             LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent(ReviewLoader.INTENT_ACTION));
         } else {
-            //  We have an error
+            // Check whether we are in debugging mode
             if (BuildConfig.IS_DEBUG_MODE) {
                 // we got an error message - Do error handling here
                 Log.d(LOG_TAG, response.errorBody().toString());

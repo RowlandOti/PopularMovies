@@ -27,9 +27,6 @@ import com.rowland.movies.data.loaders.MovieLoader;
 import com.rowland.movies.data.repository.MovieRepository;
 import com.rowland.movies.rest.collections.MovieCollection;
 import com.rowland.movies.rest.enums.ESortOrder;
-import com.rowland.movies.rest.models.RestError;
-
-import java.io.IOException;
 
 import retrofit.Callback;
 import retrofit.Response;
@@ -55,7 +52,6 @@ public class MovieCallBack implements Callback<MovieCollection> {
     @Override
     public void onResponse(Response<MovieCollection> response, Retrofit retrofit) {
         // Check status of response before proceeding
-        //if (response.isSuccess() && response.errorBody() == null) {
         if (response.isSuccess()) {
             // Collection available
             MovieCollection reviewCollection = response.body();
@@ -66,21 +62,10 @@ public class MovieCallBack implements Callback<MovieCollection> {
             // BroadCast the changes locally
             LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent(MovieLoader.INTENT_ACTION));
         } else {
-
-            try {
-                RestError restError = (RestError) retrofit
-                        .responseConverter(RestError.class, RestError.class.getAnnotations())
-                        .convert(response.errorBody());
-                if (BuildConfig.IS_DEBUG_MODE) {
-                    // we got an error message - Do error handling here
-                    Log.d(LOG_TAG, restError.getErrorMesage());
-                    Log.d(LOG_TAG, response.errorBody().toString());
-                    //For getting error code. Code is integer value like 200,404 etc
-                    Log.d(LOG_TAG, String.valueOf(restError.getCode()));
-                }
-
-            } catch (IOException e) {
-                e.printStackTrace();
+            // Check whether we are in debugging mode;
+            if (BuildConfig.IS_DEBUG_MODE) {
+                // we got an error message - Do error handling here
+                Log.d(LOG_TAG, response.errorBody().toString());
             }
         }
     }

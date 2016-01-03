@@ -49,7 +49,6 @@ public class TrailerCallBack implements Callback<TrailerCollection> {
     public void onResponse(Response<TrailerCollection> response, Retrofit retrofit) {
 
         // Check status of response before proceeding
-        //if (response.isSuccess() && response.errorBody() == null) {
         if (response.isSuccess()) {
             // Collection available
             TrailerCollection trailerCollection = response.body();
