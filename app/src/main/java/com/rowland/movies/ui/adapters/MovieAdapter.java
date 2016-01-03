@@ -60,7 +60,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.CustomViewHo
     // Context instance
     private Context mContext;
     // The container Activity
-    private MainActivity mActivity;
+    private FragmentActivity mActivity;
 
     public MovieAdapter(List<Movie> movieList, Context context, FragmentActivity activity) {
         // Acquire the context
@@ -68,7 +68,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.CustomViewHo
         // Acquire a Calendar object
         this.mCalendar = Calendar.getInstance();
         // Acquire the containing activity
-        this.mActivity = (MainActivity) activity;
+        this.mActivity = activity;
         // Initially add local movies to list
         addAll(movieList);
     }
@@ -158,8 +158,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.CustomViewHo
             // Set click listener on card view
             mGridItemContainer.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    // Execute Callback
-                    mActivity.onMovieSelected(movie.getId_());
+                    // Check which instance we are dealing with
+                    if (mActivity instanceof MainActivity) {
+                        // Execute Callback
+                        ((MainActivity) mActivity).onMovieSelected(movie.getId_());
+                    }
                 }
             });
             // Set movie title
