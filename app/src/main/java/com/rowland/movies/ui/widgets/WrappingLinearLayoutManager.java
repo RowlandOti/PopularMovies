@@ -36,6 +36,10 @@ public class WrappingLinearLayoutManager extends LinearLayoutManager {
         super(context);
     }
 
+    public WrappingLinearLayoutManager(Context context, int orientation, boolean reverseLayout) {
+        super(context, orientation, reverseLayout);
+    }
+
     @Override
     public boolean canScrollVertically() {
         return false;

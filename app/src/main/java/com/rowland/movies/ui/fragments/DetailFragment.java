@@ -25,6 +25,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -55,7 +56,6 @@ import com.rowland.movies.rest.services.TrailerIntentService;
 import com.rowland.movies.ui.activities.DetailActivity;
 import com.rowland.movies.ui.adapters.ReviewAdapter;
 import com.rowland.movies.ui.adapters.TrailerAdapter;
-import com.rowland.movies.ui.widgets.WrappedGridLayoutManager;
 import com.rowland.movies.ui.widgets.WrappingLinearLayoutManager;
 import com.rowland.movies.utilities.Utilities;
 import com.squareup.picasso.Callback;
@@ -197,9 +197,9 @@ public class DetailFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // Initialize layout manager
-        final WrappingLinearLayoutManager mLinearLayoutManger = new WrappingLinearLayoutManager(getContext());
+        final WrappingLinearLayoutManager mVerticalLinearLayoutManger = new WrappingLinearLayoutManager(getContext());
         // Set the RecycleView's layout manager
-        mReviewRecycleView.setLayoutManager(mLinearLayoutManger);
+        mReviewRecycleView.setLayoutManager(mVerticalLinearLayoutManger);
         // Set the RecycleView's size fixing
         mReviewRecycleView.setHasFixedSize(false);
         // Set the RecycleView's ItemAnimators
@@ -246,9 +246,9 @@ public class DetailFragment extends Fragment {
         };
 
         // Initialize layout manager
-        final WrappedGridLayoutManager mStaggeredLayoutManger = new WrappedGridLayoutManager(getContext(), 2);
+        final WrappingLinearLayoutManager mHorizontalLinearLayoutManger = new WrappingLinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         // Set the RecycleView's layout manager
-        mTrailerRecycleView.setLayoutManager(mStaggeredLayoutManger);
+        mTrailerRecycleView.setLayoutManager(mHorizontalLinearLayoutManger);
         // Set the RecycleView's size fixing
         mTrailerRecycleView.setHasFixedSize(false);
         // Set the RecycleView's ItemAnimators
