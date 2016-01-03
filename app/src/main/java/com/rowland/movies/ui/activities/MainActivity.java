@@ -30,7 +30,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.rowland.movies.R;
-import com.rowland.movies.rest.models.Movie;
 import com.rowland.movies.ui.fragments.DetailFragment;
 import com.rowland.movies.ui.fragments.MainFragment;
 
@@ -128,23 +127,20 @@ public class MainActivity extends BaseToolBarActivity implements MainFragment.IM
     }
 
     @Override
-    public void onMovieSelected(Movie movie) {
+    public void onMovieSelected(long movieId) {
         // Check for two-pane
-        if (mIsTwoPane)
-        {
+        if (mIsTwoPane) {
             // Create a Bundle object
             Bundle args = new Bundle();
             // Set the arguments
-            args.putSerializable(DetailFragment.MOVIE_KEY, movie);
+            args.putLong(DetailFragment.MOVIE_KEY, movieId);
             // Show the DetailFragment
             showDetailFragment(args);
-        }
-        else
-        {
+        } else {
             // Create an Intent object
             Intent intent = new Intent(this, DetailActivity.class);
             // Set extras - pass MOVIE_KEY
-            intent.putExtra(DetailFragment.MOVIE_KEY, movie);
+            intent.putExtra(DetailFragment.MOVIE_KEY, movieId);
             // Start the DetailActivity
             startActivity(intent);
         }

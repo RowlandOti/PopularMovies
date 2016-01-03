@@ -22,17 +22,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 
 import com.rowland.movies.BuildConfig;
-import com.rowland.movies.data.interfaces.ILoader;
 import com.rowland.movies.data.loaders.BaseLoader;
 import com.rowland.movies.utilities.Utilities;
 
 /**
  * Created by Oti Rowland on 12/21/2015.
- *
+ * <p/>
  * This above broadcast receiver will be called only when Network state change
  * to connected and not on disconnected.
  */
@@ -43,8 +41,7 @@ public class NetworkChangeBroadCastReceiver extends BroadcastReceiver {
     // The loader that owns this listener
     private BaseLoader mLoader;
 
-    public NetworkChangeBroadCastReceiver(BaseLoader loader)
-    {
+    public NetworkChangeBroadCastReceiver(BaseLoader loader) {
         // Assign loader to this listener
         this.mLoader = loader;
         // Create an IntentFilter
@@ -54,17 +51,17 @@ public class NetworkChangeBroadCastReceiver extends BroadcastReceiver {
         // Register reciever to listen for above IntentFilter
         mLoader.getContext().registerReceiver(this, intentFilter);
     }
+
     // Inform if contents of database is changed
     @Override
-    public void onReceive(Context context, Intent intent)
-    {
+    public void onReceive(Context context, Intent intent) {
         // network status
         boolean isOnline = Utilities.NetworkUtility.isNetworkAvailable(context);
         // Set network status of loader
         mLoader.setIsOnline(isOnline);
         // Check wether we are in debug mode
         if (BuildConfig.IS_DEBUG_MODE) {
-            Log.d(LOG_TAG, "Connection broadcast fired from " + mLoader.getClass().getSimpleName()+ " " +mLoader.getIsOnline());
+            Log.d(LOG_TAG, "Connection broadcast fired from " + mLoader.getClass().getSimpleName() + " " + mLoader.getIsOnline());
         }
     }
 }

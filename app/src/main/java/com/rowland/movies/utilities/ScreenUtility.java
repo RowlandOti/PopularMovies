@@ -31,8 +31,7 @@ public class ScreenUtility {
      * value for the current screen.
      *
      * @param context Context instance
-     * @param dip The DIP value to convert
-     *
+     * @param dip     The DIP value to convert
      * @return The pixels value for the current screen of the given DIP value.
      */
     public static int convertDIPToPixels(Context context, int dip) {
@@ -45,8 +44,7 @@ public class ScreenUtility {
      * value for the current screen.
      *
      * @param context Context instance
-     * @param dip The DIP value to convert
-     *
+     * @param dip     The DIP value to convert
      * @return The pixels value for the current screen of the given DIP value.
      */
     public static int convertDIPToPixels(Context context, float dip) {
@@ -59,8 +57,7 @@ public class ScreenUtility {
      * value for the current screen.
      *
      * @param context Context instance
-     * @param pixels The pixels value to convert
-     *
+     * @param pixels  The pixels value to convert
      * @return The DIP value for the current screen of the given pixels value.
      */
     public static float convertPixelsToDIP(Context context, int pixels) {
@@ -73,7 +70,6 @@ public class ScreenUtility {
      * {@link Point#x} is the screen width and {@link Point#y} is the screen height.
      *
      * @param context Context instance
-     *
      * @return The current screen dimensions in DIP.
      */
     public static Point getScreenDimensionsInDIP(Context context) {
@@ -95,7 +91,6 @@ public class ScreenUtility {
 
     /**
      * @param context Context instance
-     *
      * @return [true] if the device is in landscape orientation, [false] otherwise.
      */
     public static boolean isInLandscapeOrientation(Context context) {
@@ -105,7 +100,6 @@ public class ScreenUtility {
 
     /**
      * @param context Context instance
-     *
      * @return [true] if the device has a small screen, [false] otherwise.
      */
     public static boolean hasSmallScreen(Context context) {
@@ -114,7 +108,6 @@ public class ScreenUtility {
 
     /**
      * @param context Context instance
-     *
      * @return [true] if the device has a normal screen, [false] otherwise.
      */
     public static boolean hasNormalScreen(Context context) {
@@ -123,7 +116,6 @@ public class ScreenUtility {
 
     /**
      * @param context Context instance
-     *
      * @return [true] if the device has a large screen, [false] otherwise.
      */
     public static boolean hasLargeScreen(Context context) {
@@ -132,7 +124,6 @@ public class ScreenUtility {
 
     /**
      * @param context Context instance
-     *
      * @return [true] if the device has an extra large screen, [false] otherwise.
      */
     public static boolean hasXLargeScreen(Context context) {
@@ -141,18 +132,17 @@ public class ScreenUtility {
 
     /**
      * The size of the screen, one of 4 possible values:
-     *
+     * <p/>
      * <ul>
-     *     <li>http://developer.android.com/reference/android/content/res/Configuration.html#SCREENLAYOUT_SIZE_SMALL</li>
-     *     <li>http://developer.android.com/reference/android/content/res/Configuration.html#SCREENLAYOUT_SIZE_NORMAL</li>
-     *     <li>http://developer.android.com/reference/android/content/res/Configuration.html#SCREENLAYOUT_SIZE_LARGE</li>
-     *     <li>http://developer.android.com/reference/android/content/res/Configuration.html#SCREENLAYOUT_SIZE_XLARGE</li>
+     * <li>http://developer.android.com/reference/android/content/res/Configuration.html#SCREENLAYOUT_SIZE_SMALL</li>
+     * <li>http://developer.android.com/reference/android/content/res/Configuration.html#SCREENLAYOUT_SIZE_NORMAL</li>
+     * <li>http://developer.android.com/reference/android/content/res/Configuration.html#SCREENLAYOUT_SIZE_LARGE</li>
+     * <li>http://developer.android.com/reference/android/content/res/Configuration.html#SCREENLAYOUT_SIZE_XLARGE</li>
      * </ul>
-     *
+     * <p/>
      * See http://developer.android.com/reference/android/content/res/Configuration.html#screenLayout for more details.
      *
      * @param context Context instance
-     *
      * @return The size of the screen
      */
     public static int getScreenSize(Context context) {

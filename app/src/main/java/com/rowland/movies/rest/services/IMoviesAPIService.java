@@ -48,9 +48,9 @@ public interface IMoviesAPIService {
 
     // Load the movie's trailer videos
     @GET(MOVIE_TRAILERS_ENDPOINT)
-    Call<TrailerCollection> loadTrailerData(@Path("id") int mTmdbMovieId, @Query("page") int pageNo, @Query("api_key") String apiKey);
+    Call<TrailerCollection> loadTrailerData(@Path("id") long mTmdbMovieId, @Query("page") int pageNo, @Query("api_key") String apiKey);
 
     // Load the movie's trailers
     @GET(MOVIE_REVIEWS_ENDPOINT)
-    Call<ReviewCollection> loadReviewData(@Path("id") int mTmdbMovieId, @Query("page") int pageNo, @Query("api_key") String apiKey);
+    Call<ReviewCollection> loadReviewData(@Path("id") long mTmdbMovieId, @Query("page") int pageNo, @Query("api_key") String apiKey);
 }

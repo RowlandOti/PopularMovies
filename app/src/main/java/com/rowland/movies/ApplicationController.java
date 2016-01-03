@@ -25,8 +25,8 @@ import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp.StethoInterceptor;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.rowland.movies.rest.enums.EBaseURlTypes;
 import com.rowland.movies.rest.enums.EAPITypes;
+import com.rowland.movies.rest.enums.EBaseURlTypes;
 import com.rowland.movies.rest.interceptors.SessionRequestInterceptor;
 import com.rowland.movies.rest.models.Movie;
 import com.rowland.movies.rest.models.Review;
@@ -65,34 +65,6 @@ public class ApplicationController extends Application {
         return instance;
     }
 
-    @Override
-    public void onCreate() {
-        /**
-         *  Retrofit and OkHttp can be hard to troubleshoot when trying to step through the various layers of
-         *  abstraction in the libraries. Facebook's Stetho project enables you to use Chrome to inspect all network traffic.
-         *  Visit chrome://inspect on your Chrome desktop and your emulator/device should appear.
-         *  Click on Inspect to launch a new window. Click on the Network tab. Now you can start watching network traffic
-         *  between your emulator or device in real-time!
-         */
-        super.onCreate();
-        // Acquire a configuration object
-        Configuration.Builder cfg = new Configuration.Builder(this);
-        // Declare our models in it
-        cfg.addModelClass(Movie.class);
-        cfg.addModelClass(Trailer.class);
-        cfg.addModelClass(Review.class);
-        // Initialize ActiveAndroid
-        ActiveAndroid.initialize(cfg.create());
-        //ActiveAndroid.initialize(this);
-        instance = this;
-        // Initialize Facebook Stetho
-        Stetho.initializeWithDefaults(this);
-    }
-    @Override
-    public void onTerminate() {
-        super.onTerminate();
-        ActiveAndroid.dispose();
-    }
     // Needed for factory pattern we’ll implement later in our singleton
     // Returns the single Retrofit instance
     public static Retrofit getRetrofit() {
@@ -120,6 +92,37 @@ public class ApplicationController extends Application {
         // Wollah! Retrofit instance is served hot.
         return retrofit;
     }
+
+    @Override
+    public void onCreate() {
+        /**
+         *  Retrofit and OkHttp can be hard to troubleshoot when trying to step through the various layers of
+         *  abstraction in the libraries. Facebook's Stetho project enables you to use Chrome to inspect all network traffic.
+         *  Visit chrome://inspect on your Chrome desktop and your emulator/device should appear.
+         *  Click on Inspect to launch a new window. Click on the Network tab. Now you can start watching network traffic
+         *  between your emulator or device in real-time!
+         */
+        super.onCreate();
+        // Acquire a configuration object
+        Configuration.Builder cfg = new Configuration.Builder(this);
+        // Declare our models in it
+        cfg.addModelClass(Movie.class);
+        cfg.addModelClass(Trailer.class);
+        cfg.addModelClass(Review.class);
+        // Initialize ActiveAndroid
+        ActiveAndroid.initialize(cfg.create());
+        //ActiveAndroid.initialize(this);
+        instance = this;
+        // Initialize Facebook Stetho
+        Stetho.initializeWithDefaults(this);
+    }
+
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+        ActiveAndroid.dispose();
+    }
+
     // Factory method will return to us the appropriate IMovieService
     public IMoviesAPIService getMovieServiceOfApiType(EAPITypes apiType) {
         // with appriopriate apiType, get the IRetrofitApi with correct Endpoint

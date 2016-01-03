@@ -34,12 +34,12 @@ import retrofit.Call;
  * Created by Oti Rowland on 12/25/2015.
  */
 public class MovieIntentService extends IntentService {
-    // The class Log identifier
-    private static final String LOG_TAG = MovieIntentService.class.getSimpleName();
     // The sort type string identifier
     public static final String REQUEST_SORT_TYPE_STRING = "SORT_TYPE";
     // The page no. string identifier
     public static final String REQUEST_PAGE_NO_INT = "PAGE_NO";
+    // The class Log identifier
+    private static final String LOG_TAG = MovieIntentService.class.getSimpleName();
     // The request sort type
     private String requestSortType;
     // The request page  no.

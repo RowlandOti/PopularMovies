@@ -27,8 +27,7 @@ import java.io.IOException;
 /**
  * Created by Oti Rowland on 12/23/2015.
  */
-public class SessionRequestInterceptor implements Interceptor
-{
+public class SessionRequestInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
 

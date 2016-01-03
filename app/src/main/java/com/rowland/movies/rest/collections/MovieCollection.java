@@ -45,72 +45,56 @@ public class MovieCollection {
     private List<Movie> results;
 
     /**
-     *
-     * @return
-     * The page
+     * @return The page
      */
     public Integer getPage() {
         return page;
     }
 
     /**
-     *
-     * @param page
-     * The page
+     * @param page The page
      */
     public void setPage(Integer page) {
         this.page = page;
     }
 
     /**
-     *
-     * @return
-     * The results
+     * @return The results
      */
     public List<Movie> getResults() {
         return results;
     }
 
     /**
-     *
-     * @param results
-     * The results
+     * @param results The results
      */
     public void setResults(List<Movie> results) {
         this.results = results;
     }
 
     /**
-     *
-     * @return
-     * The totalResults
+     * @return The totalResults
      */
     public Integer getTotalResults() {
         return totalResults;
     }
 
     /**
-     *
-     * @param totalResults
-     * The total_results
+     * @param totalResults The total_results
      */
     public void setTotalResults(Integer totalResults) {
         this.totalResults = totalResults;
     }
 
     /**
-     *
-     * @return
-     * The totalPages
+     * @return The totalPages
      */
     public Integer getTotalPages() {
         return totalPages;
     }
 
     /**
-     *
-     * @param totalPages
-     * The total_pages
+     * @param totalPages The total_pages
      */
     public void setTotalPages(Integer totalPages) {
         this.totalPages = totalPages;

@@ -100,18 +100,18 @@ public class SearchActivity extends BaseToolBarActivity {
             ft.commit();
         }
     }
+
     // Get Search query from Intent
     private String getSearchQuery() {
         // The search query
         String searchQuery = "";
         // Filter the relevant Intent
-        if (Intent.ACTION_SEARCH.equals(getIntent().getAction()))
-        {
+        if (Intent.ACTION_SEARCH.equals(getIntent().getAction())) {
             // Acquire the search query
             searchQuery = getIntent().getStringExtra(SearchManager.QUERY);
         }
         // Return the search string
-        return  searchQuery;
+        return searchQuery;
     }
 
 }

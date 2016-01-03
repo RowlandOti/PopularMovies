@@ -39,7 +39,7 @@ import butterknife.ButterKnife;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class SearchFragment extends BaseMovieFragment implements LoaderManager.LoaderCallbacks<List<Movie>>{
+public class SearchFragment extends BaseMovieFragment implements LoaderManager.LoaderCallbacks<List<Movie>> {
 
     // Logging tracker for this class
     private final String LOG_TAG = SearchFragment.class.getSimpleName();
@@ -50,6 +50,7 @@ public class SearchFragment extends BaseMovieFragment implements LoaderManager.L
     public SearchFragment() {
         super();
     }
+
     // Create fragment with arguments
     public static SearchFragment newInstance(Bundle args) {
         // Create the new fragment instance
@@ -63,8 +64,7 @@ public class SearchFragment extends BaseMovieFragment implements LoaderManager.L
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Check if we have arguments
-        if (getArguments() != null)
-        {
+        if (getArguments() != null) {
             mQuery = getArguments().getString(SearchManager.QUERY);
         }
     }
@@ -92,8 +92,7 @@ public class SearchFragment extends BaseMovieFragment implements LoaderManager.L
         // Initialize the sort order
         mSortOrder = ESortOrder.POPULAR_DESCENDING;
         // Check if we a value the query string
-        if (mQuery != null)
-        {
+        if (mQuery != null) {
             // Create a Bundle object
             Bundle data = new Bundle();
             // Assign the query string as argument
@@ -102,6 +101,7 @@ public class SearchFragment extends BaseMovieFragment implements LoaderManager.L
             getLoaderManager().initLoader(0, data, this);
         }
     }
+
     //Here you Save your data
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -112,7 +112,7 @@ public class SearchFragment extends BaseMovieFragment implements LoaderManager.L
     @Override
     public Loader<List<Movie>> onCreateLoader(int id, Bundle args) {
         // Create new loader
-        MovieLoader movieLoader =  new MovieLoader(getActivity(), mSortOrder);
+        MovieLoader movieLoader = new MovieLoader(getActivity(), mSortOrder);
         // Return new loader
         return movieLoader;
     }

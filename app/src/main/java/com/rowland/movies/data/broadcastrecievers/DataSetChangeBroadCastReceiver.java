@@ -21,36 +21,32 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.support.v4.content.Loader;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.rowland.movies.BuildConfig;
-import com.rowland.movies.data.interfaces.ILoader;
 import com.rowland.movies.data.loaders.BaseLoader;
 
 
 /**
  * Created by Oti Rowland on 12/21/2015.
  */
-public class DataSetChangeBroadCastReceiver extends BroadcastReceiver
-{
+public class DataSetChangeBroadCastReceiver extends BroadcastReceiver {
     // The class Log identifier
     private static final String LOG_TAG = DataSetChangeBroadCastReceiver.class.getSimpleName();
     // The loader that owns this listener
     final private BaseLoader mLoader;
 
-    public DataSetChangeBroadCastReceiver(BaseLoader loader, IntentFilter mLFilter)
-    {
+    public DataSetChangeBroadCastReceiver(BaseLoader loader, IntentFilter mLFilter) {
         // Assign loader to this listener
         this.mLoader = loader;
         // Register reciever to listen for above IntentFilter
         LocalBroadcastManager.getInstance(mLoader.getContext()).registerReceiver(this, mLFilter);
     }
+
     // Inform if contents of database is changed
     @Override
-    public void onReceive(Context context, Intent intent)
-    {
+    public void onReceive(Context context, Intent intent) {
         // Notify the loader of content change
         mLoader.onContentChanged();
         // Check wether we are in debug mode

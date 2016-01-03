@@ -152,13 +152,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.CustomViewHo
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+
         // Bind the data to the holder views
         private void bindTo(final Movie movie) {
             // Set click listener on card view
             mGridItemContainer.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     // Execute Callback
-                    mActivity.onMovieSelected(movie);
+                    mActivity.onMovieSelected(movie.getId_());
                 }
             });
             // Set movie title

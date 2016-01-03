@@ -82,7 +82,7 @@ public class FavouriteFragment extends BaseMovieFragment implements LoaderManage
         // Initialize the sort order
         mSortOrder = ESortOrder.FAVOURITE_DESCENDING;
         // Call service if first launch of fragment
-        if(isLaunch) {
+        if (isLaunch) {
             startMovieIntentService();
             isLaunch = false;
         }
@@ -93,7 +93,7 @@ public class FavouriteFragment extends BaseMovieFragment implements LoaderManage
     @Override
     public Loader<List<Movie>> onCreateLoader(int id, Bundle args) {
         // Create new loader
-        MovieLoader movieLoader =  new MovieLoader(getActivity(), mSortOrder);
+        MovieLoader movieLoader = new MovieLoader(getActivity(), mSortOrder);
         // Return new loader
         return movieLoader;
     }

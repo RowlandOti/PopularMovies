@@ -29,7 +29,6 @@ import android.widget.TextView;
 import com.rowland.movies.R;
 import com.rowland.movies.objects.ListPopupMenu;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;

@@ -17,10 +17,7 @@
 
 package com.rowland.movies.rest.services;
 
-import android.util.Log;
-
 import com.rowland.movies.ApplicationController;
-import com.rowland.movies.BuildConfig;
 
 import retrofit.Retrofit;
 

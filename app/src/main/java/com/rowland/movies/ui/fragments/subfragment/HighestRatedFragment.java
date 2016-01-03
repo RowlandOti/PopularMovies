@@ -83,7 +83,7 @@ public class HighestRatedFragment extends BaseMovieFragment implements LoaderMan
         // Initialize the sort order
         mSortOrder = ESortOrder.HIGHEST_RATED_DESCENDING;
         // Call service if first launch of fragment
-        if(isLaunch) {
+        if (isLaunch) {
             startMovieIntentService();
             isLaunch = false;
         }

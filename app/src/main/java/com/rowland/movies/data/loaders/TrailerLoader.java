@@ -33,10 +33,10 @@ import java.util.List;
  * Created by Oti Rowland on 12/12/2015.
  */
 public class TrailerLoader extends BaseLoader {
-    // The class Log identifier
-    private static final String LOG_TAG = TrailerLoader.class.getSimpleName();
     // DataChangeObserver Intent Receiver action
     public static final String INTENT_ACTION = "com.rowland.movies.TRAILER_DATA_CHANGE";
+    // The class Log identifier
+    private static final String LOG_TAG = TrailerLoader.class.getSimpleName();
     // The movie id whose trailersList are retrieved
     private Movie mMovie;
 
@@ -63,7 +63,7 @@ public class TrailerLoader extends BaseLoader {
         // Movie repository in use
         TrailerRepository mTrailerRepository = new TrailerRepository();
         // Check for null
-        if(mMovie != null) {
+        if (mMovie != null) {
             // Return local list
             return mTrailerRepository.getAllWhere(mMovie);
         }

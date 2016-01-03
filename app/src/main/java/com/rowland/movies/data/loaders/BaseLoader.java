@@ -1,5 +1,3 @@
-
-
 /*
  * Copyright 2015 Oti Rowland
  *
@@ -21,16 +19,12 @@ package com.rowland.movies.data.loaders;
 
 import android.content.Context;
 import android.content.IntentFilter;
-import android.util.Log;
 
 import com.rowland.movies.BuildConfig;
 import com.rowland.movies.data.broadcastrecievers.DataSetChangeBroadCastReceiver;
-import com.rowland.movies.data.broadcastrecievers.NetworkChangeBroadCastReceiver;
 import com.rowland.movies.data.interfaces.ILoader;
 import com.rowland.movies.utilities.Utilities;
 import com.uwetrottmann.androidutils.GenericSimpleLoader;
-
-import java.io.IOException;
 
 /*ToDo: Improve Loader using tutorial below
 * <a>http://www.androiddesignpatterns.com/2012/08/implementing-loaders.html</a>
@@ -39,6 +33,8 @@ import java.io.IOException;
 * */
 public abstract class BaseLoader<T> extends GenericSimpleLoader<T> implements ILoader {
 
+    // DataChangeObserver Intent Receiver action
+    public static final String INTENT_ACTION = "com.rowland.movies.DATA_CHANGE";
     // The class Log identifier
     private static final String LOG_TAG = BaseLoader.class.getSimpleName();
     // An observer to listen for changes in data
@@ -47,8 +43,6 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> implements IL
     //private NetworkChangeBroadCastReceiver mNetworkChangeObserver;
     // Check if we are online
     private boolean isOnline = false;
-    // DataChangeObserver Intent Receiver action
-    public static final String INTENT_ACTION = "com.rowland.movies.DATA_CHANGE";
 
     public BaseLoader(Context context) {
         super(context);
@@ -101,11 +95,10 @@ public abstract class BaseLoader<T> extends GenericSimpleLoader<T> implements IL
         if (mDataSetChangeObserver != null) {
             // Sometimes the Fragment onDestroy() unregisters the observer before calling below code
             // See <a>http://stackoverflow.com/questions/6165070/receiver-not-registered-exception-error</a>
-            try  {
+            try {
                 getContext().unregisterReceiver(mDataSetChangeObserver);
                 mDataSetChangeObserver = null;
-            }
-            catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException e) {
                 // Check wether we are in debug mode
                 if (BuildConfig.IS_DEBUG_MODE) {
                     e.printStackTrace();

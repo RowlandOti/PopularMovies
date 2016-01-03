@@ -30,6 +30,10 @@ import java.util.List;
 public class TrailerCollection {
 
     // Gson annotations
+    @SerializedName("results")
+    @Expose
+    public List<Trailer> results;
+    // Gson annotations
     @SerializedName("id")
     @Expose
     private Integer id;
@@ -45,10 +49,6 @@ public class TrailerCollection {
     @SerializedName("total_pages")
     @Expose
     private Integer totalPages;
-    // Gson annotations
-    @SerializedName("results")
-    @Expose
-    public List<Trailer> results;
 
     /**
      * @return The results

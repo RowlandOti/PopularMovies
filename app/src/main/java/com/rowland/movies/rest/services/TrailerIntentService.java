@@ -34,14 +34,14 @@ import retrofit.Call;
  */
 public class TrailerIntentService extends IntentService {
 
-    // The class Log identifier
-    private static final String LOG_TAG =TrailerIntentService.class.getSimpleName();
     // The page no. string identifier
     public static final String REQUEST_PAGE_NO_INT = "PAGE_NO";
     // The movie remote id identifier
     public static final String REQUEST_MOVIE_REMOTE_ID = "MOVIE_REMOTE_ID";
+    // The class Log identifier
+    private static final String LOG_TAG = TrailerIntentService.class.getSimpleName();
     // The movie's remote id.
-    private int requestMovieRemoteId;
+    private long requestMovieRemoteId;
     // The request page  no.
     private int requestPageNo;
 
@@ -63,7 +63,7 @@ public class TrailerIntentService extends IntentService {
         //Acquire the page no.
         requestPageNo = intent.getIntExtra(REQUEST_PAGE_NO_INT, 1);
         //Acquire the movie's remote id
-        requestMovieRemoteId = intent.getIntExtra(REQUEST_MOVIE_REMOTE_ID, 1);
+        requestMovieRemoteId = intent.getLongExtra(REQUEST_MOVIE_REMOTE_ID, 1);
         // Set the sort type to use
         setPageNo(requestPageNo);
         // Set the movie's remote id
@@ -92,7 +92,7 @@ public class TrailerIntentService extends IntentService {
         requestPageNo = pageNo;
     }
 
-    public void setMovieRemoteId(int movieRemoteId) {
+    public void setMovieRemoteId(long movieRemoteId) {
         this.requestMovieRemoteId = movieRemoteId;
     }
 }

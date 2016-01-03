@@ -33,10 +33,10 @@ import java.util.List;
  * Created by Oti Rowland on 12/12/2015.
  */
 public class ReviewLoader extends BaseLoader {
-    // The class Log identifier
-    private static final String LOG_TAG = ReviewLoader.class.getSimpleName();
     // DataChangeObserver Intent Receiver action
     public static final String INTENT_ACTION = "com.rowland.movies.REVIEW_DATA_CHANGE";
+    // The class Log identifier
+    private static final String LOG_TAG = ReviewLoader.class.getSimpleName();
     // The movie id whose reviewsList are retrieved
     private Movie mMovie;
 
@@ -62,7 +62,7 @@ public class ReviewLoader extends BaseLoader {
         // Movie repository in use
         ReviewRepository mReviewRepository = new ReviewRepository();
         // Check for null
-        if(mMovie != null) {
+        if (mMovie != null) {
             // Return local list
             return mReviewRepository.getAllWhere(mMovie);
         }

@@ -22,22 +22,21 @@ package com.rowland.movies.rest.models;
  * Created by Rowland on 12/11/2015.
  */
 
-import android.util.Log;
-
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.rowland.movies.BuildConfig;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Table(name = "movies")
-public class Movie extends Model implements Serializable{
+public class Movie extends Model implements Serializable {
 
+    // The class Log identifier
+    private static final String LOG_TAG = Movie.class.getSimpleName();
     // Gson annotations
     @SerializedName("release_date")
     //ActiveAndroid Annotations
@@ -93,7 +92,7 @@ public class Movie extends Model implements Serializable{
     @Expose
     //ActiveAndroid Annotations
     @Column(name = "id_", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
-    private Integer id_;
+    private Long id_;
     // Gson annotations
     @SerializedName("popularity")
     @Expose
@@ -122,10 +121,6 @@ public class Movie extends Model implements Serializable{
     @Column(name = "isFavourite")
     private Boolean isFavourite;
 
-
-    // The class Log identifier
-    private static final String LOG_TAG = Movie.class.getSimpleName();
-
     public Movie() {
         // You have to call super in each constructor to create the table.
         super();
@@ -133,13 +128,14 @@ public class Movie extends Model implements Serializable{
 
     // Retrieve all the movie owned trailers
     public List<Trailer> getMovieTrailers() {
-        return getMany(Trailer.class, "Trailer");
+        return getMany(Trailer.class, "movie");
     }
 
     // Retrieve all the movie owned reviews
     public List<Review> getMovieReviews() {
         return getMany(Review.class, "Review");
     }
+
     /**
      * @return The isHighestRated
      */
@@ -167,6 +163,7 @@ public class Movie extends Model implements Serializable{
     public void setIsFavourite(boolean isFavourite) {
         this.isFavourite = isFavourite;
     }
+
     /**
      * @return The isPopular
      */
@@ -294,16 +291,16 @@ public class Movie extends Model implements Serializable{
     }
 
     /**
-     * @return The id
+     * @return The id_
      */
-    public Integer getId_() {
+    public Long getId_() {
         return id_;
     }
 
     /**
-     * @param id_ The id
+     * @param id_ The id_
      */
-    public void setId(Integer id_) {
+    public void setId_(Long id_) {
         this.id_ = id_;
     }
 

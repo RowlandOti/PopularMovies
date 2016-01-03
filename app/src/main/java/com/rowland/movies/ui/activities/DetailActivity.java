@@ -22,10 +22,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 import com.rowland.movies.R;
-import com.rowland.movies.rest.models.Movie;
 import com.rowland.movies.ui.fragments.DetailFragment;
-
-import java.io.Serializable;
 
 import butterknife.ButterKnife;
 
@@ -54,17 +51,18 @@ public class DetailActivity extends BaseToolBarActivity {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
             else {
-                Serializable movie = getIntent().getSerializableExtra(DetailFragment.MOVIE_KEY);
+                long movieId = getIntent().getLongExtra(DetailFragment.MOVIE_KEY, 0);
                 // Create a Bundle object
                 Bundle args = new Bundle();
                 // Set arguments on Bundle
-                args.putSerializable(DetailFragment.MOVIE_KEY, movie);
+                args.putLong(DetailFragment.MOVIE_KEY, movieId);
                 // Pass bundle to the fragment
                 showDetailFragment(args);
             }
         }
 
     }
+
     // Insert the DetailFragment
     private void showDetailFragment(Bundle args) {
         // Acquire the Fragment manger

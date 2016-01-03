@@ -1,4 +1,3 @@
-
 /*
 * Copyright 2015 David Cesarino de Sousa
 *
@@ -14,7 +13,7 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-package com.rowland.movies;
+package com.rowland.movies.ui.widgets;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;

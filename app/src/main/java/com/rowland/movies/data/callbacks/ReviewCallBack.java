@@ -26,11 +26,6 @@ import com.rowland.movies.BuildConfig;
 import com.rowland.movies.data.loaders.ReviewLoader;
 import com.rowland.movies.data.repository.ReviewRepository;
 import com.rowland.movies.rest.collections.ReviewCollection;
-import com.rowland.movies.rest.models.RestError;
-import com.rowland.movies.rest.models.Review;
-
-import java.io.IOException;
-import java.util.List;
 
 import retrofit.Callback;
 import retrofit.Response;
@@ -65,21 +60,10 @@ public class ReviewCallBack implements Callback<ReviewCollection> {
             // BroadCast the changes locally
             LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent(ReviewLoader.INTENT_ACTION));
         } else {
-
-            try {
-                RestError restError = (RestError) retrofit
-                        .responseConverter(RestError.class, RestError.class.getAnnotations())
-                        .convert(response.errorBody());
-                if (BuildConfig.IS_DEBUG_MODE) {
-                    // we got an error message - Do error handling here
-                    Log.d(LOG_TAG, restError.getErrorMesage());
-                    Log.d(LOG_TAG, response.errorBody().toString());
-                    //For getting error code. Code is integer value like 200,404 etc
-                    Log.d(LOG_TAG, String.valueOf(restError.getCode()));
-                }
-
-            } catch (IOException e) {
-                e.printStackTrace();
+            //  We have an error
+            if (BuildConfig.IS_DEBUG_MODE) {
+                // we got an error message - Do error handling here
+                Log.d(LOG_TAG, response.errorBody().toString());
             }
         }
     }

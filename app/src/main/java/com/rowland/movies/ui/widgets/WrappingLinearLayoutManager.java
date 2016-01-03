@@ -15,7 +15,7 @@
  *
  */
 
-package com.rowland.movies;
+package com.rowland.movies.ui.widgets;
 
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;

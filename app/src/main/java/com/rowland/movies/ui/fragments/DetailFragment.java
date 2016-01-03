@@ -25,14 +25,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -43,10 +42,11 @@ import android.widget.TextView;
 
 import com.rowland.movies.BuildConfig;
 import com.rowland.movies.R;
-import com.rowland.movies.WrappedGridLayoutManager;
-import com.rowland.movies.WrappingLinearLayoutManager;
+import com.rowland.movies.ui.widgets.WrappedGridLayoutManager;
+import com.rowland.movies.ui.widgets.WrappingLinearLayoutManager;
 import com.rowland.movies.data.loaders.ReviewLoader;
 import com.rowland.movies.data.loaders.TrailerLoader;
+import com.rowland.movies.data.repository.MovieRepository;
 import com.rowland.movies.rest.enums.EBaseImageSize;
 import com.rowland.movies.rest.enums.EBaseURlTypes;
 import com.rowland.movies.rest.models.Movie;
@@ -61,7 +61,6 @@ import com.rowland.movies.utilities.Utilities;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -81,59 +80,44 @@ public class DetailFragment extends Fragment {
     private final String LOG_TAG = DetailFragment.class.getSimpleName();
     // Is movie Favourite
     boolean isFavourite;
-
     // ButterKnife injected views
     @Nullable
     @Bind(R.id.toolbar)
     Toolbar mToolbar;
-
     @Bind(R.id.movie_detail_poster_image_view)
     ImageView mPosterMovie;
-
     @Bind(R.id.movie_detail_backdrop_image_view)
     ImageView mBackdropMovie;
-
     @Bind(R.id.movie_statistic_favourite_text_view)
     TextView mDetailFavouriteTextView;
-
     @Bind(R.id.movie_title_text_view)
     TextView mDetailMovieTitle;
-
     @Bind(R.id.movie_statistic_year_text_view)
     TextView mDetailMovieYear;
-
     @Bind(R.id.movie_statistic_rate_text_view)
     TextView mDetailMovieRate;
-
     @Bind(R.id.movie_statistic_popular_text_view)
     TextView mDetailMoviePopularity;
-
     @Bind(R.id.movie_overview_text_view)
     TextView mDetailMovieOverview;
-
     @Bind(R.id.favorite_fab)
     FloatingActionButton mFavoriteFab;
-
     @Bind(R.id.trailer_empty_text_view)
     TextView mDetailMovieEmptyTrailers;
-
     @Bind(R.id.review_empty_text_view)
     TextView mDetailMovieEmptyReviews;
-
     @Bind(R.id.trailer_progress_bar)
     ProgressBar mTrailerProgressBar;
-
     @Bind(R.id.review_progress_bar)
     ProgressBar mReviewProgressBar;
-
     @Bind(R.id.trailer_recycle_view)
     RecyclerView mTrailerRecycleView;
-
     @Bind(R.id.review_recycle_view)
     RecyclerView mReviewRecycleView;
-
     // The Movie model
-    private Serializable mMovie;
+    private Movie mMovie;
+    // The model key
+    private long id;
     // Reviews LoaderCallBack
     private LoaderManager.LoaderCallbacks mReviewLoaderCallBack;
     // Trailers LoaderCallBack
@@ -177,7 +161,9 @@ public class DetailFragment extends Fragment {
         // Check if we have any arguments
         if (getArguments() != null) {
             // Acquire the selected movie identifier
-            mMovie = getArguments().getSerializable(DetailFragment.MOVIE_KEY);
+            id = getArguments().getLong(DetailFragment.MOVIE_KEY);
+            // Acquire movie instance
+            mMovie = new MovieRepository().getWhereId(id);
             // Is movie Favourite
             isFavourite = ((Movie) mMovie).getIsFavourite();
             // Start services
@@ -224,7 +210,7 @@ public class DetailFragment extends Fragment {
                 // Set ProgressBar refresh on
                 mReviewProgressBar.setVisibility(View.VISIBLE);
                 // Create new loader
-                ReviewLoader movieLoader = new ReviewLoader(getActivity(), (Movie) mMovie);
+                ReviewLoader movieLoader = new ReviewLoader(getActivity(), mMovie);
                 // Return new loader
                 return movieLoader;
             }
@@ -336,6 +322,31 @@ public class DetailFragment extends Fragment {
         inflater.inflate(R.menu.menu_detail, menu);
     }
 
+    // Do actions based on selected menu
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Share a movie trailer
+            case R.id.action_share:
+                // Create an Intent object
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                // Acquire the video url
+                //String trailerUrl = String.format(EBaseURlTypes.YOUTUBE_VIDEO_URL.getUrlType(), trailer.getKey());
+                String trailerUrl = String.format(EBaseURlTypes.YOUTUBE_VIDEO_URL.getUrlType(), ((Movie) mMovie).getMovieTrailers());
+                // Put the trailer url
+                intent.putExtra(Intent.EXTRA_TEXT, trailerUrl);
+                // Put a subject for Intent
+                intent.putExtra(android.content.Intent.EXTRA_SUBJECT, ((Movie) mMovie).getOriginalTitle());
+                // Start the share Intent
+                startActivity(Intent.createChooser(intent, "Share Trailer"));
+                return true;
+            default: {
+                return super.onOptionsItemSelected(item);
+            }
+        }
+    }
+
     // Bind data to the views
     private void bindTo() {
         // Build the image url
@@ -369,7 +380,7 @@ public class DetailFragment extends Fragment {
         // Create an Intent object
         Intent i = new Intent(getActivity(), ReviewIntentService.class);
         // Set any extras to pass over
-        i.putExtra(ReviewIntentService.REQUEST_MOVIE_REMOTE_ID, ((Movie) mMovie).getId_());
+        i.putExtra(ReviewIntentService.REQUEST_MOVIE_REMOTE_ID, mMovie.getId_());
         i.putExtra(ReviewIntentService.REQUEST_PAGE_NO_INT, 1);
         // Start the service
         getActivity().startService(i);
@@ -384,7 +395,7 @@ public class DetailFragment extends Fragment {
         // Create an Intent object
         Intent i = new Intent(getActivity(), TrailerIntentService.class);
         // Set any extras to pass over
-        i.putExtra(TrailerIntentService.REQUEST_MOVIE_REMOTE_ID, ((Movie) mMovie).getId_());
+        i.putExtra(TrailerIntentService.REQUEST_MOVIE_REMOTE_ID, mMovie.getId_());
         i.putExtra(TrailerIntentService.REQUEST_PAGE_NO_INT, 1);
         // Start the service
         getActivity().startService(i);

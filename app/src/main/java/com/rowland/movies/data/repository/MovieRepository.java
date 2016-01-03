@@ -57,7 +57,7 @@ public class MovieRepository {
                 whereClause = "isFavourite = ?";
                 break;
         }
-        if(sortOrder != null) {
+        if (sortOrder != null) {
             // ToDo: Move this logic to the Movie model where it belongs
             // Query ActiveAndroid for list of data
             List<Movie> queryResults = new Select()
@@ -68,7 +68,18 @@ public class MovieRepository {
             // This is how you execute a query
             return queryResults;
         }
-        return  null;
+        return null;
+    }
+
+    public Movie getWhereId(long id) {
+
+        Movie queryResult = new Select()
+                .from(Movie.class)
+                .where("id_ = ?", id)
+                .executeSingle();
+        // This is how you execute a query
+        return queryResult;
+
     }
 
     // Save the movie list
@@ -95,7 +106,7 @@ public class MovieRepository {
                 if (BuildConfig.IS_DEBUG_MODE) {
                     Log.d(LOG_TAG, "Movie: " + movie.getTitle());
                     Log.d(LOG_TAG, "Movie: " + movie.getReleaseDate());
-                    Log.d(LOG_TAG, "Movie: " + movie.getId_());
+                    Log.d(LOG_TAG, "Movie: " + movie.getId());
                     Log.d(LOG_TAG, "Movie HighestRated: " + movie.getIsHighestRated());
                     Log.d(LOG_TAG, "Movie Favourite: " + movie.getIsFavourite());
                     Log.d(LOG_TAG, "Movie Popular: " + movie.getIsPopular());

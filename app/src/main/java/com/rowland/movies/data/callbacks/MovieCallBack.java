@@ -27,11 +27,9 @@ import com.rowland.movies.data.loaders.MovieLoader;
 import com.rowland.movies.data.repository.MovieRepository;
 import com.rowland.movies.rest.collections.MovieCollection;
 import com.rowland.movies.rest.enums.ESortOrder;
-import com.rowland.movies.rest.models.Movie;
 import com.rowland.movies.rest.models.RestError;
 
 import java.io.IOException;
-import java.util.List;
 
 import retrofit.Callback;
 import retrofit.Response;
@@ -90,6 +88,6 @@ public class MovieCallBack implements Callback<MovieCollection> {
     @Override
     public void onFailure(Throwable t) {
         // Inform user of failure due to no network e.t.c
-        Log.d(LOG_TAG, t.getMessage());
+        //Log.d(LOG_TAG, t.getMessage());
     }
 }

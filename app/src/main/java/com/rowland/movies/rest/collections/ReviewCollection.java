@@ -30,6 +30,10 @@ import java.util.List;
 public class ReviewCollection {
 
     // Gson annotations
+    @SerializedName("results")
+    @Expose
+    public List<Review> results;
+    // Gson annotations
     @SerializedName("id")
     @Expose
     private Integer id;
@@ -45,10 +49,6 @@ public class ReviewCollection {
     @SerializedName("total_pages")
     @Expose
     private Integer totalPages;
-    // Gson annotations
-    @SerializedName("results")
-    @Expose
-    public List<Review> results;
 
     /**
      * @return The results

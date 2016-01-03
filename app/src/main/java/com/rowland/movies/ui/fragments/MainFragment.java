@@ -34,11 +34,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 
 import com.rowland.movies.R;
+import com.rowland.movies.objects.ListPopupMenu;
 import com.rowland.movies.ui.activities.MainActivity;
 import com.rowland.movies.ui.adapters.ListPopupWindowAdapter;
 import com.rowland.movies.ui.adapters.SmartNestedViewPagerAdapter;
-import com.rowland.movies.objects.ListPopupMenu;
-import com.rowland.movies.rest.models.Movie;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,10 +51,18 @@ import butterknife.ButterKnife;
  */
 public class MainFragment extends Fragment {
 
-    // The class Log identifier
-    private final String LOG_TAG = MainFragment.class.getSimpleName();
     // Selected tab key
     public static final String SELECTED_TAB_KEY = "SELECTED_TAB";
+    // The class Log identifier
+    private final String LOG_TAG = MainFragment.class.getSimpleName();
+    // ButterKnife injected views
+    @Nullable
+    @Bind(R.id.toolbar)
+    Toolbar mToolbar;
+    @Bind(R.id.slidingTabStrips)
+    SlidingTabStripLayout mSlidingTabStrips;
+    @Bind(R.id.viewPager)
+    ViewPager mViewPager;
     // The Subfragment titles
     private String[] TITLES = {"Popular", "Highest Rated", "Favourite"};
     // The adapter that manages the subfragments
@@ -66,17 +73,6 @@ public class MainFragment extends Fragment {
     private float mPopupMaxWidth;
     // The currently selected tab strip
     private int selectedTabStrip = 0;
-
-    // ButterKnife injected views
-    @Nullable
-    @Bind(R.id.toolbar)
-    Toolbar mToolbar;
-
-    @Bind(R.id.slidingTabStrips)
-    SlidingTabStripLayout mSlidingTabStrips;
-
-    @Bind(R.id.viewPager)
-    ViewPager mViewPager;
 
     // Default constructor
     public MainFragment() {
@@ -94,11 +90,7 @@ public class MainFragment extends Fragment {
         // Return the new fragment
         return fragmentInstance;
     }
-    // A callback interface that all containing activities implement
-    public interface IMovieSelectionCallBack {
-        // Call this when movie is selected.
-        void onMovieSelected(Movie movie);
-    }
+
     //
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -111,6 +103,7 @@ public class MainFragment extends Fragment {
         this.mPopupMaxWidth = Math.max(this.getResources().getDisplayMetrics().widthPixels / 2,
                 this.getResources().getDimensionPixelSize(R.dimen.config_prefListPopupWindowWidth));
     }
+
     // Create the view for this fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -121,6 +114,7 @@ public class MainFragment extends Fragment {
         // Return the view for this fragment
         return rootView;
     }
+
     // Save data for this fragment
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -130,6 +124,7 @@ public class MainFragment extends Fragment {
         // Save the currently selected tab position
         outState.putInt(SELECTED_TAB_KEY, selectedTabStrip);
     }
+
     // Called after the containing activity is created
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -144,6 +139,7 @@ public class MainFragment extends Fragment {
             mViewPager.setCurrentItem(selectedTabStrip, true);
         }
     }
+
     // Called after fragmnet's view is created by onCreateView()
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -154,6 +150,7 @@ public class MainFragment extends Fragment {
         // Set up the viewPager
         mSlidingTabStrips.setupWithViewPager(mViewPager);
     }
+
     // Called after fragment is attached to activity
     @Override
     public void onAttach(Context context) {
@@ -167,6 +164,7 @@ public class MainFragment extends Fragment {
             throw new ClassCastException(context.toString() + " must implement IMovieSelectionCallBack");
         }
     }
+
     // Called after fragment is detached from activity
     @Override
     public void onDetach() {
@@ -174,6 +172,7 @@ public class MainFragment extends Fragment {
         mMovieSelectionCallBack = null;
         super.onDetach();
     }
+
     // Create  the menu items for fragment
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -181,6 +180,7 @@ public class MainFragment extends Fragment {
         // Inflate new menu.
         inflater.inflate(R.menu.menu_main_fragment, menu);
     }
+
     // Do actions based on selected menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -248,5 +248,11 @@ public class MainFragment extends Fragment {
 
     public String[] getTITLES() {
         return TITLES;
+    }
+
+    // A callback interface that all containing activities implement
+    public interface IMovieSelectionCallBack {
+        // Call this when movie is selected.
+        void onMovieSelected(long movieId);
     }
 }

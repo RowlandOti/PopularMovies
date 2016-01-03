@@ -32,6 +32,9 @@ import com.google.gson.annotations.SerializedName;
 public class Review extends Model {
 
     // A movie has many trailers so lets associate each movie to a trailer in a many-to-one relation
+    // Gson annotations
+    @SerializedName("movie")
+    @Expose
     //ActiveAndroid Annotations
     @Column(name = "movie", onDelete = Column.ForeignKeyAction.CASCADE)
     public Movie movie;

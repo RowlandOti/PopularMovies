@@ -46,6 +46,7 @@ public class PopularFragment extends BaseMovieFragment implements LoaderManager.
     public PopularFragment() {
         super();
     }
+
     // Create fragment with arguments
     public static PopularFragment newInstance(Bundle args) {
         // Create the new fragment instance
@@ -82,7 +83,7 @@ public class PopularFragment extends BaseMovieFragment implements LoaderManager.
         // Initialize the sort order
         mSortOrder = ESortOrder.POPULAR_DESCENDING;
         // Call service if first launch of fragment
-        if(isLaunch) {
+        if (isLaunch) {
             startMovieIntentService();
             isLaunch = false;
         }
@@ -93,7 +94,7 @@ public class PopularFragment extends BaseMovieFragment implements LoaderManager.
     @Override
     public Loader<List<Movie>> onCreateLoader(int id, Bundle args) {
         // Create new loader
-        MovieLoader movieLoader =  new MovieLoader(getActivity(), mSortOrder);
+        MovieLoader movieLoader = new MovieLoader(getActivity(), mSortOrder);
         // Return new loader
         return movieLoader;
     }

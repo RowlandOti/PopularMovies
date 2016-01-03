@@ -33,6 +33,7 @@ public enum ESortOrder {
     private ESortOrder(String s) {
         sortOrder = s;
     }
+
     // Get the corresponding sort order
     private void setSortOrderType(ESortOrder sortOrderType) {
         // Find out which sort this is
@@ -48,20 +49,24 @@ public enum ESortOrder {
                 break;
         }
     }
+
     // Get the correspinding sort order
     public String getSortOrder() {
         return this.sortOrder;
     }
+
     // Get whether we sorted by popularity
     public boolean isPopular() {
         setSortOrderType(this);
         return isPopular;
     }
+
     // Get whether we sorted by rating
     public boolean isHighestRated() {
         setSortOrderType(this);
         return isHighestRated;
     }
+
     // Get whether we sorted by favourite
     public boolean isFavourite() {
         setSortOrderType(this);
