@@ -42,8 +42,6 @@ import android.widget.TextView;
 
 import com.rowland.movies.BuildConfig;
 import com.rowland.movies.R;
-import com.rowland.movies.ui.widgets.WrappedGridLayoutManager;
-import com.rowland.movies.ui.widgets.WrappingLinearLayoutManager;
 import com.rowland.movies.data.loaders.ReviewLoader;
 import com.rowland.movies.data.loaders.TrailerLoader;
 import com.rowland.movies.data.repository.MovieRepository;
@@ -57,6 +55,8 @@ import com.rowland.movies.rest.services.TrailerIntentService;
 import com.rowland.movies.ui.activities.DetailActivity;
 import com.rowland.movies.ui.adapters.ReviewAdapter;
 import com.rowland.movies.ui.adapters.TrailerAdapter;
+import com.rowland.movies.ui.widgets.WrappedGridLayoutManager;
+import com.rowland.movies.ui.widgets.WrappingLinearLayoutManager;
 import com.rowland.movies.utilities.Utilities;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -165,7 +165,7 @@ public class DetailFragment extends Fragment {
             // Acquire movie instance
             mMovie = new MovieRepository().getWhereId(id);
             // Is movie Favourite
-            isFavourite = ((Movie) mMovie).getIsFavourite();
+            isFavourite = mMovie.getIsFavourite();
             // Start services
             startReviewIntentService();
             startTrailerIntentService();
@@ -354,7 +354,7 @@ public class DetailFragment extends Fragment {
     // Bind data to the views
     private void bindTo() {
         // Build the image url
-        String imageUrl = EBaseURlTypes.MOVIE_API_IMAGE_BASE_URL.getUrlType() + EBaseImageSize.IMAGE_SIZE_W500.getImageSize() + ((Movie) mMovie).getBackdropPath();
+        String imageUrl = EBaseURlTypes.MOVIE_API_IMAGE_BASE_URL.getUrlType() + EBaseImageSize.IMAGE_SIZE_W500.getImageSize() + mMovie.getBackdropPath();
         // Use Picasso to load the images
         Picasso.with(mBackdropMovie.getContext())
                 .load(imageUrl)
@@ -362,17 +362,17 @@ public class DetailFragment extends Fragment {
                 .placeholder(R.drawable.ic_movie_placeholder)
                 .into(mBackdropMovie);
         // Set the title
-        mDetailMovieTitle.setText(((Movie) mMovie).getOriginalTitle());
+        mDetailMovieTitle.setText(mMovie.getOriginalTitle());
         // Set the overview
-        mDetailMovieOverview.setText(((Movie) mMovie).getOverview());
+        mDetailMovieOverview.setText(mMovie.getOverview());
         // Set the rating
-        mDetailMovieRate.setText(String.format("%d/10", Math.round(((Movie) mMovie).getVoteAverage())));
+        mDetailMovieRate.setText(String.format("%d/10", Math.round(mMovie.getVoteAverage())));
         // Set popularity
-        mDetailMoviePopularity.setText(String.format("%d votes", Math.round(((Movie) mMovie).getPopularity())));
+        mDetailMoviePopularity.setText(String.format("%d votes", Math.round(mMovie.getPopularity())));
         // Set the release date
-        if (((Movie) mMovie).getReleaseDate() != null) {
+        if (mMovie.getReleaseDate() != null) {
             Calendar mCalendar = Calendar.getInstance();
-            mCalendar.setTime(((Movie) mMovie).getReleaseDate());
+            mCalendar.setTime(mMovie.getReleaseDate());
             mDetailMovieYear.setText(String.valueOf(mCalendar.get(Calendar.YEAR)));
         }
         // Update FAB icon drawable
@@ -452,19 +452,19 @@ public class DetailFragment extends Fragment {
         Animation simpleRotateAnimation;
         if (!isFavourite) {
             // Set movie isFavourite to true
-            ((Movie) mMovie).setIsFavourite(true);
+            mMovie.setIsFavourite(true);
             isFavourite = true;
             // Create an Animation
             simpleRotateAnimation = AnimationUtils.loadAnimation(mFavoriteFab.getContext(), R.anim.rotate_clockwise);
         } else {
             // Set movie isFavourite to false
-            ((Movie) mMovie).setIsFavourite(false);
+            mMovie.setIsFavourite(false);
             isFavourite = false;
             // Create an Animation
             simpleRotateAnimation = AnimationUtils.loadAnimation(mFavoriteFab.getContext(), R.anim.rotate_anticlockwise);
         }
         // Save changes made on movie
-        ((Movie) mMovie).save();
+        mMovie.save();
         // Update the drawable
         updateFabDrawable();
         // Animate the Floating action button
