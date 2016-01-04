@@ -88,7 +88,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.CustomViewHo
         // Acquire Movie item at this position
         final Movie movie = mMovieList.get(position);
         // Bind the data to the view holder
-        holder.bindTo(movie);
+        holder.bindTo(movie, position);
     }
 
     // What's the size of the movie List
@@ -154,14 +154,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.CustomViewHo
         }
 
         // Bind the data to the holder views
-        private void bindTo(final Movie movie) {
+        private void bindTo(final Movie movie, final int position) {
             // Set click listener on card view
             mGridItemContainer.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     // Check which instance we are dealing with
                     if (mActivity instanceof MainActivity) {
                         // Execute Callback
-                        ((MainActivity) mActivity).onMovieSelected(movie.getId_());
+                        ((MainActivity) mActivity).onMovieSelected(movie.getId_(), position);
                     }
                 }
             });

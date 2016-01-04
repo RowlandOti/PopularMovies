@@ -253,6 +253,6 @@ public class MainFragment extends Fragment {
     // A callback interface that all containing activities implement
     public interface IMovieSelectionCallBack {
         // Call this when movie is selected.
-        void onMovieSelected(long movieId);
+        void onMovieSelected(long movieId, int selectedPosition);
     }
 }

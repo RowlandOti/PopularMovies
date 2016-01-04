@@ -40,6 +40,10 @@ public class MainActivity extends BaseToolBarActivity implements MainFragment.IM
 
     // Logging Identifier for class
     private final String LOG_TAG = MainActivity.class.getSimpleName();
+    // The Movie ID Identifier Key
+    public static final String SELECTED_POSITION_KEY = "selected_position_key";
+    // The selected grid position
+    private int mSelectedPosition = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +61,8 @@ public class MainActivity extends BaseToolBarActivity implements MainFragment.IM
             // If we're being restored from a previous state, don't need to do anything
             // and should return or else we could end up with overlapping fragments.
             if (savedInstanceState != null) {
+                // Recover this position
+                mSelectedPosition = savedInstanceState.getInt(SELECTED_POSITION_KEY);
                 return;
             } else {
                 // Get Facebook Stetho doing its job
@@ -116,8 +122,17 @@ public class MainActivity extends BaseToolBarActivity implements MainFragment.IM
         return super.onCreateOptionsMenu(menu);
     }
 
+    // Save any important data for recovery
     @Override
-    public void onMovieSelected(long movieId) {
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(SELECTED_POSITION_KEY, mSelectedPosition);
+    }
+
+    @Override
+    public void onMovieSelected(long movieId, int selectedPosition) {
+        // Store this position
+        mSelectedPosition = selectedPosition;
         // Check for two-pane
         if (mIsTwoPane) {
             // Create a Bundle object
