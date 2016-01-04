@@ -23,6 +23,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -340,18 +341,25 @@ public class DetailFragment extends Fragment {
         switch (item.getItemId()) {
             // Share a movie trailer
             case R.id.action_share:
-                // Create an Intent object
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType("text/plain");
-                // Acquire the video url
-                //String trailerUrl = String.format(EBaseURlTypes.YOUTUBE_VIDEO_URL.getUrlType(), trailer.getKey());
-                String trailerUrl = String.format(EBaseURlTypes.YOUTUBE_VIDEO_URL.getUrlType(), ((Movie) mMovie).getMovieTrailers());
-                // Put the trailer url
-                intent.putExtra(Intent.EXTRA_TEXT, trailerUrl);
-                // Put a subject for Intent
-                intent.putExtra(android.content.Intent.EXTRA_SUBJECT, ((Movie) mMovie).getOriginalTitle());
-                // Start the share Intent
-                startActivity(Intent.createChooser(intent, "Share Trailer"));
+                // Check for null
+                if(mMovie != null){
+                    // Create an Intent object
+                    Intent intent = new Intent(Intent.ACTION_SEND);
+                    intent.setType("text/plain");
+                    try {
+                        // Acquire the video url
+                        String trailerUrl = String.format(EBaseURlTypes.YOUTUBE_VIDEO_URL.getUrlType(), mMovie.getMovieTrailers().get(0));
+                        // Put the trailer url
+                        intent.putExtra(Intent.EXTRA_TEXT, trailerUrl);
+                        // Put a subject for Intent
+                        intent.putExtra(Intent.EXTRA_SUBJECT, mMovie.getOriginalTitle());
+                        // Start the share Intent
+                        startActivity(Intent.createChooser(intent, "Share Trailer"));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Snackbar.make(getView(), R.string.status_no_trailers, Snackbar.LENGTH_SHORT);
+                    }
+                }
                 return true;
             default: {
                 return super.onOptionsItemSelected(item);
