@@ -62,7 +62,7 @@ public class ScrollAwareFloatingActionButtonBehavior extends FloatingActionButto
     // We depend on the AppBarLayout
     @Override
     public boolean layoutDependsOn(CoordinatorLayout parent, FloatingActionButton child, View dependency) {
-        // We're dependent on all SnackbarLayouts (if enabled)
+        // We're dependent on all AppbarLayouts (if enabled)
         return APPBARLAYOUT_BEHAVIOR_ENABLED && dependency instanceof AppBarLayout;
     }
 }

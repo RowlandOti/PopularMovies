@@ -18,8 +18,6 @@
 package com.rowland.movies.ui.fragments;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -38,7 +36,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -171,18 +168,21 @@ public class DetailFragment extends Fragment {
             id = getArguments().getLong(DetailFragment.MOVIE_KEY);
             // Acquire movie instance
             mMovie = new MovieRepository().getWhereId(id);
-            // Is movie Favourite
-            isFavourite = mMovie.getIsFavourite();
-            // Start services
-            startReviewIntentService();
-            startTrailerIntentService();
+            // Checek for null
+            if (mMovie != null) {
+                // Is movie Favourite
+                isFavourite = mMovie.getIsFavourite();
+                // Start services
+                startReviewIntentService();
+                startTrailerIntentService();
+                // Initialize the review list
+                mReviewList = new ArrayList<>();
+                // Initialize the trailer list
+                mTrailerList = new ArrayList<>();
+                // Create an Animation
+                simpleGrowAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.grow_bigger);
+            }
         }
-        // Initialize the review list
-        mReviewList = new ArrayList<>();
-        // Initialize the trailer list
-        mTrailerList = new ArrayList<>();
-        // Create an Animation
-       simpleGrowAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.grow_bigger);
     }
 
     // Called to instantiate the fragment's view hierarchy
@@ -200,105 +200,108 @@ public class DetailFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // Initialize layout manager
-        final WrappingLinearLayoutManager mVerticalLinearLayoutManger = new WrappingLinearLayoutManager(getContext());
-        // Set the RecycleView's layout manager
-        mReviewRecycleView.setLayoutManager(mVerticalLinearLayoutManger);
-        // Set the RecycleView's size fixing
-        mReviewRecycleView.setHasFixedSize(false);
-        // Set the RecycleView's ItemAnimators
-        mReviewRecycleView.setItemAnimator(new DefaultItemAnimator());
-        // Initialize new Review adapter
-        mReviewAdapter = new ReviewAdapter(mReviewList);
-        // Set RecycleView's adapter
-        mReviewRecycleView.setAdapter(mReviewAdapter);
-        // Review LoaderCallBack implementation
-        mReviewLoaderCallBack = new LoaderManager.LoaderCallbacks<List<Review>>() {
-            @Override
-            public Loader<List<Review>> onCreateLoader(int id, Bundle args) {
-                // Set ProgressBar refresh on
-                mReviewProgressBar.setVisibility(View.VISIBLE);
-                // Create new loader
-                ReviewLoader movieLoader = new ReviewLoader(getActivity(), mMovie);
-                // Return new loader
-                return movieLoader;
-            }
-
-            @Override
-            public void onLoadFinished(Loader<List<Review>> loader, List<Review> reviewList) {
-                // Set ProgressBar refresh off
-                mReviewProgressBar.setVisibility(View.GONE);
-                // Set mReviewList
-                mReviewList = reviewList;
-                // Pass reviews list to our adapter
-                mReviewAdapter.addAll(mReviewList);
-                // Update the Empty View
-                updateReviewsEmptyView();
-                // Check whether we are in debug mode
-                if (BuildConfig.IS_DEBUG_MODE) {
-                    Log.d(LOG_TAG, "Review: " + mReviewAdapter.getItemCount());
+        // Check for null
+        if (mMovie != null) {
+            // Initialize layout manager
+            final WrappingLinearLayoutManager mVerticalLinearLayoutManger = new WrappingLinearLayoutManager(getContext());
+            // Set the RecycleView's layout manager
+            mReviewRecycleView.setLayoutManager(mVerticalLinearLayoutManger);
+            // Set the RecycleView's size fixing
+            mReviewRecycleView.setHasFixedSize(false);
+            // Set the RecycleView's ItemAnimators
+            mReviewRecycleView.setItemAnimator(new DefaultItemAnimator());
+            // Initialize new Review adapter
+            mReviewAdapter = new ReviewAdapter(mReviewList);
+            // Set RecycleView's adapter
+            mReviewRecycleView.setAdapter(mReviewAdapter);
+            // Review LoaderCallBack implementation
+            mReviewLoaderCallBack = new LoaderManager.LoaderCallbacks<List<Review>>() {
+                @Override
+                public Loader<List<Review>> onCreateLoader(int id, Bundle args) {
+                    // Set ProgressBar refresh on
+                    mReviewProgressBar.setVisibility(View.VISIBLE);
+                    // Create new loader
+                    ReviewLoader movieLoader = new ReviewLoader(getActivity(), mMovie);
+                    // Return new loader
+                    return movieLoader;
                 }
-            }
 
-            @Override
-            public void onLoaderReset(Loader<List<Review>> loader) {
-                // Set ProgressBar refresh off
-                mReviewProgressBar.setVisibility(View.GONE);
-                // We reset the loader, nullify old data
-                mReviewAdapter.addAll(null);
-            }
-        };
-
-        // Initialize layout manager
-        final WrappingLinearLayoutManager mHorizontalLinearLayoutManger = new WrappingLinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        // Set the RecycleView's layout manager
-        mTrailerRecycleView.setLayoutManager(mHorizontalLinearLayoutManger);
-        // Set the RecycleView's size fixing
-        mTrailerRecycleView.setHasFixedSize(false);
-        // Set the RecycleView's ItemAnimators
-        mTrailerRecycleView.setItemAnimator(new DefaultItemAnimator());
-        // Initialize new Trailer adapter
-        mTrailerAdapter = new TrailerAdapter(mTrailerList, getActivity());
-        // Set RecycleView's adapter
-        mTrailerRecycleView.setAdapter(mTrailerAdapter);
-        // Trailer LoaderCallBack implementation
-        mTrailerLoaderCallBack = new LoaderManager.LoaderCallbacks<List<Trailer>>() {
-            @Override
-            public Loader<List<Trailer>> onCreateLoader(int id, Bundle args) {
-                // Set ProgressBar refresh on
-                mTrailerProgressBar.setVisibility(View.VISIBLE);
-                // Create new loader
-                TrailerLoader movieLoader = new TrailerLoader(getActivity(), (Movie) mMovie);
-                // Return new loader
-                return movieLoader;
-            }
-
-            @Override
-            public void onLoadFinished(Loader<List<Trailer>> loader, List<Trailer> trailerList) {
-                // Set ProgressBar refresh off
-                mTrailerProgressBar.setVisibility(View.GONE);
-                // Set mTrailerList
-                mTrailerList = trailerList;
-                // Add trailers
-                mTrailerAdapter.addAll(mTrailerList);
-                // Update the Empty View
-                updateTrailersEmptyView();
-                // Check whether we are in debug mode
-                if (BuildConfig.IS_DEBUG_MODE) {
-                    Log.d(LOG_TAG, "Trailer: " + mTrailerAdapter.getItemCount());
+                @Override
+                public void onLoadFinished(Loader<List<Review>> loader, List<Review> reviewList) {
+                    // Set ProgressBar refresh off
+                    mReviewProgressBar.setVisibility(View.GONE);
+                    // Set mReviewList
+                    mReviewList = reviewList;
+                    // Pass reviews list to our adapter
+                    mReviewAdapter.addAll(mReviewList);
+                    // Update the Empty View
+                    updateReviewsEmptyView();
+                    // Check whether we are in debug mode
+                    if (BuildConfig.IS_DEBUG_MODE) {
+                        Log.d(LOG_TAG, "Review: " + mReviewAdapter.getItemCount());
+                    }
                 }
-            }
 
-            @Override
-            public void onLoaderReset(Loader<List<Trailer>> loader) {
-                // Set ProgressBar refresh off
-                mTrailerProgressBar.setVisibility(View.GONE);
-                // We reset the loader, nullify old data
-                mTrailerAdapter.addAll(null);
-            }
-        };
-        // Bind data to views
-        bindTo();
+                @Override
+                public void onLoaderReset(Loader<List<Review>> loader) {
+                    // Set ProgressBar refresh off
+                    mReviewProgressBar.setVisibility(View.GONE);
+                    // We reset the loader, nullify old data
+                    mReviewAdapter.addAll(null);
+                }
+            };
+
+            // Initialize layout manager
+            final WrappingLinearLayoutManager mHorizontalLinearLayoutManger = new WrappingLinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+            // Set the RecycleView's layout manager
+            mTrailerRecycleView.setLayoutManager(mHorizontalLinearLayoutManger);
+            // Set the RecycleView's size fixing
+            mTrailerRecycleView.setHasFixedSize(false);
+            // Set the RecycleView's ItemAnimators
+            mTrailerRecycleView.setItemAnimator(new DefaultItemAnimator());
+            // Initialize new Trailer adapter
+            mTrailerAdapter = new TrailerAdapter(mTrailerList, getActivity());
+            // Set RecycleView's adapter
+            mTrailerRecycleView.setAdapter(mTrailerAdapter);
+            // Trailer LoaderCallBack implementation
+            mTrailerLoaderCallBack = new LoaderManager.LoaderCallbacks<List<Trailer>>() {
+                @Override
+                public Loader<List<Trailer>> onCreateLoader(int id, Bundle args) {
+                    // Set ProgressBar refresh on
+                    mTrailerProgressBar.setVisibility(View.VISIBLE);
+                    // Create new loader
+                    TrailerLoader movieLoader = new TrailerLoader(getActivity(), (Movie) mMovie);
+                    // Return new loader
+                    return movieLoader;
+                }
+
+                @Override
+                public void onLoadFinished(Loader<List<Trailer>> loader, List<Trailer> trailerList) {
+                    // Set ProgressBar refresh off
+                    mTrailerProgressBar.setVisibility(View.GONE);
+                    // Set mTrailerList
+                    mTrailerList = trailerList;
+                    // Add trailers
+                    mTrailerAdapter.addAll(mTrailerList);
+                    // Update the Empty View
+                    updateTrailersEmptyView();
+                    // Check whether we are in debug mode
+                    if (BuildConfig.IS_DEBUG_MODE) {
+                        Log.d(LOG_TAG, "Trailer: " + mTrailerAdapter.getItemCount());
+                    }
+                }
+
+                @Override
+                public void onLoaderReset(Loader<List<Trailer>> loader) {
+                    // Set ProgressBar refresh off
+                    mTrailerProgressBar.setVisibility(View.GONE);
+                    // We reset the loader, nullify old data
+                    mTrailerAdapter.addAll(null);
+                }
+            };
+            // Bind data to views
+            bindTo();
+        }
     }
 
     // Called when the containing activity onCreate() is done, and after onCreateView() of fragment
@@ -312,13 +315,16 @@ public class DetailFragment extends Fragment {
             // Set the ToolBar
             ((DetailActivity) getActivity()).setToolbar(mToolbar, true, false, R.drawable.ic_logo_48px);
         }
-        // Initialize the Loader
-        getLoaderManager().initLoader(0, null, mReviewLoaderCallBack);
-        getLoaderManager().initLoader(1, null, mTrailerLoaderCallBack);
-        // Create an Animation
-        Animation simpleGrowAnimation = AnimationUtils.loadAnimation(mFavoriteFab.getContext(), R.anim.grow_bigger);
-        // Animate the Floating action button
-        mFavoriteFab.startAnimation(simpleGrowAnimation);
+        // Check for null
+        if (mMovie != null) {
+            // Initialize the Loader
+            getLoaderManager().initLoader(0, null, mReviewLoaderCallBack);
+            getLoaderManager().initLoader(1, null, mTrailerLoaderCallBack);
+            // Create an Animation
+            Animation simpleGrowAnimation = AnimationUtils.loadAnimation(mFavoriteFab.getContext(), R.anim.grow_bigger);
+            // Animate the Floating action button
+            mFavoriteFab.startAnimation(simpleGrowAnimation);
+        }
     }
 
     // Called to destroy this fragment
@@ -342,7 +348,7 @@ public class DetailFragment extends Fragment {
             // Share a movie trailer
             case R.id.action_share:
                 // Check for null
-                if(mMovie != null){
+                if (mMovie != null) {
                     // Create an Intent object
                     Intent intent = new Intent(Intent.ACTION_SEND);
                     intent.setType("text/plain");
@@ -356,8 +362,9 @@ public class DetailFragment extends Fragment {
                         // Start the share Intent
                         startActivity(Intent.createChooser(intent, "Share Trailer"));
                     } catch (Exception e) {
-                        e.printStackTrace();
                         Snackbar.make(getView(), R.string.status_no_trailers, Snackbar.LENGTH_SHORT);
+                        e.printStackTrace();
+
                     }
                 }
                 return true;
