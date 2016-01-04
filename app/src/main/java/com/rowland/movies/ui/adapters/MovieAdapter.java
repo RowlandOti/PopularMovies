@@ -123,8 +123,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.CustomViewHo
             }
             // End
             mMovieList.endBatchedUpdates();
+            // Auto select the first item
         }
-        // Notify others of the data changes
     }
 
     // Takes care of the overhead of recycling and gives better performance and scrolling
