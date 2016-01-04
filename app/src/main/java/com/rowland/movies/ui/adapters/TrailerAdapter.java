@@ -52,14 +52,14 @@ public class TrailerAdapter extends RecyclerView.Adapter<TrailerAdapter.CustomVi
     // A list of the movie items
     private List<Trailer> mTrailerList;
     // The container Activity
-    private DetailActivity mActivity;
+    private FragmentActivity mActivity;
 
     // Default constructor
     public TrailerAdapter(List<Trailer> trailerList, FragmentActivity activity) {
         // The list of trailers
         this.mTrailerList = trailerList;
         // Acquire the containing activity
-        this.mActivity = (DetailActivity) activity;
+        this.mActivity =  activity;
     }
 
     // Called when RecyclerView needs a new CustomViewHolder of the given type to represent an item.
