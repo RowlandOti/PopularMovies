@@ -25,6 +25,10 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+
+import com.rowland.movies.R;
 
 /**
  * Created by Oti Rowland on 1/1/2016.
@@ -56,6 +60,9 @@ public class ScrollAwareFloatingActionButtonBehavior extends FloatingActionButto
             child.hide();
         } else if (dyConsumed < 0 && child.getVisibility() != View.VISIBLE) {
             child.show();
+             // Create a Simple growth Animation
+            Animation simpleGrowAnimation = AnimationUtils.loadAnimation(child.getContext(), R.anim.grow_bigger);
+            child.startAnimation(simpleGrowAnimation);
         }
     }
 
