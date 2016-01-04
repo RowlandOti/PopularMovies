@@ -11,6 +11,7 @@
     <color name="apptheme_grey">#d3d6db</color>
     <color name="apptheme_grey_border">#999999</color>
 
+
     <!-- Dark Theme Colors-->
     <color name="apptheme_primary_grey_light">#616161</color>
     <color name="apptheme_primary_grey">#424242</color>
@@ -19,4 +20,5 @@
     <color name="apptheme_secondary_text_whitegrey">#d3d6db</color>
     <color name="apptheme_accent_teal">#00796b</color>
     <color name="apptheme_accent_red">#EF5350</color>
+    <color name="apptheme_background_window">#FFF5F5F5</color>
 </resources>
