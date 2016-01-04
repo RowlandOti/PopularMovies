@@ -19,6 +19,6 @@
 
 
     <style name="AppTheme.Dark" parent="AppBaseThemeNoActionBar.Dark">
-        <item name="android:windowTranslucentStatus">true</item>
+        <!--<item name="android:windowTranslucentStatus">true</item>-->
     </style>
 </resources>
