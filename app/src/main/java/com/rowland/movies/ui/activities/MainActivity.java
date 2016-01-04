@@ -40,10 +40,6 @@ public class MainActivity extends BaseToolBarActivity implements MainFragment.IM
 
     // Logging Identifier for class
     private final String LOG_TAG = MainActivity.class.getSimpleName();
-    // The MainFragment
-    private MainFragment mainFragment;
-    // The DetailFragment
-    private DetailFragment detailFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,14 +78,11 @@ public class MainActivity extends BaseToolBarActivity implements MainFragment.IM
         FragmentManager fm = getSupportFragmentManager();
         // Begin the transaction
         FragmentTransaction ft = fm.beginTransaction();
-        // Check if we already have a fragment
-        if (detailFragment == null) {
-            // Create new fragment
-            detailFragment = DetailFragment.newInstance(args);
-            // Prefer replace() over add() see <a>https://github.com/RowlandOti/PopularMovies/issues/1</a>
-            ft.replace(R.id.detail_container, detailFragment);
-            ft.commit();
-        }
+        // Create new fragment
+        DetailFragment detailFragment = DetailFragment.newInstance(args);
+        // Prefer replace() over add() see <a>https://github.com/RowlandOti/PopularMovies/issues/1</a>
+        ft.replace(R.id.detail_container, detailFragment);
+        ft.commit();
     }
 
     // Insert the MainFragment
@@ -98,14 +91,11 @@ public class MainActivity extends BaseToolBarActivity implements MainFragment.IM
         FragmentManager fm = getSupportFragmentManager();
         // Begin the transaction
         FragmentTransaction ft = fm.beginTransaction();
-        // Check if we already have a fragment
-        if (mainFragment == null) {
-            // Create new fragment
-            mainFragment = MainFragment.newInstance(args);
-            // Prefer replace() over add() see <a>https://github.com/RowlandOti/PopularMovies/issues/1</a>
-            ft.replace(R.id.fragment_container, mainFragment);
-            ft.commit();
-        }
+        // Create new fragment
+        MainFragment mainFragment = MainFragment.newInstance(args);
+        // Prefer replace() over add() see <a>https://github.com/RowlandOti/PopularMovies/issues/1</a>
+        ft.replace(R.id.fragment_container, mainFragment);
+        ft.commit();
     }
 
     @Override
