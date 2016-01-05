@@ -134,13 +134,6 @@ public class MainFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         // Set the ToolBar
         ((MainActivity) getActivity()).setToolbar(mToolbar, false, false, R.drawable.ic_logo_48px);
-        // Restore states
-        if (savedInstanceState != null) {
-            // Acquire previously selected tab.
-            selectedTabStrip = savedInstanceState.getInt(SELECTED_TAB_KEY, selectedTabStrip);
-            // Restore previously selected tab
-            mViewPager.setCurrentItem(selectedTabStrip, true);
-        }
     }
 
     // Called after fragmnet's view is created by onCreateView()
@@ -152,6 +145,13 @@ public class MainFragment extends Fragment {
         mViewPager.setAdapter(pagerAdapter);
         // Set up the viewPager
         mSlidingTabStrips.setupWithViewPager(mViewPager);
+        // Restore states
+        if (savedInstanceState != null) {
+            // Acquire previously selected tab.
+            selectedTabStrip = savedInstanceState.getInt(SELECTED_TAB_KEY, selectedTabStrip);
+            // Restore previously selected tab
+            mViewPager.setCurrentItem(selectedTabStrip, true);
+        }
     }
 
     // Called after fragment is attached to activity
