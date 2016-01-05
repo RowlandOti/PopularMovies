@@ -70,6 +70,6 @@ public class ReviewCallBack implements Callback<ReviewCollection> {
     @Override
     public void onFailure(Throwable t) {
         // Inform user of failure due to no network e.t.c
-        Log.d(LOG_TAG, t.getMessage());
+        t.printStackTrace();
     }
 }

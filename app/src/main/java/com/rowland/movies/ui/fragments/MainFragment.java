@@ -18,6 +18,9 @@
 package com.rowland.movies.ui.fragments;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.SlidingTabStripLayout;
@@ -214,6 +217,7 @@ public class MainFragment extends Fragment {
         pop.setAnchorView(anchor);
         // Setting this enables window to be dismissed by click outside ListPopupWindow
         pop.setModal(true);
+        pop.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
         // Sets the width of the ListPopupWindow
         pop.setContentWidth((int) this.mPopupMaxWidth);
         // Sets the Height of the ListPopupWindow
@@ -222,6 +226,8 @@ public class MainFragment extends Fragment {
         pop.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                // Dismiss the LisPopupWindow when a list item is clicked
+                pop.dismiss();
                 // The overflow menu selected
                 String menuName = ((ListPopupMenu) adapterView.getItemAtPosition(position)).getName();
                 // Switch to the right ViewPager element at given position
@@ -239,8 +245,6 @@ public class MainFragment extends Fragment {
                         mViewPager.setCurrentItem(0, true);
                         break;
                 }
-                // Dismiss the LisPopupWindow when a list item is clicked
-                pop.dismiss();
             }
         });
         pop.show();
