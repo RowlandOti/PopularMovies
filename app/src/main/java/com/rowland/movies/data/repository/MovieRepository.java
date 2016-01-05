@@ -44,7 +44,7 @@ public class MovieRepository {
 
     public List<Movie> getAllWhere(ESortOrder sortOrder) {
         // Holds the where clause
-        String whereClause = "";
+        String whereClause = null;
         // Find out which where clause to use
         switch (sortOrder) {
             case POPULAR_DESCENDING:
@@ -57,7 +57,7 @@ public class MovieRepository {
                 whereClause = "isFavourite = ?";
                 break;
         }
-        if (sortOrder != null) {
+        if (whereClause != null) {
             // ToDo: Move this logic to the Movie model where it belongs
             // Query ActiveAndroid for list of data
             List<Movie> queryResults = new Select()

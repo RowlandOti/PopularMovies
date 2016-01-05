@@ -21,5 +21,18 @@
     <style name="AppTheme.Dark" parent="AppBaseThemeNoActionBar.Dark">
        <!-- <item name="android:windowDrawsSystemBarBackgrounds">true</item>-->
         <!--<item name="android:statusBarColor">@android:color/transparent</item>-->
+        <item name="searchViewStyle">@style/Widget.App.SearchView</item>
+    </style>
+
+    <!-- Widget ListPopUpWindow Style-->
+    <!--<style name="Widget.App.ListPopupWindow" parent="android:Widget.Material.ListPopupWindow">
+        <item name="dropDownVerticalOffset">-40dp</item>
+        <item name="popupBackground">@color/apptheme_white</item>
+        <item name="dropDownSelector">@color/apptheme_accent_teal</item>
+    </style>-->
+    <!-- Widget SearchView Style-->
+    <style name="Widget.App.SearchView" parent="Widget.AppCompat.SearchView">
+        <item name="searchIcon">@drawable/ic_share_white_48dp</item>
+        <item name="closeIcon">@drawable/ic_close_white_48dp</item>
     </style>
 </resources>

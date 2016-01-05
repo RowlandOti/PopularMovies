@@ -217,7 +217,6 @@ public class MainFragment extends Fragment {
         pop.setAnchorView(anchor);
         // Setting this enables window to be dismissed by click outside ListPopupWindow
         pop.setModal(true);
-        pop.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
         // Sets the width of the ListPopupWindow
         pop.setContentWidth((int) this.mPopupMaxWidth);
         // Sets the Height of the ListPopupWindow
