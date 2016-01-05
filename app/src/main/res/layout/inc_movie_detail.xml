@@ -33,7 +33,7 @@
         <RelativeLayout
             android:id="@+id/movie_title_container"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="?attr/actionBarSize"
             android:background="@color/apptheme_accent_red">
 
             <TextView
@@ -42,7 +42,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:textColor="@color/apptheme_primary_text_white"
