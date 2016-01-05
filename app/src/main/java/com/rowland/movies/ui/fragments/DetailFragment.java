@@ -453,7 +453,7 @@ public class DetailFragment extends Fragment {
         if (mReviewAdapter.getItemCount() == 0) {
             // Show Empty TextView
             mReviewRecycleView.setVisibility(View.GONE);
-            mDetailMovieEmptyTrailers.setVisibility(View.VISIBLE);
+            mDetailMovieEmptyReviews.setVisibility(View.VISIBLE);
         } else {
             // Show RecycleView filled with movies
             mReviewRecycleView.setVisibility(View.VISIBLE);
