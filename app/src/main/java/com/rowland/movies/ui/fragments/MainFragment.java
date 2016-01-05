@@ -217,6 +217,8 @@ public class MainFragment extends Fragment {
         pop.setAnchorView(anchor);
         // Setting this enables window to be dismissed by click outside ListPopupWindow
         pop.setModal(true);
+        // Set the background color
+        pop.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.apptheme_transparent)));
         // Set the selector color
         pop.setListSelector(new ColorDrawable(getResources().getColor(R.color.apptheme_accent_teal)));
         // Sets the width of the ListPopupWindow
