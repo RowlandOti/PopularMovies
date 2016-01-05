@@ -40,10 +40,14 @@ public class MainActivity extends BaseToolBarActivity implements MainFragment.IM
 
     // Logging Identifier for class
     private final String LOG_TAG = MainActivity.class.getSimpleName();
-    // The Movie ID Identifier Key
+    // The Movie POSITION Identifier Key
     public static final String SELECTED_POSITION_KEY = "selected_position_key";
+    // The Movie ID Identifier Key
+    public static final String SELECTED_MOVIE_KEY = "selected_movie_key";
     // The selected grid position
     private int mSelectedPosition = -1;
+    // The selected movie remote id
+    private long mMovieId = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +65,11 @@ public class MainActivity extends BaseToolBarActivity implements MainFragment.IM
             // If we're being restored from a previous state, don't need to do anything
             // and should return or else we could end up with overlapping fragments.
             if (savedInstanceState != null) {
-                // Recover this position
+                // Recover assets
                 mSelectedPosition = savedInstanceState.getInt(SELECTED_POSITION_KEY);
+                mMovieId = savedInstanceState.getInt(SELECTED_MOVIE_KEY);
+                // Set positions as selected
+                onMovieSelected(mMovieId, mSelectedPosition);
                 return;
             } else {
                 // Get Facebook Stetho doing its job
@@ -127,12 +134,15 @@ public class MainActivity extends BaseToolBarActivity implements MainFragment.IM
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(SELECTED_POSITION_KEY, mSelectedPosition);
+        outState.putLong(SELECTED_MOVIE_KEY, mMovieId);
     }
 
     @Override
     public void onMovieSelected(long movieId, int selectedPosition) {
         // Store this position
         mSelectedPosition = selectedPosition;
+        // Store remote movie id
+        mMovieId = movieId;
         // Check for two-pane
         if (mIsTwoPane) {
             // Create a Bundle object
