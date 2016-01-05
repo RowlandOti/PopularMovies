@@ -39,6 +39,7 @@ public class BaseToolBarActivity extends AppCompatActivity {
     @Nullable
     @Bind(R.id.toolbar)
     protected Toolbar mToolbar;
+
     // Should we show master-detail layout?
     protected boolean mIsTwoPane;
 
@@ -80,6 +81,11 @@ public class BaseToolBarActivity extends AppCompatActivity {
     // Should we show master-detail layout?
     protected void toggleShowTwoPane(boolean isShowTwoPane) {
         mIsTwoPane = isShowTwoPane;
+    }
+
+    // Are we a master-detail layout?
+    public boolean getIsTwoPane() {
+        return mIsTwoPane;
     }
 
 }

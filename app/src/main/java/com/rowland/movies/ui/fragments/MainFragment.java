@@ -18,9 +18,7 @@
 package com.rowland.movies.ui.fragments;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.SlidingTabStripLayout;
@@ -103,7 +101,7 @@ public class MainFragment extends Fragment {
         // Don't destroy fragment across orientation change
         setRetainInstance(true);
         //Get the maximum width of our ListPopupWindow
-        this.mPopupMaxWidth = Math.max(this.getResources().getDisplayMetrics().widthPixels / 2,
+        this.mPopupMaxWidth = Math.min(this.getResources().getDisplayMetrics().widthPixels / 2,
                 this.getResources().getDimensionPixelSize(R.dimen.config_prefListPopupWindowWidth));
     }
 

@@ -61,6 +61,7 @@
             android:layout_gravity="center"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:elevation="4dp"
+            android:visibility="gone"
             android:src="@drawable/ic_play_circle_outline_black_48dp" />
 
         <android.support.v7.widget.Toolbar

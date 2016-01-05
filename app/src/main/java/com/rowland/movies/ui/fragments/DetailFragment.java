@@ -403,8 +403,13 @@ public class DetailFragment extends Fragment {
                 .into(mBackdropMovie, new Callback() {
                     @Override
                     public void onSuccess() {
-                        // Do some Animation on play button
-                        mBackdropMoviePlay.startAnimation(simpleGrowAnimation);
+                        // Check for null
+                        if (mBackdropMoviePlay != null) {
+                            // Check visibility
+                            mBackdropMoviePlay.setVisibility(View.VISIBLE);
+                            // Do some Animation on play button
+                            mBackdropMoviePlay.startAnimation(simpleGrowAnimation);
+                        }
                     }
 
                     @Override
