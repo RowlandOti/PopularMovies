@@ -25,8 +25,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.activeandroid.query.Select;
 import com.rowland.movies.R;
-import com.rowland.movies.data.loaders.MovieLoader;
+import com.rowland.movies.data.loaders.ModelLoader;
 import com.rowland.movies.rest.enums.ESortOrder;
 import com.rowland.movies.rest.models.Movie;
 import com.rowland.movies.ui.fragments.subfragment.BaseMovieFragment;
@@ -111,8 +112,10 @@ public class SearchFragment extends BaseMovieFragment implements LoaderManager.L
 
     @Override
     public Loader<List<Movie>> onCreateLoader(int id, Bundle args) {
+        // Acquire the search string
+        String queryString = args.getString(SearchManager.QUERY);
         // Create new loader
-        MovieLoader movieLoader = new MovieLoader(getActivity(), mSortOrder);
+        ModelLoader movieLoader = new ModelLoader<>(getActivity(), Movie.class, new Select().from(Movie.class).where("originalTitle == " +queryString), false);
         // Return new loader
         return movieLoader;
     }
