@@ -327,11 +327,11 @@ public class DetailFragment extends Fragment {
             // Set the status bar tobe transparent
             getActivity().getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
-        // Check for minimum api as Kitkat
+        /*// Check for minimum api as Kitkat
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
             // Set translucent to be true
             getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        }
+        }*/
         // Check for null
         if (mMovie != null) {
             // Initialize the Loader
