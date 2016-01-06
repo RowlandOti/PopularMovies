@@ -29,7 +29,7 @@ import java.util.List;
 public class ModelLoader<T extends Model> extends AsyncTaskLoader<List<T>> {
 
     // The class Log identifier
-    private static final String LOG_TAG = BaseLoader.class.getSimpleName();
+    private static final String LOG_TAG = ModelLoader.class.getSimpleName();
 
     // Our Observer and Resolver
     private ContentResolver mContentResolver;
