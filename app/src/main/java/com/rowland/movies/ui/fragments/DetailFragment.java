@@ -38,7 +38,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -369,9 +368,12 @@ public class DetailFragment extends Fragment {
                     // Create an Intent object
                     Intent intent = new Intent(Intent.ACTION_SEND);
                     intent.setType("text/plain");
+                    Trailer trailerShare = null;
                     try {
+                        // Retrieve first trailer
+                        trailerShare = mMovie.getMovieTrailers().get(0);
                         // Acquire the video url
-                        String trailerUrl = String.format(EBaseURlTypes.YOUTUBE_VIDEO_URL.getUrlType(), mMovie.getMovieTrailers().get(0));
+                        String trailerUrl = String.format(EBaseURlTypes.YOUTUBE_VIDEO_URL.getUrlType(), trailerShare);
                         // Put the trailer url
                         intent.putExtra(Intent.EXTRA_TEXT, trailerUrl);
                         // Put a subject for Intent
@@ -379,9 +381,13 @@ public class DetailFragment extends Fragment {
                         // Start the share Intent
                         startActivity(Intent.createChooser(intent, "Share Trailer"));
                     } catch (Exception e) {
-                        Snackbar.make(getView(), R.string.status_no_trailers, Snackbar.LENGTH_SHORT);
                         e.printStackTrace();
 
+                    }
+                    // Do we have any trailers?
+                    if (trailerShare == null) {
+                        // Inform user of unavailable trailers
+                        Snackbar.make(getView(), R.string.status_no_trailers, Snackbar.LENGTH_SHORT);
                     }
                 }
                 return true;
