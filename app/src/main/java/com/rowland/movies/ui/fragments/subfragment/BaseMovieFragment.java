@@ -27,6 +27,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.rowland.movies.R;
@@ -67,6 +68,8 @@ public class BaseMovieFragment extends Fragment implements SwipeRefreshLayout.On
     protected RecyclerView mMovieRecycleView;
     @Bind(R.id.empty_text_view)
     protected TextView mEmptyTextView;
+    @Bind(R.id.empty_text_view_container)
+    protected LinearLayout mEmptyTextViewContainer;
 
     // Default constructor
     public BaseMovieFragment() {
@@ -179,11 +182,11 @@ public class BaseMovieFragment extends Fragment implements SwipeRefreshLayout.On
         if (mMovieAdapter.getItemCount() == 0) {
             // Show Empty TextView
             mMovieRecycleView.setVisibility(View.GONE);
-            mEmptyTextView.setVisibility(View.VISIBLE);
+            mEmptyTextViewContainer.setVisibility(View.VISIBLE);
         } else {
             // Show RecycleView filled with movies
             mMovieRecycleView.setVisibility(View.VISIBLE);
-            mEmptyTextView.setVisibility(View.GONE);
+            mEmptyTextViewContainer.setVisibility(View.GONE);
         }
     }
 }

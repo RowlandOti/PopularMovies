@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MoviesOriginal.iml" filepath="$PROJECT_DIR$/MoviesOriginal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PopularMoviesProject.iml" filepath="$PROJECT_DIR$/PopularMoviesProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/libraries/design/design.iml" filepath="$PROJECT_DIR$/libraries/design/design.iml" />
       <module fileurl="file://$PROJECT_DIR$/libraries/libraries.iml" filepath="$PROJECT_DIR$/libraries/libraries.iml" />

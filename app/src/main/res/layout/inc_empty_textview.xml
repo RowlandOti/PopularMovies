@@ -30,8 +30,7 @@
         android:paddingLeft="@dimen/empty_text_viewPadding"
         android:paddingRight="@dimen/empty_text_viewPadding"
         android:paddingTop="@dimen/empty_text_viewPadding"
-        android:text="@string/empty_movies_list"
-        android:visibility="gone">
+        android:text="@string/empty_movies_list">
 
     </TextView>
 
