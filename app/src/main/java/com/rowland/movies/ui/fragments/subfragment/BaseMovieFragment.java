@@ -66,8 +66,6 @@ public class BaseMovieFragment extends Fragment implements SwipeRefreshLayout.On
     protected SwipeRefreshLayout mSwRefreshLayout;
     @Bind(R.id.movie_recycle_view)
     protected RecyclerView mMovieRecycleView;
-    @Bind(R.id.empty_text_view)
-    protected TextView mEmptyTextView;
     @Bind(R.id.empty_text_view_container)
     protected LinearLayout mEmptyTextViewContainer;
 
