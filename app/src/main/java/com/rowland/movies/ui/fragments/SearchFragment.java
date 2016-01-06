@@ -115,7 +115,7 @@ public class SearchFragment extends BaseMovieFragment implements LoaderManager.L
         // Acquire the search string
         String queryString = args.getString(SearchManager.QUERY);
         // Create new loader
-        ModelLoader movieLoader = new ModelLoader<>(getActivity(), Movie.class, new Select().from(Movie.class).where("originalTitle == " +queryString), false);
+        ModelLoader movieLoader = new ModelLoader<>(getActivity(), Movie.class, new Select().from(Movie.class).where("originalTitle = ?", queryString), true);
         // Return new loader
         return movieLoader;
     }
