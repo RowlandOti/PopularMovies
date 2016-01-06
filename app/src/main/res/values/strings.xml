@@ -17,6 +17,7 @@
     <string name="search_hint">God\'s of Egypt</string>
     <string name="title_activity_detail">DetailActivity</string>
     <string name="title_activity_hoax">Hoax</string>
+    <string name="imdb_credits" >This product uses the TMDb API but is not endorsed or certified by TMDb.</string>
 
 
 </resources>

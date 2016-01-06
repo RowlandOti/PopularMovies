@@ -18,12 +18,14 @@
 package com.rowland.movies.ui.fragments;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.SlidingTabStripLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.ListPopupWindow;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -199,12 +201,34 @@ public class MainFragment extends Fragment {
         }
     }
 
+    // We need to attribute our API source
+    public void onShowCreditsDialog() {
+        // Acquire a Dialog builder object
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        // Use this to inflate custom view
+        LayoutInflater factory = LayoutInflater.from(getActivity());
+        // Acquire custom view
+        final View view = factory.inflate(R.layout.dialog_credit, null);
+        // Associate dialog with custom view
+        builder.setView(view);
+        // Use this button to dismiss dialog
+        builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                //
+                builder.create().dismiss();
+            }
+        });
+        // Final call that will display dialog
+        builder.create().show();
+    }
+
     public void onListPopUp(View anchor) {
         // This a sample dat to fill our ListView
         List<ListPopupMenu> menuItem = new ArrayList<>();
         menuItem.add(new ListPopupMenu(R.drawable.ic_popular_black_48dp, "Popular"));
         menuItem.add(new ListPopupMenu(R.drawable.ic_rated_black_48dp, "Highest Rated"));
         menuItem.add(new ListPopupMenu(R.drawable.ic_favourite_black_48dp, "Favourite"));
+        menuItem.add(new ListPopupMenu(R.drawable.ic_overview_black_48dp, "Credits"));
         // Initialise our adapter
         ListPopupWindowAdapter mListPopUpAdapter = new ListPopupWindowAdapter(getActivity().getApplicationContext(), menuItem);
         // Initialise our ListPopupWindow instance
@@ -241,6 +265,9 @@ public class MainFragment extends Fragment {
                         break;
                     case "Favourite":
                         mViewPager.setCurrentItem(2, true);
+                        break;
+                    case "Credits":
+                        onShowCreditsDialog();
                         break;
                     default:
                         mViewPager.setCurrentItem(0, true);
