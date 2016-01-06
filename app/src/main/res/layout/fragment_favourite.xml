@@ -20,6 +20,10 @@
     android:layout_height="match_parent">
 
     <include layout="@layout/inc_swipable_recycler" />
+    <include
+        android:id="@+id/empty_text_view_container"
+        android:visibility="gone"
+        layout="@layout/inc_empty_textview" />
 </FrameLayout>
 
 

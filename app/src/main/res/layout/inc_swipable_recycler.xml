@@ -28,10 +28,7 @@
         android:clipToPadding="false"
         android:visibility="visible" />
 
-    <include
-        android:id="@+id/empty_text_view_container"
-        android:visibility="gone"
-        layout="@layout/inc_empty_textview" />
+
 
 
 </android.support.v4.widget.SwipeRefreshLayout>
