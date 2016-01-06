@@ -22,9 +22,9 @@ import java.util.List;
 /**
  * Created by <a href="https://github.com/blork">Blork</a>
  * Modified  by Oti Rowland on 1/6/2016.
- * 
- *  see <a href="https://github.com/3squared/ActiveAndroid-Loaders/blob/master/src/com/activeandroid/loaders/ModelLoader.java">ActiveAndroidLoaders</a>
- *  see <a href="https://github.com/pardom/ActiveAndroid/pull/35">ActiveAndroid Pull Request</a>
+ * <p/>
+ * see <a href="https://github.com/3squared/ActiveAndroid-Loaders/blob/master/src/com/activeandroid/loaders/ModelLoader.java">ActiveAndroidLoaders</a>
+ * see <a href="https://github.com/pardom/ActiveAndroid/pull/35">ActiveAndroid Pull Request</a>
  */
 public class ModelLoader<T extends Model> extends AsyncTaskLoader<List<T>> {
 
