@@ -6,3 +6,6 @@ Preview:
 
 ![Alt text](https://github.com/RowlandOti/PopularMovies/blob/master/art/framed/marketing/Hero-Image_Nexus.jpg?raw=true "Popular Movies Preview")
 
+
+![Alt text](https://github.com/RowlandOti/PopularMovies/blob/master/art/gif/marketing/hashtrace.gif?raw=true "Popular Movies Preview")
+
