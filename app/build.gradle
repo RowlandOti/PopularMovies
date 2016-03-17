@@ -32,7 +32,7 @@ android {
             versionName project.VERSION_NAME + "-pro"
             //Accessed in java code as BuildConfig.IS_PRO_VERSION
             buildConfigField "boolean", "IS_PRO_VERSION", "true"
-            buildConfigField 'String', 'IMDB_API_KEY', '"153677fe3867bbfc1eedc322abc94afc"'
+            buildConfigField 'String', 'IMDB_API_KEY', '"153677fe3867bbfc1***c322abc94afc"'
             productFlavors.pro.signingConfig signingConfigs.release
 
         }
@@ -42,7 +42,7 @@ android {
             versionName project.VERSION_NAME + "-free"
             //Accessed in java code as BuildConfig.IS_PRO_VERSION
             buildConfigField "boolean", "IS_PRO_VERSION", "false"
-            buildConfigField 'String', 'IMDB_API_KEY', '"153677fe3867bbfc1eedc322abc94afc"'
+            buildConfigField 'String', 'IMDB_API_KEY', '"153677fe3867bbfc1xxxxx322abc94afc"'
             productFlavors.free.signingConfig signingConfigs.release
 
         }
